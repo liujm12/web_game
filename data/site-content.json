@@ -1,0 +1,233 @@
+{
+  "site": {
+    "brandName": "TurboArcade",
+    "tagline": "Jump in. Play fast. Come back for one more round.",
+    "description": "TurboArcade is a fast, mobile-friendly browser game site built for quick breaks and repeat play.",
+    "adsenseClient": "",
+    "supportEmail": "hello@turboarcade.games",
+    "launchedAt": "2026-07-04"
+  },
+  "categories": [
+    {
+      "slug": "arcade",
+      "name": "Arcade",
+      "description": "Fast-reflex browser games for quick sessions.",
+      "highlight": "Best for two-minute breaks"
+    },
+    {
+      "slug": "brain",
+      "name": "Brain",
+      "description": "Short memory and pattern games that stay satisfying on mobile.",
+      "highlight": "Great for daily streaks"
+    }
+  ],
+  "games": [
+    {
+      "slug": "meteor-sprint",
+      "title": "Meteor Sprint",
+      "category": "arcade",
+      "summary": "Slide across three lanes, scoop up stars, and dodge meteor strikes.",
+      "description": "Meteor Sprint is a lane-dodging reflex game designed for quick retries. The rules are simple, the pace ramps up fast, and every run gives you a reason to chase one more score.",
+      "instructions": [
+        "Use the left and right controls to swap lanes.",
+        "Catch stars to raise your score and build a streak.",
+        "Avoid meteors. One hit ends the run."
+      ],
+      "tags": ["Reflex", "Quick Play", "Arcade"],
+      "featured": true,
+      "trendingScore": 98,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "90 seconds",
+      "componentKey": "meteor-sprint",
+      "heroGradient": "from-cyan-400 via-sky-500 to-indigo-700",
+      "seoTitle": "Meteor Sprint - Free Browser Arcade Game | TurboArcade",
+      "seoDescription": "Play Meteor Sprint online for free. Dodge meteors, grab stars, and chase a higher score in under two minutes."
+    },
+    {
+      "slug": "memory-mosaic",
+      "title": "Memory Mosaic",
+      "category": "brain",
+      "summary": "Flip glowing tiles, match the symbols, and clear the board in as few moves as possible.",
+      "description": "Memory Mosaic is a clean card-matching game with a neon arcade finish. It is simple enough for first-time players and sticky enough for repeat sessions.",
+      "instructions": [
+        "Tap two tiles to reveal what is underneath.",
+        "Matched tiles stay open.",
+        "Clear every pair with the fewest moves you can."
+      ],
+      "tags": ["Memory", "Puzzle", "Casual"],
+      "featured": true,
+      "trendingScore": 91,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "memory-mosaic",
+      "heroGradient": "from-fuchsia-400 via-orange-400 to-rose-500",
+      "seoTitle": "Memory Mosaic - Free Matching Game | TurboArcade",
+      "seoDescription": "Play Memory Mosaic in your browser. Flip, match, and clear every neon tile in this quick memory game."
+    },
+    {
+      "slug": "pattern-pulse",
+      "title": "Pattern Pulse",
+      "category": "brain",
+      "summary": "Watch the light sequence, replay it perfectly, and push your streak one round further.",
+      "description": "Pattern Pulse mixes classic memory patterns with sharper pacing and a cleaner mobile-first layout. It is ideal for players who like short concentration challenges.",
+      "instructions": [
+        "Press Start to watch the sequence.",
+        "Repeat the flashing order using the four pads.",
+        "Miss one input and the run ends."
+      ],
+      "tags": ["Sequence", "Memory", "Skill"],
+      "featured": false,
+      "trendingScore": 84,
+      "difficulty": "Medium",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "75 seconds",
+      "componentKey": "pattern-pulse",
+      "heroGradient": "from-amber-300 via-orange-500 to-pink-600",
+      "seoTitle": "Pattern Pulse - Free Sequence Memory Game | TurboArcade",
+      "seoDescription": "Test your memory in Pattern Pulse. Follow the light sequence and see how many rounds you can survive."
+    },
+    {
+      "slug": "target-blitz",
+      "title": "Target Blitz",
+      "category": "arcade",
+      "summary": "Hit the glowing tile before it jumps away and pile up points in twenty seconds.",
+      "description": "Target Blitz is a fast click-and-tap challenge built for players who want instant action. The target keeps moving, the timer stays tight, and every miss makes the next hit feel more urgent.",
+      "instructions": [
+        "Press Start Challenge to begin a 20-second round.",
+        "Tap the glowing tile every time it appears.",
+        "Keep the streak moving before the timer hits zero."
+      ],
+      "tags": ["Reaction", "Tap Game", "Arcade"],
+      "featured": true,
+      "trendingScore": 89,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "20 seconds",
+      "componentKey": "target-blitz",
+      "heroGradient": "from-emerald-300 via-teal-400 to-cyan-600",
+      "seoTitle": "Target Blitz - Free Tap Reaction Game | TurboArcade",
+      "seoDescription": "Play Target Blitz free in your browser. Tap the glowing target fast and see how many hits you can land in twenty seconds."
+    },
+    {
+      "slug": "number-rush",
+      "title": "Number Rush",
+      "category": "brain",
+      "summary": "Tap the numbers in order, keep your mistakes low, and clear the board cleanly.",
+      "description": "Number Rush turns a simple number-order challenge into a quick brain workout. It is easy to understand immediately, works well on phones, and gives players a clean score loop they can replay.",
+      "instructions": [
+        "Press Start Round to shuffle the board.",
+        "Tap numbers from 1 through 9 in order.",
+        "Wrong taps add mistakes, so aim for a clean clear."
+      ],
+      "tags": ["Numbers", "Focus", "Brain"],
+      "featured": false,
+      "trendingScore": 86,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "45 seconds",
+      "componentKey": "number-rush",
+      "heroGradient": "from-violet-300 via-fuchsia-400 to-indigo-600",
+      "seoTitle": "Number Rush - Free Order Puzzle Game | TurboArcade",
+      "seoDescription": "Play Number Rush online for free. Tap the numbers in order and clear the board with as few mistakes as possible."
+    },
+    {
+      "slug": "2048",
+      "title": "2048",
+      "category": "brain",
+      "summary": "Slide the board, merge matching tiles, and build your way up to 2048.",
+      "description": "2048 is the kind of browser puzzle players understand in seconds and replay for much longer than they expect. Every move matters, the board fills quickly, and the next merge always feels close enough to chase.",
+      "instructions": [
+        "Press Start 2048 to seed the board.",
+        "Use the move buttons to slide every tile in one direction.",
+        "Merge matching numbers and keep space open for the next chain."
+      ],
+      "tags": ["2048", "Merge", "Puzzle"],
+      "featured": true,
+      "trendingScore": 96,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "3 minutes",
+      "componentKey": "tile-merge-2048",
+      "heroGradient": "from-amber-300 via-orange-400 to-rose-500",
+      "seoTitle": "2048 - Free Tile Merge Game | TurboArcade",
+      "seoDescription": "Play 2048 online for free. Merge matching tiles, keep the board alive, and push toward the 2048 tile."
+    },
+    {
+      "slug": "snake",
+      "title": "Snake",
+      "category": "arcade",
+      "summary": "Guide the snake to fruit, grow longer, and avoid crashing into walls or yourself.",
+      "description": "Snake is still one of the cleanest web-game loops ever made: start fast, score quickly, and fail in a way that makes the next round feel irresistible. This version keeps the rules simple and the board readable on smaller screens.",
+      "instructions": [
+        "Press Start Snake to begin the run.",
+        "Use the direction buttons to steer toward the fruit.",
+        "Do not hit the walls or your own trail."
+      ],
+      "tags": ["Snake", "Arcade", "Reflex"],
+      "featured": false,
+      "trendingScore": 93,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "neon-snake",
+      "heroGradient": "from-lime-300 via-emerald-400 to-teal-600",
+      "seoTitle": "Snake - Free Browser Arcade Game | TurboArcade",
+      "seoDescription": "Play Snake in your browser for free. Eat fruit, grow longer, and see how long you can stay alive."
+    },
+    {
+      "slug": "four-in-a-row",
+      "title": "Gomoku",
+      "category": "brain",
+      "summary": "Place black and white stones on a standard board and connect five in a row to win.",
+      "description": "Gomoku gives your catalog a more classic strategy game feel without asking players to learn anything complicated first. The standard 15x15 board looks familiar, the turns are quick, and the five-in-a-row goal is instantly readable.",
+      "instructions": [
+        "Press New Board to reset the standard 15x15 board.",
+        "Black moves first, then white alternates each turn.",
+        "Connect five stones horizontally, vertically, or diagonally to win."
+      ],
+      "tags": ["Gomoku", "Board", "Strategy"],
+      "featured": false,
+      "trendingScore": 88,
+      "difficulty": "Medium",
+      "playersLabel": "Two local turns",
+      "status": "live",
+      "estimatedSession": "4 minutes",
+      "componentKey": "gomoku-board",
+      "heroGradient": "from-stone-200 via-amber-300 to-orange-500",
+      "seoTitle": "Gomoku - Free Browser Board Game | TurboArcade",
+      "seoDescription": "Play Gomoku free in your browser. Place stones on a standard board and connect five in a row before your opponent."
+    },
+    {
+      "slug": "breakout-blitz",
+      "title": "Breakout Blitz",
+      "category": "arcade",
+      "summary": "Keep the ball alive, move the paddle, and wipe out the brick wall one hit at a time.",
+      "description": "Breakout Blitz keeps that classic brick-breaker rhythm: launch quickly, protect the paddle, and clear the top rows before your lives run out. It works well for short sessions and gives players a strong score chase loop.",
+      "instructions": [
+        "Press Launch Ball to start the round.",
+        "Use the paddle buttons to stay under the ball.",
+        "Clear every brick while protecting your remaining lives."
+      ],
+      "tags": ["Breakout", "Arcade", "Brick Breaker"],
+      "featured": true,
+      "trendingScore": 90,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "breakout-blitz",
+      "heroGradient": "from-sky-300 via-cyan-400 to-indigo-600",
+      "seoTitle": "Breakout Blitz - Free Brick Breaker Game | TurboArcade",
+      "seoDescription": "Play Breakout Blitz online for free. Break bricks, protect the paddle, and push for a higher score."
+    }
+  ]
+}
