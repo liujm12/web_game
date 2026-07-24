@@ -5,7 +5,15 @@
     "description": "TurboArcade is a fast, mobile-friendly browser game site built for quick breaks and repeat play.",
     "adsenseClient": "",
     "supportEmail": "hello@turboarcade.games",
-    "launchedAt": "2026-07-04"
+    "launchedAt": "2026-07-04",
+    "adSlots": {
+      "homeHero": "",
+      "homepageFeatured": "",
+      "gameSidebar": "",
+      "gameInline": "",
+      "allGamesInline": "",
+      "categoryInline": ""
+    }
   },
   "categories": [
     {
@@ -41,6 +49,7 @@
       "status": "live",
       "estimatedSession": "90 seconds",
       "componentKey": "meteor-sprint",
+      "playMode": "internal",
       "heroGradient": "from-cyan-400 via-sky-500 to-indigo-700",
       "seoTitle": "Meteor Sprint - Free Browser Arcade Game | TurboArcade",
       "seoDescription": "Play Meteor Sprint online for free. Dodge meteors, grab stars, and chase a higher score in under two minutes."
@@ -64,6 +73,7 @@
       "status": "live",
       "estimatedSession": "2 minutes",
       "componentKey": "memory-mosaic",
+      "playMode": "internal",
       "heroGradient": "from-fuchsia-400 via-orange-400 to-rose-500",
       "seoTitle": "Memory Mosaic - Free Matching Game | TurboArcade",
       "seoDescription": "Play Memory Mosaic in your browser. Flip, match, and clear every neon tile in this quick memory game."
@@ -87,6 +97,7 @@
       "status": "live",
       "estimatedSession": "75 seconds",
       "componentKey": "pattern-pulse",
+      "playMode": "internal",
       "heroGradient": "from-amber-300 via-orange-500 to-pink-600",
       "seoTitle": "Pattern Pulse - Free Sequence Memory Game | TurboArcade",
       "seoDescription": "Test your memory in Pattern Pulse. Follow the light sequence and see how many rounds you can survive."
@@ -110,6 +121,7 @@
       "status": "live",
       "estimatedSession": "20 seconds",
       "componentKey": "target-blitz",
+      "playMode": "internal",
       "heroGradient": "from-emerald-300 via-teal-400 to-cyan-600",
       "seoTitle": "Target Blitz - Free Tap Reaction Game | TurboArcade",
       "seoDescription": "Play Target Blitz free in your browser. Tap the glowing target fast and see how many hits you can land in twenty seconds."
@@ -133,6 +145,7 @@
       "status": "live",
       "estimatedSession": "45 seconds",
       "componentKey": "number-rush",
+      "playMode": "internal",
       "heroGradient": "from-violet-300 via-fuchsia-400 to-indigo-600",
       "seoTitle": "Number Rush - Free Order Puzzle Game | TurboArcade",
       "seoDescription": "Play Number Rush online for free. Tap the numbers in order and clear the board with as few mistakes as possible."
@@ -156,6 +169,7 @@
       "status": "live",
       "estimatedSession": "3 minutes",
       "componentKey": "tile-merge-2048",
+      "playMode": "internal",
       "heroGradient": "from-amber-300 via-orange-400 to-rose-500",
       "seoTitle": "2048 - Free Tile Merge Game | TurboArcade",
       "seoDescription": "Play 2048 online for free. Merge matching tiles, keep the board alive, and push toward the 2048 tile."
@@ -179,6 +193,7 @@
       "status": "live",
       "estimatedSession": "2 minutes",
       "componentKey": "neon-snake",
+      "playMode": "internal",
       "heroGradient": "from-lime-300 via-emerald-400 to-teal-600",
       "seoTitle": "Snake - Free Browser Arcade Game | TurboArcade",
       "seoDescription": "Play Snake in your browser for free. Eat fruit, grow longer, and see how long you can stay alive."
@@ -202,6 +217,7 @@
       "status": "live",
       "estimatedSession": "4 minutes",
       "componentKey": "gomoku-board",
+      "playMode": "internal",
       "heroGradient": "from-stone-200 via-amber-300 to-orange-500",
       "seoTitle": "Gomoku - Free Browser Board Game | TurboArcade",
       "seoDescription": "Play Gomoku free in your browser. Place stones on a standard board and connect five in a row before your opponent."
@@ -225,9 +241,35 @@
       "status": "live",
       "estimatedSession": "2 minutes",
       "componentKey": "breakout-blitz",
+      "playMode": "internal",
       "heroGradient": "from-sky-300 via-cyan-400 to-indigo-600",
       "seoTitle": "Breakout Blitz - Free Brick Breaker Game | TurboArcade",
       "seoDescription": "Play Breakout Blitz online for free. Break bricks, protect the paddle, and push for a higher score."
+    },
+    {
+      "slug": "orbit-hopper",
+      "title": "Orbit Hopper",
+      "category": "arcade",
+      "summary": "Bounce between lanes, grab energy rings, and dodge the red debris wave for as long as you can.",
+      "description": "Orbit Hopper is a lightweight embedded HTML5 arcade game built to validate the fast-publish workflow. It starts instantly, works with keyboard or touch controls, and gives players a simple survive-and-score loop that fits quick ad-supported sessions.",
+      "instructions": [
+        "Press Start Game to begin a fresh run.",
+        "Move left and right between the three lanes to collect blue rings.",
+        "Avoid the red debris blocks. Three hits end the session."
+      ],
+      "tags": ["Embed", "Arcade", "Reflex"],
+      "featured": false,
+      "trendingScore": 82,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "75 seconds",
+      "componentKey": "",
+      "playMode": "embed",
+      "gameUrl": "/embed-games/orbit-hopper/index.html",
+      "heroGradient": "from-indigo-300 via-sky-400 to-cyan-500",
+      "seoTitle": "Orbit Hopper - Free Browser Reflex Game | TurboArcade",
+      "seoDescription": "Play Orbit Hopper online for free. Shift lanes, collect energy rings, and dodge debris in a fast browser arcade run."
     }
   ]
 }

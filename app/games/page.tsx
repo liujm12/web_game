@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { AdSlot } from "@/components/ad-slot";
 import { GameCard } from "@/components/game-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -75,6 +76,12 @@ export default async function AllGamesPage() {
             </p>
           </div>
         </section>
+
+        <AdSlot
+          label="All games inline placement"
+          slot={content.site.adSlots?.allGamesInline}
+          className="mt-10"
+        />
 
         <section className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {liveGames.map((game) => (

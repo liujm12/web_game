@@ -8,6 +8,14 @@ export type SiteSettings = {
   adsenseClient: string;
   supportEmail: string;
   launchedAt: string;
+  adSlots?: {
+    homeHero?: string;
+    homepageFeatured?: string;
+    gameSidebar?: string;
+    gameInline?: string;
+    allGamesInline?: string;
+    categoryInline?: string;
+  };
 };
 
 export type CategoryRecord = {
@@ -32,6 +40,8 @@ export type GameRecord = {
   status: "draft" | "live";
   estimatedSession: string;
   componentKey: string;
+  playMode?: "internal" | "embed";
+  gameUrl?: string;
   heroGradient: string;
   seoTitle: string;
   seoDescription: string;

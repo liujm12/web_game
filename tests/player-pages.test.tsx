@@ -31,6 +31,7 @@ const game = {
   status: "live",
   estimatedSession: "90 seconds",
   componentKey: "meteor-sprint",
+  playMode: "internal",
   heroGradient: "from-cyan-400 via-sky-500 to-indigo-700",
   seoTitle: "Meteor Sprint",
   seoDescription: "Play Meteor Sprint online.",
@@ -41,9 +42,10 @@ describe("player-facing page sections", () => {
     render(<GamePageIntro game={game} />);
 
     expect(screen.getByText("Arcade / 90 seconds")).toBeInTheDocument();
-    expect(screen.getByText("Best for quick reflex breaks")).toBeInTheDocument();
     expect(screen.getByText("Easy to learn")).toBeInTheDocument();
     expect(screen.getByText("Short rounds")).toBeInTheDocument();
+    expect(screen.getByText("Original play page")).toBeInTheDocument();
+    expect(screen.getByText("Native browser game")).toBeInTheDocument();
   });
 
   it("frames category hero around player choice and pace", () => {

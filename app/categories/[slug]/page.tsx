@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { AdSlot } from "@/components/ad-slot";
 import { CategoryHero } from "@/components/category-hero";
 import { GameCard } from "@/components/game-card";
 import { SiteFooter } from "@/components/site-footer";
@@ -74,6 +75,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <GameCard key={game.slug} game={game} />
           ))}
         </section>
+
+        <AdSlot
+          label="Category page inline placement"
+          slot={content.site.adSlots?.categoryInline}
+          className="mt-10"
+        />
 
         <section className="mt-10 rounded-[30px] border border-white/10 bg-slate-900/65 p-6">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">

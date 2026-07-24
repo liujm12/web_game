@@ -75,6 +75,11 @@ export function AdminDashboard({ initialContent }: AdminDashboardProps) {
             featured status, ranking score, live state, and summary copy without
             touching React files.
           </p>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
+            For phase one, keep every game in `data/site-content.json`, decide
+            whether it is `internal` or `embed`, and add AdSense slot IDs only
+            after your account is approved.
+          </p>
         </div>
         <div className="flex items-end">
           <input
@@ -88,6 +93,31 @@ export function AdminDashboard({ initialContent }: AdminDashboardProps) {
 
       <div className="rounded-[24px] border border-cyan-400/20 bg-cyan-400/10 px-5 py-4 text-sm text-cyan-100">
         {statusMessage}
+      </div>
+
+      <div className="grid gap-4 rounded-[30px] border border-white/10 bg-slate-900/70 p-6 md:grid-cols-2">
+        <div>
+          <p className="text-xs uppercase tracking-[0.25em] text-orange-200/70">
+            Publish flow
+          </p>
+          <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-300">
+            <li>1. Duplicate a game entry in `data/site-content.json`.</li>
+            <li>2. Set `playMode` to `internal` or `embed`.</li>
+            <li>3. If embedded, add a hosted `gameUrl`.</li>
+            <li>4. Switch the game to `live` and optionally `featured`.</li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">
+            AdSense checklist
+          </p>
+          <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-300">
+            <li>Set `NEXT_PUBLIC_ADSENSE_CLIENT` in production.</li>
+            <li>Fill `site.adSlots` with the real slot IDs.</li>
+            <li>Check `/ads.txt` after deployment.</li>
+            <li>Keep each game page descriptive before review.</li>
+          </ul>
+        </div>
       </div>
 
       <div className="grid gap-4">

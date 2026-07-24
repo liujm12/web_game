@@ -18,6 +18,14 @@ const seedContent = {
     adsenseClient: "",
     supportEmail: "hello@turboarcade.test",
     launchedAt: "2026-07-04",
+    adSlots: {
+      homeHero: "",
+      homepageFeatured: "",
+      gameSidebar: "",
+      gameInline: "",
+      allGamesInline: "",
+      categoryInline: "",
+    },
   },
   categories: [
     { slug: "arcade", name: "Arcade" },
@@ -31,6 +39,7 @@ const seedContent = {
       featured: true,
       trendingScore: 98,
       status: "live",
+      playMode: "internal",
     },
     {
       slug: "memory-mosaic",
@@ -39,6 +48,7 @@ const seedContent = {
       featured: false,
       trendingScore: 74,
       status: "live",
+      playMode: "internal",
     },
   ],
 };

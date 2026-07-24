@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { AdSlot } from "@/components/ad-slot";
-import { GamePlayer } from "@/components/game-player";
 import { GameCard } from "@/components/game-card";
 import { GamePageIntro } from "@/components/game-page-intro";
+import { GameSurface } from "@/components/game-surface";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGameBySlug, getSiteContent } from "@/lib/site-content";
@@ -52,10 +52,17 @@ export default async function GamePage({ params }: GamePageProps) {
         <section className="grid gap-8 lg:grid-cols-[1.1fr_0.45fr]">
           <div className="space-y-6">
             <GamePageIntro game={game} />
-            <GamePlayer componentKey={game.componentKey} />
+            <GameSurface game={game} />
+            <AdSlot
+              label="Gameplay footer placement"
+              slot={content.site.adSlots?.gameInline}
+            />
           </div>
           <div className="space-y-6">
-            <AdSlot label="In-game sidebar placement" />
+            <AdSlot
+              label="In-game sidebar placement"
+              slot={content.site.adSlots?.gameSidebar}
+            />
             <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
                 Start in seconds
@@ -78,6 +85,9 @@ export default async function GamePage({ params }: GamePageProps) {
                   Players: {game.playersLabel}
                 </div>
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
+                  Format: {game.playMode === "embed" ? "Hosted game page" : "Built into TurboArcade"}
+                </div>
+                <div className="rounded-2xl bg-white/5 px-4 py-3">
                   Best for: quick repeat sessions after work, school, or lunch
                 </div>
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
@@ -98,6 +108,10 @@ export default async function GamePage({ params }: GamePageProps) {
               starts fast, and every retry feels short enough to fit into a real
               break. That is the rhythm most American casual-browser players
               expect.
+            </p>
+            <p className="mt-4 text-sm leading-7 text-slate-400">
+              This page adds instructions, fast context, and related picks so
+              each game screen keeps real publisher content around the play area.
             </p>
           </div>
           <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-6">

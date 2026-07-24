@@ -1,7 +1,6 @@
 "use client";
 
 import { BreakoutBlitzGame } from "@/components/games/breakout-blitz-game";
-import { ConnectFourGame } from "@/components/games/connect-four-game";
 import { GomokuBoardGame } from "@/components/games/gomoku-board-game";
 import { MemoryMosaicGame } from "@/components/games/memory-mosaic-game";
 import { MeteorSprintGame } from "@/components/games/meteor-sprint-game";
@@ -31,8 +30,6 @@ export function GamePlayer({ componentKey }: GamePlayerProps) {
       return <TileMerge2048Game />;
     case "neon-snake":
       return <NeonSnakeGame />;
-    case "connect-four":
-      return <ConnectFourGame />;
     case "gomoku-board":
       return <GomokuBoardGame />;
     case "breakout-blitz":

@@ -1,12 +1,48 @@
+"use client";
+
+import { useEffect, useId, useRef } from "react";
+
+import { getAdsenseClient } from "@/lib/adsense";
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
+
 type AdSlotProps = {
   label: string;
   className?: string;
+  slot?: string;
 };
 
-export function AdSlot({ label, className = "" }: AdSlotProps) {
-  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+export function AdSlot({ label, className = "", slot = "" }: AdSlotProps) {
+  const adsenseClient = getAdsenseClient();
+  const adElementId = useId().replace(/:/g, "");
+  const requestedRef = useRef(false);
 
-  if (adsenseClient) {
+  useEffect(() => {
+    if (!adsenseClient || !slot || requestedRef.current) {
+      return;
+    }
+
+    const adElement = document.getElementById(adElementId);
+
+    if (!adElement) {
+      return;
+    }
+
+    try {
+      window.adsbygoogle = window.adsbygoogle ?? [];
+      window.adsbygoogle.push({});
+      requestedRef.current = true;
+      adElement.setAttribute("data-ad-status", "filled");
+    } catch {
+      adElement.setAttribute("data-ad-status", "pending");
+    }
+  }, [adElementId, adsenseClient, slot]);
+
+  if (adsenseClient && slot) {
     return (
       <div
         className={`rounded-3xl border border-white/10 bg-slate-950/60 p-4 ${className}`}
@@ -15,11 +51,12 @@ export function AdSlot({ label, className = "" }: AdSlotProps) {
           Sponsored
         </p>
         <ins
+          id={adElementId}
           className="adsbygoogle block min-h-32 rounded-2xl bg-slate-900/60"
           data-ad-client={adsenseClient}
           data-ad-format="auto"
           data-full-width-responsive="true"
-          data-ad-slot="1234567890"
+          data-ad-slot={slot}
         />
       </div>
     );
@@ -34,8 +71,8 @@ export function AdSlot({ label, className = "" }: AdSlotProps) {
       </p>
       <p className="mt-3 text-sm text-slate-200">{label}</p>
       <p className="mt-2 max-w-sm text-xs text-slate-400">
-        Connect Google AdSense by setting `NEXT_PUBLIC_ADSENSE_CLIENT` before
-        production launch.
+        Add `NEXT_PUBLIC_ADSENSE_CLIENT` and a real ad slot ID for this
+        placement before production launch.
       </p>
     </div>
   );

@@ -26,7 +26,10 @@ export default async function Home() {
             featuredGame={featuredGames[0] ?? trendingGames[0]}
           />
           <div className="grid gap-6">
-            <AdSlot label="Homepage leaderboard placement" />
+            <AdSlot
+              label="Homepage leaderboard placement"
+              slot={content.site.adSlots?.homeHero}
+            />
             <div className="rounded-[32px] border border-white/10 bg-slate-900/75 p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-200/70">
                 Why players click back in
@@ -102,6 +105,11 @@ export default async function Home() {
           id="featured-games"
           className="mx-auto max-w-7xl px-6 py-8 lg:px-10"
         >
+          <AdSlot
+            label="Homepage featured games placement"
+            slot={content.site.adSlots?.homepageFeatured}
+            className="mb-8"
+          />
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-cyan-200/70">
