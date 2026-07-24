@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signal Sweep</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, Arial, sans-serif; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; display: grid; place-items: center;
+        background:
+          radial-gradient(circle at top, rgba(251, 191, 36, 0.22), transparent 32%),
+          linear-gradient(180deg, #111827 0%, #0f172a 48%, #020617 100%);
+        color: #f8fafc;
+      }
+      .shell { width: min(100%, 840px); padding: 18px; }
+      .card {
+        border-radius: 28px; overflow: hidden; background: rgba(15, 23, 42, 0.93);
+        border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 80px rgba(2,6,23,0.55);
+      }
+      .topbar, .footer {
+        display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+        padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .footer { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 0; }
+      .eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: rgba(253,224,71,0.72); }
+      .title { margin-top: 8px; font-size: 26px; font-weight: 800; }
+      .pill, button {
+        border-radius: 999px; border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.06); color: #f8fafc; padding: 10px 16px; font-size: 14px;
+      }
+      button { cursor: pointer; font-weight: 700; }
+      button:hover { background: rgba(251,191,36,0.18); }
+      .board { padding: 20px; display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pad {
+        aspect-ratio: 1 / 1; border-radius: 26px; border: 0; font-size: 20px; font-weight: 800;
+        transition: transform .12s ease, filter .12s ease, opacity .12s ease;
+      }
+      .pad:active { transform: scale(.98); }
+      .pad[data-color="0"] { background: linear-gradient(135deg, #f87171, #fb7185); }
+      .pad[data-color="1"] { background: linear-gradient(135deg, #60a5fa, #22d3ee); }
+      .pad[data-color="2"] { background: linear-gradient(135deg, #4ade80, #34d399); }
+      .pad[data-color="3"] { background: linear-gradient(135deg, #fbbf24, #fb923c); }
+      .pad.inactive { opacity: .58; filter: saturate(.7); }
+      .pad.active { transform: scale(1.03); filter: brightness(1.2); }
+      .hint { max-width: 560px; font-size: 14px; line-height: 1.7; color: #cbd5e1; }
+      @media (max-width: 640px) { .board { padding: 14px; gap: 12px; } }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="card">
+        <div class="topbar">
+          <div>
+            <div class="eyebrow">Embedded memory game</div>
+            <div class="title">Signal Sweep</div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div class="pill" id="roundLabel">Round: 0</div>
+            <div class="pill" id="statusLabel">Ready</div>
+            <button id="startButton" type="button">Start Sequence</button>
+          </div>
+        </div>
+        <div class="board" id="board">
+          <button class="pad inactive" data-pad="0" data-color="0" type="button">A</button>
+          <button class="pad inactive" data-pad="1" data-color="1" type="button">B</button>
+          <button class="pad inactive" data-pad="2" data-color="2" type="button">C</button>
+          <button class="pad inactive" data-pad="3" data-color="3" type="button">D</button>
+        </div>
+        <div class="footer">
+          <div class="hint">Watch the order, then tap the same pads back. This is a lightweight sequence game added through the embed pipeline instead of a custom component.</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const pads = Array.from(document.querySelectorAll(".pad"));
+      const roundLabel = document.getElementById("roundLabel");
+      const statusLabel = document.getElementById("statusLabel");
+      const startButton = document.getElementById("startButton");
+      let sequence = [], inputIndex = 0, locked = true;
+
+      function setStatus(text) { statusLabel.textContent = text; }
+      function setRound(value) { roundLabel.textContent = `Round: ${value}`; }
+      function flashPad(index) {
+        const pad = pads[index];
+        pad.classList.remove("inactive");
+        pad.classList.add("active");
+        setTimeout(() => {
+          pad.classList.remove("active");
+          pad.classList.add("inactive");
+        }, 380);
+      }
+      function showSequence() {
+        locked = true;
+        setStatus("Watch");
+        sequence.forEach((value, index) => {
+          setTimeout(() => flashPad(value), 650 * index + 250);
+        });
+        setTimeout(() => {
+          locked = false;
+          inputIndex = 0;
+          setStatus("Repeat");
+        }, 650 * sequence.length + 150);
+      }
+      function nextRound() {
+        sequence.push(Math.floor(Math.random() * 4));
+        setRound(sequence.length);
+        showSequence();
+      }
+      function resetGame() {
+        sequence = [];
+        inputIndex = 0;
+        nextRound();
+      }
+      pads.forEach((pad) => {
+        pad.addEventListener("click", () => {
+          if (locked) return;
+          const value = Number(pad.dataset.pad);
+          flashPad(value);
+          if (sequence[inputIndex] !== value) {
+            locked = true;
+            setStatus("Missed");
+            startButton.textContent = "Play Again";
+            return;
+          }
+          inputIndex += 1;
+          if (inputIndex === sequence.length) {
+            locked = true;
+            setStatus("Nice");
+            setTimeout(nextRound, 650);
+          }
+        });
+      });
+      startButton.addEventListener("click", () => {
+        startButton.textContent = "Restart Sequence";
+        resetGame();
+      });
+    </script>
+  </body>
+</html>

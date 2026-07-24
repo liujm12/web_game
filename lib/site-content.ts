@@ -34,6 +34,7 @@ export type GameRecord = {
   instructions: string[];
   tags: string[];
   featured: boolean;
+  featuredPriority?: number;
   trendingScore: number;
   difficulty: string;
   playersLabel: string;
@@ -70,7 +71,17 @@ export async function saveSiteContent(
 }
 
 export function getFeaturedGames(content: SiteContent) {
-  return content.games.filter((game) => game.featured && game.status === "live");
+  return [...content.games]
+    .filter((game) => game.featured && game.status === "live")
+    .sort((left, right) => {
+      const priorityDelta = (right.featuredPriority ?? 0) - (left.featuredPriority ?? 0);
+
+      if (priorityDelta !== 0) {
+        return priorityDelta;
+      }
+
+      return right.trendingScore - left.trendingScore;
+    });
 }
 
 export function getTrendingGames(content: SiteContent) {

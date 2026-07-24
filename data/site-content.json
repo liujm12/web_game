@@ -90,7 +90,7 @@
         "Miss one input and the run ends."
       ],
       "tags": ["Sequence", "Memory", "Skill"],
-      "featured": false,
+      "featured": true,
       "trendingScore": 84,
       "difficulty": "Medium",
       "playersLabel": "Single player",
@@ -138,7 +138,7 @@
         "Wrong taps add mistakes, so aim for a clean clear."
       ],
       "tags": ["Numbers", "Focus", "Brain"],
-      "featured": false,
+      "featured": true,
       "trendingScore": 86,
       "difficulty": "Easy",
       "playersLabel": "Single player",
@@ -258,7 +258,8 @@
         "Avoid the red debris blocks. Three hits end the session."
       ],
       "tags": ["Embed", "Arcade", "Reflex"],
-      "featured": false,
+      "featured": true,
+      "featuredPriority": 100,
       "trendingScore": 82,
       "difficulty": "Easy",
       "playersLabel": "Single player",
@@ -270,6 +271,82 @@
       "heroGradient": "from-indigo-300 via-sky-400 to-cyan-500",
       "seoTitle": "Orbit Hopper - Free Browser Reflex Game | TurboArcade",
       "seoDescription": "Play Orbit Hopper online for free. Shift lanes, collect energy rings, and dodge debris in a fast browser arcade run."
+    },
+    {
+      "slug": "neon-drift",
+      "title": "Neon Drift",
+      "category": "arcade",
+      "summary": "Slide across the neon lanes, grab charge cells, and keep clear of the blackout blocks.",
+      "description": "Neon Drift is a fast embedded arcade run designed for quick sessions on desktop or mobile. It keeps the controls simple, scores quickly, and works well as a second or third click after a player finishes one of your core games.",
+      "instructions": [
+        "Press Start Run to begin.",
+        "Use left and right to move between lanes.",
+        "Blue cells add score and red blackout blocks cost lives."
+      ],
+      "tags": ["Embed", "Arcade", "Quick Play"],
+      "featured": true,
+      "featuredPriority": 90,
+      "trendingScore": 80,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "60 seconds",
+      "componentKey": "",
+      "playMode": "embed",
+      "gameUrl": "/embed-games/neon-drift/index.html",
+      "heroGradient": "from-fuchsia-300 via-violet-400 to-cyan-500",
+      "seoTitle": "Neon Drift - Free Browser Arcade Game | TurboArcade",
+      "seoDescription": "Play Neon Drift for free in your browser. Shift lanes, collect charge cells, and dodge blackout blocks in a fast arcade run."
+    },
+    {
+      "slug": "signal-sweep",
+      "title": "Signal Sweep",
+      "category": "brain",
+      "summary": "Watch the pad sequence, repeat it cleanly, and extend your streak one round at a time.",
+      "description": "Signal Sweep is an embedded memory game built for short repeat sessions. It gives your lineup a second brain-game style without needing a custom React component, which makes it a strong example of the light publish workflow.",
+      "instructions": [
+        "Press Start Sequence to begin a round.",
+        "Watch the glowing pad order carefully.",
+        "Repeat the sequence without mistakes to keep climbing."
+      ],
+      "tags": ["Embed", "Memory", "Sequence"],
+      "featured": false,
+      "trendingScore": 79,
+      "difficulty": "Medium",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "90 seconds",
+      "componentKey": "",
+      "playMode": "embed",
+      "gameUrl": "/embed-games/signal-sweep/index.html",
+      "heroGradient": "from-amber-300 via-orange-400 to-pink-500",
+      "seoTitle": "Signal Sweep - Free Sequence Memory Game | TurboArcade",
+      "seoDescription": "Play Signal Sweep online for free. Watch the pattern, repeat it exactly, and build a longer memory streak."
+    },
+    {
+      "slug": "comet-loop",
+      "title": "Comet Loop",
+      "category": "arcade",
+      "summary": "Tap at the right time to sling the comet through the gate and keep the orbit streak alive.",
+      "description": "Comet Loop is a simple timing game with one clear hook: wait for the moving comet to reach the gate, then tap at the right moment. It is quick to learn, different from the lane dodgers, and useful for testing which casual arcade loop earns more repeat plays.",
+      "instructions": [
+        "Press Start Loop to launch the first orbit.",
+        "Tap Shoot while the comet is inside the cyan gate.",
+        "Perfect timing raises the streak and missed timing costs a life."
+      ],
+      "tags": ["Embed", "Timing", "Arcade"],
+      "featured": false,
+      "trendingScore": 78,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "45 seconds",
+      "componentKey": "",
+      "playMode": "embed",
+      "gameUrl": "/embed-games/comet-loop/index.html",
+      "heroGradient": "from-sky-300 via-cyan-400 to-emerald-500",
+      "seoTitle": "Comet Loop - Free Timing Arcade Game | TurboArcade",
+      "seoDescription": "Play Comet Loop free in your browser. Time your shot, hit the gate, and keep your orbit streak alive."
     }
   ]
 }

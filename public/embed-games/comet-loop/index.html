@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comet Loop</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, Arial, sans-serif; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; display: grid; place-items: center; color: #e2e8f0;
+        background:
+          radial-gradient(circle at top, rgba(34,211,238,0.22), transparent 34%),
+          linear-gradient(180deg, #082f49 0%, #0f172a 48%, #020617 100%);
+      }
+      .shell { width: min(100%, 860px); padding: 18px; }
+      .card {
+        border-radius: 28px; overflow: hidden; background: rgba(15,23,42,0.93);
+        border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 80px rgba(2,6,23,0.55);
+      }
+      .topbar, .footer {
+        display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+        padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .footer { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 0; }
+      .eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: rgba(103,232,249,0.72); }
+      .title { margin-top: 8px; font-size: 26px; font-weight: 800; }
+      .pill, button {
+        border-radius: 999px; border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.06); color: #f8fafc; padding: 10px 16px; font-size: 14px;
+      }
+      button { cursor: pointer; font-weight: 700; }
+      button:hover { background: rgba(34,211,238,0.18); }
+      .stage { padding: 20px; }
+      canvas { width: 100%; display: block; border-radius: 24px; background: #020617; }
+      .hint { max-width: 540px; font-size: 14px; line-height: 1.7; color: #bae6fd; }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="card">
+        <div class="topbar">
+          <div>
+            <div class="eyebrow">Embedded timing game</div>
+            <div class="title">Comet Loop</div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div class="pill" id="streakLabel">Streak: 0</div>
+            <div class="pill" id="livesLabel">Lives: 3</div>
+            <button id="startButton" type="button">Start Loop</button>
+            <button id="shootButton" type="button">Shoot</button>
+          </div>
+        </div>
+        <div class="stage">
+          <canvas id="game" width="820" height="560" aria-label="Comet Loop board"></canvas>
+        </div>
+        <div class="footer">
+          <div class="hint">Wait for the comet to pass through the cyan gate, then hit Shoot. It is a one-button timing loop that gives you a different arcade feel from the lane runners.</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d");
+      const streakLabel = document.getElementById("streakLabel");
+      const livesLabel = document.getElementById("livesLabel");
+      const startButton = document.getElementById("startButton");
+      const shootButton = document.getElementById("shootButton");
+      let angle = 0, speed = 0.028, streak = 0, lives = 3, running = false, gateCenter = -Math.PI / 2;
+
+      function syncHud() {
+        streakLabel.textContent = `Streak: ${streak}`;
+        livesLabel.textContent = `Lives: ${lives}`;
+      }
+      function resetGame() {
+        angle = 0; speed = 0.028; streak = 0; lives = 3; running = true;
+        startButton.textContent = "Restart Loop";
+        syncHud();
+      }
+      function shoot() {
+        if (!running) return;
+        const diff = Math.abs(normalize(angle - gateCenter));
+        if (diff < 0.22) {
+          streak += 1;
+          speed += 0.003;
+        } else {
+          lives -= 1;
+        }
+        syncHud();
+        if (lives <= 0) {
+          running = false;
+          startButton.textContent = "Play Again";
+        }
+      }
+      function normalize(value) {
+        while (value > Math.PI) value -= Math.PI * 2;
+        while (value < -Math.PI) value += Math.PI * 2;
+        return value;
+      }
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const bg = ctx.createLinearGradient(0,0,0,canvas.height);
+        bg.addColorStop(0, "#082f49"); bg.addColorStop(1, "#020617");
+        ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        const cx = canvas.width / 2, cy = canvas.height / 2 + 20, radius = 180;
+        ctx.lineWidth = 18;
+        ctx.strokeStyle = "rgba(255,255,255,0.08)";
+        ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2); ctx.stroke();
+
+        ctx.strokeStyle = "#67e8f9";
+        ctx.beginPath(); ctx.arc(cx, cy, radius, gateCenter - 0.18, gateCenter + 0.18); ctx.stroke();
+
+        const cometX = cx + Math.cos(angle) * radius;
+        const cometY = cy + Math.sin(angle) * radius;
+        ctx.fillStyle = "#fef08a";
+        ctx.beginPath(); ctx.arc(cometX, cometY, 16, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#f97316";
+        ctx.beginPath(); ctx.arc(cometX - 16, cometY, 8, 0, Math.PI * 2); ctx.fill();
+
+        if (!running) {
+          ctx.fillStyle = "rgba(2,6,23,0.56)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+          ctx.fillStyle = "#f8fafc"; ctx.textAlign = "center"; ctx.font = "800 34px Inter, Arial, sans-serif";
+          ctx.fillText(streak === 0 ? "Ready to loop?" : "Loop over", cx, 220);
+          ctx.font = "500 20px Inter, Arial, sans-serif"; ctx.fillStyle = "#bae6fd";
+          ctx.fillText(streak === 0 ? "Press Shoot when the comet reaches the cyan gate." : `Final streak: ${streak}`, cx, 264);
+        }
+      }
+      function tick() {
+        if (running) angle += speed;
+        draw();
+        requestAnimationFrame(tick);
+      }
+      startButton.addEventListener("click", resetGame);
+      shootButton.addEventListener("click", shoot);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === " " || event.key === "Enter") {
+          event.preventDefault();
+          if (!running) resetGame(); else shoot();
+        }
+      });
+      syncHud(); draw(); tick();
+    </script>
+  </body>
+</html>

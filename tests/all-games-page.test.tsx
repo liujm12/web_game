@@ -18,5 +18,8 @@ describe("All games page", () => {
     expect(screen.getByText("Meteor Sprint")).toBeInTheDocument();
     expect(screen.getByText("Number Rush")).toBeInTheDocument();
     expect(screen.getByText("Orbit Hopper")).toBeInTheDocument();
+    expect(screen.getByText("Neon Drift")).toBeInTheDocument();
+    expect(screen.getByText("Signal Sweep")).toBeInTheDocument();
+    expect(screen.getByText("Comet Loop")).toBeInTheDocument();
   });
 });
