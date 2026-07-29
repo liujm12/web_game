@@ -75,6 +75,34 @@ export function MeteorSprintGame() {
     setIsRunning(true);
   }
 
+  function moveLane(direction: -1 | 1) {
+    setLaneIndex((current) => Math.min(lanes.length - 1, Math.max(0, current + direction)));
+  }
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      const key = event.key.toLowerCase();
+      const handledKeys = ["arrowleft", "arrowright", "a", "d", " ", "enter", "r"];
+
+      if (!handledKeys.includes(key)) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (key === "arrowleft" || key === "a") {
+        moveLane(-1);
+      } else if (key === "arrowright" || key === "d") {
+        moveLane(1);
+      } else {
+        startGame();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
+
   const trackRows = useMemo(
     () => Array.from({ length: 5 }, (_, index) => index),
     [],
@@ -165,16 +193,14 @@ export function MeteorSprintGame() {
       <div className="mt-4 grid grid-cols-2 gap-3">
         <button
           type="button"
-          onClick={() => setLaneIndex((current) => Math.max(0, current - 1))}
+          onClick={() => moveLane(-1)}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Move left
         </button>
         <button
           type="button"
-          onClick={() =>
-            setLaneIndex((current) => Math.min(lanes.length - 1, current + 1))
-          }
+          onClick={() => moveLane(1)}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Move right

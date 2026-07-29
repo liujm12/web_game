@@ -175,6 +175,32 @@
       "seoDescription": "Play 2048 online for free. Merge matching tiles, keep the board alive, and push toward the 2048 tile."
     },
     {
+      "slug": "merge-shot-2048",
+      "title": "Merge Shot 2048",
+      "category": "brain",
+      "summary": "Aim the cannon, fire number blocks, trigger merges, and chase a bigger 2048 combo.",
+      "description": "Merge Shot 2048 turns the familiar number-merge loop into a more active arcade puzzle. Players choose a lane, shoot the current block, watch the landing path, and build combos by connecting matching numbers before the stack reaches the danger line.",
+      "instructions": [
+        "Press Start Shot to arm the cannon.",
+        "Use Arrow Left and Arrow Right, or A and D, to pick a lane.",
+        "Press Space, Enter, or Fire to shoot the current number block.",
+        "Match touching blocks with the same number to merge upward toward 2048."
+      ],
+      "tags": ["2048", "Merge Shooter", "Puzzle"],
+      "featured": true,
+      "featuredPriority": 130,
+      "trendingScore": 99,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "3 minutes",
+      "componentKey": "merge-shot-2048",
+      "playMode": "internal",
+      "heroGradient": "from-cyan-300 via-sky-400 to-violet-600",
+      "seoTitle": "Merge Shot 2048 - Free Number Shooter Game | TurboArcade",
+      "seoDescription": "Play Merge Shot 2048 online for free. Aim, shoot number blocks, trigger combos, and chase the 2048 tile in a fast browser puzzle."
+    },
+    {
       "slug": "snake",
       "title": "Snake",
       "category": "arcade",

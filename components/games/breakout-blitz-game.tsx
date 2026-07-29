@@ -190,6 +190,40 @@ export function BreakoutBlitzGame() {
     setGame({ ...createInitialState(difficulty), phase: "playing" });
   }
 
+  function movePaddle(direction: -1 | 1) {
+    setGame((currentGame) => ({
+      ...currentGame,
+      paddleX:
+        direction < 0
+          ? Math.max(0, currentGame.paddleX - paddleStep)
+          : Math.min(100 - paddleWidth, currentGame.paddleX + paddleStep),
+    }));
+  }
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      const key = event.key.toLowerCase();
+      const handledKeys = ["arrowleft", "arrowright", "a", "d", " ", "enter", "r"];
+
+      if (!handledKeys.includes(key)) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (key === "arrowleft" || key === "a") {
+        movePaddle(-1);
+      } else if (key === "arrowright" || key === "d") {
+        movePaddle(1);
+      } else {
+        startGame();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
+
   return (
     <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-5 flex items-center justify-between">
@@ -243,6 +277,7 @@ export function BreakoutBlitzGame() {
           ))}
 
         <div
+          data-breakout-paddle="true"
           className="absolute h-3 rounded-full bg-fuchsia-300 shadow-[0_10px_25px_rgba(232,121,249,0.4)]"
           style={{
             left: `${game.paddleX}%`,
@@ -277,24 +312,14 @@ export function BreakoutBlitzGame() {
       <div className="mt-5 grid grid-cols-2 gap-3">
         <button
           type="button"
-          onClick={() =>
-            setGame((currentGame) => ({
-              ...currentGame,
-              paddleX: Math.max(0, currentGame.paddleX - paddleStep),
-            }))
-          }
+          onClick={() => movePaddle(-1)}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Paddle left
         </button>
         <button
           type="button"
-          onClick={() =>
-            setGame((currentGame) => ({
-              ...currentGame,
-              paddleX: Math.min(100 - paddleWidth, currentGame.paddleX + paddleStep),
-            }))
-          }
+          onClick={() => movePaddle(1)}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Paddle right

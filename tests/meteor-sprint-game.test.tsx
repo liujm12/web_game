@@ -2,12 +2,17 @@
 
 import "@testing-library/jest-dom/vitest";
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { MeteorSprintGame } from "@/components/games/meteor-sprint-game";
 
 describe("MeteorSprintGame", () => {
+  afterEach(() => {
+    cleanup();
+    vi.useRealTimers();
+  });
+
   it("starts a run when the player clicks Start run", () => {
     vi.useFakeTimers();
 
@@ -17,7 +22,24 @@ describe("MeteorSprintGame", () => {
 
     expect(screen.getByRole("button", { name: "Reset run" })).toBeInTheDocument();
     expect(screen.queryByText("Ready for launch?")).not.toBeInTheDocument();
+  });
 
-    vi.useRealTimers();
+  it("supports desktop keyboard start and lane movement", () => {
+    vi.useFakeTimers();
+
+    const { container } = render(<MeteorSprintGame />);
+
+    fireEvent.keyDown(window, { key: " " });
+    expect(screen.getByRole("button", { name: "Reset run" })).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "ArrowLeft" });
+    expect(container.querySelectorAll('[data-active="true"]')[0]).toHaveStyle({
+      left: "18%",
+    });
+
+    fireEvent.keyDown(window, { key: "d" });
+    expect(container.querySelectorAll('[data-active="true"]')[0]).toHaveStyle({
+      left: "50%",
+    });
   });
 });

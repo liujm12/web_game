@@ -3,6 +3,7 @@
 import { BreakoutBlitzGame } from "@/components/games/breakout-blitz-game";
 import { GomokuBoardGame } from "@/components/games/gomoku-board-game";
 import { MemoryMosaicGame } from "@/components/games/memory-mosaic-game";
+import { MergeShot2048Game } from "@/components/games/merge-shot-2048-game";
 import { MeteorSprintGame } from "@/components/games/meteor-sprint-game";
 import { NeonSnakeGame } from "@/components/games/neon-snake-game";
 import { NumberRushGame } from "@/components/games/number-rush-game";
@@ -28,6 +29,8 @@ export function GamePlayer({ componentKey }: GamePlayerProps) {
       return <NumberRushGame />;
     case "tile-merge-2048":
       return <TileMerge2048Game />;
+    case "merge-shot-2048":
+      return <MergeShot2048Game />;
     case "neon-snake":
       return <NeonSnakeGame />;
     case "gomoku-board":

@@ -16,11 +16,15 @@ export function EmbedGameFrame({ title, gameUrl }: EmbedGameFrameProps) {
           Game opens in the frame below without leaving TurboArcade.
         </p>
       </div>
-      <div className="aspect-[16/10] min-h-[540px] bg-slate-950">
+      <div
+        aria-label={`${title} play area`}
+        className="h-[min(82vh,780px)] min-h-[680px] bg-slate-950 max-sm:h-[720px] max-sm:min-h-[720px]"
+      >
         <iframe
           title={`Play ${title}`}
           src={gameUrl}
           className="h-full w-full border-0"
+          scrolling="no"
           loading="lazy"
           allow="fullscreen; autoplay"
           referrerPolicy="strict-origin-when-cross-origin"

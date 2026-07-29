@@ -4,7 +4,7 @@ import { getSiteContent } from "@/lib/site-content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await getSiteContent();
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://playturboarcade.com";
 
   return [
     "",

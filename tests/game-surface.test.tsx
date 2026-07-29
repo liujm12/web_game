@@ -55,6 +55,10 @@ describe("game surface", () => {
       "src",
       "https://games.example.com/mini-golf/index.html",
     );
+    expect(screen.getByTitle("Play Mini Golf Tour")).toHaveAttribute("scrolling", "no");
+    expect(screen.getByLabelText("Mini Golf Tour play area")).toHaveClass(
+      "min-h-[680px]",
+    );
     expect(
       screen.getByText("Game opens in the frame below without leaving TurboArcade."),
     ).toBeInTheDocument();
