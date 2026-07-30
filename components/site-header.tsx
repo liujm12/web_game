@@ -18,17 +18,17 @@ const mobileNavItems = navItems.filter((item) =>
 
 export function SiteHeader({ brandName }: SiteHeaderProps) {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+    <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950 md:bg-slate-950/90 md:backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-10">
         <Link href="/" className="flex items-center gap-3">
-          <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 via-sky-500 to-orange-400 text-lg font-black text-slate-950">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 via-sky-500 to-orange-400 text-base font-black text-slate-950 sm:h-11 sm:w-11 sm:text-lg">
             TA
           </span>
           <div>
             <p className="text-lg font-semibold tracking-tight text-white">
               {brandName}
             </p>
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-200/70">
+            <p className="hidden text-xs uppercase tracking-[0.22em] text-cyan-200/70 sm:block">
               Browser games for quick breaks
             </p>
           </div>
@@ -47,7 +47,7 @@ export function SiteHeader({ brandName }: SiteHeaderProps) {
       </div>
       <nav
         aria-label="Mobile quick links"
-        className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-6 pb-4 md:hidden"
+        className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 sm:px-6 md:hidden"
       >
         {mobileNavItems.map((item) => (
           <Link

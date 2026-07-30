@@ -225,8 +225,8 @@ export function BreakoutBlitzGame() {
   });
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
-      <div className="mb-5 flex items-center justify-between">
+    <div className="rounded-[26px] border border-white/10 bg-slate-950 p-3 text-white sm:rounded-[30px] sm:p-4">
+      <div className="mb-3 flex items-center justify-between gap-3 sm:mb-5">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-sky-200/70">
             Brick breaker
@@ -241,7 +241,7 @@ export function BreakoutBlitzGame() {
           {game.phase === "playing" ? "Reset round" : "Launch ball"}
         </button>
       </div>
-      <div className="mb-5 flex flex-wrap gap-2">
+      <div className="mb-3 flex flex-wrap gap-2 sm:mb-5">
         {(["Easy", "Normal", "Hard"] as Difficulty[]).map((mode) => (
           <button
             key={mode}
@@ -257,9 +257,25 @@ export function BreakoutBlitzGame() {
           </button>
         ))}
       </div>
+      <div className="mb-3 grid grid-cols-2 gap-2 sm:mb-5 sm:gap-3">
+        <button
+          type="button"
+          onClick={() => movePaddle(-1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Paddle left
+        </button>
+        <button
+          type="button"
+          onClick={() => movePaddle(1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Paddle right
+        </button>
+      </div>
       <div
         data-breakout-field="true"
-        className="relative mx-auto h-[460px] w-full max-w-[760px] overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_rgba(15,23,42,0.98)_58%)]"
+        className="relative mx-auto h-[52svh] min-h-[320px] max-h-[440px] w-full max-w-[760px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_rgba(15,23,42,0.98)_58%)] sm:h-[460px] sm:rounded-[28px]"
       >
         {game.bricks
           .filter((brick) => brick.alive)
@@ -309,23 +325,7 @@ export function BreakoutBlitzGame() {
           </div>
         )}
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-3">
-        <button
-          type="button"
-          onClick={() => movePaddle(-1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Paddle left
-        </button>
-        <button
-          type="button"
-          onClick={() => movePaddle(1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Paddle right
-        </button>
-      </div>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      <div className="mt-3 grid gap-2 sm:mt-5 sm:grid-cols-2 sm:gap-3">
         <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
           {`Lives: ${game.lives}`}
         </div>
@@ -333,7 +333,7 @@ export function BreakoutBlitzGame() {
           {`Mode: ${difficulty}`}
         </div>
       </div>
-      <div className="mt-5 rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+      <div className="mt-3 rounded-[22px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300 sm:mt-5 sm:rounded-[24px] sm:p-4">
         {game.phase === "idle" && "Break every brick and protect the paddle."}
         {game.phase === "playing" &&
           "Use the paddle buttons to keep the ball alive and clear the full brick wall."}

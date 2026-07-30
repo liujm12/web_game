@@ -129,6 +129,7 @@ export function NeonSnakeGame() {
         ))}
       </div>
       <div
+        data-snake-board="true"
         className="mx-auto grid max-w-[720px] gap-1 rounded-[24px] border border-white/10 bg-white/5 p-3"
         style={{ gridTemplateColumns: `repeat(${boardSize}, minmax(0, 1fr))` }}
       >
@@ -154,7 +155,7 @@ export function NeonSnakeGame() {
           );
         })}
       </div>
-      <div className="mt-5 grid grid-cols-3 gap-3">
+      <div className="mt-3 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-3">
         <div />
         <button
           type="button"

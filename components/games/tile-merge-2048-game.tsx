@@ -180,7 +180,7 @@ export function TileMerge2048Game() {
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-4 gap-3">
+      <div data-tile-2048-board="true" className="grid grid-cols-4 gap-3">
         {board.map((value, index) => (
           <div
             key={index}
@@ -190,7 +190,7 @@ export function TileMerge2048Game() {
           </div>
         ))}
       </div>
-      <div className="mt-5 grid grid-cols-3 gap-3">
+      <div className="mt-3 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-3">
         <button
           type="button"
           onClick={() => handleMove("left")}

@@ -109,8 +109,8 @@ export function MeteorSprintGame() {
   );
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
-      <div className="mb-4 flex items-center justify-between">
+    <div className="rounded-[26px] border border-white/10 bg-slate-950 p-3 text-white sm:rounded-[30px] sm:p-4">
+      <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">
             Live game
@@ -125,7 +125,26 @@ export function MeteorSprintGame() {
           {gameOver ? "Restart run" : isRunning ? "Reset run" : "Start run"}
         </button>
       </div>
-      <div className="relative h-[420px] overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.3),_rgba(15,23,42,0.95)_55%)]">
+      <div className="mb-3 grid grid-cols-2 gap-2 sm:mb-4 sm:gap-3">
+        <button
+          type="button"
+          onClick={() => moveLane(-1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Move left
+        </button>
+        <button
+          type="button"
+          onClick={() => moveLane(1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Move right
+        </button>
+      </div>
+      <div
+        data-meteor-field="true"
+        className="relative h-[52svh] min-h-[330px] max-h-[430px] overflow-hidden rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.3),_rgba(15,23,42,0.95)_55%)] sm:h-[420px] sm:rounded-[28px]"
+      >
         {trackRows.map((row) => (
           <div
             key={row}
@@ -167,9 +186,9 @@ export function MeteorSprintGame() {
 
         {!isRunning && !gameOver && (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-950/55">
-            <div className="max-w-sm rounded-[28px] border border-white/10 bg-slate-900/90 p-6 text-center">
-              <h3 className="text-2xl font-semibold">Ready for launch?</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-300">
+            <div className="max-w-sm rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center sm:rounded-[28px] sm:p-6">
+              <h3 className="text-xl font-semibold sm:text-2xl">Ready for launch?</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-300 sm:mt-3 sm:leading-7">
                 Shift between lanes, catch glowing stars, and dodge every meteor.
               </p>
             </div>
@@ -178,33 +197,17 @@ export function MeteorSprintGame() {
 
         {gameOver && (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-950/65">
-            <div className="rounded-[28px] border border-white/10 bg-slate-900/90 p-6 text-center">
+            <div className="rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center sm:rounded-[28px] sm:p-6">
               <p className="text-xs uppercase tracking-[0.26em] text-orange-200/70">
                 Run over
               </p>
-              <h3 className="mt-2 text-3xl font-semibold">{score} points</h3>
+              <h3 className="mt-2 text-2xl font-semibold sm:text-3xl">{score} points</h3>
               <p className="mt-2 text-sm text-slate-300">
                 One more round usually goes better.
               </p>
             </div>
           </div>
         )}
-      </div>
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        <button
-          type="button"
-          onClick={() => moveLane(-1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Move left
-        </button>
-        <button
-          type="button"
-          onClick={() => moveLane(1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Move right
-        </button>
       </div>
     </div>
   );

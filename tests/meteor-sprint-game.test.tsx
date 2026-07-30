@@ -42,4 +42,19 @@ describe("MeteorSprintGame", () => {
       left: "50%",
     });
   });
+
+  it("places lane controls before the playfield for mobile play", () => {
+    const { container } = render(<MeteorSprintGame />);
+
+    const moveLeftButton = screen.getByRole("button", { name: "Move left" });
+    const playfield = container.querySelector('[data-meteor-field="true"]');
+
+    expect(playfield).toBeTruthy();
+    expect(
+      Boolean(
+        moveLeftButton.compareDocumentPosition(playfield!) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ),
+    ).toBe(true);
+  });
 });

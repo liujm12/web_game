@@ -48,15 +48,15 @@ export default async function GamePage({ params }: GamePageProps) {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <SiteHeader brandName={content.site.brandName} />
-      <main className="mx-auto max-w-7xl px-6 py-10 lg:px-10">
-        <section className="grid gap-8 lg:grid-cols-[1.1fr_0.45fr]">
-          <div className="space-y-6">
-            <GamePageIntro game={game} />
+      <main className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-8 lg:px-10">
+        <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
+          <div className="space-y-5 sm:space-y-6">
             <GameSurface game={game} />
             <AdSlot
               label="Gameplay footer placement"
               slot={content.site.adSlots?.gameInline}
             />
+            <GamePageIntro game={game} />
           </div>
           <div className="space-y-6">
             <AdSlot

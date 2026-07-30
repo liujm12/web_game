@@ -7,6 +7,7 @@ import { afterEach, describe, expect, it } from "vitest";
 
 import { NeonSnakeGame } from "@/components/games/neon-snake-game";
 import { BreakoutBlitzGame } from "@/components/games/breakout-blitz-game";
+import { TileMerge2048Game } from "@/components/games/tile-merge-2048-game";
 
 describe("arcade sizing upgrades", () => {
   afterEach(() => {
@@ -43,5 +44,52 @@ describe("arcade sizing upgrades", () => {
     expect(container.querySelector('[data-breakout-paddle="true"]')).toHaveStyle({
       left: "41%",
     });
+  });
+
+  it("places paddle controls before the breakout field for mobile play", () => {
+    const { container } = render(<BreakoutBlitzGame />);
+
+    const paddleLeftButton = screen.getByRole("button", { name: "Paddle left" });
+    const playfield = container.querySelector('[data-breakout-field="true"]');
+
+    expect(playfield).toBeTruthy();
+    expect(
+      Boolean(
+        paddleLeftButton.compareDocumentPosition(playfield!) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ),
+    ).toBe(true);
+  });
+
+  it("keeps snake direction controls directly after the board", () => {
+    const { container } = render(<NeonSnakeGame />);
+
+    const board = container.querySelector('[data-snake-board="true"]');
+    const upButton = screen.getByRole("button", { name: "Up" });
+    const speedText = screen.getByText("Speed: Balanced");
+
+    expect(board).toBeTruthy();
+    expect(
+      Boolean(board!.compareDocumentPosition(upButton) & Node.DOCUMENT_POSITION_FOLLOWING),
+    ).toBe(true);
+    expect(
+      Boolean(upButton.compareDocumentPosition(speedText) & Node.DOCUMENT_POSITION_FOLLOWING),
+    ).toBe(true);
+  });
+
+  it("keeps 2048 direction controls directly after the board", () => {
+    const { container } = render(<TileMerge2048Game />);
+
+    const board = container.querySelector('[data-tile-2048-board="true"]');
+    const leftButton = screen.getByRole("button", { name: "Left" });
+    const bestTileText = screen.getByText("Best tile: 0");
+
+    expect(board).toBeTruthy();
+    expect(
+      Boolean(board!.compareDocumentPosition(leftButton) & Node.DOCUMENT_POSITION_FOLLOWING),
+    ).toBe(true);
+    expect(
+      Boolean(leftButton.compareDocumentPosition(bestTileText) & Node.DOCUMENT_POSITION_FOLLOWING),
+    ).toBe(true);
   });
 });
