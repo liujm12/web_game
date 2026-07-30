@@ -231,17 +231,10 @@ export function BreakoutBlitzGame() {
           <p className="text-xs uppercase tracking-[0.25em] text-sky-200/70">
             Brick breaker
           </p>
-          <p className="text-xl font-semibold">{`Score: ${game.score}`}</p>
+          <p className="text-xl font-semibold">{`Score ${game.score} · Lives ${game.lives}`}</p>
         </div>
-        <button
-          type="button"
-          onClick={startGame}
-          className="rounded-full bg-sky-300 px-4 py-2 text-sm font-semibold text-slate-950"
-        >
-          {game.phase === "playing" ? "Reset round" : "Launch ball"}
-        </button>
       </div>
-      <div className="mb-3 flex flex-wrap gap-2 sm:mb-5">
+      <div className="mb-3 flex flex-wrap gap-2">
         {(["Easy", "Normal", "Hard"] as Difficulty[]).map((mode) => (
           <button
             key={mode}
@@ -256,22 +249,6 @@ export function BreakoutBlitzGame() {
             {mode}
           </button>
         ))}
-      </div>
-      <div className="mb-3 grid grid-cols-2 gap-2 sm:mb-5 sm:gap-3">
-        <button
-          type="button"
-          onClick={() => movePaddle(-1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Paddle left
-        </button>
-        <button
-          type="button"
-          onClick={() => movePaddle(1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Paddle right
-        </button>
       </div>
       <div
         data-breakout-field="true"
@@ -321,17 +298,49 @@ export function BreakoutBlitzGame() {
                 Launch the ball, move the paddle, and clear the wall across a much
                 wider arcade field.
               </p>
+              <button
+                type="button"
+                onClick={startGame}
+                className="mt-4 rounded-full bg-sky-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                Launch ball
+              </button>
+            </div>
+          </div>
+        )}
+        {(game.phase === "over" || game.phase === "won") && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-950/60">
+            <div className="rounded-[24px] border border-white/10 bg-slate-900/85 px-6 py-5 text-center">
+              <p className="text-xs uppercase tracking-[0.26em] text-sky-200/70">
+                {game.phase === "won" ? "Board clear" : "Round over"}
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold">{game.score} points</h3>
+              <button
+                type="button"
+                onClick={startGame}
+                className="mt-4 rounded-full bg-sky-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                Play again
+              </button>
             </div>
           </div>
         )}
       </div>
-      <div className="mt-3 grid gap-2 sm:mt-5 sm:grid-cols-2 sm:gap-3">
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Lives: ${game.lives}`}
-        </div>
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Mode: ${difficulty}`}
-        </div>
+      <div className="mt-2 grid grid-cols-2 gap-2 sm:mt-3 sm:gap-3">
+        <button
+          type="button"
+          onClick={() => movePaddle(-1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Paddle left
+        </button>
+        <button
+          type="button"
+          onClick={() => movePaddle(1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Paddle right
+        </button>
       </div>
       <div className="mt-3 rounded-[22px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300 sm:mt-5 sm:rounded-[24px] sm:p-4">
         {game.phase === "idle" && "Break every brick and protect the paddle."}

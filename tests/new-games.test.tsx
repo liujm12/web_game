@@ -13,7 +13,7 @@ describe("new game entries", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Start challenge" }));
 
-    expect(screen.getByText(/Time:/)).toBeInTheDocument();
+    expect(screen.getByText(/Time 20s · Score 0 · Best 0/)).toBeInTheDocument();
     expect(screen.queryByText("Tap the glowing target as fast as you can.")).not.toBeInTheDocument();
   });
 
@@ -22,7 +22,7 @@ describe("new game entries", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Start round" }));
 
-    expect(screen.getByText(/Next:/)).toBeInTheDocument();
+    expect(screen.getByText(/Next 1 · Mistakes 0 · Cleared 0/)).toBeInTheDocument();
     expect(screen.queryByText("Tap numbers from low to high as quickly as you can.")).not.toBeInTheDocument();
   });
 });

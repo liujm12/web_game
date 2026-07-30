@@ -68,22 +68,18 @@ export function TargetBlitzGame() {
 
   return (
     <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-emerald-200/70">
             Tap challenge
           </p>
-          <p className="text-xl font-semibold">{`Time: ${timeLeft}s`}</p>
+          <p className="text-xl font-semibold">{`Time ${timeLeft}s · Score ${score} · Best ${bestScore}`}</p>
         </div>
-        <button
-          type="button"
-          onClick={startGame}
-          className="rounded-full bg-emerald-300 px-4 py-2 text-sm font-semibold text-slate-950"
-        >
-          {phase === "playing" ? "Restart challenge" : "Start challenge"}
-        </button>
       </div>
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+      <div
+        data-target-blitz-field="true"
+        className="relative grid grid-cols-3 gap-3 sm:grid-cols-4"
+      >
         {Array.from({ length: cellCount }, (_, index) => {
           const isActive = phase === "playing" && activeCell === index;
 
@@ -103,16 +99,28 @@ export function TargetBlitzGame() {
             </button>
           );
         })}
+        {phase !== "playing" && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-[24px] bg-slate-950/60 p-4">
+            <div className="rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center">
+              <p className="text-xs uppercase tracking-[0.26em] text-emerald-200/70">
+                {phase === "over" ? "Challenge over" : "Ready"}
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold">
+                {phase === "over" ? `${score} hits` : "Target Blitz"}
+              </h3>
+              <p className="mt-2 text-sm text-slate-300">{`Best ${bestScore}`}</p>
+              <button
+                type="button"
+                onClick={startGame}
+                className="mt-4 rounded-full bg-emerald-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                {phase === "over" ? "Play again" : "Start challenge"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Score: ${score}`}
-        </div>
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Best: ${bestScore}`}
-        </div>
-      </div>
-      <div className="mt-5 rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+      <div className="mt-3 rounded-[24px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
         {phase === "idle" && "Tap the glowing target as fast as you can."}
         {phase === "playing" && "Keep tapping the active tile before time runs out."}
         {phase === "over" &&

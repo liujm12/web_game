@@ -149,22 +149,15 @@ export function TileMerge2048Game() {
 
   return (
     <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-amber-200/70">
             Tile merge
           </p>
-          <p className="text-xl font-semibold">{`Score: ${score}`}</p>
+          <p className="text-xl font-semibold">{`Score ${score} · Best ${bestTile || 0}`}</p>
         </div>
-        <button
-          type="button"
-          onClick={startGame}
-          className="rounded-full bg-amber-300 px-4 py-2 text-sm font-semibold text-slate-950"
-        >
-          {phase === "playing" ? "Restart 2048" : "Start 2048"}
-        </button>
       </div>
-      <div className="mb-5 flex flex-wrap gap-2">
+      <div className="mb-3 flex flex-wrap gap-2">
         {(["Easy", "Normal", "Hard"] as Difficulty[]).map((mode) => (
           <button
             key={mode}
@@ -180,7 +173,7 @@ export function TileMerge2048Game() {
           </button>
         ))}
       </div>
-      <div data-tile-2048-board="true" className="grid grid-cols-4 gap-3">
+      <div data-tile-2048-board="true" className="relative grid grid-cols-4 gap-3">
         {board.map((value, index) => (
           <div
             key={index}
@@ -189,8 +182,25 @@ export function TileMerge2048Game() {
             {value > 0 ? value : ""}
           </div>
         ))}
+        {phase !== "playing" && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-[24px] bg-slate-950/55 p-4">
+            <div className="rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center">
+              <p className="text-xs uppercase tracking-[0.26em] text-amber-200/70">
+                Tile merge
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold">Chase 2048</h3>
+              <button
+                type="button"
+                onClick={startGame}
+                className="mt-4 rounded-full bg-amber-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                Start 2048
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="mt-3 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-3">
+      <div className="mt-2 grid grid-cols-3 gap-2 sm:mt-3 sm:gap-3">
         <button
           type="button"
           onClick={() => handleMove("left")}
@@ -220,18 +230,12 @@ export function TileMerge2048Game() {
           Down
         </button>
       </div>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Best tile: ${bestTile || 0}`}
-        </div>
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {has2048 ? "You hit 2048." : `Mode: ${difficulty}`}
-        </div>
-      </div>
-      <div className="mt-5 rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+      <div className="mt-3 rounded-[24px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
         {phase === "idle"
           ? "Merge matching tiles and chase 2048."
-          : "Use the direction buttons to slide the whole board and stack bigger numbers."}
+          : has2048
+            ? "You hit 2048. Keep stacking for a bigger board."
+            : `Mode ${difficulty}. Slide the board and stack bigger numbers.`}
       </div>
     </div>
   );

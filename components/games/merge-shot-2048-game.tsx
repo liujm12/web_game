@@ -189,7 +189,7 @@ export function MergeShot2048Game() {
 
   return (
     <div className="rounded-[26px] border border-white/10 bg-slate-950 p-3 text-white sm:rounded-[30px] sm:p-4">
-      <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">
             Merge shooter
@@ -199,13 +199,6 @@ export function MergeShot2048Game() {
             Arrow keys or A/D to aim. Space or Enter to shoot. R restarts.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={phase === "playing" ? shootTile : startGame}
-          className="rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(103,232,249,0.35)]"
-        >
-          {phase === "playing" ? "Shoot Tile" : "Start Shot"}
-        </button>
       </div>
 
       <div className="mb-3 rounded-[22px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
@@ -250,6 +243,25 @@ export function MergeShot2048Game() {
                 </div>
               );
             }),
+          )}
+          {phase !== "playing" && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center rounded-[24px] bg-slate-950/60 p-4 sm:rounded-[28px]">
+              <div className="rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center">
+                <p className="text-xs uppercase tracking-[0.26em] text-cyan-200/70">
+                  {phase === "over" ? "Stack full" : "Ready"}
+                </p>
+                <h3 className="mt-2 text-2xl font-semibold">
+                  {phase === "over" ? `${score} points` : "Ready to fire"}
+                </h3>
+                <button
+                  type="button"
+                  onClick={startGame}
+                  className="mt-4 rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(103,232,249,0.35)]"
+                >
+                  {phase === "over" ? "Play again" : "Start Shot"}
+                </button>
+              </div>
+            </div>
           )}
         </div>
 

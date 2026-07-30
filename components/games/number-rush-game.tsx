@@ -8,9 +8,13 @@ function shuffleNumbers() {
   );
 }
 
+function orderedNumbers() {
+  return Array.from({ length: 9 }, (_, index) => index + 1);
+}
+
 export function NumberRushGame() {
   const [phase, setPhase] = useState<"idle" | "playing" | "over">("idle");
-  const [numbers, setNumbers] = useState<number[]>(() => shuffleNumbers());
+  const [numbers, setNumbers] = useState<number[]>(() => orderedNumbers());
   const [nextNumber, setNextNumber] = useState(1);
   const [mistakes, setMistakes] = useState(0);
   const [roundsCleared, setRoundsCleared] = useState(0);
@@ -49,22 +53,15 @@ export function NumberRushGame() {
 
   return (
     <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-violet-200/70">
             Order game
           </p>
-          <p className="text-xl font-semibold">{`Next: ${Math.min(nextNumber, 9)}`}</p>
+          <p className="text-xl font-semibold">{`Next ${Math.min(nextNumber, 9)} · Mistakes ${mistakes} · Cleared ${roundsCleared}`}</p>
         </div>
-        <button
-          type="button"
-          onClick={startRound}
-          className="rounded-full bg-violet-300 px-4 py-2 text-sm font-semibold text-slate-950"
-        >
-          {phase === "playing" ? "Restart round" : "Start round"}
-        </button>
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div data-number-rush-board="true" className="relative grid grid-cols-3 gap-3">
         {numbers.map((value) => {
           const isCleared = clearedNumbers.has(value);
 
@@ -83,16 +80,27 @@ export function NumberRushGame() {
             </button>
           );
         })}
+        {phase !== "playing" && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-[24px] bg-slate-950/60 p-4">
+            <div className="rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center">
+              <p className="text-xs uppercase tracking-[0.26em] text-violet-200/70">
+                {phase === "over" ? "Round clear" : "Ready"}
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold">
+                {phase === "over" ? `${mistakes} mistakes` : "Number Rush"}
+              </h3>
+              <button
+                type="button"
+                onClick={startRound}
+                className="mt-4 rounded-full bg-violet-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                {phase === "over" ? "Play again" : "Start round"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Mistakes: ${mistakes}`}
-        </div>
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-          {`Rounds cleared: ${roundsCleared}`}
-        </div>
-      </div>
-      <div className="mt-5 rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+      <div className="mt-3 rounded-[24px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
         {phase === "idle" && "Tap numbers from low to high as quickly as you can."}
         {phase === "playing" && "Stay in order. Wrong taps add mistakes but do not end the round."}
         {phase === "over" &&

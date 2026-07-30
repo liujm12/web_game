@@ -117,29 +117,9 @@ export function MeteorSprintGame() {
           </p>
           <p className="text-xl font-semibold">Score: {score}</p>
         </div>
-        <button
-          type="button"
-          onClick={startGame}
-          className="rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950"
-        >
-          {gameOver ? "Restart run" : isRunning ? "Reset run" : "Start run"}
-        </button>
-      </div>
-      <div className="mb-3 grid grid-cols-2 gap-2 sm:mb-4 sm:gap-3">
-        <button
-          type="button"
-          onClick={() => moveLane(-1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Move left
-        </button>
-        <button
-          type="button"
-          onClick={() => moveLane(1)}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
-        >
-          Move right
-        </button>
+        <p className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300">
+          {isRunning ? "Running" : gameOver ? "Run over" : "Ready"}
+        </p>
       </div>
       <div
         data-meteor-field="true"
@@ -191,6 +171,13 @@ export function MeteorSprintGame() {
               <p className="mt-2 text-sm leading-6 text-slate-300 sm:mt-3 sm:leading-7">
                 Shift between lanes, catch glowing stars, and dodge every meteor.
               </p>
+              <button
+                type="button"
+                onClick={startGame}
+                className="mt-4 rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                Start run
+              </button>
             </div>
           </div>
         )}
@@ -205,9 +192,32 @@ export function MeteorSprintGame() {
               <p className="mt-2 text-sm text-slate-300">
                 One more round usually goes better.
               </p>
+              <button
+                type="button"
+                onClick={startGame}
+                className="mt-4 rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+              >
+                Play again
+              </button>
             </div>
           </div>
         )}
+      </div>
+      <div className="mt-2 grid grid-cols-2 gap-2 sm:mt-3 sm:gap-3">
+        <button
+          type="button"
+          onClick={() => moveLane(-1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Move left
+        </button>
+        <button
+          type="button"
+          onClick={() => moveLane(1)}
+          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
+        >
+          Move right
+        </button>
       </div>
     </div>
   );

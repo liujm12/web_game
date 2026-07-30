@@ -25,7 +25,7 @@ function randomFreeCell(blocked: number[]) {
 }
 
 export function NeonSnakeGame() {
-  const [phase, setPhase] = useState<"idle" | "playing" | "over">("idle");
+  const [phase, setPhase] = useState<"idle" | "ready" | "playing" | "over">("idle");
   const [snake, setSnake] = useState<number[]>([27, 28, 29]);
   const [direction, setDirection] = useState<"up" | "down" | "left" | "right">("right");
   const [fruit, setFruit] = useState(34);
@@ -92,27 +92,67 @@ export function NeonSnakeGame() {
     setDirection("right");
     setFruit(34);
     setScore(0);
-    setPhase("playing");
+    setPhase("ready");
   }
+
+  function chooseDirection(nextDirection: "up" | "down" | "left" | "right") {
+    setDirection(nextDirection);
+    if (phase === "ready") {
+      setPhase("playing");
+    }
+  }
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      const key = event.key.toLowerCase();
+      const handledKeys = [
+        "arrowup",
+        "arrowdown",
+        "arrowleft",
+        "arrowright",
+        "w",
+        "a",
+        "s",
+        "d",
+        " ",
+        "enter",
+        "r",
+      ];
+
+      if (!handledKeys.includes(key)) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (key === " " || key === "enter" || key === "r") {
+        startGame();
+      } else if (key === "arrowup" || key === "w") {
+        chooseDirection("up");
+      } else if (key === "arrowdown" || key === "s") {
+        chooseDirection("down");
+      } else if (key === "arrowleft" || key === "a") {
+        chooseDirection("left");
+      } else {
+        chooseDirection("right");
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
 
   return (
     <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-lime-200/70">
             Snake run
           </p>
-          <p className="text-xl font-semibold">{`Score: ${score}`}</p>
+          <p className="text-xl font-semibold">{`Score ${score} · ${speedLabelByMode[difficulty]}`}</p>
         </div>
-        <button
-          type="button"
-          onClick={startGame}
-          className="rounded-full bg-lime-300 px-4 py-2 text-sm font-semibold text-slate-950"
-        >
-          {phase === "playing" ? "Reset snake" : "Start snake"}
-        </button>
       </div>
-      <div className="mb-5 flex flex-wrap gap-2">
+      <div className="mb-3 flex flex-wrap gap-2">
         {(["Easy", "Normal", "Hard"] as Difficulty[]).map((mode) => (
           <button
             key={mode}
@@ -130,7 +170,7 @@ export function NeonSnakeGame() {
       </div>
       <div
         data-snake-board="true"
-        className="mx-auto grid max-w-[720px] gap-1 rounded-[24px] border border-white/10 bg-white/5 p-3"
+        className="relative mx-auto grid max-w-[720px] gap-1 rounded-[24px] border border-white/10 bg-white/5 p-3"
         style={{ gridTemplateColumns: `repeat(${boardSize}, minmax(0, 1fr))` }}
       >
         {Array.from({ length: totalCells }, (_, index) => {
@@ -154,12 +194,37 @@ export function NeonSnakeGame() {
             />
           );
         })}
+        {phase !== "playing" && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-[24px] bg-slate-950/60 p-4">
+            <div className="max-w-xs rounded-[24px] border border-white/10 bg-slate-900/90 p-5 text-center">
+              {phase === "ready" ? (
+                <p className="text-lg font-semibold">Choose a direction to start.</p>
+              ) : (
+                <>
+                  <p className="text-xs uppercase tracking-[0.26em] text-lime-200/70">
+                    {phase === "over" ? "Game over" : "Ready"}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold">
+                    {phase === "over" ? `${score} points` : "Snake Run"}
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={startGame}
+                    className="mt-4 rounded-full bg-lime-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
+                  >
+                    {phase === "over" ? "Play again" : "Start snake"}
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-      <div className="mt-3 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-3">
+      <div className="mt-2 grid grid-cols-3 gap-2 sm:mt-3 sm:gap-3">
         <div />
         <button
           type="button"
-          onClick={() => setDirection("up")}
+          onClick={() => chooseDirection("up")}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Up
@@ -167,33 +232,31 @@ export function NeonSnakeGame() {
         <div />
         <button
           type="button"
-          onClick={() => setDirection("left")}
+          onClick={() => chooseDirection("left")}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Left
         </button>
         <button
           type="button"
-          onClick={() => setDirection("down")}
+          onClick={() => chooseDirection("down")}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Down
         </button>
         <button
           type="button"
-          onClick={() => setDirection("right")}
+          onClick={() => chooseDirection("right")}
           className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold"
         >
           Right
         </button>
       </div>
-      <div className="mt-5 rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+      <div className="mt-3 rounded-[24px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
         {phase === "idle" && "Use the arrow buttons to guide the snake to fruit."}
+        {phase === "ready" && "Pick any direction when your thumb is ready."}
         {phase === "playing" && "Keep moving, eat the orange fruit, and avoid walls or your own trail."}
         {phase === "over" && "Crash. Hit start and go for a longer run."}
-      </div>
-      <div className="mt-3 rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-        {`Speed: ${speedLabelByMode[difficulty]}`}
       </div>
     </div>
   );

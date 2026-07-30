@@ -49,9 +49,9 @@ export function GameCard({ game }: GameCardProps) {
           </p>
           <Link
             href={`/games/${game.slug}`}
-            className="rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
+            className="rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold whitespace-nowrap text-slate-950 transition hover:bg-cyan-200"
           >
-            Play now
+            Play
           </Link>
         </div>
       </div>

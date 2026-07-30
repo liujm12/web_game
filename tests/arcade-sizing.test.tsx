@@ -33,7 +33,7 @@ describe("arcade sizing upgrades", () => {
     const { container } = render(<BreakoutBlitzGame />);
 
     fireEvent.keyDown(window, { key: " " });
-    expect(screen.getByRole("button", { name: "Reset round" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Launch ball" })).not.toBeInTheDocument();
 
     fireEvent.keyDown(window, { key: "ArrowLeft" });
     expect(container.querySelector('[data-breakout-paddle="true"]')).toHaveStyle({
@@ -46,7 +46,7 @@ describe("arcade sizing upgrades", () => {
     });
   });
 
-  it("places paddle controls before the breakout field for mobile play", () => {
+  it("places paddle controls after the breakout field for mobile play", () => {
     const { container } = render(<BreakoutBlitzGame />);
 
     const paddleLeftButton = screen.getByRole("button", { name: "Paddle left" });
@@ -55,7 +55,7 @@ describe("arcade sizing upgrades", () => {
     expect(playfield).toBeTruthy();
     expect(
       Boolean(
-        paddleLeftButton.compareDocumentPosition(playfield!) &
+        playfield!.compareDocumentPosition(paddleLeftButton) &
           Node.DOCUMENT_POSITION_FOLLOWING,
       ),
     ).toBe(true);
@@ -66,14 +66,14 @@ describe("arcade sizing upgrades", () => {
 
     const board = container.querySelector('[data-snake-board="true"]');
     const upButton = screen.getByRole("button", { name: "Up" });
-    const speedText = screen.getByText("Speed: Balanced");
+    const statusText = screen.getByText("Score 0 · Balanced");
 
     expect(board).toBeTruthy();
     expect(
       Boolean(board!.compareDocumentPosition(upButton) & Node.DOCUMENT_POSITION_FOLLOWING),
     ).toBe(true);
     expect(
-      Boolean(upButton.compareDocumentPosition(speedText) & Node.DOCUMENT_POSITION_FOLLOWING),
+      Boolean(upButton.compareDocumentPosition(statusText) & Node.DOCUMENT_POSITION_PRECEDING),
     ).toBe(true);
   });
 
@@ -82,14 +82,14 @@ describe("arcade sizing upgrades", () => {
 
     const board = container.querySelector('[data-tile-2048-board="true"]');
     const leftButton = screen.getByRole("button", { name: "Left" });
-    const bestTileText = screen.getByText("Best tile: 0");
+    const statusText = screen.getByText("Score 0 · Best 0");
 
     expect(board).toBeTruthy();
     expect(
       Boolean(board!.compareDocumentPosition(leftButton) & Node.DOCUMENT_POSITION_FOLLOWING),
     ).toBe(true);
     expect(
-      Boolean(leftButton.compareDocumentPosition(bestTileText) & Node.DOCUMENT_POSITION_FOLLOWING),
+      Boolean(leftButton.compareDocumentPosition(statusText) & Node.DOCUMENT_POSITION_PRECEDING),
     ).toBe(true);
   });
 });

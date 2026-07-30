@@ -15,8 +15,8 @@ describe("expanded game entries", () => {
     fireEvent.click(scoped.getByRole("button", { name: "Hard" }));
     fireEvent.click(scoped.getByRole("button", { name: "Start 2048" }));
 
-    expect(scoped.getByText(/Score:/)).toBeInTheDocument();
-    expect(scoped.getByText("Mode: Hard")).toBeInTheDocument();
+    expect(scoped.getByText(/Score 0 · Best/)).toBeInTheDocument();
+    expect(scoped.getByText(/Mode Hard/)).toBeInTheDocument();
     expect(scoped.queryByText("Merge matching tiles and chase 2048.")).not.toBeInTheDocument();
     cleanup();
   });
@@ -28,8 +28,8 @@ describe("expanded game entries", () => {
     fireEvent.click(scoped.getByRole("button", { name: "Hard" }));
     fireEvent.click(scoped.getByRole("button", { name: "Start snake" }));
 
-    expect(scoped.getByRole("button", { name: "Reset snake" })).toBeInTheDocument();
-    expect(scoped.getByText("Speed: Fast")).toBeInTheDocument();
+    expect(scoped.getByText("Choose a direction to start.")).toBeInTheDocument();
+    expect(scoped.getByText("Score 0 · Fast")).toBeInTheDocument();
     expect(scoped.queryByText("Use the arrow buttons to guide the snake to fruit.")).not.toBeInTheDocument();
     cleanup();
   });
@@ -54,8 +54,8 @@ describe("expanded game entries", () => {
     fireEvent.click(scoped.getByRole("button", { name: "Hard" }));
     fireEvent.click(scoped.getByRole("button", { name: "Launch ball" }));
 
-    expect(scoped.getByRole("button", { name: "Reset round" })).toBeInTheDocument();
-    expect(scoped.getByText("Mode: Hard")).toBeInTheDocument();
+    expect(scoped.queryByRole("button", { name: "Launch ball" })).not.toBeInTheDocument();
+    expect(scoped.getByText(/Score 0 · Lives 2/)).toBeInTheDocument();
     expect(scoped.queryByText("Break every brick and protect the paddle.")).not.toBeInTheDocument();
     cleanup();
   });

@@ -20,7 +20,7 @@ describe("MeteorSprintGame", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Start run" }));
 
-    expect(screen.getByRole("button", { name: "Reset run" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Start run" })).not.toBeInTheDocument();
     expect(screen.queryByText("Ready for launch?")).not.toBeInTheDocument();
   });
 
@@ -30,7 +30,7 @@ describe("MeteorSprintGame", () => {
     const { container } = render(<MeteorSprintGame />);
 
     fireEvent.keyDown(window, { key: " " });
-    expect(screen.getByRole("button", { name: "Reset run" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Start run" })).not.toBeInTheDocument();
 
     fireEvent.keyDown(window, { key: "ArrowLeft" });
     expect(container.querySelectorAll('[data-active="true"]')[0]).toHaveStyle({
@@ -43,7 +43,7 @@ describe("MeteorSprintGame", () => {
     });
   });
 
-  it("places lane controls before the playfield for mobile play", () => {
+  it("places lane controls after the playfield for mobile play", () => {
     const { container } = render(<MeteorSprintGame />);
 
     const moveLeftButton = screen.getByRole("button", { name: "Move left" });
@@ -52,7 +52,7 @@ describe("MeteorSprintGame", () => {
     expect(playfield).toBeTruthy();
     expect(
       Boolean(
-        moveLeftButton.compareDocumentPosition(playfield!) &
+        playfield!.compareDocumentPosition(moveLeftButton) &
           Node.DOCUMENT_POSITION_FOLLOWING,
       ),
     ).toBe(true);
