@@ -134,6 +134,27 @@ describe("mobile game UX polish", () => {
     randomSpy.mockRestore();
   });
 
+  it("shows total round time after clearing number rush", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+
+    render(<NumberRushGame />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Start round" }));
+    vi.advanceTimersByTime(12400);
+
+    for (const value of ["1", "2", "3", "4", "5", "6", "7", "8", "9"]) {
+      fireEvent.click(screen.getByRole("button", { name: value }));
+    }
+
+    expect(
+      screen.getByText(
+        "Board cleared with 0 mistakes in 12s. Start another round and try to clean it up.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "0 mistakes · 12s" })).toBeInTheDocument();
+  });
+
   it("shows compact target blitz score and best status", () => {
     const { container } = render(<TargetBlitzGame />);
     const field = container.querySelector('[data-target-blitz-field="true"]')!;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function shuffleNumbers() {
   return Array.from({ length: 9 }, (_, index) => index + 1).sort(
@@ -18,16 +18,30 @@ export function NumberRushGame() {
   const [nextNumber, setNextNumber] = useState(1);
   const [mistakes, setMistakes] = useState(0);
   const [roundsCleared, setRoundsCleared] = useState(0);
+  const [roundTimeSeconds, setRoundTimeSeconds] = useState(0);
 
   const clearedNumbers = useMemo(
     () => new Set(Array.from({ length: nextNumber - 1 }, (_, index) => index + 1)),
     [nextNumber],
   );
 
+  useEffect(() => {
+    if (phase !== "playing") {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setRoundTimeSeconds((currentTime) => currentTime + 1);
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, [phase]);
+
   function startRound() {
     setNumbers(shuffleNumbers());
     setNextNumber(1);
     setMistakes(0);
+    setRoundTimeSeconds(0);
     setPhase("playing");
   }
 
@@ -87,7 +101,9 @@ export function NumberRushGame() {
                 {phase === "over" ? "Round clear" : "Ready"}
               </p>
               <h3 className="mt-2 text-2xl font-semibold">
-                {phase === "over" ? `${mistakes} mistakes` : "Number Rush"}
+                {phase === "over"
+                  ? `${mistakes} mistakes · ${roundTimeSeconds}s`
+                  : "Number Rush"}
               </h3>
               <button
                 type="button"
@@ -104,7 +120,7 @@ export function NumberRushGame() {
         {phase === "idle" && "Tap numbers from low to high as quickly as you can."}
         {phase === "playing" && "Stay in order. Wrong taps add mistakes but do not end the round."}
         {phase === "over" &&
-          `Board cleared with ${mistakes} mistakes. Start another round and try to clean it up.`}
+          `Board cleared with ${mistakes} mistakes in ${roundTimeSeconds}s. Start another round and try to clean it up.`}
       </div>
     </div>
   );
