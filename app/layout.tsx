@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,16 +13,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim();
+
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-slate-950 text-white">
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? (
-          <Script
+      {adsenseClient ? (
+        <head>
+          <script
             async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
             crossOrigin="anonymous"
           />
-        ) : null}
+        </head>
+      ) : null}
+      <body className="min-h-full flex flex-col bg-slate-950 text-white">
         {children}
       </body>
     </html>
