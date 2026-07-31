@@ -67,12 +67,11 @@ export function AdSlot({ label, className = "", slot = "" }: AdSlotProps) {
       className={`flex min-h-32 flex-col items-center justify-center rounded-3xl border border-dashed border-cyan-300/40 bg-cyan-400/10 p-4 text-center ${className}`}
     >
       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-100/70">
-        Ad Placeholder
+        Sponsored
       </p>
       <p className="mt-3 text-sm text-slate-200">{label}</p>
       <p className="mt-2 max-w-sm text-xs text-slate-400">
-        Add `NEXT_PUBLIC_ADSENSE_CLIENT` and a real ad slot ID for this
-        placement before production launch.
+        Advertising space reserved for future display ads.
       </p>
     </div>
   );
