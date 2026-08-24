@@ -106,12 +106,12 @@ export default async function GamePage({ params }: GamePageProps) {
             <p className="mt-4 text-sm leading-7 text-slate-300">
               {game.title} works because the rules click quickly, the first round
               starts fast, and every retry feels short enough to fit into a real
-              break. That is the rhythm most American casual-browser players
-              expect.
+              break. That rhythm keeps the game easy to start and satisfying to
+              replay.
             </p>
             <p className="mt-4 text-sm leading-7 text-slate-400">
-              This page adds instructions, fast context, and related picks so
-              each game screen keeps real publisher content around the play area.
+              Clear instructions, quick context, and related picks help every game
+              page feel useful before and after the first round.
             </p>
           </div>
           <div className="rounded-[28px] border border-orange-200/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
@@ -129,8 +129,8 @@ export default async function GamePage({ params }: GamePageProps) {
               ))}
             </div>
             <p className="mt-5 text-sm leading-7 text-slate-400">
-              If those tags feel right, this is the kind of game most American
-              casual players will try immediately without needing a tutorial.
+              If those tags feel right, this is the kind of game you can try
+              immediately without needing a long tutorial.
             </p>
           </div>
         </section>
@@ -162,3 +162,4 @@ export default async function GamePage({ params }: GamePageProps) {
     </div>
   );
 }
+
