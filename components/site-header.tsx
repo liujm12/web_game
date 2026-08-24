@@ -10,7 +10,6 @@ const navItems = [
   { href: "/categories/arcade", label: "Arcade" },
   { href: "/categories/brain", label: "Brain" },
   { href: "/games", label: "All Games" },
-  { href: "/admin", label: "Admin" },
 ];
 
 const mobileNavItems = navItems.filter((item) =>
@@ -20,7 +19,7 @@ const mobileNavItems = navItems.filter((item) =>
 export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderProps) {
   return (
     <header
-      className={`z-30 border-b border-white/10 bg-slate-950 md:bg-slate-950/90 md:backdrop-blur-xl ${
+      className={`z-30 border-b border-cyan-200/10 bg-[#030712]/95 shadow-[0_12px_40px_rgba(2,6,23,0.45)] md:bg-[#030712]/82 md:backdrop-blur-xl ${
         compactGameHeader ? "relative md:sticky md:top-0" : "sticky top-0"
       }`}
     >
@@ -29,15 +28,15 @@ export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderP
           compactGameHeader ? "py-2 sm:py-3" : "py-3"
         }`}
       >
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="group flex items-center gap-3">
           <span
-            className={`inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 via-sky-500 to-orange-400 font-black text-slate-950 ${
+            className={`relative inline-flex -skew-x-6 items-center justify-center rounded-[18px] border border-cyan-100/35 bg-[linear-gradient(135deg,#22d3ee_0%,#38bdf8_46%,#fb923c_100%)] font-black text-cyan-950 shadow-[0_0_28px_rgba(34,211,238,0.28)] transition group-hover:translate-x-0.5 ${
               compactGameHeader
                 ? "h-9 w-9 text-base sm:h-11 sm:w-11 sm:text-lg"
                 : "h-10 w-10 text-base sm:h-11 sm:w-11 sm:text-lg"
             }`}
           >
-            TA
+            <span className="skew-x-6">TA</span>
           </span>
           <div>
             <p
@@ -47,7 +46,7 @@ export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderP
             >
               {brandName}
             </p>
-            <p className="hidden text-xs uppercase tracking-[0.22em] text-cyan-200/70 sm:block">
+            <p className="hidden text-xs uppercase tracking-[0.22em] text-cyan-100/70 sm:block">
               Browser games for quick breaks
             </p>
           </div>
@@ -55,7 +54,7 @@ export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderP
         {compactGameHeader && (
           <Link
             href="/games"
-            className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm font-semibold text-slate-200 md:hidden"
+            className="rounded-full border border-cyan-100/15 bg-cyan-300/10 px-3 py-1.5 text-sm font-semibold text-cyan-100 md:hidden"
           >
             All Games
           </Link>
@@ -65,7 +64,7 @@ export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderP
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-slate-300 transition hover:text-white"
+              className="rounded-full px-3 py-1.5 text-sm font-semibold text-cyan-50/80 transition hover:bg-cyan-300/10 hover:text-cyan-100"
             >
               {item.label}
             </Link>
@@ -81,7 +80,7 @@ export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderP
             <Link
               key={item.href}
               href={item.href}
-              className="shrink-0 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200"
+              className="shrink-0 rounded-full border border-cyan-100/15 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200"
             >
               {item.label}
             </Link>

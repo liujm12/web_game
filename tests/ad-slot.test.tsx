@@ -14,15 +14,28 @@ describe("AdSlot", () => {
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT = originalClient;
   });
 
-  it("shows review-safe ad copy instead of setup instructions when slots are pending", () => {
+  it("hides the placement when a real slot is not configured", () => {
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT = "ca-pub-1015999676044681";
 
-    render(<AdSlot label="Gameplay footer placement" />);
+    const { container } = render(<AdSlot label="Gameplay footer placement" />);
+
+    expect(container).toBeEmptyDOMElement();
+    expect(screen.queryByText("Gameplay footer placement")).not.toBeInTheDocument();
+    expect(screen.queryByText("Sponsored")).not.toBeInTheDocument();
+    expect(screen.queryByText(/NEXT_PUBLIC_ADSENSE_CLIENT/)).not.toBeInTheDocument();
+  });
+
+  it("renders a sponsored slot when both publisher client and slot are configured", () => {
+    process.env.NEXT_PUBLIC_ADSENSE_CLIENT = "ca-pub-1015999676044681";
+
+    const { container } = render(
+      <AdSlot label="Gameplay footer placement" slot="1234567890" />,
+    );
 
     expect(screen.getByText("Sponsored")).toBeInTheDocument();
-    expect(screen.getByText("Gameplay footer placement")).toBeInTheDocument();
-    expect(screen.queryByText(/NEXT_PUBLIC_ADSENSE_CLIENT/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/ad slot ID/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/production launch/)).not.toBeInTheDocument();
+    expect(container.querySelector(".adsbygoogle")).toHaveAttribute(
+      "data-ad-slot",
+      "1234567890",
+    );
   });
 });

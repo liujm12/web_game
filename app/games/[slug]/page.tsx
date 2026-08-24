@@ -46,7 +46,7 @@ export default async function GamePage({ params }: GamePageProps) {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen text-white">
       <SiteHeader brandName={content.site.brandName} compactGameHeader />
       <main className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-8 lg:px-10">
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
@@ -63,7 +63,7 @@ export default async function GamePage({ params }: GamePageProps) {
               label="In-game sidebar placement"
               slot={content.site.adSlots?.gameSidebar}
             />
-            <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-6">
+            <div className="rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
                 Start in seconds
               </p>
@@ -73,7 +73,7 @@ export default async function GamePage({ params }: GamePageProps) {
                 ))}
               </ul>
             </div>
-            <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-6">
+            <div className="rounded-[28px] border border-orange-200/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-200/70">
                 Quick facts
               </p>
@@ -99,7 +99,7 @@ export default async function GamePage({ params }: GamePageProps) {
         </section>
 
         <section className="mt-10 grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-6">
+          <div className="rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
               Why players keep coming back
             </p>
@@ -114,7 +114,7 @@ export default async function GamePage({ params }: GamePageProps) {
               each game screen keeps real publisher content around the play area.
             </p>
           </div>
-          <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-6">
+          <div className="rounded-[28px] border border-orange-200/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-200/70">
               Good if you like
             </p>

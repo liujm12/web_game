@@ -8,7 +8,7 @@ import { afterEach, describe, expect, it } from "vitest";
 afterEach(cleanup);
 
 describe("mobile game detail layout", () => {
-  it("puts the playable surface before intro copy and every ad placement", async () => {
+  it("puts the playable surface before intro copy and hides empty ad placements", async () => {
     const pageModule = await import("@/app/games/[slug]/page");
     const Page = pageModule.default;
 
@@ -16,30 +16,22 @@ describe("mobile game detail layout", () => {
 
     const playButton = screen.getByRole("button", { name: "Start run" });
     const introHeading = screen.getByRole("heading", { name: "Meteor Sprint" });
-    const adLabels = [
-      screen.getByText("Gameplay footer placement"),
-      screen.getByText("In-game sidebar placement"),
-    ];
 
     expect(
       Boolean(playButton.compareDocumentPosition(introHeading) & Node.DOCUMENT_POSITION_FOLLOWING),
     ).toBe(true);
-
-    adLabels.forEach((label) => {
-      expect(
-        Boolean(playButton.compareDocumentPosition(label) & Node.DOCUMENT_POSITION_FOLLOWING),
-      ).toBe(true);
-    });
+    expect(screen.queryByText("Gameplay footer placement")).not.toBeInTheDocument();
+    expect(screen.queryByText("In-game sidebar placement")).not.toBeInTheDocument();
   });
 
-  it("keeps both game ad placements available on the detail page", async () => {
+  it("does not show empty game ad reservations on the detail page", async () => {
     const pageModule = await import("@/app/games/[slug]/page");
     const Page = pageModule.default;
 
     render(await Page({ params: Promise.resolve({ slug: "meteor-sprint" }) }));
 
-    expect(screen.getAllByText("Gameplay footer placement")).toHaveLength(1);
-    expect(screen.getAllByText("In-game sidebar placement")).toHaveLength(1);
+    expect(screen.queryByText("Gameplay footer placement")).not.toBeInTheDocument();
+    expect(screen.queryByText("In-game sidebar placement")).not.toBeInTheDocument();
   });
 
   it("uses compact mobile header spacing and an opaque background", async () => {
@@ -47,7 +39,7 @@ describe("mobile game detail layout", () => {
 
     render(<SiteHeader brandName="TurboArcade" />);
 
-    expect(screen.getByRole("banner")).toHaveClass("bg-slate-950");
+    expect(screen.getByRole("banner")).toHaveClass("bg-[#030712]/95");
     expect(screen.getByText("Browser games for quick breaks")).toHaveClass(
       "hidden",
     );
