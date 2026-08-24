@@ -29,7 +29,8 @@ describe("SiteHeader", () => {
       link.textContent?.trim(),
     );
 
-    expect(labels).toEqual(["Home", "Arcade", "Brain", "All Games", "Admin"]);
+    expect(labels).toEqual(["Home", "Arcade", "Brain", "All Games"]);
+    expect(screen.queryByRole("link", { name: "Admin" })).not.toBeInTheDocument();
   });
 
   it("keeps core navigation reachable on mobile", () => {

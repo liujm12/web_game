@@ -62,7 +62,9 @@ describe("mobile game UX polish", () => {
 
     render(<GameCard game={game} />);
 
-    expect(screen.getByRole("link", { name: "Play" })).toHaveClass("whitespace-nowrap");
+    expect(screen.getByRole("link", { name: "Time the shot" })).toHaveClass(
+      "whitespace-nowrap",
+    );
   });
 
   it("puts meteor lane controls after the field and restart actions inside the field", () => {

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://playturboarcade.com"),
   title: "TurboArcade | Free Browser Games",
   description:
-    "TurboArcade is a polished starter site for fast browser games, ad-ready layouts, and SEO-friendly launch pages.",
+    "TurboArcade offers fast, mobile-friendly browser games for quick breaks, simple rules, and repeat play.",
 };
 
 export default function RootLayout({
@@ -32,3 +32,4 @@ export default function RootLayout({
     </html>
   );
 }
+

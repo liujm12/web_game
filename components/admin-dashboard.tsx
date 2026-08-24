@@ -11,7 +11,7 @@ type AdminDashboardProps = {
 export function AdminDashboard({ initialContent }: AdminDashboardProps) {
   const [content, setContent] = useState(initialContent);
   const [search, setSearch] = useState("");
-  const [statusMessage, setStatusMessage] = useState("Local JSON storage ready.");
+  const [statusMessage, setStatusMessage] = useState("Content tools ready.");
   const deferredSearch = useDeferredValue(search);
 
   const filteredGames = useMemo(() => {
@@ -67,18 +67,14 @@ export function AdminDashboard({ initialContent }: AdminDashboardProps) {
       <div className="grid gap-4 rounded-[30px] border border-white/10 bg-slate-900/75 p-6 lg:grid-cols-[1fr_auto]">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">
-            Basic backend
+            Content tools
           </p>
           <h1 className="mt-2 text-3xl font-semibold text-white">TurboArcade Admin</h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
-            This dashboard edits the local JSON content store, so you can change
-            featured status, ranking score, live state, and summary copy without
-            touching React files.
+            Use this private workspace to review featured status, ranking score, live state, and summary copy before publishing updates.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
-            For phase one, keep every game in `data/site-content.json`, decide
-            whether it is `internal` or `embed`, and add AdSense slot IDs only
-            after your account is approved.
+            Keep game details accurate, make sure every live page has helpful copy, and publish only polished games that are ready for players.
           </p>
         </div>
         <div className="flex items-end">
@@ -109,13 +105,13 @@ export function AdminDashboard({ initialContent }: AdminDashboardProps) {
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">
-            AdSense checklist
+            Publishing checklist
           </p>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-300">
-            <li>Set `NEXT_PUBLIC_ADSENSE_CLIENT` in production.</li>
-            <li>Fill `site.adSlots` with the real slot IDs.</li>
-            <li>Check `/ads.txt` after deployment.</li>
-            <li>Keep each game page descriptive before review.</li>
+            <li>Keep production settings current.</li>
+            <li>Use approved ad placements only after review.</li>
+            <li>Confirm public policy and discovery files after deployment.</li>
+            <li>Keep each game page descriptive and useful for players.</li>
           </ul>
         </div>
       </div>
@@ -196,3 +192,4 @@ export function AdminDashboard({ initialContent }: AdminDashboardProps) {
     </div>
   );
 }
+

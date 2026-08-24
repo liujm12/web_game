@@ -16,7 +16,7 @@ type AdSlotProps = {
   slot?: string;
 };
 
-export function AdSlot({ label, className = "", slot = "" }: AdSlotProps) {
+export function AdSlot({ className = "", slot = "" }: AdSlotProps) {
   const adsenseClient = getAdsenseClient();
   const adElementId = useId().replace(/:/g, "");
   const requestedRef = useRef(false);
@@ -62,17 +62,5 @@ export function AdSlot({ label, className = "", slot = "" }: AdSlotProps) {
     );
   }
 
-  return (
-    <div
-      className={`flex min-h-32 flex-col items-center justify-center rounded-3xl border border-dashed border-cyan-300/40 bg-cyan-400/10 p-4 text-center ${className}`}
-    >
-      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-100/70">
-        Sponsored
-      </p>
-      <p className="mt-3 text-sm text-slate-200">{label}</p>
-      <p className="mt-2 max-w-sm text-xs text-slate-400">
-        Advertising space reserved for future display ads.
-      </p>
-    </div>
-  );
+  return null;
 }

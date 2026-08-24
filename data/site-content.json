@@ -4,7 +4,7 @@
     "tagline": "Jump in. Play fast. Come back for one more round.",
     "description": "TurboArcade is a fast, mobile-friendly browser game site built for quick breaks and repeat play.",
     "adsenseClient": "",
-    "supportEmail": "hello@turboarcade.games",
+    "supportEmail": "hello@playturboarcade.com",
     "launchedAt": "2026-07-04",
     "adSlots": {
       "homeHero": "",
@@ -277,7 +277,7 @@
       "title": "Orbit Hopper",
       "category": "arcade",
       "summary": "Bounce between lanes, grab energy rings, and dodge the red debris wave for as long as you can.",
-      "description": "Orbit Hopper is a lightweight embedded HTML5 arcade game built to validate the fast-publish workflow. It starts instantly, works with keyboard or touch controls, and gives players a simple survive-and-score loop that fits quick ad-supported sessions.",
+      "description": "Orbit Hopper is a lightweight HTML5 arcade game built for quick repeat sessions. It starts instantly, works with keyboard or touch controls, and gives players a simple survive-and-score loop that fits a short break.",
       "instructions": [
         "Press Start Game to begin a fresh run.",
         "Move left and right between the three lanes to collect blue rings.",
@@ -303,7 +303,7 @@
       "title": "Neon Drift",
       "category": "arcade",
       "summary": "Slide across the neon lanes, grab charge cells, and keep clear of the blackout blocks.",
-      "description": "Neon Drift is a fast embedded arcade run designed for quick sessions on desktop or mobile. It keeps the controls simple, scores quickly, and works well as a second or third click after a player finishes one of your core games.",
+      "description": "Neon Drift is a fast arcade run designed for quick sessions on desktop or mobile. It keeps the controls simple, scores quickly, and gives players another easy way to jump into one more round.",
       "instructions": [
         "Press Start Run to begin.",
         "Use left and right to move between lanes.",
@@ -329,7 +329,7 @@
       "title": "Signal Sweep",
       "category": "brain",
       "summary": "Watch the pad sequence, repeat it cleanly, and extend your streak one round at a time.",
-      "description": "Signal Sweep is an embedded memory game built for short repeat sessions. It gives your lineup a second brain-game style without needing a custom React component, which makes it a strong example of the light publish workflow.",
+      "description": "Signal Sweep is a memory game built for short repeat sessions. Watch the pattern, repeat it cleanly, and keep the streak alive as each round adds one more step.",
       "instructions": [
         "Press Start Sequence to begin a round.",
         "Watch the glowing pad order carefully.",
@@ -376,3 +376,4 @@
     }
   ]
 }
+
