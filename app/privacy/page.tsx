@@ -4,7 +4,7 @@ import { getSiteContent } from "@/lib/site-content";
 
 export default async function PrivacyPage() {
   const content = await getSiteContent();
-  const updatedAt = "July 24, 2026";
+  const updatedAt = "October 9, 2026";
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">

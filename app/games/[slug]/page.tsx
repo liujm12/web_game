@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { AdSlot } from "@/components/ad-slot";
@@ -8,6 +8,9 @@ import { GameSurface } from "@/components/game-surface";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGameBySlug, getSiteContent } from "@/lib/site-content";
+
+const sectionCardClass =
+  "rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]";
 
 type GamePageProps = {
   params: Promise<{ slug: string }>;
@@ -41,9 +44,37 @@ export default async function GamePage({ params }: GamePageProps) {
     notFound();
   }
 
-  const relatedGames = content.games.filter(
-    (entry) => entry.slug !== game.slug && entry.status === "live",
-  );
+  const category = content.categories.find((entry) => entry.slug === game.category);
+  const relatedGames = content.games
+    .filter((entry) => entry.slug !== game.slug && entry.status === "live")
+    .sort((left, right) => {
+      if (left.category === game.category && right.category !== game.category) return -1;
+      if (right.category === game.category && left.category !== game.category) return 1;
+      return right.trendingScore - left.trendingScore;
+    })
+    .slice(0, 6);
+
+  const controls = game.controls ?? game.instructions;
+  const bestFor = game.bestFor ?? [
+    `${game.estimatedSession} sessions when you want a fast browser game.`,
+    `Players looking for a ${game.difficulty.toLowerCase()} ${game.category} pick.`,
+    "Anyone who wants to understand the controls before starting.",
+  ];
+  const playNotes = game.playNotes ?? [
+    `${game.title} is best treated as a short retry loop, not a long session.`,
+    "The page keeps instructions and controls close to the game so mobile players do not need to hunt around.",
+  ];
+  const strategyTips = game.strategyTips ?? game.instructions;
+  const commonMistakes = game.commonMistakes ?? [
+    "Starting before reading the first control prompt.",
+    "Trying to play too quickly before the rhythm is clear.",
+  ];
+  const faq = game.faq ?? [
+    {
+      question: `Is ${game.title} free to play?`,
+      answer: "Yes. The game runs in the browser and can be started from this page.",
+    },
+  ];
 
   return (
     <div className="min-h-screen text-white">
@@ -58,18 +89,20 @@ export default async function GamePage({ params }: GamePageProps) {
             />
             <GamePageIntro game={game} />
           </div>
-          <div className="space-y-6">
+          <aside className="space-y-6">
             <AdSlot
               label="In-game sidebar placement"
               slot={content.site.adSlots?.gameSidebar}
             />
-            <div className="rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
+            <div className={sectionCardClass}>
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
-                Start in seconds
+                How to play
               </p>
               <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
                 {game.instructions.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="rounded-2xl bg-white/[0.045] px-4 py-3">
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -85,36 +118,97 @@ export default async function GamePage({ params }: GamePageProps) {
                   Players: {game.playersLabel}
                 </div>
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
-                  Format: {game.playMode === "embed" ? "Hosted game page" : "Built into TurboArcade"}
+                  Session: {game.estimatedSession}
                 </div>
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
-                  Best for: quick repeat sessions after work, school, or lunch
+                  Format: {game.playMode === "embed" ? "Hosted HTML5 game" : "Built into TurboArcade"}
                 </div>
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
-                  Why start here: the hook is obvious in your first round
+                  Last checked: {game.lastChecked ?? "October 2026"}
                 </div>
               </div>
+            </div>
+          </aside>
+        </section>
+
+        <section className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className={sectionCardClass}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
+              What this game is good for
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-white">
+              {game.title} fits a {game.estimatedSession.toLowerCase()} break
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-slate-300">
+              {game.description}
+            </p>
+            <div className="mt-5 grid gap-3">
+              {bestFor.map((item) => (
+                <p key={item} className="rounded-2xl bg-white/[0.045] px-4 py-3 text-sm leading-7 text-slate-300">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className={sectionCardClass}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-200/70">
+              Controls we checked
+            </p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+              {controls.map((item) => (
+                <li key={item} className="rounded-2xl bg-white/[0.045] px-4 py-3">
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {(game.testedOn ?? ["Desktop browser", "Mobile browser"]).map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="mt-10 grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <div className="rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
+        <section className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className={sectionCardClass}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
-              Why players keep coming back
+              Test notes
             </p>
-            <p className="mt-4 text-sm leading-7 text-slate-300">
-              {game.title} works because the rules click quickly, the first round
-              starts fast, and every retry feels short enough to fit into a real
-              break. That rhythm keeps the game easy to start and satisfying to
-              replay.
-            </p>
-            <p className="mt-4 text-sm leading-7 text-slate-400">
-              Clear instructions, quick context, and related picks help every game
-              page feel useful before and after the first round.
-            </p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+              {playNotes.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
-          <div className="rounded-[28px] border border-orange-200/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]">
+          <div className={sectionCardClass}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-lime-200/70">
+              Better-score tips
+            </p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+              {strategyTips.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className={sectionCardClass}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-200/70">
+              Mistakes to avoid
+            </p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+              {commonMistakes.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="mt-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className={sectionCardClass}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-200/70">
               Good if you like
             </p>
@@ -129,9 +223,23 @@ export default async function GamePage({ params }: GamePageProps) {
               ))}
             </div>
             <p className="mt-5 text-sm leading-7 text-slate-400">
-              If those tags feel right, this is the kind of game you can try
-              immediately without needing a long tutorial.
+              {category
+                ? `${category.name} games on TurboArcade are selected for quick starts, readable rules, and repeatable sessions.`
+                : "TurboArcade keeps game pages practical, with controls and notes written for real play."}
             </p>
+          </div>
+          <div className={sectionCardClass}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
+              Player questions
+            </p>
+            <div className="mt-5 space-y-4">
+              {faq.map((item) => (
+                <div key={item.question} className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+                  <h3 className="font-semibold text-white">{item.question}</h3>
+                  <p className="mt-2 text-sm leading-7 text-slate-300">{item.answer}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -141,11 +249,10 @@ export default async function GamePage({ params }: GamePageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/70">
                 Up next
               </p>
-              <h2 className="mt-3 text-3xl font-semibold">Keep the session going</h2>
+              <h2 className="mt-3 text-3xl font-semibold">More tested quick games</h2>
             </div>
             <p className="hidden max-w-lg text-sm leading-7 text-slate-400 md:block">
-              The next click should feel easy: another quick round, a different
-              pace, or a lighter challenge.
+              Related games are ordered by category first, then by our internal shelf order.
             </p>
           </div>
           <div className="mt-8 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
@@ -162,4 +269,3 @@ export default async function GamePage({ params }: GamePageProps) {
     </div>
   );
 }
-

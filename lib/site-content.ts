@@ -46,6 +46,17 @@ export type GameRecord = {
   heroGradient: string;
   seoTitle: string;
   seoDescription: string;
+  controls?: string[];
+  bestFor?: string[];
+  playNotes?: string[];
+  strategyTips?: string[];
+  commonMistakes?: string[];
+  faq?: {
+    question: string;
+    answer: string;
+  }[];
+  testedOn?: string[];
+  lastChecked?: string;
 };
 
 export type SiteContent = {

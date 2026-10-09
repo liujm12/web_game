@@ -77,6 +77,38 @@ export default async function AllGamesPage() {
           </div>
         </section>
 
+
+
+        <section className="mt-10 grid gap-6 lg:grid-cols-3">
+          {[
+            ["Keyboard-friendly picks", "2048, Snake, Breakout Blitz, and Meteor Sprint are good starting points if you are playing on a laptop or desktop."],
+            ["Best on a phone", "Target Blitz, Number Rush, Memory Mosaic, and Pattern Pulse use large tap targets and simple actions."],
+            ["Slower brain breaks", "Choose 2048, five-in-a-row, or Memory Mosaic when you want a calmer session with fewer reflex demands."],
+          ].map(([title, body]) => (
+            <div
+              key={title}
+              className="rounded-[26px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]"
+            >
+              <h2 className="text-xl font-black text-white">{title}</h2>
+              <p className="mt-3 text-sm leading-7 text-slate-400">{body}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="mt-10 rounded-[30px] border border-orange-200/12 bg-[#0a0d18]/88 p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-200/70">
+            Catalog notes
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <p className="text-sm leading-7 text-slate-300">
+              We keep this list intentionally small while the site is in its early stage. New games are added only after the controls, mobile layout, and retry flow are checked.
+            </p>
+            <p className="text-sm leading-7 text-slate-300">
+              If a game uses an embedded HTML5 source, its page still includes TurboArcade notes, controls, and practical context so visitors are not landing on a blank frame.
+            </p>
+          </div>
+        </section>
+
         <AdSlot
           label="All games inline placement"
           slot={content.site.adSlots?.allGamesInline}

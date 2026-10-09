@@ -42,10 +42,10 @@ describe("player-facing page sections", () => {
     render(<GamePageIntro game={game} />);
 
     expect(screen.getByText("Arcade / 90 seconds")).toBeInTheDocument();
-    expect(screen.getByText("Easy to learn")).toBeInTheDocument();
-    expect(screen.getByText("Short rounds")).toBeInTheDocument();
-    expect(screen.getByText("Original play page")).toBeInTheDocument();
-    expect(screen.getByText("Native browser game")).toBeInTheDocument();
+    expect(screen.getByText("Controls checked")).toBeInTheDocument();
+    expect(screen.getByText("Short sessions")).toBeInTheDocument();
+    expect(screen.getByText("Tips included")).toBeInTheDocument();
+    expect(screen.getByText("Built-in browser game")).toBeInTheDocument();
   });
 
   it("frames category hero around player choice and pace", () => {

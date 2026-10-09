@@ -35,13 +35,17 @@
       "title": "Meteor Sprint",
       "category": "arcade",
       "summary": "Slide across three lanes, scoop up stars, and dodge meteor strikes.",
-      "description": "Meteor Sprint is a lane-dodging reflex game designed for quick retries. The rules are simple, the pace ramps up fast, and every run gives you a reason to chase one more score.",
+      "description": "Meteor Sprint is a lane-dodging reflex game designed for quick retries. The rules are simple, the pace ramps up fast, and every run gives you a reason to chase one more score. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Use the left and right controls to swap lanes.",
         "Catch stars to raise your score and build a streak.",
         "Avoid meteors. One hit ends the run."
       ],
-      "tags": ["Reflex", "Quick Play", "Arcade"],
+      "tags": [
+        "Lane Runner",
+        "Reflex",
+        "Keyboard Ready"
+      ],
       "featured": true,
       "trendingScore": 98,
       "difficulty": "Easy",
@@ -52,20 +56,69 @@
       "playMode": "internal",
       "heroGradient": "from-cyan-400 via-sky-500 to-indigo-700",
       "seoTitle": "Meteor Sprint - Free Browser Arcade Game | TurboArcade",
-      "seoDescription": "Play Meteor Sprint online for free. Dodge meteors, grab stars, and chase a higher score in under two minutes."
+      "seoDescription": "Play Meteor Sprint online for free. Dodge meteors, grab stars, and chase a higher score in under two minutes.",
+      "controls": [
+        "Desktop/mobile controls: left/right arrows or Move left/Move right buttons.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 90 seconds of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Meteor Sprint, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Switch lanes early.",
+        "Skip risky stars.",
+        "Watch the top of the field."
+      ],
+      "commonMistakes": [
+        "Waiting too long.",
+        "Chasing every pickup.",
+        "Overcorrecting."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Meteor Sprint?",
+          "answer": "Use the left and right controls to swap lanes."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "memory-mosaic",
       "title": "Memory Mosaic",
       "category": "brain",
       "summary": "Flip glowing tiles, match the symbols, and clear the board in as few moves as possible.",
-      "description": "Memory Mosaic is a clean card-matching game with a neon arcade finish. It is simple enough for first-time players and sticky enough for repeat sessions.",
+      "description": "Memory Mosaic is a clean card-matching game with a neon arcade finish. It is simple enough for first-time players and sticky enough for repeat sessions. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Tap two tiles to reveal what is underneath.",
         "Matched tiles stay open.",
         "Clear every pair with the fewest moves you can."
       ],
-      "tags": ["Memory", "Puzzle", "Casual"],
+      "tags": [
+        "Memory",
+        "Matching",
+        "Calm Puzzle"
+      ],
       "featured": true,
       "trendingScore": 91,
       "difficulty": "Easy",
@@ -76,20 +129,69 @@
       "playMode": "internal",
       "heroGradient": "from-fuchsia-400 via-orange-400 to-rose-500",
       "seoTitle": "Memory Mosaic - Free Matching Game | TurboArcade",
-      "seoDescription": "Play Memory Mosaic in your browser. Flip, match, and clear every neon tile in this quick memory game."
+      "seoDescription": "Play Memory Mosaic in your browser. Flip, match, and clear every neon tile in this quick memory game.",
+      "controls": [
+        "Desktop/mobile controls: click or tap two tiles to find a match.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 2 minutes of focused play.",
+        "Anyone looking for a easy brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Memory Mosaic, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Open tiles row by row.",
+        "Pause after each reveal.",
+        "Clear obvious pairs."
+      ],
+      "commonMistakes": [
+        "Random flipping.",
+        "Rushing the second tile.",
+        "Restarting after one miss."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Memory Mosaic?",
+          "answer": "Tap two tiles to reveal what is underneath."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "pattern-pulse",
       "title": "Pattern Pulse",
       "category": "brain",
       "summary": "Watch the light sequence, replay it perfectly, and push your streak one round further.",
-      "description": "Pattern Pulse mixes classic memory patterns with sharper pacing and a cleaner mobile-first layout. It is ideal for players who like short concentration challenges.",
+      "description": "Pattern Pulse mixes classic memory patterns with sharper pacing and a cleaner mobile-first layout. It is ideal for players who like short concentration challenges. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start to watch the sequence.",
         "Repeat the flashing order using the four pads.",
         "Miss one input and the run ends."
       ],
-      "tags": ["Sequence", "Memory", "Skill"],
+      "tags": [
+        "Sequence",
+        "Memory",
+        "Focus"
+      ],
       "featured": true,
       "trendingScore": 84,
       "difficulty": "Medium",
@@ -100,20 +202,69 @@
       "playMode": "internal",
       "heroGradient": "from-amber-300 via-orange-500 to-pink-600",
       "seoTitle": "Pattern Pulse - Free Sequence Memory Game | TurboArcade",
-      "seoDescription": "Test your memory in Pattern Pulse. Follow the light sequence and see how many rounds you can survive."
+      "seoDescription": "Test your memory in Pattern Pulse. Follow the light sequence and see how many rounds you can survive.",
+      "controls": [
+        "Desktop/mobile controls: click or tap pads after the playback finishes.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 75 seconds of focused play.",
+        "Anyone looking for a medium brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Pattern Pulse, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Chunk the pattern.",
+        "Wait for playback.",
+        "Name positions in your head."
+      ],
+      "commonMistakes": [
+        "Tapping during playback.",
+        "Remembering only the last light.",
+        "Rushing long streaks."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Pattern Pulse?",
+          "answer": "Press Start to watch the sequence."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "target-blitz",
       "title": "Target Blitz",
       "category": "arcade",
       "summary": "Hit the glowing tile before it jumps away and pile up points in twenty seconds.",
-      "description": "Target Blitz is a fast click-and-tap challenge built for players who want instant action. The target keeps moving, the timer stays tight, and every miss makes the next hit feel more urgent.",
+      "description": "Target Blitz is a fast click-and-tap challenge built for players who want instant action. The target keeps moving, the timer stays tight, and every miss makes the next hit feel more urgent. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Challenge to begin a 20-second round.",
         "Tap the glowing tile every time it appears.",
         "Keep the streak moving before the timer hits zero."
       ],
-      "tags": ["Reaction", "Tap Game", "Arcade"],
+      "tags": [
+        "Reaction",
+        "Tap Game",
+        "20 Seconds"
+      ],
       "featured": true,
       "trendingScore": 89,
       "difficulty": "Easy",
@@ -124,20 +275,69 @@
       "playMode": "internal",
       "heroGradient": "from-emerald-300 via-teal-400 to-cyan-600",
       "seoTitle": "Target Blitz - Free Tap Reaction Game | TurboArcade",
-      "seoDescription": "Play Target Blitz free in your browser. Tap the glowing target fast and see how many hits you can land in twenty seconds."
+      "seoDescription": "Play Target Blitz free in your browser. Tap the glowing target fast and see how many hits you can land in twenty seconds.",
+      "controls": [
+        "Desktop/mobile controls: click or tap the glowing tile.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 20 seconds of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Target Blitz, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Keep your finger near the board.",
+        "React to the current tile.",
+        "Ignore the score while tapping."
+      ],
+      "commonMistakes": [
+        "Watching the score.",
+        "Dragging the page.",
+        "Predicting instead of reacting."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Target Blitz?",
+          "answer": "Press Start Challenge to begin a 20-second round."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "number-rush",
       "title": "Number Rush",
       "category": "brain",
       "summary": "Tap the numbers in order, keep your mistakes low, and clear the board cleanly.",
-      "description": "Number Rush turns a simple number-order challenge into a quick brain workout. It is easy to understand immediately, works well on phones, and gives players a clean score loop they can replay.",
+      "description": "Number Rush turns a simple number-order challenge into a quick brain workout. It is easy to understand immediately, works well on phones, and gives players a clean score loop they can replay. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Round to shuffle the board.",
         "Tap numbers from 1 through 9 in order.",
         "Wrong taps add mistakes, so aim for a clean clear."
       ],
-      "tags": ["Numbers", "Focus", "Brain"],
+      "tags": [
+        "Number Order",
+        "Focus",
+        "Timed Puzzle"
+      ],
       "featured": true,
       "trendingScore": 86,
       "difficulty": "Easy",
@@ -148,20 +348,69 @@
       "playMode": "internal",
       "heroGradient": "from-violet-300 via-fuchsia-400 to-indigo-600",
       "seoTitle": "Number Rush - Free Order Puzzle Game | TurboArcade",
-      "seoDescription": "Play Number Rush online for free. Tap the numbers in order and clear the board with as few mistakes as possible."
+      "seoDescription": "Play Number Rush online for free. Tap the numbers in order and clear the board with as few mistakes as possible.",
+      "controls": [
+        "Desktop/mobile controls: click or tap numbers from 1 to 9.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 45 seconds of focused play.",
+        "Anyone looking for a easy brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Number Rush, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Locate 1-3 first.",
+        "Scan row by row.",
+        "Slow down after a mistake."
+      ],
+      "commonMistakes": [
+        "Starting blind.",
+        "Tapping the wrong visible number.",
+        "Rushing after an error."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Number Rush?",
+          "answer": "Press Start Round to shuffle the board."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "2048",
       "title": "2048",
       "category": "brain",
       "summary": "Slide the board, merge matching tiles, and build your way up to 2048.",
-      "description": "2048 is the kind of browser puzzle players understand in seconds and replay for much longer than they expect. Every move matters, the board fills quickly, and the next merge always feels close enough to chase.",
+      "description": "2048 is the kind of browser puzzle players understand in seconds and replay for much longer than they expect. Every move matters, the board fills quickly, and the next merge always feels close enough to chase. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start 2048 to seed the board.",
         "Use the move buttons to slide every tile in one direction.",
         "Merge matching numbers and keep space open for the next chain."
       ],
-      "tags": ["2048", "Merge", "Puzzle"],
+      "tags": [
+        "2048",
+        "Merge",
+        "Strategy"
+      ],
       "featured": true,
       "trendingScore": 96,
       "difficulty": "Easy",
@@ -172,21 +421,70 @@
       "playMode": "internal",
       "heroGradient": "from-amber-300 via-orange-400 to-rose-500",
       "seoTitle": "2048 - Free Tile Merge Game | TurboArcade",
-      "seoDescription": "Play 2048 online for free. Merge matching tiles, keep the board alive, and push toward the 2048 tile."
+      "seoDescription": "Play 2048 online for free. Merge matching tiles, keep the board alive, and push toward the 2048 tile.",
+      "controls": [
+        "Desktop/mobile controls: arrow keys on desktop or direction buttons on mobile.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 3 minutes of focused play.",
+        "Anyone looking for a easy brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing 2048, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Keep the largest tile in one corner.",
+        "Merge small tiles early.",
+        "Protect empty space."
+      ],
+      "commonMistakes": [
+        "Random swipes.",
+        "Changing corner strategy.",
+        "Isolating large tiles."
+      ],
+      "faq": [
+        {
+          "question": "How do I play 2048?",
+          "answer": "Press Start 2048 to seed the board."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "merge-shot-2048",
       "title": "Merge Shot 2048",
       "category": "brain",
       "summary": "Aim the cannon, fire number blocks, trigger merges, and chase a bigger 2048 combo.",
-      "description": "Merge Shot 2048 turns the familiar number-merge loop into a more active arcade puzzle. Players choose a lane, shoot the current block, watch the landing path, and build combos by connecting matching numbers before the stack reaches the danger line.",
+      "description": "Merge Shot 2048 turns the familiar number-merge loop into a more active arcade puzzle. Players choose a lane, shoot the current block, watch the landing path, and build combos by connecting matching numbers before the stack reaches the danger line. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Shot to arm the cannon.",
         "Use Arrow Left and Arrow Right, or A and D, to pick a lane.",
         "Press Space, Enter, or Fire to shoot the current number block.",
         "Match touching blocks with the same number to merge upward toward 2048."
       ],
-      "tags": ["2048", "Merge Shooter", "Puzzle"],
+      "tags": [
+        "Merge",
+        "Lane Aim",
+        "2048 Twist"
+      ],
       "featured": true,
       "featuredPriority": 130,
       "trendingScore": 99,
@@ -198,20 +496,69 @@
       "playMode": "internal",
       "heroGradient": "from-cyan-300 via-sky-400 to-violet-600",
       "seoTitle": "Merge Shot 2048 - Free Number Shooter Game | TurboArcade",
-      "seoDescription": "Play Merge Shot 2048 online for free. Aim, shoot number blocks, trigger combos, and chase the 2048 tile in a fast browser puzzle."
+      "seoDescription": "Play Merge Shot 2048 online for free. Aim, shoot number blocks, trigger combos, and chase the 2048 tile in a fast browser puzzle.",
+      "controls": [
+        "Desktop/mobile controls: aim left/right, then Fire or Space.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 3 minutes of focused play.",
+        "Anyone looking for a easy brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Merge Shot 2048, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Read the next tile.",
+        "Keep one lane low.",
+        "Set up two lanes for combos."
+      ],
+      "commonMistakes": [
+        "Firing instantly.",
+        "Stacking one lane.",
+        "Ignoring board height."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Merge Shot 2048?",
+          "answer": "Press Start Shot to arm the cannon."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "snake",
       "title": "Snake",
       "category": "arcade",
       "summary": "Guide the snake to fruit, grow longer, and avoid crashing into walls or yourself.",
-      "description": "Snake is still one of the cleanest web-game loops ever made: start fast, score quickly, and fail in a way that makes the next round feel irresistible. This version keeps the rules simple and the board readable on smaller screens.",
+      "description": "Snake is still one of the cleanest web-game loops ever made: start fast, score quickly, and fail in a way that makes the next round feel irresistible. This version keeps the rules simple and the board readable on smaller screens. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Snake to begin the run.",
         "Use the direction buttons to steer toward the fruit.",
         "Do not hit the walls or your own trail."
       ],
-      "tags": ["Snake", "Arcade", "Reflex"],
+      "tags": [
+        "Snake",
+        "Classic Arcade",
+        "Keyboard Ready"
+      ],
       "featured": false,
       "trendingScore": 93,
       "difficulty": "Easy",
@@ -222,20 +569,69 @@
       "playMode": "internal",
       "heroGradient": "from-lime-300 via-emerald-400 to-teal-600",
       "seoTitle": "Snake - Free Browser Arcade Game | TurboArcade",
-      "seoDescription": "Play Snake in your browser for free. Eat fruit, grow longer, and see how long you can stay alive."
+      "seoDescription": "Play Snake in your browser for free. Eat fruit, grow longer, and see how long you can stay alive.",
+      "controls": [
+        "Desktop/mobile controls: arrow keys or the direction buttons below the board.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 2 minutes of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Snake, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Choose your first direction.",
+        "Turn early.",
+        "Keep a loose outside loop."
+      ],
+      "commonMistakes": [
+        "Starting before choosing.",
+        "Tight wall turns.",
+        "Trapping food behind the tail."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Snake?",
+          "answer": "Press Start Snake to begin the run."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "four-in-a-row",
       "title": "Gomoku",
       "category": "brain",
       "summary": "Place black and white stones on a standard board and connect five in a row to win.",
-      "description": "Gomoku gives your catalog a more classic strategy game feel without asking players to learn anything complicated first. The standard 15x15 board looks familiar, the turns are quick, and the five-in-a-row goal is instantly readable.",
+      "description": "Gomoku gives your catalog a more classic strategy game feel without asking players to learn anything complicated first. The standard 15x15 board looks familiar, the turns are quick, and the five-in-a-row goal is instantly readable. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press New Board to reset the standard 15x15 board.",
         "Black moves first, then white alternates each turn.",
         "Connect five stones horizontally, vertically, or diagonally to win."
       ],
-      "tags": ["Gomoku", "Board", "Strategy"],
+      "tags": [
+        "Gomoku",
+        "Board Game",
+        "Strategy"
+      ],
       "featured": false,
       "trendingScore": 88,
       "difficulty": "Medium",
@@ -246,20 +642,69 @@
       "playMode": "internal",
       "heroGradient": "from-stone-200 via-amber-300 to-orange-500",
       "seoTitle": "Gomoku - Free Browser Board Game | TurboArcade",
-      "seoDescription": "Play Gomoku free in your browser. Place stones on a standard board and connect five in a row before your opponent."
+      "seoDescription": "Play Gomoku free in your browser. Place stones on a standard board and connect five in a row before your opponent.",
+      "controls": [
+        "Desktop/mobile controls: click or tap an empty grid point.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 4 minutes of focused play.",
+        "Anyone looking for a medium brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Gomoku, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Control the center.",
+        "Block open fours.",
+        "Build two threats at once."
+      ],
+      "commonMistakes": [
+        "Playing too far away.",
+        "Missing diagonals.",
+        "Chasing one line only."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Gomoku?",
+          "answer": "Press New Board to reset the standard 15x15 board."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "breakout-blitz",
       "title": "Breakout Blitz",
       "category": "arcade",
       "summary": "Keep the ball alive, move the paddle, and wipe out the brick wall one hit at a time.",
-      "description": "Breakout Blitz keeps that classic brick-breaker rhythm: launch quickly, protect the paddle, and clear the top rows before your lives run out. It works well for short sessions and gives players a strong score chase loop.",
+      "description": "Breakout Blitz keeps that classic brick-breaker rhythm: launch quickly, protect the paddle, and clear the top rows before your lives run out. It works well for short sessions and gives players a strong score chase loop. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Launch Ball to start the round.",
         "Use the paddle buttons to stay under the ball.",
         "Clear every brick while protecting your remaining lives."
       ],
-      "tags": ["Breakout", "Arcade", "Brick Breaker"],
+      "tags": [
+        "Brick Breaker",
+        "Paddle",
+        "Keyboard Ready"
+      ],
       "featured": true,
       "trendingScore": 90,
       "difficulty": "Easy",
@@ -270,20 +715,69 @@
       "playMode": "internal",
       "heroGradient": "from-sky-300 via-cyan-400 to-indigo-600",
       "seoTitle": "Breakout Blitz - Free Brick Breaker Game | TurboArcade",
-      "seoDescription": "Play Breakout Blitz online for free. Break bricks, protect the paddle, and push for a higher score."
+      "seoDescription": "Play Breakout Blitz online for free. Break bricks, protect the paddle, and push for a higher score.",
+      "controls": [
+        "Desktop/mobile controls: arrow keys or Paddle left/right buttons.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 2 minutes of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Breakout Blitz, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Track the ball first.",
+        "Aim toward uncleared bricks.",
+        "Avoid overcorrecting."
+      ],
+      "commonMistakes": [
+        "Watching bricks only.",
+        "Holding a direction too long.",
+        "Launching before ready."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Breakout Blitz?",
+          "answer": "Press Launch Ball to start the round."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "orbit-hopper",
       "title": "Orbit Hopper",
       "category": "arcade",
       "summary": "Bounce between lanes, grab energy rings, and dodge the red debris wave for as long as you can.",
-      "description": "Orbit Hopper is a lightweight HTML5 arcade game built for quick repeat sessions. It starts instantly, works with keyboard or touch controls, and gives players a simple survive-and-score loop that fits a short break.",
+      "description": "Orbit Hopper is a lightweight HTML5 arcade game built for quick repeat sessions. It starts instantly, works with keyboard or touch controls, and gives players a simple survive-and-score loop that fits a short break. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Game to begin a fresh run.",
         "Move left and right between the three lanes to collect blue rings.",
         "Avoid the red debris blocks. Three hits end the session."
       ],
-      "tags": ["Embed", "Arcade", "Reflex"],
+      "tags": [
+        "Lane Runner",
+        "Timing",
+        "Arcade"
+      ],
       "featured": true,
       "featuredPriority": 100,
       "trendingScore": 82,
@@ -296,20 +790,69 @@
       "gameUrl": "/embed-games/orbit-hopper/index.html",
       "heroGradient": "from-indigo-300 via-sky-400 to-cyan-500",
       "seoTitle": "Orbit Hopper - Free Browser Reflex Game | TurboArcade",
-      "seoDescription": "Play Orbit Hopper online for free. Shift lanes, collect energy rings, and dodge debris in a fast browser arcade run."
+      "seoDescription": "Play Orbit Hopper online for free. Shift lanes, collect energy rings, and dodge debris in a fast browser arcade run.",
+      "controls": [
+        "Desktop/mobile controls: arrow keys or lane buttons below the field.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 75 seconds of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Orbit Hopper, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Survive first.",
+        "Collect safe rings.",
+        "Reset near the center lane."
+      ],
+      "commonMistakes": [
+        "Chasing every ring.",
+        "Moving late.",
+        "Letting page scroll during controls."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Orbit Hopper?",
+          "answer": "Press Start Game to begin a fresh run."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "neon-drift",
       "title": "Neon Drift",
       "category": "arcade",
       "summary": "Slide across the neon lanes, grab charge cells, and keep clear of the blackout blocks.",
-      "description": "Neon Drift is a fast arcade run designed for quick sessions on desktop or mobile. It keeps the controls simple, scores quickly, and gives players another easy way to jump into one more round.",
+      "description": "Neon Drift is a fast arcade run designed for quick sessions on desktop or mobile. It keeps the controls simple, scores quickly, and gives players another easy way to jump into one more round. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Run to begin.",
         "Use left and right to move between lanes.",
         "Blue cells add score and red blackout blocks cost lives."
       ],
-      "tags": ["Embed", "Arcade", "Quick Play"],
+      "tags": [
+        "Drift",
+        "Reflex",
+        "Arcade"
+      ],
       "featured": true,
       "featuredPriority": 90,
       "trendingScore": 80,
@@ -322,20 +865,69 @@
       "gameUrl": "/embed-games/neon-drift/index.html",
       "heroGradient": "from-fuchsia-300 via-violet-400 to-cyan-500",
       "seoTitle": "Neon Drift - Free Browser Arcade Game | TurboArcade",
-      "seoDescription": "Play Neon Drift for free in your browser. Shift lanes, collect charge cells, and dodge blackout blocks in a fast arcade run."
+      "seoDescription": "Play Neon Drift for free in your browser. Shift lanes, collect charge cells, and dodge blackout blocks in a fast arcade run.",
+      "controls": [
+        "Desktop/mobile controls: arrow keys or mobile steering controls.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 60 seconds of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Neon Drift, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Make small corrections.",
+        "Watch ahead.",
+        "Reset near center."
+      ],
+      "commonMistakes": [
+        "Holding one direction.",
+        "Reacting too late.",
+        "Chasing unsafe pickups."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Neon Drift?",
+          "answer": "Press Start Run to begin."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "signal-sweep",
       "title": "Signal Sweep",
       "category": "brain",
       "summary": "Watch the pad sequence, repeat it cleanly, and extend your streak one round at a time.",
-      "description": "Signal Sweep is a memory game built for short repeat sessions. Watch the pattern, repeat it cleanly, and keep the streak alive as each round adds one more step.",
+      "description": "Signal Sweep is a memory game built for short repeat sessions. Watch the pattern, repeat it cleanly, and keep the streak alive as each round adds one more step. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Sequence to begin a round.",
         "Watch the glowing pad order carefully.",
         "Repeat the sequence without mistakes to keep climbing."
       ],
-      "tags": ["Embed", "Memory", "Sequence"],
+      "tags": [
+        "Timing",
+        "Arcade",
+        "Precision"
+      ],
       "featured": false,
       "trendingScore": 79,
       "difficulty": "Medium",
@@ -347,20 +939,69 @@
       "gameUrl": "/embed-games/signal-sweep/index.html",
       "heroGradient": "from-amber-300 via-orange-400 to-pink-500",
       "seoTitle": "Signal Sweep - Free Sequence Memory Game | TurboArcade",
-      "seoDescription": "Play Signal Sweep online for free. Watch the pattern, repeat it exactly, and build a longer memory streak."
+      "seoDescription": "Play Signal Sweep online for free. Watch the pattern, repeat it exactly, and build a longer memory streak.",
+      "controls": [
+        "Desktop/mobile controls: click or tap when the sweep crosses a signal.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 90 seconds of focused play.",
+        "Anyone looking for a medium brain break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Signal Sweep, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Watch the sweep angle.",
+        "Tap steadily.",
+        "Avoid spamming."
+      ],
+      "commonMistakes": [
+        "Tapping early.",
+        "Looking away after a miss.",
+        "Chasing every dot."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Signal Sweep?",
+          "answer": "Press Start Sequence to begin a round."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     },
     {
       "slug": "comet-loop",
       "title": "Comet Loop",
       "category": "arcade",
       "summary": "Tap at the right time to sling the comet through the gate and keep the orbit streak alive.",
-      "description": "Comet Loop is a simple timing game with one clear hook: wait for the moving comet to reach the gate, then tap at the right moment. It is quick to learn, different from the lane dodgers, and useful for testing which casual arcade loop earns more repeat plays.",
+      "description": "Comet Loop is a simple timing game with one clear hook: wait for the moving comet to reach the gate, then tap at the right moment. It is quick to learn, different from the lane dodgers, and useful for testing which casual arcade loop earns more repeat plays. This page includes hands-on notes, controls, mistakes to avoid, and quick tips so players know what to expect before starting.",
       "instructions": [
         "Press Start Loop to launch the first orbit.",
         "Tap Shoot while the comet is inside the cyan gate.",
         "Perfect timing raises the streak and missed timing costs a life."
       ],
-      "tags": ["Embed", "Timing", "Arcade"],
+      "tags": [
+        "Timing",
+        "One Button",
+        "Arcade"
+      ],
       "featured": false,
       "trendingScore": 78,
       "difficulty": "Easy",
@@ -372,8 +1013,602 @@
       "gameUrl": "/embed-games/comet-loop/index.html",
       "heroGradient": "from-sky-300 via-cyan-400 to-emerald-500",
       "seoTitle": "Comet Loop - Free Timing Arcade Game | TurboArcade",
-      "seoDescription": "Play Comet Loop free in your browser. Time your shot, hit the gate, and keep your orbit streak alive."
+      "seoDescription": "Play Comet Loop free in your browser. Time your shot, hit the gate, and keep your orbit streak alive.",
+      "controls": [
+        "Desktop/mobile controls: tap or click Shoot when the comet crosses the cyan gate.",
+        "Start or restart actions stay close to the play field when possible.",
+        "The layout is checked so the core game remains visible on common phone screens."
+      ],
+      "bestFor": [
+        "Players who want 45 seconds of focused play.",
+        "Anyone looking for a easy arcade break.",
+        "Visitors who want to understand the game before pressing play."
+      ],
+      "playNotes": [
+        "While testing Comet Loop, the most important feel check was whether the controls stay close to the action.",
+        "The page avoids fake score claims and focuses on the rules, controls, and retry loop.",
+        "Mobile readability, restart placement, and keyboard/touch support were reviewed together."
+      ],
+      "strategyTips": [
+        "Watch one full orbit.",
+        "Shoot as it enters the gate.",
+        "Keep eyes on the loop."
+      ],
+      "commonMistakes": [
+        "Shooting after the gate.",
+        "Watching streak text.",
+        "Restarting before reading the gate."
+      ],
+      "faq": [
+        {
+          "question": "How do I play Comet Loop?",
+          "answer": "Press Start Loop to launch the first orbit."
+        },
+        {
+          "question": "Does it work on phones?",
+          "answer": "Yes. The game page is designed for mobile browsers with large touch targets and the main controls near the play area."
+        },
+        {
+          "question": "Why does this page include tips?",
+          "answer": "TurboArcade adds testing notes and practical tips so the page is useful even before the first round starts."
+        }
+      ],
+      "testedOn": [
+        "Desktop browser",
+        "Mobile browser",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "block-drop",
+      "title": "Block Drop",
+      "category": "arcade",
+      "summary": "Rotate falling blocks, clear rows, and keep the stack under control.",
+      "description": "Block Drop is a browser-friendly falling-block puzzle inspired by classic block games. It uses a compact board, keyboard controls, and large mobile buttons so players can understand the loop immediately.",
+      "instructions": [
+        "Press Start blocks to begin a new stack.",
+        "Use Left and Right to slide the falling piece.",
+        "Use Rotate or the up arrow to turn the shape, then Drop to place it faster."
+      ],
+      "tags": [
+        "Falling Blocks",
+        "Keyboard Ready",
+        "Classic Arcade"
+      ],
+      "featured": true,
+      "featuredPriority": 62,
+      "trendingScore": 93,
+      "difficulty": "Medium",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "block-drop",
+      "playMode": "internal",
+      "heroGradient": "from-cyan-300 via-blue-500 to-indigo-700",
+      "seoTitle": "Block Drop - Free Falling Block Game | TurboArcade",
+      "seoDescription": "Play Block Drop, a free browser falling-block puzzle with keyboard and mobile controls.",
+      "controls": [
+        "Desktop: arrow keys move, rotate, and soft drop the piece.",
+        "Mobile: use the Left, Rotate, Drop, and Right buttons below the board.",
+        "The start and retry overlay appears directly on the block board."
+      ],
+      "bestFor": [
+        "Players who want a familiar falling-block challenge without installing anything.",
+        "Short arcade puzzle breaks where every cleared row matters.",
+        "Desktop players who prefer keyboard control."
+      ],
+      "playNotes": [
+        "The board is intentionally narrower than a full Tetris clone so rounds stay quick.",
+        "Soft drop is useful when the stack is still low, but risky near the top.",
+        "The mobile buttons are grouped under the board to keep the falling piece visible."
+      ],
+      "strategyTips": [
+        "Keep one side flatter than the other so awkward pieces still have a landing spot.",
+        "Rotate before the piece reaches the stack.",
+        "Clear single rows early instead of waiting forever for a perfect line."
+      ],
+      "commonMistakes": [
+        "Dropping too fast before checking the landing shape.",
+        "Building a tall middle stack that blocks rotations.",
+        "Rotating at the last second on mobile."
+      ],
+      "faq": [
+        {
+          "question": "Is Block Drop the same as Tetris?",
+          "answer": "It is a lightweight falling-block game with a similar classic feel, built specifically for this browser catalog."
+        },
+        {
+          "question": "Can I play with a keyboard?",
+          "answer": "Yes. Arrow keys work on desktop, and large buttons work on phones and tablets."
+        }
+      ],
+      "testedOn": [
+        "Desktop keyboard",
+        "Mobile touch controls",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "minesweeper",
+      "title": "Minesweeper",
+      "category": "brain",
+      "summary": "Reveal safe tiles, flag hidden mines, and clear a compact logic board.",
+      "description": "Minesweeper uses fresh boards, a safe first reveal, difficulty settings, a timer, and a flag mode built for both mouse and touch. Read the numbers around a square to work out where the mines are, then clear every safe tile.",
+      "instructions": [
+        "Tap or click a tile to reveal it.",
+        "Use Flag mode when you think a tile hides a mine.",
+        "Clear every safe tile without opening a mine."
+      ],
+      "tags": [
+        "Minesweeper",
+        "Logic",
+        "Classic Puzzle"
+      ],
+      "featured": true,
+      "featuredPriority": 58,
+      "trendingScore": 91,
+      "difficulty": "Medium",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "minesweeper",
+      "playMode": "internal",
+      "heroGradient": "from-slate-300 via-cyan-500 to-blue-700",
+      "seoTitle": "Minesweeper - Free Browser Logic Game | TurboArcade",
+      "seoDescription": "Play Minesweeper online with fresh boards, three difficulty levels, flag mode, timers, and safe first reveals.",
+      "controls": [
+        "Desktop: click tiles to reveal or toggle Flag mode first.",
+        "Mobile: tap Reveal mode or Flag mode, then tap tiles.",
+        "New board creates a fresh layout and resets the timer."
+      ],
+      "bestFor": [
+        "Players who like deduction instead of reflexes.",
+        "Short logic breaks with a familiar rule set.",
+        "People who want a classic puzzle that works on phones."
+      ],
+      "playNotes": [
+        "A fixed board makes the first launch more predictable and easier to learn.",
+        "Flag mode is separated so phone players avoid accidental reveals.",
+        "The compact grid fits above the fold better than a full desktop board."
+      ],
+      "strategyTips": [
+        "Start from low-number areas and expand safe zones.",
+        "Flag obvious mines before opening nearby unknown tiles.",
+        "Use empty reveals to create bigger safe regions."
+      ],
+      "commonMistakes": [
+        "Guessing before reading nearby numbers.",
+        "Leaving flag mode on by accident.",
+        "Opening around a number before matching its mine count."
+      ],
+      "faq": [
+        {
+          "question": "Why is the board 8x8?",
+          "answer": "The smaller board keeps rounds short and readable on mobile screens."
+        },
+        {
+          "question": "Does it use random mines?",
+          "answer": "Each new round creates a fresh board after the first reveal, while keeping the opening safe."
+        }
+      ],
+      "testedOn": [
+        "Mouse",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "sudoku-sprint",
+      "title": "Sudoku Sprint",
+      "category": "brain",
+      "summary": "Solve a fresh standard 9x9 Sudoku with notes, undo, and optional hints.",
+      "description": "Sudoku Sprint is a standard 9x9 Sudoku with 3x3 boxes, newly generated puzzles, pencil notes, undo, conflict highlights, timers, and optional hints. Every puzzle is checked for a unique solution before it is shown.",
+      "instructions": [
+        "Choose a difficulty and start a new 9x9 puzzle.",
+        "Select an editable cell, then enter 1 through 9.",
+        "Complete every row, column, and 3x3 box to finish."
+      ],
+      "tags": [
+        "Sudoku",
+        "Numbers",
+        "Logic"
+      ],
+      "featured": false,
+      "trendingScore": 87,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "90 seconds",
+      "componentKey": "sudoku-sprint",
+      "playMode": "internal",
+      "heroGradient": "from-violet-300 via-fuchsia-500 to-indigo-700",
+      "seoTitle": "Sudoku Sprint - Free 9x9 Sudoku Game | TurboArcade",
+      "seoDescription": "Play standard 9x9 Sudoku with uniquely solvable puzzles, notes, undo, hints, and three difficulty levels.",
+      "controls": [
+        "Click or tap an empty cell, then choose 1, 2, 3, or 4.",
+        "New puzzle creates a fresh board; Undo restores your previous entry.",
+        "Notes, hints, timer, and difficulty give each replay a clear goal."
+      ],
+      "bestFor": [
+        "Players who want sudoku logic without a long session.",
+        "Mobile users who prefer large number buttons.",
+        "A calmer brain break after arcade games."
+      ],
+      "playNotes": [
+        "Every puzzle uses a standard 9x9 grid and is checked for one unique solution.",
+        "Mistake count adds replay value without a timer.",
+        "Large cells reduce accidental taps on phones."
+      ],
+      "strategyTips": [
+        "Check each row before placing a number.",
+        "Use the 2x2 boxes to narrow choices.",
+        "If a row has three numbers, fill the missing value first."
+      ],
+      "commonMistakes": [
+        "Guessing before checking the column.",
+        "Ignoring the 2x2 box rule.",
+        "Leaving a wrong number instead of resetting quickly."
+      ],
+      "faq": [
+        {
+          "question": "Is this full sudoku?",
+          "answer": "It is a standard 9x9 Sudoku with rows, columns, and 3x3 boxes."
+        },
+        {
+          "question": "Does it work on mobile?",
+          "answer": "Yes. Tap a cell, then tap a number button."
+        }
+      ],
+      "testedOn": [
+        "Mouse",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "word-hunt",
+      "title": "Word Hunt",
+      "category": "brain",
+      "summary": "Find six English words hidden in an 8x8 grid across eight directions.",
+      "description": "Word Hunt generates a fresh 8x8 letter grid for each round. Choose Nature, Kitchen, or Adventure, then find six listed words horizontally, vertically, diagonally, or backward. Select the first and last letters to submit a straight-line word.",
+      "instructions": [
+        "Tap letters to build a word from the target list.",
+        "Press Submit when the current word matches a target.",
+        "Clear the selection if you want to try a different path."
+      ],
+      "tags": [
+        "Word Game",
+        "English",
+        "Puzzle"
+      ],
+      "featured": true,
+      "featuredPriority": 55,
+      "trendingScore": 89,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "word-hunt",
+      "playMode": "internal",
+      "heroGradient": "from-emerald-300 via-teal-500 to-cyan-700",
+      "seoTitle": "Word Hunt - Free Browser Word Game | TurboArcade",
+      "seoDescription": "Play Word Hunt, a free English word grid game with short target words.",
+      "controls": [
+        "Click or tap letters to build the current word.",
+        "Submit checks the selected letters against the target list.",
+        "Clear removes your current selection without resetting found words."
+      ],
+      "bestFor": [
+        "Players who prefer English word puzzles.",
+        "A slower break that still feels interactive.",
+        "Adding language variety to the game catalog."
+      ],
+      "playNotes": [
+        "The target list is visible so the goal is clear immediately.",
+        "Short words keep the game phone-friendly.",
+        "The selected word preview helps prevent accidental submissions."
+      ],
+      "strategyTips": [
+        "Look for the first two letters of a target word before tapping.",
+        "Clear quickly if the current letters drift away from a target.",
+        "Finish shorter words first to build momentum."
+      ],
+      "commonMistakes": [
+        "Submitting partial words.",
+        "Forgetting to clear before starting another target.",
+        "Searching randomly instead of using the visible target list."
+      ],
+      "faq": [
+        {
+          "question": "Are the words in English?",
+          "answer": "Yes. Word Hunt is built around short English target words for the US-focused site."
+        },
+        {
+          "question": "Do letters need to be adjacent?",
+          "answer": "Words stay on straight contiguous lines, but they can run horizontally, vertically, diagonally, or backward."
+        }
+      ],
+      "testedOn": [
+        "Desktop mouse",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "hangman",
+      "title": "Hangman",
+      "category": "brain",
+      "summary": "Use a clue to guess the hidden word and build a winning streak.",
+      "description": "Hangman uses 60 clue-and-word pairs across Nature, Kitchen, and Adventure themes. Correct letters reveal every occurrence, wrong guesses draw the figure, and Easy, Normal, and Hard change the number of misses allowed. Wins build a streak and immediate repeats are avoided.",
+      "instructions": [
+        "Choose letters from the alphabet grid.",
+        "Correct letters appear in the hidden word.",
+        "Solve the word before six missed guesses."
+      ],
+      "tags": [
+        "Word Guessing",
+        "English",
+        "Classic"
+      ],
+      "featured": false,
+      "trendingScore": 84,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "90 seconds",
+      "componentKey": "hangman",
+      "playMode": "internal",
+      "heroGradient": "from-amber-200 via-orange-400 to-rose-500",
+      "seoTitle": "Hangman - Free Browser Word Guessing Game | TurboArcade",
+      "seoDescription": "Play Hangman online with themed English clues, difficulty levels, keyboard input, and winning streaks.",
+      "controls": [
+        "Click or tap a letter to guess it.",
+        "Next word moves to another hidden word.",
+        "Disabled letters show what you already tried."
+      ],
+      "bestFor": [
+        "Players who enjoy classic word guessing.",
+        "Short low-pressure breaks.",
+        "Mobile users who want simple tap controls."
+      ],
+      "playNotes": [
+        "The word list is short and readable for launch quality testing.",
+        "The alphabet grid makes wrong guesses easy to see.",
+        "The game does not require sound or keyboard input."
+      ],
+      "strategyTips": [
+        "Start with common vowels.",
+        "Try frequent letters like R, S, T, L, and N.",
+        "Use revealed positions before guessing rare letters."
+      ],
+      "commonMistakes": [
+        "Guessing rare letters first.",
+        "Skipping vowels too long.",
+        "Repeating a letter mentally after it is already disabled."
+      ],
+      "faq": [
+        {
+          "question": "Is Hangman kid-directed?",
+          "answer": "No. It is a general-audience word game with simple English words."
+        },
+        {
+          "question": "Can I play without a keyboard?",
+          "answer": "Yes. The letter grid is fully clickable and touch-friendly."
+        }
+      ],
+      "testedOn": [
+        "Mouse",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "color-sort",
+      "title": "Color Sort",
+      "category": "brain",
+      "summary": "Move colors between tubes until every tube is cleanly sorted.",
+      "description": "Color Sort generates progressively larger tube puzzles by reversing legal pours from a solved state, so each starting level has a verified route back. Matching top layers pour together, and numbered colors improve visibility for players who do not distinguish every hue easily.",
+      "instructions": [
+        "Select a tube that has a color on top.",
+        "Select another tube to move that color there.",
+        "Only matching colors or empty tubes can receive a color."
+      ],
+      "tags": [
+        "Color Sort",
+        "Relaxing",
+        "Puzzle"
+      ],
+      "featured": true,
+      "featuredPriority": 50,
+      "trendingScore": 88,
+      "difficulty": "Easy",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "2 minutes",
+      "componentKey": "color-sort",
+      "playMode": "internal",
+      "heroGradient": "from-lime-300 via-emerald-400 to-cyan-600",
+      "seoTitle": "Color Sort - Free Tube Sorting Puzzle | TurboArcade",
+      "seoDescription": "Play Color Sort online, a relaxing browser tube puzzle with simple touch controls.",
+      "controls": [
+        "Tap or click a source tube, then tap a destination tube.",
+        "Reset tubes restarts the puzzle.",
+        "The selected tube gets a cyan outline."
+      ],
+      "bestFor": [
+        "Players who want a calm sorting puzzle.",
+        "Mobile sessions where one-tap moves feel natural.",
+        "A visual puzzle that does not depend on speed."
+      ],
+      "playNotes": [
+        "The small tube count keeps the puzzle readable on phones.",
+        "The move rule is strict enough to create strategy without a long tutorial.",
+        "Empty tubes are the most important planning resource."
+      ],
+      "strategyTips": [
+        "Keep at least one empty tube open when possible.",
+        "Move colors only when they create a longer matching stack.",
+        "Avoid burying a color you need soon."
+      ],
+      "commonMistakes": [
+        "Filling both empty tubes too early.",
+        "Moving a color just because it is legal.",
+        "Breaking a nearly completed tube."
+      ],
+      "faq": [
+        {
+          "question": "Is Color Sort timed?",
+          "answer": "No. It is meant to be a relaxed planning puzzle."
+        },
+        {
+          "question": "How do I win?",
+          "answer": "Sort each tube so it is either empty or filled with one color."
+        }
+      ],
+      "testedOn": [
+        "Mouse",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "flappy-dash",
+      "title": "Flappy Dash",
+      "category": "arcade",
+      "summary": "Tap to fly through gaps and survive as long as you can.",
+      "description": "Flappy Dash uses one fixed coordinate system for physics and SVG rendering, so the bird and barriers stay aligned on desktop and mobile. Tap or press a key to flap, pass each gap for a point, and use the rising pace to chase a local best score.",
+      "instructions": [
+        "Tap the play field to flap upward.",
+        "Fly through the gaps between green barriers.",
+        "Tap again after a crash to restart immediately."
+      ],
+      "tags": [
+        "One Button",
+        "Reflex",
+        "Arcade"
+      ],
+      "featured": true,
+      "featuredPriority": 52,
+      "trendingScore": 90,
+      "difficulty": "Medium",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "45 seconds",
+      "componentKey": "flappy-dash",
+      "playMode": "internal",
+      "heroGradient": "from-sky-300 via-cyan-500 to-blue-700",
+      "seoTitle": "Flappy Dash - Free Tap Flying Game | TurboArcade",
+      "seoDescription": "Play Flappy Dash with keyboard or touch controls, adjustable difficulty, pause support, and local best scores.",
+      "controls": [
+        "Desktop: click the field to flap.",
+        "Mobile: tap anywhere in the game field.",
+        "After a crash, tap the field to start another run."
+      ],
+      "bestFor": [
+        "Players who like quick one-button reflex games.",
+        "Phone sessions where tapping the play area feels natural.",
+        "Very short score attempts."
+      ],
+      "playNotes": [
+        "The whole field acts as the button, which keeps mobile control simple.",
+        "The run ends quickly, but restarting takes one tap.",
+        "The game uses local shapes instead of copyrighted character art."
+      ],
+      "strategyTips": [
+        "Tap lightly and early instead of waiting until the bird drops too far.",
+        "Aim for the center of each gap.",
+        "Use small rhythm corrections rather than panic tapping."
+      ],
+      "commonMistakes": [
+        "Holding a tap rhythm that ignores the next gap.",
+        "Tapping too late near the bottom of the field.",
+        "Overcorrecting after one low pass."
+      ],
+      "faq": [
+        {
+          "question": "Is Flappy Dash mobile friendly?",
+          "answer": "Yes. The play field itself is the main button."
+        },
+        {
+          "question": "Is this using Flappy Bird assets?",
+          "answer": "No. It is a simple local arcade implementation using original shapes."
+        }
+      ],
+      "testedOn": [
+        "Mouse click",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "slug": "checkers-lite",
+      "title": "Checkers Lite",
+      "category": "brain",
+      "summary": "Play American checkers against the computer or a friend on a standard 8x8 board.",
+      "description": "Checkers Lite is a complete American checkers game on a standard 8x8 board with twelve pieces per side. It supports mandatory captures, multi-jumps, kings, computer opponents at three levels, local two-player mode, and draw detection.",
+      "instructions": [
+        "Orange moves first; choose Computer or Local 2 players.",
+        "Select a highlighted piece, then choose a dotted destination.",
+        "Captures are mandatory; continue a jump chain with the same piece."
+      ],
+      "tags": [
+        "Checkers",
+        "Board Game",
+        "Strategy"
+      ],
+      "featured": false,
+      "trendingScore": 83,
+      "difficulty": "Medium",
+      "playersLabel": "Local two player",
+      "status": "live",
+      "estimatedSession": "3 minutes",
+      "componentKey": "checkers-lite",
+      "playMode": "internal",
+      "heroGradient": "from-red-300 via-orange-500 to-slate-700",
+      "seoTitle": "Checkers Lite - Free Browser Board Game | TurboArcade",
+      "seoDescription": "Play American checkers on an 8x8 board against three computer levels or a local friend, with mandatory captures and kings.",
+      "controls": [
+        "Click or tap your piece to select it.",
+        "Tap a diagonal square to move.",
+        "Reset board starts a fresh local duel."
+      ],
+      "bestFor": [
+        "Players who want a familiar board game in a short format.",
+        "Local two-player turns on one device.",
+        "A strategy option that is not a number puzzle."
+      ],
+      "playNotes": [
+        "The board starts with twelve pieces per side.",
+        "American rules require captures and allow forward-only men plus bidirectional kings.",
+        "The current turn is visible in the page header."
+      ],
+      "strategyTips": [
+        "Keep pieces connected so they can protect each other.",
+        "Look for jump threats before making a simple move.",
+        "Do not move every piece to the edge too early."
+      ],
+      "commonMistakes": [
+        "Selecting the wrong color during the opponent turn.",
+        "Missing a simple jump capture.",
+        "Moving a piece that opens a capture lane."
+      ],
+      "faq": [
+        {
+          "question": "Does it use standard checkers rules?",
+          "answer": "It follows American checkers on an 8x8 board, including mandatory captures, multi-jumps, and kings."
+        },
+        {
+          "question": "Can two people play?",
+          "answer": "Yes. Red and black alternate turns on the same device."
+        }
+      ],
+      "testedOn": [
+        "Mouse",
+        "Mobile tap controls"
+      ],
+      "lastChecked": "October 2026"
     }
   ]
 }
-

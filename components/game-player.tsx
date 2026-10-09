@@ -1,6 +1,16 @@
 "use client";
 
 import { BreakoutBlitzGame } from "@/components/games/breakout-blitz-game";
+import {
+  BlockDropGame,
+  CheckersLiteGame,
+  ColorSortGame,
+  FlappyDashGame,
+  HangmanGame,
+  MinesweeperGame,
+  SudokuSprintGame,
+  WordHuntGame,
+} from "@/components/games/classic-pack-games";
 import { GomokuBoardGame } from "@/components/games/gomoku-board-game";
 import { MemoryMosaicGame } from "@/components/games/memory-mosaic-game";
 import { MergeShot2048Game } from "@/components/games/merge-shot-2048-game";
@@ -37,6 +47,22 @@ export function GamePlayer({ componentKey }: GamePlayerProps) {
       return <GomokuBoardGame />;
     case "breakout-blitz":
       return <BreakoutBlitzGame />;
+    case "block-drop":
+      return <BlockDropGame />;
+    case "minesweeper":
+      return <MinesweeperGame />;
+    case "sudoku-sprint":
+      return <SudokuSprintGame />;
+    case "word-hunt":
+      return <WordHuntGame />;
+    case "hangman":
+      return <HangmanGame />;
+    case "color-sort":
+      return <ColorSortGame />;
+    case "flappy-dash":
+      return <FlappyDashGame />;
+    case "checkers-lite":
+      return <CheckersLiteGame />;
     default:
       return (
         <div className="rounded-[30px] border border-white/10 bg-slate-950 p-8 text-slate-200">

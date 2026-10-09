@@ -57,6 +57,46 @@ const gameCardCopy: Record<string, { cta: string; hook: string; badge: string }>
     hook: "Find the glow, tap quickly, and pile up hits before time runs out.",
     badge: "Reaction rush",
   },
+  "block-drop": {
+    cta: "Drop blocks",
+    hook: "Rotate falling shapes, clear rows, and keep the stack low.",
+    badge: "Block puzzle",
+  },
+  "minesweeper": {
+    cta: "Sweep mines",
+    hook: "Read the numbers, flag the risky tiles, and clear the board.",
+    badge: "Logic classic",
+  },
+  "sudoku-sprint": {
+    cta: "Fill grid",
+    hook: "Solve a fresh 9x9 puzzle with notes, undo, and hints.",
+    badge: "Classic sudoku",
+  },
+  "word-hunt": {
+    cta: "Find words",
+    hook: "Find six hidden words in a fresh eight-direction letter grid.",
+    badge: "Word grid",
+  },
+  "hangman": {
+    cta: "Guess word",
+    hook: "Use the clue, guess letters, and build a winning streak.",
+    badge: "Word classic",
+  },
+  "color-sort": {
+    cta: "Sort tubes",
+    hook: "Move colors into clean tubes without trapping the top color.",
+    badge: "Calm puzzle",
+  },
+  "flappy-dash": {
+    cta: "Tap to fly",
+    hook: "Flap through gaps and restart with one tap after a crash.",
+    badge: "One button",
+  },
+  "checkers-lite": {
+    cta: "Play checkers",
+    hook: "Challenge the computer or a friend with full American rules.",
+    badge: "Board duel",
+  },
 };
 
 function getCardCopy(game: GameRecord) {
@@ -74,7 +114,7 @@ function getCardCopy(game: GameRecord) {
 
   return {
     cta: "Start run",
-    hook: "Jump in fast, learn by playing, and chase one more score.",
+    hook: "Start a short round, learn the pattern, and try to beat your last attempt.",
     badge: "Quick arcade",
   };
 }
@@ -363,7 +403,119 @@ function CometPreview({ game }: { game: GameRecord }) {
   );
 }
 
+
+
+function BlockDropPreview({ game }: { game: GameRecord }) {
+  const activeCells = new Set([2, 7, 12, 13, 18, 19, 20]);
+  const floorCells = new Set([21, 22, 23]);
+  return (
+    <PreviewShell game={game} className="p-3">
+      <div className="grid h-full grid-cols-5 gap-1.5">
+        {Array.from({ length: 25 }).map((_, index) => {
+          const className = ["rounded-md", activeCells.has(index) ? "bg-cyan-200" : floorCells.has(index) ? "bg-orange-200" : "bg-white/10"].join(" ");
+          return <span key={index} className={className} />;
+        })}
+      </div>
+    </PreviewShell>
+  );
+}
+
+function MinePreview({ game }: { game: GameRecord }) {
+  return (
+    <PreviewShell game={game} className="p-3">
+      <div className="grid h-full grid-cols-5 gap-1.5">
+        {Array.from({ length: 25 }).map((_, index) => {
+          const active = [1, 7, 18].includes(index);
+          const numbered = [4, 9, 13].includes(index);
+          const className = [
+            "flex items-center justify-center rounded-md text-[10px] font-black",
+            active ? "bg-orange-200 text-orange-950" : numbered ? "bg-cyan-200 text-cyan-950" : "bg-white/12 text-white/70",
+          ].join(" ");
+          return <span key={index} className={className}>{numbered ? "1" : ""}</span>;
+        })}
+      </div>
+    </PreviewShell>
+  );
+}
+
+function WordPreview({ game }: { game: GameRecord }) {
+  const letters = game.slug === "hangman" ? ["_", "A", "_", "E", "_"] : ["P", "L", "A", "Y", "G", "A", "M", "E"];
+  return (
+    <PreviewShell game={game} className="p-4">
+      <div className="grid h-full grid-cols-4 gap-2">
+        {letters.map((letter, index) => {
+          const className = ["flex items-center justify-center rounded-xl text-sm font-black", index % 3 === 0 ? "bg-cyan-200 text-cyan-950" : "bg-white/12 text-white"].join(" ");
+          return <span key={letter + "-" + index} className={className}>{letter}</span>;
+        })}
+      </div>
+    </PreviewShell>
+  );
+}
+
+function SudokuPreview({ game }: { game: GameRecord }) {
+  const clues: Record<number, string> = { 0: "5", 1: "3", 4: "7", 9: "6", 12: "1", 13: "9", 14: "5", 19: "9", 20: "8", 25: "6", 27: "8", 31: "6", 35: "3", 36: "4", 39: "8", 41: "3", 44: "1", 45: "7", 49: "2", 53: "6", 55: "6", 60: "2", 61: "8", 66: "4", 67: "1", 68: "9", 71: "5", 76: "8", 79: "7", 80: "9" };
+  return <PreviewShell game={game} className="p-2"><div className="grid h-full grid-cols-9 overflow-hidden rounded border border-slate-500 bg-slate-100">
+    {Array.from({ length: 81 }, (_, index) => <span key={index} className={["flex items-center justify-center border-b border-r border-slate-300 text-[8px] font-bold text-slate-900", index % 3 === 2 && index % 9 !== 8 ? "border-r-slate-700" : "", Math.floor(index / 9) % 3 === 2 ? "border-b-slate-700" : ""].join(" ")}>{clues[index] || ""}</span>)}
+  </div></PreviewShell>;
+}
+
+function HangmanPreview({ game }: { game: GameRecord }) {
+  return <PreviewShell game={game} className="flex flex-col items-center justify-center p-3">
+    <svg viewBox="0 0 100 80" className="h-20 w-24 text-orange-200" aria-hidden="true"><g fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round"><path d="M15 75H65M30 75V8H70V20" opacity=".5" /><circle cx="70" cy="30" r="10" /><path d="M70 40V60M70 45L57 55" /></g></svg>
+    <div className="mt-2 flex gap-1">{["C", "", "B", "", "N"].map((letter, index) => <span key={index} className="h-6 w-4 border-b border-cyan-200 text-center text-xs font-bold text-white">{letter}</span>)}</div>
+  </PreviewShell>;
+}
+
+function TubePreview({ game }: { game: GameRecord }) {
+  const colors = ["bg-cyan-200", "bg-orange-200", "bg-lime-300", "bg-fuchsia-200"];
+  return (
+    <PreviewShell game={game} className="flex items-end justify-center gap-3 p-4">
+      {colors.map((color, index) => (
+        <span key={color} className="flex h-24 w-6 flex-col-reverse gap-1 rounded-b-full border border-white/15 p-1">
+          {Array.from({ length: index === 3 ? 2 : 4 }).map((_, dotIndex) => <span key={dotIndex} className={["h-4 rounded-full", color].join(" ")} />)}
+        </span>
+      ))}
+    </PreviewShell>
+  );
+}
+
+function FlappyPreview({ game }: { game: GameRecord }) {
+  return (
+    <PreviewShell game={game} className="relative">
+      <span className="absolute left-8 top-14 h-6 w-6 rounded-full bg-orange-200 shadow-[0_0_18px_rgba(254,215,170,0.6)]" />
+      <span className="absolute right-10 top-0 h-12 w-8 rounded-b-xl bg-lime-300" />
+      <span className="absolute right-10 bottom-0 h-12 w-8 rounded-t-xl bg-lime-300" />
+      <span className="absolute inset-x-0 bottom-0 h-1 bg-cyan-200/70" />
+    </PreviewShell>
+  );
+}
+
+function CheckersPreview({ game }: { game: GameRecord }) {
+  return (
+    <PreviewShell game={game} className="p-3">
+      <div className="grid h-full grid-cols-8">
+        {Array.from({ length: 64 }).map((_, index) => {
+          const row = Math.floor(index / 8);
+          const col = index % 8;
+          const piece = [8, 10, 17, 19, 42, 44, 49, 51].includes(index);
+          const className = ["flex items-center justify-center", (row + col) % 2 ? "bg-slate-950" : "bg-white/10"].join(" ");
+          const pieceClass = ["h-2.5 w-2.5 rounded-full", index < 32 ? "bg-cyan-200" : "bg-orange-200"].join(" ");
+          return <span key={index} className={className}>{piece ? <span className={pieceClass} /> : null}</span>;
+        })}
+      </div>
+    </PreviewShell>
+  );
+}
+
 function GamePreview({ game }: { game: GameRecord }) {
+  if (game.slug === "block-drop") return <BlockDropPreview game={game} />;
+  if (game.slug === "minesweeper") return <MinePreview game={game} />;
+  if (game.slug === "sudoku-sprint") return <SudokuPreview game={game} />;
+  if (game.slug === "word-hunt") return <WordPreview game={game} />;
+  if (game.slug === "hangman") return <HangmanPreview game={game} />;
+  if (game.slug === "color-sort") return <TubePreview game={game} />;
+  if (game.slug === "flappy-dash") return <FlappyPreview game={game} />;
+  if (game.slug === "checkers-lite") return <CheckersPreview game={game} />;
   if (game.slug === "target-blitz") return <TargetPreview game={game} />;
   if (game.slug === "memory-mosaic") return <MemoryPreview game={game} />;
   if (game.slug === "pattern-pulse") return <PatternPreview game={game} />;
@@ -415,9 +567,11 @@ export function GameCard({ game }: GameCardProps) {
         </div>
       </div>
       <div className="space-y-4 border-t border-cyan-100/10 p-6">
-        <div className="flex items-center justify-between text-sm text-slate-400">
+        <div className="flex items-center justify-between gap-4 text-sm text-slate-400">
           <p>{game.playersLabel}</p>
-          <p className="font-semibold text-cyan-100/75">{`Popularity ${game.trendingScore}`}</p>
+          <p className="text-right font-semibold text-cyan-100/75">
+            {game.difficulty} · {game.estimatedSession}
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
           {game.tags.map((tag) => (

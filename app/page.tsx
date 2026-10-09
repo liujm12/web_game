@@ -128,6 +128,60 @@ export default async function Home() {
             ))}
           </div>
         </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-7 shadow-[0_24px_70px_rgba(2,6,23,0.42)]">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-cyan-100/75">
+                How we choose games
+              </p>
+              <h2 className="mt-4 text-3xl font-black text-white">
+                Quick does not mean empty
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-300">
+                Every game we keep on TurboArcade needs a clear first move, readable controls,
+                and a reason to try again. If a game feels confusing on a phone, hides the
+                restart button, or needs too much scrolling before play starts, it goes back
+                into revision before it stays in the catalog.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {[
+                ["Controls", "Keyboard and touch controls are checked together."],
+                ["Mobile fit", "The main play field should stay visible on common phones."],
+                ["Useful pages", "Game pages include notes, tips, mistakes, and FAQs."],
+              ].map(([title, body]) => (
+                <div
+                  key={title}
+                  className="rounded-[24px] border border-white/10 bg-white/[0.045] p-5"
+                >
+                  <p className="text-lg font-black text-white">{title}</p>
+                  <p className="mt-3 text-sm leading-7 text-slate-400">{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
+          <div className="rounded-[30px] border border-orange-200/12 bg-[#0a0d18]/88 p-7 shadow-[0_24px_70px_rgba(2,6,23,0.42)]">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-orange-100/75">
+              Pick by situation
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                ["Need a 20-second reset?", "Try Target Blitz or Number Rush when you want one measurable attempt."],
+                ["Want something calmer?", "Open 2048, Memory Mosaic, or Pattern Pulse for a slower focus break."],
+                ["Prefer arcade motion?", "Meteor Sprint, Snake, Breakout Blitz, and Comet Loop are better for reflex play."],
+              ].map(([title, body]) => (
+                <div key={title} className="rounded-[22px] bg-white/[0.045] p-5">
+                  <h3 className="font-black text-white">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-400">{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
       <SiteFooter
         brandName={content.site.brandName}

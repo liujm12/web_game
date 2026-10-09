@@ -31,12 +31,12 @@ const game = {
 } satisfies GameRecord;
 
 describe("GameCard visual specificity", () => {
-  it("shows a game-specific preview and player-facing popularity label", () => {
+  it("shows a game-specific preview and practical session facts", () => {
     const { container } = render(<GameCard game={game} />);
 
     expect(container.querySelector('[data-game-preview="2048"]')).toBeTruthy();
-    expect(screen.getByText("Popularity 96")).toBeInTheDocument();
-    expect(screen.queryByText("Hot score 96")).not.toBeInTheDocument();
+    expect(screen.getByText("Easy · 3 minutes")).toBeInTheDocument();
+    expect(screen.queryByText("Popularity 96")).not.toBeInTheDocument();
   });
 
   it("uses game-specific calls to action instead of repeated template copy", () => {

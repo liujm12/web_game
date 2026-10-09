@@ -4,10 +4,10 @@ type GamePageIntroProps = {
   game: GameRecord;
 };
 
-const quickSignals = [
-  "Easy to learn",
-  "Short rounds",
-  "Original play page",
+const fallbackSignals = [
+  "Controls checked",
+  "Short sessions",
+  "Tips included",
 ];
 
 export function GamePageIntro({ game }: GamePageIntroProps) {
@@ -31,7 +31,7 @@ export function GamePageIntro({ game }: GamePageIntroProps) {
         {game.description}
       </p>
       <div className="mt-5 flex flex-wrap gap-2 sm:mt-7 sm:gap-3">
-        {quickSignals.map((signal) => (
+        {(game.bestFor?.slice(0, 2) ?? fallbackSignals.slice(0, 2)).map((signal) => (
           <span
             key={signal}
             className="rounded-full border border-slate-900/10 bg-white/30 px-3 py-1.5 text-xs font-semibold text-slate-950 sm:px-4 sm:py-2 sm:text-sm"
@@ -40,7 +40,10 @@ export function GamePageIntro({ game }: GamePageIntroProps) {
           </span>
         ))}
         <span className="rounded-full border border-slate-900/10 bg-white/30 px-3 py-1.5 text-xs font-semibold text-slate-950 sm:px-4 sm:py-2 sm:text-sm">
-          {game.playMode === "embed" ? "Embedded game room" : "Native browser game"}
+          {game.controls?.[0] ?? fallbackSignals[2]}
+        </span>
+        <span className="rounded-full border border-slate-900/10 bg-white/30 px-3 py-1.5 text-xs font-semibold text-slate-950 sm:px-4 sm:py-2 sm:text-sm">
+          {game.playMode === "embed" ? "Selected HTML5 game" : "Built-in browser game"}
         </span>
       </div>
     </div>
