@@ -31,7 +31,7 @@ export default async function TermsPage() {
               <p className="mt-3">
                 Game pages, rankings, featured placements, category shelves, and
                 advertising layouts may change at any time as the catalog grows
-                or as we test better page experiences. We do not guarantee that
+                or as we improve the playing experience. We do not guarantee that
                 every game or page will remain available indefinitely.
               </p>
             </section>

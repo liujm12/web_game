@@ -97,14 +97,16 @@ export default async function AllGamesPage() {
 
         <section className="mt-10 rounded-[30px] border border-orange-200/12 bg-[#0a0d18]/88 p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-200/70">
-            Catalog notes
+            Find your next game
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <p className="text-sm leading-7 text-slate-300">
-              We keep this list intentionally small while the site is in its early stage. New games are added only after the controls, mobile layout, and retry flow are checked.
+              Choose a short arcade run when you want quick reactions, or open a
+              brain game when you would rather slow down and plan each move.
             </p>
             <p className="text-sm leading-7 text-slate-300">
-              If a game uses an embedded HTML5 source, its page still includes TurboArcade notes, controls, and practical context so visitors are not landing on a blank frame.
+              Every game page includes the controls, rules, and practical tips
+              you need to start without searching for a separate guide.
             </p>
           </div>
         </section>

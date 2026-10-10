@@ -42,7 +42,7 @@ describe("player-facing page sections", () => {
     render(<GamePageIntro game={game} />);
 
     expect(screen.getByText("Arcade / 90 seconds")).toBeInTheDocument();
-    expect(screen.getByText("Controls checked")).toBeInTheDocument();
+    expect(screen.getByText("Keyboard and touch")).toBeInTheDocument();
     expect(screen.getByText("Short sessions")).toBeInTheDocument();
     expect(screen.getByText("Tips included")).toBeInTheDocument();
     expect(screen.getByText("Built-in browser game")).toBeInTheDocument();

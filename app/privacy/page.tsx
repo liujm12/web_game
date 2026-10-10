@@ -42,17 +42,15 @@ export default async function PrivacyPage() {
             <section>
               <h2 className="text-xl font-semibold text-white">Advertising and cookies</h2>
               <p className="mt-3">
-                If Google AdSense is enabled in production, Google and its
-                partners may use cookies, local storage, and similar
+                When Google AdSense is enabled, Google and its partners may use
+                cookies, local storage, and similar
                 technologies to show ads, measure performance, prevent fraud,
-                and limit repetitive ad delivery. This local development build
-                does not load live ad code unless an AdSense client ID is
-                configured.
+                and limit repetitive ad delivery.
               </p>
               <p className="mt-3">
-                For launches that target users in the United States, we plan to
-                use Google&apos;s Privacy &amp; messaging tools to support
-                consent and privacy choices where required.
+                TurboArcade uses consent and privacy controls where required by
+                applicable law, including tools provided through Google&apos;s
+                Privacy &amp; messaging services when advertising is active.
               </p>
             </section>
 
@@ -61,9 +59,8 @@ export default async function PrivacyPage() {
               <p className="mt-3">
                 We use collected information to operate the site, improve load
                 speed and game discovery, understand which content performs
-                best, detect misuse, respond to support emails, and maintain
-                advertising readiness. We do not sell personal information
-                directly from this site.
+                best, detect misuse, and respond to support emails. We do not
+                sell personal information directly from this site.
               </p>
             </section>
 

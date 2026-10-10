@@ -55,14 +55,11 @@ export default async function GamePage({ params }: GamePageProps) {
     .slice(0, 6);
 
   const controls = game.controls ?? game.instructions;
+  const difficultyArticle = /^[aeiou]/i.test(game.difficulty) ? "an" : "a";
   const bestFor = game.bestFor ?? [
     `${game.estimatedSession} sessions when you want a fast browser game.`,
-    `Players looking for a ${game.difficulty.toLowerCase()} ${game.category} pick.`,
+    `Players looking for ${difficultyArticle} ${game.difficulty.toLowerCase()} ${game.category} pick.`,
     "Anyone who wants to understand the controls before starting.",
-  ];
-  const playNotes = game.playNotes ?? [
-    `${game.title} is best treated as a short retry loop, not a long session.`,
-    "The page keeps instructions and controls close to the game so mobile players do not need to hunt around.",
   ];
   const strategyTips = game.strategyTips ?? game.instructions;
   const commonMistakes = game.commonMistakes ?? [
@@ -152,7 +149,7 @@ export default async function GamePage({ params }: GamePageProps) {
           </div>
           <div className={sectionCardClass}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-200/70">
-              Controls we checked
+              Controls
             </p>
             <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
               {controls.map((item) => (
@@ -174,17 +171,7 @@ export default async function GamePage({ params }: GamePageProps) {
           </div>
         </section>
 
-        <section className="mt-10 grid gap-6 lg:grid-cols-3">
-          <div className={sectionCardClass}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
-              Test notes
-            </p>
-            <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-300">
-              {playNotes.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+        <section className="mt-10 grid gap-6 lg:grid-cols-2">
           <div className={sectionCardClass}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-lime-200/70">
               Better-score tips
@@ -249,10 +236,10 @@ export default async function GamePage({ params }: GamePageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/70">
                 Up next
               </p>
-              <h2 className="mt-3 text-3xl font-semibold">More tested quick games</h2>
+              <h2 className="mt-3 text-3xl font-semibold">More quick games</h2>
             </div>
             <p className="hidden max-w-lg text-sm leading-7 text-slate-400 md:block">
-              Related games are ordered by category first, then by our internal shelf order.
+              Start with a similar game, or switch pace for your next round.
             </p>
           </div>
           <div className="mt-8 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">

@@ -5,7 +5,7 @@ type GamePageIntroProps = {
 };
 
 const fallbackSignals = [
-  "Controls checked",
+  "Keyboard and touch",
   "Short sessions",
   "Tips included",
 ];

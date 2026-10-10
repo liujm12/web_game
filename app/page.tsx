@@ -133,21 +133,20 @@ export default async function Home() {
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-7 shadow-[0_24px_70px_rgba(2,6,23,0.42)]">
               <p className="text-xs font-black uppercase tracking-[0.3em] text-cyan-100/75">
-                How we choose games
+                Quick-play essentials
               </p>
               <h2 className="mt-4 text-3xl font-black text-white">
-                Quick does not mean empty
+                Easy to start, satisfying to replay
               </h2>
               <p className="mt-4 text-sm leading-7 text-slate-300">
-                Every game we keep on TurboArcade needs a clear first move, readable controls,
-                and a reason to try again. If a game feels confusing on a phone, hides the
-                restart button, or needs too much scrolling before play starts, it goes back
-                into revision before it stays in the catalog.
+                TurboArcade favors games with a clear first move, readable controls, and a
+                reason to try again. The play area comes first, restart actions stay close,
+                and the rules are available without interrupting the round.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
               {[
-                ["Controls", "Keyboard and touch controls are checked together."],
+                ["Controls", "Use keyboard or touch controls, depending on the game."],
                 ["Mobile fit", "The main play field should stay visible on common phones."],
                 ["Useful pages", "Game pages include notes, tips, mistakes, and FAQs."],
               ].map(([title, body]) => (

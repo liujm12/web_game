@@ -16,10 +16,9 @@ export default async function AboutPage() {
           <h1 className="mt-3 text-4xl font-semibold">About TurboArcade</h1>
           <div className="mt-6 space-y-8 text-base leading-8 text-slate-300">
             <p>
-              TurboArcade is a small browser game site for quick breaks. The goal is not to
-              publish hundreds of untouched games. We would rather keep a smaller catalog,
-              test the play pages, and write enough context so visitors know what they are
-              opening before they press play.
+              TurboArcade is a browser game site for quick breaks. The collection focuses on
+              games that start quickly, explain themselves clearly, and feel comfortable on
+              both phones and desktop browsers.
             </p>
             <section>
               <h2 className="text-2xl font-semibold text-white">What we publish</h2>
@@ -31,22 +30,20 @@ export default async function AboutPage() {
               </p>
             </section>
             <section>
-              <h2 className="text-2xl font-semibold text-white">How we test pages</h2>
+              <h2 className="text-2xl font-semibold text-white">What players can expect</h2>
               <ul className="mt-3 list-disc space-y-2 pl-6">
-                <li>We check whether the first playable area appears before long blocks of text.</li>
-                <li>We test keyboard controls and touch controls separately when a game supports both.</li>
-                <li>We look for mobile problems such as hidden buttons, cramped boards, or controls placed above the play field.</li>
-                <li>We add practical notes, common mistakes, and FAQs to make game pages useful beyond the embedded game itself.</li>
+                <li>The playable area appears before long explanations.</li>
+                <li>Keyboard and touch instructions are listed when a game supports them.</li>
+                <li>Start, restart, and movement controls stay close to the play area.</li>
+                <li>Rules, practical tips, and common mistakes are available on each game page.</li>
               </ul>
             </section>
             <section>
               <h2 className="text-2xl font-semibold text-white">How the catalog grows</h2>
               <p className="mt-3">
                 New games are added in batches instead of all at once. That gives us time to
-                tune the layout, improve weak pages, and remove games that do not feel good on
-                desktop and mobile. We avoid fake author bios, fake community claims, and
-                inflated popularity numbers; the site should earn trust through clear pages and
-                playable experiences.
+                improve controls, refine instructions, and remove games that do not feel good on
+                desktop and mobile. The collection grows around clear pages and playable experiences.
               </p>
             </section>
             <section>
@@ -61,8 +58,14 @@ export default async function AboutPage() {
             <section>
               <h2 className="text-2xl font-semibold text-white">Contact</h2>
               <p className="mt-3">
-                For site questions, partnerships, or content issues, email
-                { }. Include the page URL if your message is
+                For site questions, partnerships, or content issues, email{" "}
+                <a
+                  href={`mailto:${content.site.supportEmail}`}
+                  className="font-semibold text-cyan-200 hover:text-cyan-100"
+                >
+                  {content.site.supportEmail}
+                </a>
+                . Include the page URL if your message is
                 about a specific game.
               </p>
             </section>
