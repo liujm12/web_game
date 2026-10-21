@@ -29,7 +29,7 @@ describe("SiteHeader", () => {
       link.textContent?.trim(),
     );
 
-    expect(labels).toEqual(["Home", "Arcade", "Brain", "All Games"]);
+    expect(labels).toEqual(["Home", "Arcade", "Brain", "All Games", "Guides", "My Games"]);
     expect(screen.queryByRole("link", { name: "Admin" })).not.toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe("SiteHeader", () => {
       link.textContent?.trim(),
     );
 
-    expect(labels).toEqual(["Arcade", "Brain", "All Games"]);
+    expect(labels).toEqual(["Arcade", "Brain", "All Games", "Guides", "My Games"]);
     expect(screen.getAllByRole("link", { name: "All Games" })[1]).toHaveAttribute(
       "href",
       "/games",

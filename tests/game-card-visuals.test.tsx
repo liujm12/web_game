@@ -30,6 +30,20 @@ const game = {
   seoDescription: "Play 2048 online.",
 } satisfies GameRecord;
 
+const patrolEscape = {
+  ...game,
+  slug: "patrol-escape",
+  title: "Patrol Escape",
+  summary: "Slide traffic out of the way and clear the police cruiser to the exit.",
+  tags: ["Traffic", "Logic", "Sliding Puzzle"],
+  difficulty: "Medium",
+  estimatedSession: "5 minutes",
+  componentKey: "patrol-escape",
+  heroGradient: "from-sky-500 via-blue-600 to-indigo-700",
+  seoTitle: "Patrol Escape",
+  seoDescription: "Play Patrol Escape online.",
+} satisfies GameRecord;
+
 describe("GameCard visual specificity", () => {
   it("shows a game-specific preview and practical session facts", () => {
     const { container } = render(<GameCard game={game} />);
@@ -45,5 +59,14 @@ describe("GameCard visual specificity", () => {
     expect(screen.getByRole("link", { name: "Chase 2048" })).toBeInTheDocument();
     expect(screen.queryByText("Tap to play")).not.toBeInTheDocument();
     expect(screen.queryByText(/Best if you want/i)).not.toBeInTheDocument();
+  });
+
+  it("gives Patrol Escape its own traffic-board preview and copy", () => {
+    const { container } = render(<GameCard game={patrolEscape} />);
+
+    expect(container.querySelector('[data-game-preview="patrol-escape"]')).toBeTruthy();
+    expect(container.querySelector("[data-patrol-preview-board]")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Clear the exit" })).toBeInTheDocument();
+    expect(screen.getByText("Traffic logic")).toBeInTheDocument();
   });
 });

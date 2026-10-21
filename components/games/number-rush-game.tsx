@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { saveBestScore } from "@/lib/player-profile";
+
 function shuffleNumbers() {
   return Array.from({ length: 9 }, (_, index) => index + 1).sort(
     () => Math.random() - 0.5,
@@ -56,6 +58,15 @@ export function NumberRushGame() {
     }
 
     if (value === 9) {
+      const performanceScore = Math.max(
+        1,
+        200 - roundTimeSeconds * 3 - mistakes * 15,
+      );
+      saveBestScore(
+        "number-rush",
+        performanceScore,
+        `${roundTimeSeconds}s · ${mistakes} mistakes`,
+      );
       setRoundsCleared((currentRounds) => currentRounds + 1);
       setNextNumber(10);
       setPhase("over");

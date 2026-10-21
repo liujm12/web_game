@@ -18,6 +18,7 @@ import { MeteorSprintGame } from "@/components/games/meteor-sprint-game";
 import { NeonSnakeGame } from "@/components/games/neon-snake-game";
 import { NumberRushGame } from "@/components/games/number-rush-game";
 import { PatternPulseGame } from "@/components/games/pattern-pulse-game";
+import { PatrolEscapeGame } from "@/components/games/patrol-escape-game";
 import { TargetBlitzGame } from "@/components/games/target-blitz-game";
 import { TileMerge2048Game } from "@/components/games/tile-merge-2048-game";
 
@@ -63,6 +64,8 @@ export function GamePlayer({ componentKey }: GamePlayerProps) {
       return <FlappyDashGame />;
     case "checkers-lite":
       return <CheckersLiteGame />;
+    case "patrol-escape":
+      return <PatrolEscapeGame />;
     default:
       return (
         <div className="rounded-[30px] border border-white/10 bg-slate-950 p-8 text-slate-200">

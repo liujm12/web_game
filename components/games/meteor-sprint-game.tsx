@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { saveBestScore } from "@/lib/player-profile";
+
 const lanes = [18, 50, 82];
 
 type FallingItem = {
@@ -19,6 +21,12 @@ export function MeteorSprintGame() {
   const [gameOver, setGameOver] = useState(false);
   const itemId = useRef(1);
   const spawnCount = useRef(0);
+
+  useEffect(() => {
+    if (gameOver && score > 0) {
+      saveBestScore("meteor-sprint", score, `${score} points`);
+    }
+  }, [gameOver, score]);
 
   useEffect(() => {
     if (!isRunning) return;

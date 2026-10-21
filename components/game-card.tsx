@@ -47,6 +47,11 @@ const gameCardCopy: Record<string, { cta: string; hook: string; badge: string }>
     hook: "Watch the pulse, replay the order, and push the streak further.",
     badge: "Sequence test",
   },
+  "patrol-escape": {
+    cta: "Clear the exit",
+    hook: "Shift the traffic, open a lane, and guide the patrol car out in fewer moves.",
+    badge: "Traffic logic",
+  },
   "snake": {
     cta: "Grow snake",
     hook: "Turn early, grab food, and avoid boxing yourself in.",
@@ -120,7 +125,7 @@ function getCardCopy(game: GameRecord) {
 }
 
 function getCardFrame(game: GameRecord) {
-  if (["2048", "number-rush", "memory-mosaic", "pattern-pulse", "four-in-a-row"].includes(game.slug)) {
+  if (["2048", "number-rush", "memory-mosaic", "pattern-pulse", "four-in-a-row", "patrol-escape"].includes(game.slug)) {
     return {
       article: "rounded-[24px]",
       hero: "min-h-72",
@@ -507,6 +512,30 @@ function CheckersPreview({ game }: { game: GameRecord }) {
   );
 }
 
+function PatrolEscapePreview({ game }: { game: GameRecord }) {
+  return (
+    <PreviewShell game={game} className="relative p-3">
+      <div
+        data-patrol-preview-board
+        className="relative h-full overflow-visible rounded-[16px] border border-white/18 bg-slate-950/35"
+      >
+        <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 opacity-35">
+          {Array.from({ length: 36 }).map((_, index) => (
+            <span key={index} className="border-b border-r border-white/10" />
+          ))}
+        </div>
+        <span className="absolute -right-3 top-[39%] h-[22%] w-4 rounded-r-lg border-y border-r border-cyan-100/70 bg-cyan-200/24" />
+        <span className="absolute left-[4%] top-[36%] h-[22%] w-[49%] rounded-[10px] border border-cyan-100/60 bg-gradient-to-r from-sky-200 to-blue-500 shadow-[0_0_18px_rgba(125,211,252,0.5)]">
+          <span className="absolute left-1/2 top-1/2 h-1.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-300 shadow-[0_0_8px_rgba(252,165,165,0.8)]" />
+        </span>
+        <span className="absolute left-[56%] top-[4%] h-[48%] w-[20%] rounded-[10px] border border-white/25 bg-orange-300" />
+        <span className="absolute left-[78%] top-[20%] h-[48%] w-[18%] rounded-[10px] border border-white/25 bg-lime-300" />
+        <span className="absolute left-[20%] top-[65%] h-[27%] w-[47%] rounded-[10px] border border-white/25 bg-fuchsia-300" />
+      </div>
+    </PreviewShell>
+  );
+}
+
 function GamePreview({ game }: { game: GameRecord }) {
   if (game.slug === "block-drop") return <BlockDropPreview game={game} />;
   if (game.slug === "minesweeper") return <MinePreview game={game} />;
@@ -516,6 +545,7 @@ function GamePreview({ game }: { game: GameRecord }) {
   if (game.slug === "color-sort") return <TubePreview game={game} />;
   if (game.slug === "flappy-dash") return <FlappyPreview game={game} />;
   if (game.slug === "checkers-lite") return <CheckersPreview game={game} />;
+  if (game.slug === "patrol-escape") return <PatrolEscapePreview game={game} />;
   if (game.slug === "target-blitz") return <TargetPreview game={game} />;
   if (game.slug === "memory-mosaic") return <MemoryPreview game={game} />;
   if (game.slug === "pattern-pulse") return <PatternPreview game={game} />;

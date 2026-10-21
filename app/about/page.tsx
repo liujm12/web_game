@@ -1,4 +1,6 @@
 ﻿import { SiteFooter } from "@/components/site-footer";
+import Link from "next/link";
+
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
 
@@ -37,6 +39,23 @@ export default async function AboutPage() {
                 <li>Start, restart, and movement controls stay close to the play area.</li>
                 <li>Rules, practical tips, and common mistakes are available on each game page.</li>
               </ul>
+            </section>
+            <section>
+              <h2 className="text-2xl font-semibold text-white">More than a game directory</h2>
+              <p className="mt-3">
+                TurboArcade keeps a small player library in the current browser. Recently played
+                games, saved favorites, personal bests, and a rotating daily challenge make it
+                easier to return with a goal instead of browsing the same catalog from scratch.
+                This information stays on the device and does not require an account.
+              </p>
+              <p className="mt-3">
+                We also publish original, game-specific strategy notes based on the controls and
+                boards available here. Visit the{" "}
+                <Link href="/guides" className="font-semibold text-cyan-200 hover:text-cyan-100">
+                  TurboArcade guides
+                </Link>{" "}
+                for practical approaches to 2048, Snake, Breakout, and Number Rush.
+              </p>
             </section>
             <section>
               <h2 className="text-2xl font-semibold text-white">How the catalog grows</h2>

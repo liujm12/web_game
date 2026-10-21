@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { saveBestScore } from "@/lib/player-profile";
+
 const fieldWidth = 100;
 const fieldHeight = 100;
 const paddleWidth = 18;
@@ -75,6 +77,12 @@ function createInitialState(difficulty: Difficulty): BreakoutState {
 export function BreakoutBlitzGame() {
   const [difficulty, setDifficulty] = useState<Difficulty>("Normal");
   const [game, setGame] = useState<BreakoutState>(() => createInitialState("Normal"));
+
+  useEffect(() => {
+    if ((game.phase === "over" || game.phase === "won") && game.score > 0) {
+      saveBestScore("breakout-blitz", game.score, `${game.score} points`);
+    }
+  }, [game.phase, game.score]);
 
   useEffect(() => {
     if (game.phase !== "playing") {

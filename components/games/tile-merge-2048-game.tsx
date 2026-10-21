@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+import { saveBestScore } from "@/lib/player-profile";
 
 const gridSize = 4;
 type Difficulty = "Easy" | "Normal" | "Hard";
@@ -122,6 +124,12 @@ export function TileMerge2048Game() {
   const [difficulty, setDifficulty] = useState<Difficulty>("Normal");
 
   const has2048 = useMemo(() => board.some((value) => value >= 2048), [board]);
+
+  useEffect(() => {
+    if (score > 0) {
+      saveBestScore("2048", score, `${score} points`);
+    }
+  }, [score]);
 
   function startGame() {
     const startingTiles = difficulty === "Hard" ? 3 : 2;

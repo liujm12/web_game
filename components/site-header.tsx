@@ -10,10 +10,12 @@ const navItems = [
   { href: "/categories/arcade", label: "Arcade" },
   { href: "/categories/brain", label: "Brain" },
   { href: "/games", label: "All Games" },
+  { href: "/guides", label: "Guides" },
+  { href: "/my-games", label: "My Games" },
 ];
 
 const mobileNavItems = navItems.filter((item) =>
-  ["Arcade", "Brain", "All Games"].includes(item.label),
+  ["Arcade", "Brain", "All Games", "Guides", "My Games"].includes(item.label),
 );
 
 export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderProps) {

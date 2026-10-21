@@ -6,6 +6,9 @@ type SiteFooterProps = {
 };
 
 const footerLinks = [
+  { href: "/games", label: "All Games" },
+  { href: "/guides", label: "Guides" },
+  { href: "/my-games", label: "My Games" },
   { href: "/about", label: "About" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms" },

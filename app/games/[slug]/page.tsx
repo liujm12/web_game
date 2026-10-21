@@ -5,6 +5,7 @@ import { AdSlot } from "@/components/ad-slot";
 import { GameCard } from "@/components/game-card";
 import { GamePageIntro } from "@/components/game-page-intro";
 import { GameSurface } from "@/components/game-surface";
+import { PlayerGameTools } from "@/components/player-game-tools";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGameBySlug, getSiteContent } from "@/lib/site-content";
@@ -80,6 +81,7 @@ export default async function GamePage({ params }: GamePageProps) {
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
           <div className="space-y-5 sm:space-y-6">
             <GameSurface game={game} />
+            <PlayerGameTools slug={game.slug} title={game.title} />
             <AdSlot
               label="Gameplay footer placement"
               slot={content.site.adSlots?.gameInline}

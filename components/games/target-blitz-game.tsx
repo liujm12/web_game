@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { saveBestScore } from "@/lib/player-profile";
+
 const cellCount = 12;
 const roundSeconds = 20;
 
@@ -20,6 +22,12 @@ export function TargetBlitzGame() {
   const [timeLeft, setTimeLeft] = useState(roundSeconds);
   const [bestScore, setBestScore] = useState(0);
   const [activeCell, setActiveCell] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (phase === "over" && score > 0) {
+      saveBestScore("target-blitz", score, `${score} hits`);
+    }
+  }, [phase, score]);
 
   useEffect(() => {
     if (phase !== "playing") {

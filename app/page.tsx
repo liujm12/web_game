@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { GameCard } from "@/components/game-card";
 import { HomeHero } from "@/components/home-hero";
+import { PlayerDashboard } from "@/components/player-dashboard";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -79,6 +80,13 @@ export default async function Home() {
               </div>
             </div>
           </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
+          <PlayerDashboard
+            games={content.games.filter((game) => game.status === "live")}
+            compact
+          />
         </section>
 
         <section

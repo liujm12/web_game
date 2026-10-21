@@ -1400,6 +1400,80 @@
         "Mobile tap controls"
       ],
       "lastChecked": "October 2026"
+    },
+    {
+      "slug": "patrol-escape",
+      "title": "Patrol Escape",
+      "category": "brain",
+      "summary": "Slide cars and trucks along their lanes to clear a path for the police cruiser.",
+      "description": "Patrol Escape is an original sliding-traffic logic game with 120 distinct, solver-verified boards. Every vehicle stays in its lane, every move changes the available space, and the police cruiser can only leave after you untangle the full parking grid. The final twenty Master missions pack in at least eight blocking vehicles and require a minimum of twenty grid steps. Use drag controls on touch screens or select a vehicle and use the arrow keys on desktop.",
+      "instructions": [
+        "Drag a car or truck forward and backward along its current lane.",
+        "Move blocking vehicles until the police cruiser has a clear route to the exit on the right.",
+        "Finish near the par move count to earn three stars, then continue through all 120 levels."
+      ],
+      "tags": [
+        "Traffic Puzzle",
+        "Sliding Blocks",
+        "Logic"
+      ],
+      "featured": true,
+      "featuredPriority": 145,
+      "trendingScore": 97,
+      "difficulty": "Medium",
+      "playersLabel": "Single player",
+      "status": "live",
+      "estimatedSession": "4 minutes",
+      "componentKey": "patrol-escape",
+      "playMode": "internal",
+      "heroGradient": "from-sky-300 via-blue-500 to-slate-800",
+      "seoTitle": "Patrol Escape - Free Sliding Car Puzzle | TurboArcade",
+      "seoDescription": "Play Patrol Escape free in your browser. Solve 120 original traffic puzzles, including 20 dense Master levels, and clear a route for the police cruiser.",
+      "controls": [
+        "Mobile: drag each vehicle along its lane.",
+        "Desktop: drag with the mouse, or select a vehicle and use the arrow keys.",
+        "Undo reverses the last slide; Restart restores the current board; Hint highlights the next useful move."
+      ],
+      "bestFor": [
+        "Players who enjoy spatial logic and sliding-block puzzles.",
+        "Longer mobile sessions without fast reflex controls.",
+        "Anyone who wants a sequence of increasingly difficult original levels."
+      ],
+      "playNotes": [
+        "Each of the twelve layouts is checked by the built-in solver before release.",
+        "Best move counts stay in the current browser and do not require an account.",
+        "Vehicles are drawn with original interface shapes rather than third-party game artwork."
+      ],
+      "strategyTips": [
+        "Start with vehicles that directly cross the police car's exit row.",
+        "Before moving a blocker, check whether another vehicle occupies the space it needs.",
+        "Use Undo to test one idea at a time instead of restarting the entire board."
+      ],
+      "commonMistakes": [
+        "Moving every free vehicle even when it does not affect the exit lane.",
+        "Clearing one blocker into the path of a second blocker.",
+        "Using a hint before checking which vehicle is actually crossing row three."
+      ],
+      "faq": [
+        {
+          "question": "Can vehicles turn in Patrol Escape?",
+          "answer": "No. Horizontal vehicles only move left and right, while vertical vehicles only move up and down."
+        },
+        {
+          "question": "Are the levels copied from another traffic puzzle?",
+          "answer": "No. Patrol Escape uses original layouts created for TurboArcade and verified with the local puzzle solver."
+        },
+        {
+          "question": "Does Patrol Escape work on phones?",
+          "answer": "Yes. The square board uses direct drag controls and scales to common mobile screen widths without an internal scrollbar."
+        }
+      ],
+      "testedOn": [
+        "Desktop mouse and keyboard",
+        "Mobile drag controls",
+        "Tablet-size viewport"
+      ],
+      "lastChecked": "October 2026"
     }
   ]
 }

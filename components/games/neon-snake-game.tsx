@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { saveBestScore } from "@/lib/player-profile";
+
 const boardSize = 12;
 const totalCells = boardSize * boardSize;
 type Difficulty = "Easy" | "Normal" | "Hard";
@@ -31,6 +33,12 @@ export function NeonSnakeGame() {
   const [fruit, setFruit] = useState(34);
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState<Difficulty>("Normal");
+
+  useEffect(() => {
+    if (phase === "over" && score > 0) {
+      saveBestScore("snake", score, `${score} points`);
+    }
+  }, [phase, score]);
 
   useEffect(() => {
     if (phase !== "playing") {
