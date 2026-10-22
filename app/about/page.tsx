@@ -1,8 +1,18 @@
 ﻿import { SiteFooter } from "@/components/site-footer";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "About TurboArcade | Free Browser Games",
+  description:
+    "Learn how TurboArcade selects, tests, and publishes quick browser games for desktop and mobile players.",
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 export default async function AboutPage() {
   const content = await getSiteContent();

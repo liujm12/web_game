@@ -8,6 +8,7 @@ export type SiteSettings = {
   adsenseClient: string;
   supportEmail: string;
   launchedAt: string;
+  contentUpdatedAt?: string;
   adSlots?: {
     homeHero?: string;
     homepageFeatured?: string;

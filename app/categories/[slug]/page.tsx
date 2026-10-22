@@ -30,6 +30,11 @@ export async function generateMetadata({
     description:
       category?.description ??
       "Explore free browser games at TurboArcade.",
+    alternates: category
+      ? {
+          canonical: `/categories/${category.slug}`,
+        }
+      : undefined,
   };
 }
 

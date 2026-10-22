@@ -6,6 +6,9 @@ import { guides } from "@/data/guides";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await getSiteContent();
   const baseUrl = "https://playturboarcade.com";
+  const lastModified = new Date(
+    content.site.contentUpdatedAt ?? content.site.launchedAt,
+  );
 
   return [
     "",
@@ -22,6 +25,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...guides.map((guide) => `/guides/${guide.slug}`),
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(content.site.launchedAt),
+    lastModified,
   }));
 }

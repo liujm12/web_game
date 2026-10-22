@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "All Games | TurboArcade",
   description:
     "Browse every live browser game on TurboArcade in one place.",
+  alternates: {
+    canonical: "/games",
+  },
 };
 
 export default async function AllGamesPage() {

@@ -1,6 +1,17 @@
 import { SiteFooter } from "@/components/site-footer";
+import type { Metadata } from "next";
+
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "Contact TurboArcade",
+  description:
+    "Contact TurboArcade about gameplay issues, partnerships, advertising, privacy, or content questions.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default async function ContactPage() {
   const content = await getSiteContent();

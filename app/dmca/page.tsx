@@ -1,6 +1,17 @@
 import { SiteFooter } from "@/components/site-footer";
+import type { Metadata } from "next";
+
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "DMCA Policy | TurboArcade",
+  description:
+    "Review TurboArcade's copyright policy and learn how to submit a complete content removal notice.",
+  alternates: {
+    canonical: "/dmca",
+  },
+};
 
 export default async function DmcaPage() {
   const content = await getSiteContent();

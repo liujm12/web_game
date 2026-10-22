@@ -33,6 +33,9 @@ export async function generateMetadata({
   return {
     title: game.seoTitle,
     description: game.seoDescription,
+    alternates: {
+      canonical: `/games/${game.slug}`,
+    },
   };
 }
 

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Browser Game Guides | TurboArcade",
   description:
     "Original TurboArcade strategy guides for 2048, Snake, Breakout, Number Rush, and other quick browser games.",
+  alternates: {
+    canonical: "/guides",
+  },
 };
 
 export default async function GuidesPage() {

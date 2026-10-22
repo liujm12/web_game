@@ -26,6 +26,9 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
   return {
     title: `${guide.title} | TurboArcade Guides`,
     description: guide.summary,
+    alternates: {
+      canonical: `/guides/${guide.slug}`,
+    },
   };
 }
 

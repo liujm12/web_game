@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { GameCard } from "@/components/game-card";
@@ -18,6 +19,12 @@ const quickChoiceChips = [
   "Keyboard ready",
   "Thumb friendly",
 ];
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const content = await getSiteContent();

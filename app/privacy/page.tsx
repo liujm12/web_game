@@ -1,6 +1,17 @@
 import { SiteFooter } from "@/components/site-footer";
+import type { Metadata } from "next";
+
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | TurboArcade",
+  description:
+    "Read how TurboArcade handles browser storage, analytics, advertising, and privacy choices.",
+  alternates: {
+    canonical: "/privacy",
+  },
+};
 
 export default async function PrivacyPage() {
   const content = await getSiteContent();

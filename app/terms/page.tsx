@@ -1,6 +1,17 @@
 import { SiteFooter } from "@/components/site-footer";
+import type { Metadata } from "next";
+
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "Terms of Use | TurboArcade",
+  description:
+    "Review the terms that apply when using TurboArcade and its free browser games.",
+  alternates: {
+    canonical: "/terms",
+  },
+};
 
 export default async function TermsPage() {
   const content = await getSiteContent();
