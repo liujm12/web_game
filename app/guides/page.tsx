@@ -1,25 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { guides } from "@/data/guides";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
+import { buildGuideCollectionStructuredData } from "@/lib/structured-data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "Browser Game Guides | TurboArcade",
   description:
     "Original TurboArcade strategy guides for 2048, Snake, Breakout, Number Rush, and other quick browser games.",
-  alternates: {
-    canonical: "/guides",
-  },
-};
+  path: "/guides",
+});
 
 export default async function GuidesPage() {
   const content = await getSiteContent();
 
   return (
     <div className="min-h-screen text-white">
+      <JsonLd data={buildGuideCollectionStructuredData(guides)} />
       <SiteHeader brandName={content.site.brandName} />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-10 lg:py-16">
         <section className="rounded-[34px] border border-cyan-100/12 bg-[#080b16]/92 p-7 shadow-[0_28px_80px_rgba(2,6,23,0.46)] sm:p-10">

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { GameCard } from "@/components/game-card";
 import { HomeHero } from "@/components/home-hero";
+import { JsonLd } from "@/components/json-ld";
 import { PlayerDashboard } from "@/components/player-dashboard";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -11,6 +12,8 @@ import {
   getSiteContent,
   getTrendingGames,
 } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
+import { buildSiteStructuredData } from "@/lib/structured-data";
 
 const quickChoiceChips = [
   "20 sec rush",
@@ -20,11 +23,12 @@ const quickChoiceChips = [
   "Thumb friendly",
 ];
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-};
+export const metadata: Metadata = buildSocialMetadata({
+  title: "TurboArcade | Free Browser Games",
+  description:
+    "TurboArcade offers fast, mobile-friendly browser games for quick breaks, simple rules, and repeat play.",
+  path: "/",
+});
 
 export default async function Home() {
   const content = await getSiteContent();
@@ -33,6 +37,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen text-white">
+      <JsonLd data={buildSiteStructuredData()} />
       <SiteHeader brandName={content.site.brandName} />
       <main>
         <section className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 md:py-12 lg:grid-cols-[1.12fr_0.88fr] lg:px-10 lg:py-16">

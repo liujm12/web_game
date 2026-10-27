@@ -5,10 +5,17 @@ import { AdSlot } from "@/components/ad-slot";
 import { GameCard } from "@/components/game-card";
 import { GamePageIntro } from "@/components/game-page-intro";
 import { GameSurface } from "@/components/game-surface";
+import { JsonLd } from "@/components/json-ld";
 import { PlayerGameTools } from "@/components/player-game-tools";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getGameBySlug, getSiteContent } from "@/lib/site-content";
+import {
+  getGameBySlug,
+  getSiteContent,
+  type GameRecord,
+} from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
+import { buildGameStructuredData } from "@/lib/structured-data";
 
 const sectionCardClass =
   "rounded-[28px] border border-cyan-100/12 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.38)]";
@@ -17,6 +24,22 @@ type GamePageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export function buildGamePageMetadata(game: GameRecord | null): Metadata {
+  if (!game || game.status !== "live") {
+    return {
+      title: "Game not found | TurboArcade",
+    };
+  }
+
+  return buildSocialMetadata({
+    title: game.seoTitle,
+    description: game.seoDescription,
+    path: `/games/${game.slug}`,
+    image: `/games/${game.slug}/opengraph-image`,
+    imageAlt: `${game.title} free browser game social card`,
+  });
+}
+
 export async function generateMetadata({
   params,
 }: GamePageProps): Promise<Metadata> {
@@ -24,19 +47,7 @@ export async function generateMetadata({
   const content = await getSiteContent();
   const game = getGameBySlug(content, slug);
 
-  if (!game) {
-    return {
-      title: "Game not found | TurboArcade",
-    };
-  }
-
-  return {
-    title: game.seoTitle,
-    description: game.seoDescription,
-    alternates: {
-      canonical: `/games/${game.slug}`,
-    },
-  };
+  return buildGamePageMetadata(game);
 }
 
 export default async function GamePage({ params }: GamePageProps) {
@@ -79,6 +90,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
   return (
     <div className="min-h-screen text-white">
+      <JsonLd data={buildGameStructuredData(game, faq)} />
       <SiteHeader brandName={content.site.brandName} compactGameHeader />
       <main className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-8 lg:px-10">
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">

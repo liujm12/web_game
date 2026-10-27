@@ -4,11 +4,15 @@ import { PlayerDashboard } from "@/components/player-dashboard";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
 
 export const metadata: Metadata = {
-  title: "My Games | TurboArcade",
-  description:
-    "Your saved TurboArcade games, recently played titles, personal bests, and daily challenge on this device.",
+  ...buildSocialMetadata({
+    title: "My Games | TurboArcade",
+    description:
+      "Your saved TurboArcade games, recently played titles, personal bests, and daily challenge on this device.",
+    path: "/my-games",
+  }),
   robots: {
     index: false,
     follow: true,

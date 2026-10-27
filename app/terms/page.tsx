@@ -3,15 +3,14 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "Terms of Use | TurboArcade",
   description:
     "Review the terms that apply when using TurboArcade and its free browser games.",
-  alternates: {
-    canonical: "/terms",
-  },
-};
+  path: "/terms",
+});
 
 export default async function TermsPage() {
   const content = await getSiteContent();

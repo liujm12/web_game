@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AdSlot } from "@/components/ad-slot";
 import { CategoryHero } from "@/components/category-hero";
 import { GameCard } from "@/components/game-card";
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -11,6 +12,8 @@ import {
   getGamesByCategory,
   getSiteContent,
 } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
+import { buildGameCollectionStructuredData } from "@/lib/structured-data";
 
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -23,19 +26,18 @@ export async function generateMetadata({
   const content = await getSiteContent();
   const category = getCategoryBySlug(content, slug);
 
-  return {
-    title: category
-      ? `${category.name} Games | TurboArcade`
-      : "Category not found | TurboArcade",
-    description:
-      category?.description ??
-      "Explore free browser games at TurboArcade.",
-    alternates: category
-      ? {
-          canonical: `/categories/${category.slug}`,
-        }
-      : undefined,
-  };
+  if (!category) {
+    return {
+      title: "Category not found | TurboArcade",
+      description: "Explore free browser games at TurboArcade.",
+    };
+  }
+
+  return buildSocialMetadata({
+    title: `${category.name} Games | TurboArcade`,
+    description: category.description,
+    path: `/categories/${category.slug}`,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -54,6 +56,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <JsonLd
+        data={buildGameCollectionStructuredData({
+          title: `${category.name} Games | TurboArcade`,
+          description: category.description,
+          path: `/categories/${category.slug}`,
+          games,
+        })}
+      />
       <SiteHeader brandName={content.site.brandName} />
       <main className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
         <CategoryHero category={category} gameCount={games.length} />

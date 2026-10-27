@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 
 import { AdSlot } from "@/components/ad-slot";
 import { GameCard } from "@/components/game-card";
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
+import { buildGameCollectionStructuredData } from "@/lib/structured-data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "All Games | TurboArcade",
   description:
     "Browse every live browser game on TurboArcade in one place.",
-  alternates: {
-    canonical: "/games",
-  },
-};
+  path: "/games",
+});
 
 export default async function AllGamesPage() {
   const content = await getSiteContent();
@@ -22,6 +23,14 @@ export default async function AllGamesPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <JsonLd
+        data={buildGameCollectionStructuredData({
+          title: "All Games | TurboArcade",
+          description: "Browse every live browser game on TurboArcade in one place.",
+          path: "/games",
+          games: liveGames,
+        })}
+      />
       <SiteHeader brandName={content.site.brandName} />
       <main className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
         <section className="rounded-[36px] border border-white/10 bg-slate-900/75 p-8">

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import { buildSocialMetadata, SITE_URL } from "@/lib/social-metadata";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://playturboarcade.com"),
-  title: "TurboArcade | Free Browser Games",
-  description:
-    "TurboArcade offers fast, mobile-friendly browser games for quick breaks, simple rules, and repeat play.",
+  metadataBase: new URL(SITE_URL),
+  ...buildSocialMetadata({
+    title: "TurboArcade | Free Browser Games",
+    description:
+      "TurboArcade offers fast, mobile-friendly browser games for quick breaks, simple rules, and repeat play.",
+    path: "/",
+  }),
 };
 
 export default function RootLayout({

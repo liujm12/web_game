@@ -3,15 +3,14 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "Privacy Policy | TurboArcade",
   description:
     "Read how TurboArcade handles browser storage, analytics, advertising, and privacy choices.",
-  alternates: {
-    canonical: "/privacy",
-  },
-};
+  path: "/privacy",
+});
 
 export default async function PrivacyPage() {
   const content = await getSiteContent();

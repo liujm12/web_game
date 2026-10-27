@@ -3,15 +3,14 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "Contact TurboArcade",
   description:
     "Contact TurboArcade about gameplay issues, partnerships, advertising, privacy, or content questions.",
-  alternates: {
-    canonical: "/contact",
-  },
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const content = await getSiteContent();

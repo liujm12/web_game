@@ -4,15 +4,14 @@ import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "About TurboArcade | Free Browser Games",
   description:
     "Learn how TurboArcade selects, tests, and publishes quick browser games for desktop and mobile players.",
-  alternates: {
-    canonical: "/about",
-  },
-};
+  path: "/about",
+});
 
 export default async function AboutPage() {
   const content = await getSiteContent();

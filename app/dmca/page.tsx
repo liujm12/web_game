@@ -3,15 +3,14 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildSocialMetadata({
   title: "DMCA Policy | TurboArcade",
   description:
     "Review TurboArcade's copyright policy and learn how to submit a complete content removal notice.",
-  alternates: {
-    canonical: "/dmca",
-  },
-};
+  path: "/dmca",
+});
 
 export default async function DmcaPage() {
   const content = await getSiteContent();

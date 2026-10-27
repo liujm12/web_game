@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGuideBySlug, guides } from "@/data/guides";
 import { getSiteContent } from "@/lib/site-content";
+import { buildSocialMetadata } from "@/lib/social-metadata";
+import { buildGuideStructuredData } from "@/lib/structured-data";
 
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
@@ -23,13 +26,12 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
     return { title: "Guide not found | TurboArcade" };
   }
 
-  return {
+  return buildSocialMetadata({
     title: `${guide.title} | TurboArcade Guides`,
     description: guide.summary,
-    alternates: {
-      canonical: `/guides/${guide.slug}`,
-    },
-  };
+    path: `/guides/${guide.slug}`,
+    type: "article",
+  });
 }
 
 export default async function GuidePage({ params }: GuidePageProps) {
@@ -47,6 +49,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   return (
     <div className="min-h-screen text-white">
+      <JsonLd data={buildGuideStructuredData(guide)} />
       <SiteHeader brandName={content.site.brandName} />
       <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-10 lg:py-16">
         <article>
