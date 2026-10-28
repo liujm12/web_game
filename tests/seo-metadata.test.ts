@@ -17,6 +17,7 @@ import { metadata as myGamesMetadata } from "@/app/my-games/page";
 import { metadata as privacyMetadata } from "@/app/privacy/page";
 import sitemap from "@/app/sitemap";
 import { metadata as termsMetadata } from "@/app/terms/page";
+import { guides } from "@/data/guides";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { getSiteContent } from "@/lib/site-content";
 
@@ -267,16 +268,32 @@ describe("SEO metadata", () => {
 });
 
 describe("sitemap", () => {
-  it("uses the latest significant content update instead of the launch date", async () => {
+  it("uses the site update for catalog pages and editorial dates for guides", async () => {
     const entries = await sitemap();
     const expectedLastModified = new Date("2026-10-22").toISOString();
+    const guideUrls = new Set(
+      guides.map(
+        (guide) => `https://playturboarcade.com/guides/${guide.slug}`,
+      ),
+    );
+    const catalogEntries = entries.filter(
+      (entry) => !guideUrls.has(entry.url),
+    );
 
     expect(entries.length).toBeGreaterThan(20);
     expect(
-      entries.every(
+      catalogEntries.every(
         (entry) =>
           entry.lastModified &&
           new Date(entry.lastModified).toISOString() === expectedLastModified,
+      ),
+    ).toBe(true);
+    expect(
+      entries.some(
+        (entry) =>
+          guideUrls.has(entry.url) &&
+          entry.lastModified &&
+          new Date(entry.lastModified).toISOString() !== expectedLastModified,
       ),
     ).toBe(true);
     expect(

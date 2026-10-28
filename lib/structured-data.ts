@@ -1,4 +1,8 @@
 import type { GameGuide } from "@/data/guides";
+import {
+  EDITORIAL_POLICY_PATH,
+  EDITORIAL_TEAM_NAME,
+} from "@/lib/editorial";
 import type { GameRecord } from "@/lib/site-content";
 import { SITE_NAME, SITE_URL } from "@/lib/social-metadata";
 
@@ -9,6 +13,7 @@ export type JsonLdDocument = {
 };
 
 const organizationId = `${SITE_URL}/#organization`;
+const editorialTeamId = `${SITE_URL}/#editorial-team`;
 const websiteId = `${SITE_URL}/#website`;
 
 export function absoluteSiteUrl(path: string) {
@@ -21,6 +26,10 @@ export function serializeJsonLd(data: unknown) {
 
 function organizationReference() {
   return { "@id": organizationId };
+}
+
+function editorialTeamReference() {
+  return { "@id": editorialTeamId };
 }
 
 function breadcrumbList(
@@ -166,9 +175,16 @@ export function buildGuideStructuredData(guide: GameGuide): JsonLdDocument {
         description: guide.summary,
         dateModified,
         mainEntityOfPage: absoluteSiteUrl(path),
-        author: organizationReference(),
+        author: editorialTeamReference(),
         publisher: organizationReference(),
         inLanguage: "en-US",
+      },
+      {
+        "@type": "Organization",
+        "@id": editorialTeamId,
+        name: EDITORIAL_TEAM_NAME,
+        url: absoluteSiteUrl(EDITORIAL_POLICY_PATH),
+        parentOrganization: organizationReference(),
       },
       breadcrumbList([
         { name: "Home", path: "/" },

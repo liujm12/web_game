@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
+import { EDITORIAL_TEAM_NAME } from "@/lib/editorial";
 import { getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 
@@ -31,6 +32,22 @@ export default async function AboutPage() {
               games that start quickly, explain themselves clearly, and feel comfortable on
               both phones and desktop browsers.
             </p>
+            <section>
+              <h2 className="text-2xl font-semibold text-white">Who maintains the site</h2>
+              <p className="mt-3">
+                {EDITORIAL_TEAM_NAME} maintains the catalog, gameplay notes,
+                and strategy guides. Before a game is marked live, the team
+                checks its start, restart, controls, and main completion states
+                on desktop and mobile layouts. Read the{" "}
+                <Link
+                  href="/editorial-policy"
+                  className="font-semibold text-cyan-200 hover:text-cyan-100"
+                >
+                  Editorial Policy
+                </Link>{" "}
+                for the full testing, review, and correction process.
+              </p>
+            </section>
             <section>
               <h2 className="text-2xl font-semibold text-white">What we publish</h2>
               <p className="mt-3">
@@ -69,9 +86,10 @@ export default async function AboutPage() {
             <section>
               <h2 className="text-2xl font-semibold text-white">How the catalog grows</h2>
               <p className="mt-3">
-                New games are added in batches instead of all at once. That gives us time to
-                improve controls, refine instructions, and remove games that do not feel good on
-                desktop and mobile. The collection grows around clear pages and playable experiences.
+                New games are added in batches instead of all at once. That gives the editorial
+                team time to improve controls, refine instructions, and remove games that do not
+                feel good on desktop and mobile. The collection grows around clear pages and
+                playable experiences.
               </p>
             </section>
             <section>

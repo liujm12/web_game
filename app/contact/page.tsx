@@ -2,6 +2,7 @@ import { SiteFooter } from "@/components/site-footer";
 import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
+import { EDITORIAL_TEAM_NAME } from "@/lib/editorial";
 import { getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 
@@ -25,13 +26,15 @@ export default async function ContactPage() {
             <p>
               For partnerships, ad operations, copyright notices, gameplay
               issues, or general site questions, email
-              {` ${content.site.supportEmail}`}.
+              {` ${content.site.supportEmail}`}. Content and gameplay reports
+              are reviewed by {EDITORIAL_TEAM_NAME}.
             </p>
             <section>
               <h2 className="text-xl font-semibold text-white">Best ways to reach us</h2>
               <ul className="mt-3 list-disc space-y-2 pl-6">
                 <li>Advertising and partnership inquiries</li>
                 <li>Bug reports or broken game links</li>
+                <li>Content corrections for instructions or strategy guides</li>
                 <li>DMCA and intellectual property notices</li>
                 <li>Privacy or policy questions</li>
               </ul>
@@ -40,8 +43,9 @@ export default async function ContactPage() {
               <h2 className="text-xl font-semibold text-white">What to include</h2>
               <p className="mt-3">
                 To help us respond faster, include the page URL, the game title,
-                your device or browser, and a short description of the issue or
-                request.
+                your device or browser, and a short description of the issue.
+                For a gameplay or content problem, include a screenshot or steps
+                to reproduce it when possible.
               </p>
             </section>
           </div>

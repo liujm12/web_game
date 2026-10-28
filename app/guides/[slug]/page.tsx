@@ -6,6 +6,10 @@ import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGuideBySlug, guides } from "@/data/guides";
+import {
+  EDITORIAL_POLICY_PATH,
+  EDITORIAL_TEAM_NAME,
+} from "@/lib/editorial";
 import { getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildGuideStructuredData } from "@/lib/structured-data";
@@ -46,6 +50,9 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const relatedGames = guide.relatedGameSlugs
     .map((gameSlug) => content.games.find((game) => game.slug === gameSlug))
     .filter((game) => Boolean(game));
+  const correctionHref = `mailto:${content.site.supportEmail}?subject=${encodeURIComponent(
+    `Correction for ${guide.title}`,
+  )}`;
 
   return (
     <div className="min-h-screen text-white">
@@ -62,7 +69,22 @@ export default async function GuidePage({ params }: GuidePageProps) {
             </p>
             <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-6xl">{guide.title}</h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">{guide.summary}</p>
-            <p className="mt-5 text-xs text-slate-500">Updated {guide.updatedAt}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-400">
+              <span>Written and reviewed by {EDITORIAL_TEAM_NAME}</span>
+              <span>Updated {guide.updatedAt}</span>
+              <Link
+                href={EDITORIAL_POLICY_PATH}
+                className="text-cyan-200 hover:text-cyan-100"
+              >
+                Editorial Policy
+              </Link>
+              <a
+                href={correctionHref}
+                className="text-cyan-200 hover:text-cyan-100"
+              >
+                Report a correction
+              </a>
+            </div>
           </header>
 
           <div className="mt-8 space-y-6">

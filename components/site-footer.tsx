@@ -10,6 +10,7 @@ const footerLinks = [
   { href: "/guides", label: "Guides" },
   { href: "/my-games", label: "My Games" },
   { href: "/about", label: "About" },
+  { href: "/editorial-policy", label: "Editorial Policy" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms" },
   { href: "/contact", label: "Contact" },

@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AdSlot } from "@/components/ad-slot";
@@ -14,6 +15,7 @@ import {
   getSiteContent,
   type GameRecord,
 } from "@/lib/site-content";
+import { EDITORIAL_POLICY_PATH } from "@/lib/editorial";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildGameStructuredData } from "@/lib/structured-data";
 
@@ -140,6 +142,12 @@ export default async function GamePage({ params }: GamePageProps) {
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
                   Last checked: {game.lastChecked ?? "October 2026"}
                 </div>
+                <Link
+                  href={EDITORIAL_POLICY_PATH}
+                  className="rounded-2xl border border-cyan-200/10 bg-cyan-300/[0.055] px-4 py-3 font-semibold text-cyan-200 hover:text-cyan-100"
+                >
+                  How we test games
+                </Link>
               </div>
             </div>
           </aside>
