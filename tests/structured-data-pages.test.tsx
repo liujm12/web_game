@@ -2,7 +2,7 @@
 
 import "@testing-library/jest-dom/vitest";
 
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
 import CategoryPage from "@/app/categories/[slug]/page";
@@ -49,7 +49,7 @@ describe("structured data page integration", () => {
       (entry: Record<string, unknown>) => entry["@type"] === "ItemList",
     );
 
-    expect(allGamesList.numberOfItems).toBeGreaterThan(20);
+    expect(allGamesList.numberOfItems).toBe(20);
     expect(categoryList.numberOfItems).toBeGreaterThan(0);
     expect(
       categoryList.itemListElement.every(
@@ -70,6 +70,17 @@ describe("structured data page integration", () => {
     expect(types).toEqual(
       expect.arrayContaining(["VideoGame", "BreadcrumbList", "FAQPage"]),
     );
+  });
+
+  it("shows tested-build evidence and a related guide on priority game pages", async () => {
+    render(await GamePage({ params: Promise.resolve({ slug: "2048" }) }));
+
+    expect(
+      screen.getByRole("heading", { name: "What we tested in this build" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Read the 2048 Corner Strategy guide" }),
+    ).toHaveAttribute("href", "/guides/2048-corner-strategy");
   });
 
   it("renders guide collection and article data on guide pages", async () => {

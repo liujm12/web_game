@@ -6,7 +6,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 describe("All games page", () => {
-  it("shows every live game in one place", async () => {
+  it("shows the curated live catalog and hides draft games", async () => {
     const pageModule = await import("@/app/games/page");
     const Page = pageModule.default;
 
@@ -17,9 +17,10 @@ describe("All games page", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Meteor Sprint")).toBeInTheDocument();
     expect(screen.getByText("Number Rush")).toBeInTheDocument();
-    expect(screen.getByText("Orbit Hopper")).toBeInTheDocument();
-    expect(screen.getByText("Neon Drift")).toBeInTheDocument();
-    expect(screen.getByText("Signal Sweep")).toBeInTheDocument();
+    expect(screen.getByText("Pattern Pulse")).toBeInTheDocument();
     expect(screen.getByText("Comet Loop")).toBeInTheDocument();
+    expect(screen.queryByText("Orbit Hopper")).not.toBeInTheDocument();
+    expect(screen.queryByText("Neon Drift")).not.toBeInTheDocument();
+    expect(screen.queryByText("Signal Sweep")).not.toBeInTheDocument();
   });
 });

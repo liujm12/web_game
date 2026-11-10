@@ -6,7 +6,7 @@
     "adsenseClient": "",
     "supportEmail": "hello@playturboarcade.com",
     "launchedAt": "2026-07-04",
-    "contentUpdatedAt": "2026-10-22",
+    "contentUpdatedAt": "2026-11-10",
     "adSlots": {
       "homeHero": "",
       "homepageFeatured": "",
@@ -366,6 +366,11 @@
       "controls": [
         "Desktop/mobile controls: arrow keys on desktop or direction buttons on mobile."
       ],
+      "playNotes": [
+        "The board is a true 4x4 grid: equal tiles merge once per move, and the merged value is added to the score.",
+        "Easy and Normal begin with two tiles; Hard begins with three and produces 4 tiles more often.",
+        "A direction that leaves the board unchanged does not add a new tile, so accidental key presses do not consume space."
+      ],
       "bestFor": [
         "Players who want 3 minutes of focused play.",
         "Anyone looking for an easy brain break."
@@ -429,6 +434,11 @@
       "controls": [
         "Desktop/mobile controls: aim left/right, then Fire or Space."
       ],
+      "playNotes": [
+        "The cannon uses five lanes and a seven-row stack, with both the current tile and next tile visible before every shot.",
+        "Matching tiles merge through touching horizontal or vertical neighbors, and the stack compacts after each combo.",
+        "A shot into a full lane ends the run; reaching a 2048 tile is the long-form win target."
+      ],
       "bestFor": [
         "Players who want 3 minutes of focused play.",
         "Anyone looking for an easy brain break."
@@ -489,6 +499,11 @@
       "seoDescription": "Play Snake in your browser for free. Eat fruit, grow longer, and see how long you can stay alive.",
       "controls": [
         "Desktop/mobile controls: arrow keys or the direction buttons below the board."
+      ],
+      "playNotes": [
+        "The play field is a 12x12 grid, and every fruit adds 10 points while extending the snake by one cell.",
+        "Easy, Normal, and Hard update every 290, 220, and 150 milliseconds respectively.",
+        "A run begins only after the player chooses a direction, which prevents an immediate wall collision after pressing Start."
       ],
       "bestFor": [
         "Players who want 2 minutes of focused play.",
@@ -612,6 +627,11 @@
       "controls": [
         "Desktop/mobile controls: arrow keys or Paddle left/right buttons."
       ],
+      "playNotes": [
+        "Every round starts with forty bricks arranged in five rows of eight, and each cleared brick adds to the score.",
+        "Easy starts with four lives, Normal with three, and Hard with two while also increasing ball speed.",
+        "The paddle uses the same normalized play field on desktop and mobile, so the ball and collision positions stay aligned."
+      ],
       "bestFor": [
         "Players who want 2 minutes of focused play.",
         "Anyone looking for an easy arcade break."
@@ -664,7 +684,7 @@
       "trendingScore": 82,
       "difficulty": "Easy",
       "playersLabel": "Single player",
-      "status": "live",
+      "status": "draft",
       "estimatedSession": "75 seconds",
       "componentKey": "",
       "playMode": "embed",
@@ -727,7 +747,7 @@
       "trendingScore": 80,
       "difficulty": "Easy",
       "playersLabel": "Single player",
-      "status": "live",
+      "status": "draft",
       "estimatedSession": "60 seconds",
       "componentKey": "",
       "playMode": "embed",
@@ -789,7 +809,7 @@
       "trendingScore": 79,
       "difficulty": "Medium",
       "playersLabel": "Single player",
-      "status": "live",
+      "status": "draft",
       "estimatedSession": "90 seconds",
       "componentKey": "",
       "playMode": "embed",
@@ -991,6 +1011,11 @@
         "Mobile: tap Reveal mode or Flag mode, then tap tiles.",
         "New board creates a fresh layout and resets the timer."
       ],
+      "playNotes": [
+        "Easy uses an 8x8 board with 10 mines, Normal a 9x9 board with 12, and Hard a 10x10 board with 18.",
+        "Mines are planted only after the first reveal, and the selected tile plus its immediate neighbors are kept safe.",
+        "Zero-value reveals expand automatically, while flags are capped at the board's exact mine count."
+      ],
       "bestFor": [
         "Players who like deduction instead of reflexes.",
         "Short logic breaks with a familiar rule set.",
@@ -1050,9 +1075,14 @@
       "seoTitle": "Sudoku Sprint - Free 9x9 Sudoku Game | TurboArcade",
       "seoDescription": "Play standard 9x9 Sudoku with uniquely solvable puzzles, notes, undo, hints, and three difficulty levels.",
       "controls": [
-        "Click or tap an empty cell, then choose 1, 2, 3, or 4.",
+        "Click or tap an empty cell, then choose 1 through 9.",
         "New puzzle creates a fresh board; Undo restores your previous entry.",
         "Notes, hints, timer, and difficulty give each replay a clear goal."
+      ],
+      "playNotes": [
+        "Every generated puzzle uses a standard 9x9 grid with 3x3 boxes and is checked for exactly one solution before display.",
+        "Easy, Normal, and Hard reduce the number of given cells while preserving the same row, column, and box rules.",
+        "Pencil notes, undo, conflict highlighting, hints, and the timer were tested with both pointer and touch input."
       ],
       "bestFor": [
         "Players who want sudoku logic without a long session.",
@@ -1061,12 +1091,12 @@
       ],
       "strategyTips": [
         "Check each row before placing a number.",
-        "Use the 2x2 boxes to narrow choices.",
+        "Use the 3x3 boxes to narrow choices.",
         "If a row has three numbers, fill the missing value first."
       ],
       "commonMistakes": [
         "Guessing before checking the column.",
-        "Ignoring the 2x2 box rule.",
+        "Ignoring the 3x3 box rule.",
         "Leaving a wrong number instead of resetting quickly."
       ],
       "faq": [
@@ -1114,9 +1144,14 @@
       "seoTitle": "Word Hunt - Free Browser Word Game | TurboArcade",
       "seoDescription": "Play Word Hunt, a free English word grid game with short target words.",
       "controls": [
-        "Click or tap letters to build the current word.",
-        "Submit checks the selected letters against the target list.",
-        "Clear removes your current selection without resetting found words."
+        "Tap the first and last letter of a straight word to select its full path.",
+        "Words can run horizontally, vertically, diagonally, forward, or backward.",
+        "New grid creates another six-word puzzle in the selected theme."
+      ],
+      "playNotes": [
+        "Each round places six English words into a fresh 8x8 grid and fills unused cells with random letters.",
+        "Nature, Kitchen, and Adventure each supply a separate twelve-word pool before six targets are selected.",
+        "The endpoint selector accepts only straight contiguous paths and recognizes both forward and reversed words."
       ],
       "bestFor": [
         "Players who prefer English word puzzles.",
@@ -1244,6 +1279,11 @@
         "Reset tubes restarts the puzzle.",
         "The selected tube gets a cyan outline."
       ],
+      "playNotes": [
+        "Every tube holds four layers, and a legal pour moves the full matching top group when space allows.",
+        "Levels are created by reversing legal pours from a solved board, preserving a verified route back to completion.",
+        "Two empty tubes remain available, while higher levels introduce additional numbered colors and more mixed stacks."
+      ],
       "bestFor": [
         "Players who want a calm sorting puzzle.",
         "Mobile sessions where one-tap moves feel natural.",
@@ -1368,8 +1408,13 @@
       "seoDescription": "Play American checkers on an 8x8 board against three computer levels or a local friend, with mandatory captures and kings.",
       "controls": [
         "Click or tap your piece to select it.",
-        "Tap a diagonal square to move.",
-        "Reset board starts a fresh local duel."
+        "Tap a highlighted diagonal square to move; captures are mandatory when available.",
+        "Choose computer or local two-player mode, then reset the board to begin another match."
+      ],
+      "playNotes": [
+        "The board follows American checkers with twelve pieces per side on a standard 8x8 layout.",
+        "Mandatory captures, forced multi-jumps, promotion to kings, threefold repetition, and the forty-move draw rule are enforced.",
+        "Computer mode offers three deterministic difficulty levels, while local mode alternates both sides on one device."
       ],
       "bestFor": [
         "Players who want a familiar board game in a short format.",
@@ -1441,7 +1486,7 @@
         "Anyone who wants a sequence of increasingly difficult original levels."
       ],
       "playNotes": [
-        "Each of the twelve layouts is checked by the built-in solver before release.",
+        "All 120 layouts are checked by the built-in solver before release, including twenty Master missions that require at least twenty grid steps.",
         "Best move counts stay in the current browser and do not require an account.",
         "Vehicles are drawn with original interface shapes rather than third-party game artwork."
       ],

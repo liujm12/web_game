@@ -21,7 +21,11 @@ export default function RootLayout({
   const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim();
 
   return (
-    <html lang="en" className="h-full antialiased">
+    <html
+      lang="en"
+      className="h-full antialiased"
+      data-scroll-behavior="smooth"
+    >
       {adsenseClient ? (
         <head>
           <script

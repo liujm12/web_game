@@ -101,11 +101,8 @@ describe("structured data", () => {
   it("lists only live games in collection structured data", async () => {
     const content = await getSiteContent();
     const games = [
+      content.games.find((entry) => entry.slug === "pattern-pulse")!,
       content.games.find((entry) => entry.slug === "signal-sweep")!,
-      {
-        ...content.games.find((entry) => entry.slug === "patrol-escape")!,
-        status: "draft" as const,
-      },
     ];
     const data = buildGameCollectionStructuredData({
       title: "Brain Games | TurboArcade",
@@ -122,8 +119,8 @@ describe("structured data", () => {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Signal Sweep",
-        url: "https://playturboarcade.com/games/signal-sweep",
+        name: "Pattern Pulse",
+        url: "https://playturboarcade.com/games/pattern-pulse",
       },
     ]);
   });

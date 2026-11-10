@@ -187,19 +187,19 @@ describe("SEO metadata", () => {
 
   it("publishes self-referencing canonicals for dynamic game and category pages", async () => {
     const gameMetadata = await generateGameMetadata({
-      params: Promise.resolve({ slug: "signal-sweep" }),
+      params: Promise.resolve({ slug: "pattern-pulse" }),
     });
     const categoryMetadata = await generateCategoryMetadata({
       params: Promise.resolve({ slug: "brain" }),
     });
 
-    expect(gameMetadata.alternates?.canonical).toBe("/games/signal-sweep");
+    expect(gameMetadata.alternates?.canonical).toBe("/games/pattern-pulse");
     expect(categoryMetadata.alternates?.canonical).toBe("/categories/brain");
   });
 
   it("publishes distinct social metadata for games and categories", async () => {
     const gameMetadata = await generateGameMetadata({
-      params: Promise.resolve({ slug: "signal-sweep" }),
+      params: Promise.resolve({ slug: "pattern-pulse" }),
     });
     const categoryMetadata = await generateCategoryMetadata({
       params: Promise.resolve({ slug: "brain" }),
@@ -207,14 +207,14 @@ describe("SEO metadata", () => {
 
     expect(gameMetadata.openGraph).toMatchObject({
       type: "website",
-      url: "/games/signal-sweep",
+      url: "/games/pattern-pulse",
       siteName: "TurboArcade",
       images: [
         {
-          url: "/games/signal-sweep/opengraph-image",
+          url: "/games/pattern-pulse/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "Signal Sweep free browser game social card",
+          alt: "Pattern Pulse free browser game social card",
         },
       ],
     });
@@ -222,8 +222,8 @@ describe("SEO metadata", () => {
       card: "summary_large_image",
       images: [
         {
-          url: "/games/signal-sweep/opengraph-image",
-          alt: "Signal Sweep free browser game social card",
+          url: "/games/pattern-pulse/opengraph-image",
+          alt: "Pattern Pulse free browser game social card",
         },
       ],
     });
@@ -236,15 +236,11 @@ describe("SEO metadata", () => {
 
   it("does not publish social metadata for draft games", async () => {
     const content = await getSiteContent();
-    const liveGame = content.games.find((game) => game.slug === "signal-sweep");
+    const draftGame = content.games.find((game) => game.slug === "signal-sweep");
 
-    expect(liveGame).toBeDefined();
-    expect(
-      buildGamePageMetadata({
-        ...liveGame!,
-        status: "draft",
-      }),
-    ).toEqual({
+    expect(draftGame).toBeDefined();
+    expect(draftGame?.status).toBe("draft");
+    expect(buildGamePageMetadata(draftGame!)).toEqual({
       title: "Game not found | TurboArcade",
     });
   });
@@ -270,7 +266,7 @@ describe("SEO metadata", () => {
 describe("sitemap", () => {
   it("uses the site update for catalog pages and editorial dates for guides", async () => {
     const entries = await sitemap();
-    const expectedLastModified = new Date("2026-10-22").toISOString();
+    const expectedLastModified = new Date("2026-11-10").toISOString();
     const guideUrls = new Set(
       guides.map(
         (guide) => `https://playturboarcade.com/guides/${guide.slug}`,
@@ -304,5 +300,16 @@ describe("sitemap", () => {
             new Date("2026-07-04").toISOString(),
       ),
     ).toBe(false);
+  });
+
+  it("excludes draft games from the public sitemap", async () => {
+    const entries = await sitemap();
+    const urls = new Set(entries.map((entry) => entry.url));
+
+    expect(urls).toContain("https://playturboarcade.com/games/meteor-sprint");
+    expect(urls).toContain("https://playturboarcade.com/games/pattern-pulse");
+    expect(urls).not.toContain("https://playturboarcade.com/games/orbit-hopper");
+    expect(urls).not.toContain("https://playturboarcade.com/games/neon-drift");
+    expect(urls).not.toContain("https://playturboarcade.com/games/signal-sweep");
   });
 });

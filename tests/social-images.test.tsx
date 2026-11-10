@@ -36,20 +36,20 @@ describe("social image routes", () => {
 
   it("derives distinct social card data for different games", async () => {
     const content = await getSiteContent();
-    const signalSweep = getGameSocialCardData(content, "signal-sweep");
+    const patternPulse = getGameSocialCardData(content, "pattern-pulse");
     const patrolEscape = getGameSocialCardData(content, "patrol-escape");
 
-    expect(signalSweep).toMatchObject({
-      title: "Signal Sweep",
+    expect(patternPulse).toMatchObject({
+      title: "Pattern Pulse",
       eyebrow: "BRAIN GAME",
     });
     expect(patrolEscape).toMatchObject({
       title: "Patrol Escape",
       eyebrow: "BRAIN GAME",
     });
-    expect(signalSweep.description).not.toBe("");
+    expect(patternPulse.description).not.toBe("");
     expect(patrolEscape.description).not.toBe("");
-    expect(signalSweep.palette).not.toEqual(patrolEscape.palette);
+    expect(patternPulse.palette).not.toEqual(patrolEscape.palette);
   });
 
   it("uses a safe branded fallback for an unknown game slug", async () => {

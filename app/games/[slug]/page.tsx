@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PlayerGameTools } from "@/components/player-game-tools";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { guides } from "@/data/guides";
 import {
   getGameBySlug,
   getSiteContent,
@@ -62,6 +63,9 @@ export default async function GamePage({ params }: GamePageProps) {
   }
 
   const category = content.categories.find((entry) => entry.slug === game.category);
+  const relatedGuide = guides.find((guide) =>
+    guide.relatedGameSlugs.includes(game.slug),
+  );
   const relatedGames = content.games
     .filter((entry) => entry.slug !== game.slug && entry.status === "live")
     .sort((left, right) => {
@@ -104,6 +108,34 @@ export default async function GamePage({ params }: GamePageProps) {
               slot={content.site.adSlots?.gameInline}
             />
             <GamePageIntro game={game} />
+            {game.playNotes?.length ? (
+              <section className={sectionCardClass}>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-lime-200/70">
+                  Editorial playtest
+                </p>
+                <h2 className="mt-3 text-2xl font-black text-white">
+                  What we tested in this build
+                </h2>
+                <ul className="mt-5 grid gap-3 text-sm leading-7 text-slate-300">
+                  {game.playNotes.map((note) => (
+                    <li
+                      key={note}
+                      className="rounded-2xl border border-white/8 bg-white/[0.045] px-4 py-3"
+                    >
+                      {note}
+                    </li>
+                  ))}
+                </ul>
+                {relatedGuide ? (
+                  <Link
+                    href={`/guides/${relatedGuide.slug}`}
+                    className="mt-5 inline-flex rounded-full bg-lime-300 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-cyan-300"
+                  >
+                    Read the {relatedGuide.title} guide
+                  </Link>
+                ) : null}
+              </section>
+            ) : null}
           </div>
           <aside className="space-y-6">
             <AdSlot
