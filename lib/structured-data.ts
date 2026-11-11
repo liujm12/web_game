@@ -224,3 +224,21 @@ export function buildGuideCollectionStructuredData(
     ],
   };
 }
+
+export function buildTopicHubStructuredData(input: {
+  title: string;
+  description: string;
+  path: string;
+  sections: { heading: string; text: string }[];
+  relatedPaths: string[];
+}): JsonLdDocument {
+  const url = absoluteSiteUrl(input.path);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "CollectionPage", "@id": `${url}#page`, name: input.title, description: input.description, url, isPartOf: { "@id": websiteId }, inLanguage: "en-US", hasPart: input.sections.map((section, index) => ({ "@type": "WebPageElement", position: index + 1, name: section.heading, text: section.text })) },
+      { "@type": "ItemList", name: "Related traffic puzzle games and guides", itemListElement: input.relatedPaths.map((path, index) => ({ "@type": "ListItem", position: index + 1, url: absoluteSiteUrl(path) })) },
+      breadcrumbList([{ name: "Home", path: "/" }, { name: "Traffic Puzzle Games", path: input.path }]),
+    ],
+  };
+}

@@ -15,6 +15,7 @@ import {
   type PatrolEscapeVehicle,
 } from "@/lib/patrol-escape";
 import { saveBestScore } from "@/lib/player-profile";
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const LEVEL_BEST_KEY = "patrol-escape-level-bests-v1";
 
@@ -91,12 +92,45 @@ export function PatrolEscapeGame() {
   const best = levelBests[String(level.id)];
 
   useEffect(() => {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const nextLevelIndex = preset === "recovery" ? 100 : preset === "master" ? 118 : 0;
+    const nextLevel = patrolEscapeLevels[nextLevelIndex];
+    let nextState = createPatrolEscapeState(nextLevel);
+
+    if (preset === "progress") {
+      nextState = applyVehicleMove(nextState, "gate-van", -1);
+      nextState = applyVehicleMove(nextState, "police", 2);
+    } else if (preset === "success") {
+      nextState = applyVehicleMove(nextState, "gate-van", -1);
+      nextState = applyVehicleMove(nextState, "police", 4);
+    } else if (preset === "recovery") {
+      nextState = applyVehicleMove(nextState, "a-v1", 1);
+      nextState = applyVehicleMove(nextState, "a-h3", 1);
+    }
+
+    const timer = window.setTimeout(() => {
+      setLevelIndex(nextLevelIndex);
+      setState(nextState);
+      setHistory([]);
+      setSelectedId(preset === "recovery" ? "a-h3" : "police");
+      setHint(null);
+      setElapsedSeconds(preset === "success" ? 18 : preset === "recovery" ? 42 : 0);
+      if (preset === "success") setLevelBests({ "1": nextState.moves });
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (readGameScreenshotPreset()) return;
     const timer = window.setTimeout(() => setLevelBests(readLevelBests()), 0);
     return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (solved) return;
+    if (solved || readGameScreenshotPreset()) return;
     const timer = window.setInterval(
       () => setElapsedSeconds(Math.floor((Date.now() - startedAt) / 1000)),
       1000,
@@ -225,7 +259,7 @@ export function PatrolEscapeGame() {
   const visibleLevels = patrolEscapeLevels.slice(levelPage * 20, levelPage * 20 + 20);
 
   return (
-    <div className="rounded-[30px] border border-cyan-200/15 bg-[#07101c] p-4 text-white shadow-[0_26px_80px_rgba(2,8,23,0.5)] sm:p-6">
+    <div data-game-capture-root="patrol-escape" className="rounded-[30px] border border-cyan-200/15 bg-[#07101c] p-4 text-white shadow-[0_26px_80px_rgba(2,8,23,0.5)] sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-200/65">Original traffic puzzle</p>

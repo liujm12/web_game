@@ -17,6 +17,7 @@ import { metadata as myGamesMetadata } from "@/app/my-games/page";
 import { metadata as privacyMetadata } from "@/app/privacy/page";
 import sitemap from "@/app/sitemap";
 import { metadata as termsMetadata } from "@/app/terms/page";
+import { metadata as trafficPuzzleMetadata } from "@/app/traffic-puzzle-games/page";
 import { guides } from "@/data/guides";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { getSiteContent } from "@/lib/site-content";
@@ -84,6 +85,7 @@ describe("SEO metadata", () => {
     ["contact", contactMetadata, "/contact"],
     ["games", gamesMetadata, "/games"],
     ["guides", guidesMetadata, "/guides"],
+    ["traffic puzzle hub", trafficPuzzleMetadata, "/traffic-puzzle-games"],
     ["privacy", privacyMetadata, "/privacy"],
     ["terms", termsMetadata, "/terms"],
     ["dmca", dmcaMetadata, "/dmca"],
@@ -174,6 +176,7 @@ describe("SEO metadata", () => {
     expect(contactMetadata.alternates?.canonical).toBe("/contact");
     expect(gamesMetadata.alternates?.canonical).toBe("/games");
     expect(guidesMetadata.alternates?.canonical).toBe("/guides");
+    expect(trafficPuzzleMetadata.alternates?.canonical).toBe("/traffic-puzzle-games");
     expect(privacyMetadata.alternates?.canonical).toBe("/privacy");
     expect(termsMetadata.alternates?.canonical).toBe("/terms");
     expect(dmcaMetadata.alternates?.canonical).toBe("/dmca");
@@ -277,6 +280,7 @@ describe("sitemap", () => {
     );
 
     expect(entries.length).toBeGreaterThan(20);
+    expect(entries.some((entry) => entry.url === "https://playturboarcade.com/traffic-puzzle-games")).toBe(true);
     expect(
       catalogEntries.every(
         (entry) =>

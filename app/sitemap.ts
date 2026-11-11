@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/dmca",
     "/editorial-policy",
     "/guides",
+    "/traffic-puzzle-games",
     ...content.categories.map((category) => `/categories/${category.slug}`),
     ...content.games
       .filter((game) => game.status === "live")

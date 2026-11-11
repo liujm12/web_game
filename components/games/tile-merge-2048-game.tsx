@@ -3,9 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { saveBestScore } from "@/lib/player-profile";
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const gridSize = 4;
 type Difficulty = "Easy" | "Normal" | "Hard";
+type GamePhase = "idle" | "playing" | "won" | "lost";
 
 function createEmptyBoard() {
   return Array.from({ length: gridSize * gridSize }, () => 0);
@@ -105,6 +107,20 @@ function moveBoard(
   };
 }
 
+export function canMoveTileBoard(board: number[]) {
+  if (board.some((value) => value === 0)) return true;
+
+  for (let row = 0; row < gridSize; row += 1) {
+    for (let column = 0; column < gridSize; column += 1) {
+      const index = row * gridSize + column;
+      if (column < gridSize - 1 && board[index] === board[index + 1]) return true;
+      if (row < gridSize - 1 && board[index] === board[index + gridSize]) return true;
+    }
+  }
+
+  return false;
+}
+
 function getTileClass(value: number) {
   if (value >= 1024) return "bg-orange-300 text-slate-950";
   if (value >= 256) return "bg-amber-300 text-slate-950";
@@ -120,16 +136,51 @@ export function TileMerge2048Game() {
   const [board, setBoard] = useState<number[]>(() => createEmptyBoard());
   const [score, setScore] = useState(0);
   const [bestTile, setBestTile] = useState(0);
-  const [phase, setPhase] = useState<"idle" | "playing">("idle");
+  const [phase, setPhase] = useState<GamePhase>("idle");
   const [difficulty, setDifficulty] = useState<Difficulty>("Normal");
+  const [capturePreset, setCapturePreset] = useState<string | null>(null);
 
   const has2048 = useMemo(() => board.some((value) => value >= 2048), [board]);
 
   useEffect(() => {
-    if (score > 0) {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const boards: Record<string, { board: number[]; score: number; phase: GamePhase }> = {
+      progress: {
+        board: [64, 32, 8, 2, 16, 8, 4, 2, 8, 4, 2, 0, 4, 2, 0, 0],
+        score: 684,
+        phase: "playing",
+      },
+      success: {
+        board: [2048, 512, 128, 32, 256, 64, 16, 8, 64, 16, 8, 4, 8, 4, 2, 0],
+        score: 24720,
+        phase: "won",
+      },
+      lost: {
+        board: [2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 4, 2],
+        score: 3584,
+        phase: "lost",
+      },
+    };
+    const capture = boards[preset];
+    const timer = window.setTimeout(() => {
+      setCapturePreset(preset);
+      if (!capture) return;
+      setBoard(capture.board);
+      setScore(capture.score);
+      setBestTile(Math.max(...capture.board));
+      setPhase(capture.phase);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (score > 0 && !capturePreset) {
       saveBestScore("2048", score, `${score} points`);
     }
-  }, [score]);
+  }, [capturePreset, score]);
 
   function startGame() {
     const startingTiles = difficulty === "Hard" ? 3 : 2;
@@ -138,6 +189,7 @@ export function TileMerge2048Game() {
     setScore(0);
     setBestTile(Math.max(...seeded));
     setPhase("playing");
+    setCapturePreset(null);
   }
 
   function handleMove(direction: "up" | "down" | "left" | "right") {
@@ -147,16 +199,22 @@ export function TileMerge2048Game() {
 
     const result = moveBoard(board, direction, difficulty);
     if (!result.didChange) {
+      if (!canMoveTileBoard(board)) setPhase("lost");
       return;
     }
 
     setBoard(result.board);
     setScore((currentScore) => currentScore + result.gainedScore);
     setBestTile(Math.max(...result.board));
+    if (result.board.some((value) => value >= 2048)) {
+      setPhase("won");
+    } else if (!canMoveTileBoard(result.board)) {
+      setPhase("lost");
+    }
   }
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
+    <div data-game-capture-root="2048" className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-amber-200/70">
@@ -196,13 +254,17 @@ export function TileMerge2048Game() {
               <p className="text-xs uppercase tracking-[0.26em] text-amber-200/70">
                 Tile merge
               </p>
-              <h3 className="mt-2 text-2xl font-semibold">Chase 2048</h3>
+              <h3 className="mt-2 text-2xl font-semibold">
+                {phase === "won" ? "2048 reached" : phase === "lost" ? "No moves left" : "Chase 2048"}
+              </h3>
+              {phase === "won" ? <p className="mt-2 text-sm text-slate-300">You built the 2048 tile.</p> : null}
+              {phase === "lost" ? <p className="mt-2 text-sm text-slate-300">The board is full with no matching neighbors.</p> : null}
               <button
                 type="button"
-                onClick={startGame}
+                onClick={phase === "won" ? () => setPhase("playing") : startGame}
                 className="mt-4 rounded-full bg-amber-300 px-5 py-2.5 text-sm font-semibold text-slate-950"
               >
-                Start 2048
+                {phase === "won" ? "Keep playing" : phase === "lost" ? "Play again" : "Start 2048"}
               </button>
             </div>
           </div>
@@ -241,6 +303,10 @@ export function TileMerge2048Game() {
       <div className="mt-3 rounded-[24px] border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
         {phase === "idle"
           ? "Merge matching tiles and chase 2048."
+          : phase === "lost"
+            ? "No legal slide remains. Start a fresh board and protect open cells longer."
+            : phase === "won"
+              ? "2048 reached. Continue if you want to build an even larger tile."
           : has2048
             ? "You hit 2048. Keep stacking for a bigger board."
             : `Mode ${difficulty}. Slide the board and stack bigger numbers.`}

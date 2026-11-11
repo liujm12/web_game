@@ -126,7 +126,8 @@ describe("structured data", () => {
   });
 
   it("describes guide articles and the guide collection", () => {
-    const guide = guides[0];
+    const guide = guides.find(({ slug }) => slug === "2048-corner-strategy");
+    if (!guide) throw new Error("Expected the 2048 strategy guide to be published");
     const article = buildGuideStructuredData(guide);
     const collection = buildGuideCollectionStructuredData(guides);
 

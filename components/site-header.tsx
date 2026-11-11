@@ -76,7 +76,7 @@ export function SiteHeader({ brandName, compactGameHeader = false }: SiteHeaderP
       {!compactGameHeader && (
         <nav
           aria-label="Mobile quick links"
-          className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 sm:px-6 md:hidden"
+          className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-6 md:hidden"
         >
           {mobileNavItems.map((item) => (
             <Link

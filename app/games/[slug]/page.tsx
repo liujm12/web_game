@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { AdSlot } from "@/components/ad-slot";
 import { GameCard } from "@/components/game-card";
 import { GamePageIntro } from "@/components/game-page-intro";
+import { GameScreenshotGallery } from "@/components/game-screenshot-gallery";
 import { GameSurface } from "@/components/game-surface";
 import { JsonLd } from "@/components/json-ld";
 import { PlayerGameTools } from "@/components/player-game-tools";
@@ -63,7 +64,7 @@ export default async function GamePage({ params }: GamePageProps) {
   }
 
   const category = content.categories.find((entry) => entry.slug === game.category);
-  const relatedGuide = guides.find((guide) =>
+  const relatedGuides = guides.filter((guide) =>
     guide.relatedGameSlugs.includes(game.slug),
   );
   const relatedGames = content.games
@@ -108,6 +109,7 @@ export default async function GamePage({ params }: GamePageProps) {
               slot={content.site.adSlots?.gameInline}
             />
             <GamePageIntro game={game} />
+            <GameScreenshotGallery gameSlug={game.slug} gameTitle={game.title} />
             {game.playNotes?.length ? (
               <section className={sectionCardClass}>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-lime-200/70">
@@ -126,14 +128,16 @@ export default async function GamePage({ params }: GamePageProps) {
                     </li>
                   ))}
                 </ul>
-                {relatedGuide ? (
+                {relatedGuides.length ? <div className="mt-5 flex flex-wrap gap-3">{relatedGuides.map((relatedGuide) => (
                   <Link
+                    key={relatedGuide.slug}
                     href={`/guides/${relatedGuide.slug}`}
-                    className="mt-5 inline-flex rounded-full bg-lime-300 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-cyan-300"
+                    className="inline-flex rounded-full bg-lime-300 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-cyan-300"
                   >
                     Read the {relatedGuide.title} guide
                   </Link>
-                ) : null}
+                ))}</div> : null}
+                {game.slug === "patrol-escape" ? <Link href="/traffic-puzzle-games" className="mt-3 inline-flex rounded-full border border-cyan-200/20 px-5 py-2.5 text-sm font-bold text-cyan-100">Explore Traffic Puzzle Games</Link> : null}
               </section>
             ) : null}
           </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { saveBestScore } from "@/lib/player-profile";
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const boardSize = 12;
 const totalCells = boardSize * boardSize;
@@ -33,15 +34,43 @@ export function NeonSnakeGame() {
   const [fruit, setFruit] = useState(34);
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState<Difficulty>("Normal");
+  const [capturePreset, setCapturePreset] = useState<string | null>(null);
 
   useEffect(() => {
-    if (phase === "over" && score > 0) {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+    const timer = window.setTimeout(() => {
+      setCapturePreset(preset);
+
+      if (preset === "progress") {
+        setSnake([51, 52, 53, 54, 55, 56]);
+        setFruit(60);
+        setScore(30);
+        setPhase("playing");
+      } else if (preset === "success") {
+        setSnake([74, 75, 76, 77, 78, 79, 80, 81, 82, 83]);
+        setFruit(84);
+        setScore(70);
+        setPhase("playing");
+      } else if (preset === "lost") {
+        setSnake([0, 1, 2, 3, 4]);
+        setFruit(17);
+        setScore(40);
+        setPhase("over");
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (phase === "over" && score > 0 && !capturePreset) {
       saveBestScore("snake", score, `${score} points`);
     }
-  }, [phase, score]);
+  }, [capturePreset, phase, score]);
 
   useEffect(() => {
-    if (phase !== "playing") {
+    if (phase !== "playing" || capturePreset) {
       return;
     }
 
@@ -93,7 +122,7 @@ export function NeonSnakeGame() {
     }, tickByMode[difficulty]);
 
     return () => window.clearInterval(interval);
-  }, [difficulty, direction, fruit, phase]);
+  }, [capturePreset, difficulty, direction, fruit, phase]);
 
   function startGame() {
     setSnake([27, 28, 29]);
@@ -101,6 +130,7 @@ export function NeonSnakeGame() {
     setFruit(34);
     setScore(0);
     setPhase("ready");
+    setCapturePreset(null);
   }
 
   function chooseDirection(nextDirection: "up" | "down" | "left" | "right") {
@@ -151,7 +181,7 @@ export function NeonSnakeGame() {
   });
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
+    <div data-game-capture-root="snake" className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-lime-200/70">

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/json-ld";
+import { PatrolEscapeBoardDiagram } from "@/components/patrol-escape-board-diagram";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGuideBySlug, guides } from "@/data/guides";
@@ -50,6 +52,9 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const relatedGames = guide.relatedGameSlugs
     .map((gameSlug) => content.games.find((game) => game.slug === gameSlug))
     .filter((game) => Boolean(game));
+  const relatedGuides = (guide.relatedGuideSlugs ?? [])
+    .map((guideSlug) => guides.find((candidate) => candidate.slug === guideSlug))
+    .filter((candidate) => Boolean(candidate));
   const correctionHref = `mailto:${content.site.supportEmail}?subject=${encodeURIComponent(
     `Correction for ${guide.title}`,
   )}`;
@@ -88,6 +93,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </header>
 
           <div className="mt-8 space-y-6">
+            {guide.images?.length ? <section aria-label="Patrol Escape examples" className="rounded-[28px] border border-white/10 bg-[#0a0d18]/88 p-6 sm:p-8"><h2 className="text-2xl font-black">Board examples from the game</h2><div className="mt-5 grid gap-5 sm:grid-cols-2">{guide.images.map((image) => <figure key={image.src} className="overflow-hidden rounded-2xl border border-white/10 bg-black/20"><Image src={image.src} alt={image.alt} width={image.width} height={image.height} className="h-auto w-full" /><figcaption className="p-4 text-sm leading-6 text-slate-300">{image.caption}</figcaption></figure>)}</div></section> : null}
             {guide.sections.map((section, index) => (
               <section key={section.heading} className="rounded-[28px] border border-white/10 bg-[#0a0d18]/88 p-6 sm:p-8">
                 <div className="flex items-start gap-4">
@@ -108,6 +114,39 @@ export default async function GuidePage({ params }: GuidePageProps) {
             ))}
           </div>
 
+          {guide.caseStudies?.length ? (
+            <section className="mt-10" aria-labelledby="case-studies-heading">
+              <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-200/75">Verified board analysis</p>
+              <h2 id="case-studies-heading" className="mt-3 text-3xl font-black text-white">Three real levels, three blocker chains</h2>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">Each route below starts from the published level data and finishes at the solver-verified par. The board diagram shows the untouched initial position.</p>
+              <div className="mt-7 space-y-8">
+                {guide.caseStudies.map((caseStudy) => (
+                  <article key={caseStudy.levelId} className="rounded-[30px] border border-white/10 bg-[#0a0d18]/90 p-5 sm:p-8">
+                    <div className="grid gap-7 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                      <PatrolEscapeBoardDiagram levelId={caseStudy.levelId} />
+                      <div>
+                        <p className="text-xs font-black uppercase tracking-[0.24em] text-orange-200">{caseStudy.difficulty} case study · Level {caseStudy.levelId}</p>
+                        <div className="mt-5 space-y-5 text-sm leading-7 text-slate-300">
+                          <div><h3 className="font-black text-white">Initial layout</h3><p className="mt-1">{caseStudy.initialLayout}</p></div>
+                          <div><h3 className="font-black text-white">Main blocker relationship</h3><p className="mt-1">{caseStudy.blockerRelationship}</p></div>
+                          <div><h3 className="font-black text-white">Common wrong move</h3><p className="mt-1">{caseStudy.commonMistake}</p></div>
+                          <div><h3 className="font-black text-white">Correct analysis</h3><p className="mt-1">{caseStudy.analysis}</p></div>
+                          {caseStudy.complexitySource ? <div><h3 className="font-black text-white">Where the 20+ steps come from</h3><p className="mt-1">{caseStudy.complexitySource}</p></div> : null}
+                        </div>
+                        <div className="mt-6 rounded-[22px] border border-cyan-200/12 bg-cyan-300/[0.05] p-5">
+                          <h3 className="font-black text-white">Par solution</h3>
+                          <ol className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
+                            {caseStudy.solution.map((step, index) => <li key={`${step.vehicleId}-${index}`}><span className="mr-2 font-black text-cyan-200">{index + 1}.</span>{step.instruction}</li>)}
+                          </ol>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
           <section className="mt-8 rounded-[28px] border border-orange-200/14 bg-orange-300/[0.055] p-6 sm:p-8">
             <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-200/75">Practice the ideas</p>
             <div className="mt-5 flex flex-wrap gap-3">
@@ -116,8 +155,14 @@ export default async function GuidePage({ params }: GuidePageProps) {
                   Play {game.title}
                 </Link>
               ) : null)}
+              {relatedGuides.map((relatedGuide) => relatedGuide ? (
+                <Link key={relatedGuide.slug} href={`/guides/${relatedGuide.slug}`} className="rounded-full border border-orange-200/20 px-5 py-2.5 text-sm font-black text-orange-100 hover:border-cyan-200/30 hover:text-cyan-100">
+                  Read {relatedGuide.title}
+                </Link>
+              ) : null)}
             </div>
           </section>
+          {guide.relatedHub ? <Link href={guide.relatedHub.href} className="mt-6 inline-flex rounded-full border border-cyan-200/20 px-5 py-3 font-bold text-cyan-100">{guide.relatedHub.label}</Link> : null}
         </article>
       </main>
       <SiteFooter brandName={content.site.brandName} supportEmail={content.site.supportEmail} />
