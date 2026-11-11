@@ -94,7 +94,7 @@ const gameCardCopy: Record<string, { cta: string; hook: string; badge: string }>
   },
   "flappy-dash": {
     cta: "Tap to fly",
-    hook: "Flap through gaps and restart with one tap after a crash.",
+    hook: "Flap through gaps, then use Fly again after a crash.",
     badge: "One button",
   },
   "checkers-lite": {
@@ -109,18 +109,10 @@ function getCardCopy(game: GameRecord) {
     return gameCardCopy[game.slug];
   }
 
-  if (game.category === "brain") {
-    return {
-      cta: "Start puzzle",
-      hook: "Warm up your focus with a short board challenge.",
-      badge: "Brain break",
-    };
-  }
-
   return {
-    cta: "Start run",
-    hook: "Start a short round, learn the pattern, and try to beat your last attempt.",
-    badge: "Quick arcade",
+    cta: `Play ${game.title}`,
+    hook: game.instructions[0] ?? game.summary,
+    badge: game.category === "brain" ? "Brain game" : "Arcade game",
   };
 }
 

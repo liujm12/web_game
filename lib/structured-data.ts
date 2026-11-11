@@ -3,7 +3,7 @@ import {
   EDITORIAL_POLICY_PATH,
   EDITORIAL_TEAM_NAME,
 } from "@/lib/editorial";
-import type { GameRecord } from "@/lib/site-content";
+import { isPublicGame, type GameRecord } from "@/lib/site-content";
 import { SITE_NAME, SITE_URL } from "@/lib/social-metadata";
 
 export type JsonLdNode = Record<string, unknown>;
@@ -131,7 +131,7 @@ export function buildGameCollectionStructuredData({
   path,
   games,
 }: GameCollectionOptions): JsonLdDocument {
-  const liveGames = games.filter((game) => game.status === "live");
+  const liveGames = games.filter(isPublicGame);
 
   return {
     "@context": "https://schema.org",

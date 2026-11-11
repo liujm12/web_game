@@ -13,8 +13,18 @@ describe("All games page", () => {
     render(await Page());
 
     expect(
-      screen.getByRole("heading", { name: "All browser games, one quick shelf" }),
+      screen.getByRole("heading", { name: "A curated catalog of playable browser games" }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Start with our eight core games" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "More Arcade games" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "More Brain games" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Patrol Escape")).toBeInTheDocument();
     expect(screen.getByText("Meteor Sprint")).toBeInTheDocument();
     expect(screen.getByText("Number Rush")).toBeInTheDocument();
     expect(screen.getByText("Pattern Pulse")).toBeInTheDocument();
@@ -22,5 +32,6 @@ describe("All games page", () => {
     expect(screen.queryByText("Orbit Hopper")).not.toBeInTheDocument();
     expect(screen.queryByText("Neon Drift")).not.toBeInTheDocument();
     expect(screen.queryByText("Signal Sweep")).not.toBeInTheDocument();
+    expect(screen.queryByText("Every live game in the catalog")).not.toBeInTheDocument();
   });
 });

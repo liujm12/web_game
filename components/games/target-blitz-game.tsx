@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { saveBestScore } from "@/lib/player-profile";
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const cellCount = 12;
 const roundSeconds = 20;
@@ -24,13 +25,42 @@ export function TargetBlitzGame() {
   const [activeCell, setActiveCell] = useState<number | null>(null);
 
   useEffect(() => {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const timer = window.setTimeout(() => {
+      if (preset === "progress") {
+        setPhase("playing");
+        setScore(14);
+        setTimeLeft(11);
+        setBestScore(18);
+        setActiveCell(6);
+      } else if (preset === "success") {
+        setPhase("over");
+        setScore(32);
+        setTimeLeft(0);
+        setBestScore(32);
+        setActiveCell(null);
+      } else if (preset === "lost") {
+        setPhase("over");
+        setScore(4);
+        setTimeLeft(0);
+        setBestScore(12);
+        setActiveCell(null);
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     if (phase === "over" && score > 0) {
       saveBestScore("target-blitz", score, `${score} hits`);
     }
   }, [phase, score]);
 
   useEffect(() => {
-    if (phase !== "playing") {
+    if (phase !== "playing" || readGameScreenshotPreset()) {
       return;
     }
 
@@ -75,7 +105,7 @@ export function TargetBlitzGame() {
   }
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
+    <div data-game-capture-root="target-blitz" className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-emerald-200/70">

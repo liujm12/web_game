@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
+
 const columnCount = 5;
 const rowCount = 7;
 const emptyBoard = () =>
@@ -101,6 +103,92 @@ export function MergeShot2048Game() {
   const nextTile = tileQueue[(shotIndex + 1) % tileQueue.length];
   const hasWon = bestTile >= 2048;
 
+  useEffect(() => {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const states: Record<string, {
+      phase: Phase;
+      board: Board;
+      lane: number;
+      shotIndex: number;
+      score: number;
+      combo: number;
+      bestTile: number;
+      message: string;
+    }> = {
+      progress: {
+        phase: "playing",
+        board: [
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 16, 0, 0],
+          [0, 8, 8, 4, 0],
+          [2, 4, 16, 8, 2],
+        ],
+        lane: 3,
+        shotIndex: 5,
+        score: 148,
+        combo: 1,
+        bestTile: 16,
+        message: "Combo x2! Merged into 16.",
+      },
+      success: {
+        phase: "playing",
+        board: [
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 512, 1024, 256, 0],
+          [128, 1024, 2048, 512, 64],
+        ],
+        lane: 2,
+        shotIndex: 7,
+        score: 28640,
+        combo: 3,
+        bestTile: 2048,
+        message: "Combo x4! Merged into 2048.",
+      },
+      lost: {
+        phase: "over",
+        board: [
+          [2, 4, 8, 16, 2],
+          [4, 8, 16, 32, 4],
+          [8, 16, 32, 64, 8],
+          [16, 32, 64, 128, 16],
+          [32, 64, 128, 256, 32],
+          [64, 128, 256, 512, 64],
+          [128, 256, 512, 1024, 128],
+        ],
+        lane: 2,
+        shotIndex: 6,
+        score: 8420,
+        combo: 0,
+        bestTile: 1024,
+        message: "Stack reached the danger line. Try another run.",
+      },
+    };
+    const state = states[preset];
+    if (!state) return;
+
+    const timer = window.setTimeout(() => {
+      setPhase(state.phase);
+      setBoard(state.board);
+      setLane(state.lane);
+      setShotIndex(state.shotIndex);
+      setScore(state.score);
+      setCombo(state.combo);
+      setBestTile(state.bestTile);
+      setMessage(state.message);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const trajectoryRows = useMemo(() => {
     const stopRow = getLowestOpenRow(board, lane);
     return Array.from({ length: rowCount }, (_, row) => row <= stopRow);
@@ -188,7 +276,7 @@ export function MergeShot2048Game() {
   });
 
   return (
-    <div className="rounded-[26px] border border-white/10 bg-slate-950 p-3 text-white sm:rounded-[30px] sm:p-4">
+    <div data-game-capture-root="merge-shot-2048" className="rounded-[26px] border border-white/10 bg-slate-950 p-3 text-white sm:rounded-[30px] sm:p-4">
       <div className="mb-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">

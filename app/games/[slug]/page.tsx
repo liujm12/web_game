@@ -14,7 +14,9 @@ import { SiteHeader } from "@/components/site-header";
 import { guides } from "@/data/guides";
 import {
   getGameBySlug,
+  getPublicGames,
   getSiteContent,
+  isPublicGame,
   type GameRecord,
 } from "@/lib/site-content";
 import { EDITORIAL_POLICY_PATH } from "@/lib/editorial";
@@ -29,7 +31,7 @@ type GamePageProps = {
 };
 
 export function buildGamePageMetadata(game: GameRecord | null): Metadata {
-  if (!game || game.status !== "live") {
+  if (!game || !isPublicGame(game)) {
     return {
       title: "Game not found | TurboArcade",
     };
@@ -59,7 +61,7 @@ export default async function GamePage({ params }: GamePageProps) {
   const content = await getSiteContent();
   const game = getGameBySlug(content, slug);
 
-  if (!game || game.status !== "live") {
+  if (!game || !isPublicGame(game)) {
     notFound();
   }
 
@@ -67,8 +69,8 @@ export default async function GamePage({ params }: GamePageProps) {
   const relatedGuides = guides.filter((guide) =>
     guide.relatedGameSlugs.includes(game.slug),
   );
-  const relatedGames = content.games
-    .filter((entry) => entry.slug !== game.slug && entry.status === "live")
+  const relatedGames = getPublicGames(content)
+    .filter((entry) => entry.slug !== game.slug)
     .sort((left, right) => {
       if (left.category === game.category && right.category !== game.category) return -1;
       if (right.category === game.category && left.category !== game.category) return 1;
@@ -77,23 +79,10 @@ export default async function GamePage({ params }: GamePageProps) {
     .slice(0, 6);
 
   const controls = game.controls ?? game.instructions;
-  const difficultyArticle = /^[aeiou]/i.test(game.difficulty) ? "an" : "a";
-  const bestFor = game.bestFor ?? [
-    `${game.estimatedSession} sessions when you want a fast browser game.`,
-    `Players looking for ${difficultyArticle} ${game.difficulty.toLowerCase()} ${game.category} pick.`,
-    "Anyone who wants to understand the controls before starting.",
-  ];
+  const bestFor = game.bestFor ?? [];
   const strategyTips = game.strategyTips ?? game.instructions;
-  const commonMistakes = game.commonMistakes ?? [
-    "Starting before reading the first control prompt.",
-    "Trying to play too quickly before the rhythm is clear.",
-  ];
-  const faq = game.faq ?? [
-    {
-      question: `Is ${game.title} free to play?`,
-      answer: "Yes. The game runs in the browser and can be started from this page.",
-    },
-  ];
+  const commonMistakes = game.commonMistakes ?? [];
+  const faq = game.faq ?? [];
 
   return (
     <div className="min-h-screen text-white">
@@ -137,7 +126,14 @@ export default async function GamePage({ params }: GamePageProps) {
                     Read the {relatedGuide.title} guide
                   </Link>
                 ))}</div> : null}
-                {game.slug === "patrol-escape" ? <Link href="/traffic-puzzle-games" className="mt-3 inline-flex rounded-full border border-cyan-200/20 px-5 py-2.5 text-sm font-bold text-cyan-100">Explore Traffic Puzzle Games</Link> : null}
+                {game.relatedHub ? (
+                  <Link
+                    href={game.relatedHub.href}
+                    className="mt-3 inline-flex rounded-full border border-cyan-200/20 px-5 py-2.5 text-sm font-bold text-cyan-100 transition hover:border-cyan-200/40 hover:bg-cyan-300/10"
+                  >
+                    Explore {game.relatedHub.label}
+                  </Link>
+                ) : null}
               </section>
             ) : null}
           </div>

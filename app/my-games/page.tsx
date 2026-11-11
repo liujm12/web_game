@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { PlayerDashboard } from "@/components/player-dashboard";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getSiteContent } from "@/lib/site-content";
+import { getPublicGames, getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default async function MyGamesPage() {
   const content = await getSiteContent();
-  const games = content.games.filter((game) => game.status === "live");
+  const games = getPublicGames(content);
 
   return (
     <div className="min-h-screen text-white">

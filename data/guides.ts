@@ -489,6 +489,55 @@ export const guides: GameGuide[] = [
       },
     ],
   },
+  {
+    slug: "memory-mosaic-and-pattern-pulse-training",
+    title: "Memory Mosaic and Pattern Pulse Training",
+    eyebrow: "Two kinds of recall",
+    summary:
+      "Practice location memory in Memory Mosaic, ordered recall in Pattern Pulse, and use the right encoding method for each game.",
+    readTime: "6 min read",
+    updatedAt: "November 11, 2026",
+    relatedGameSlugs: ["memory-mosaic", "pattern-pulse"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
+    sections: [
+      {
+        heading: "Separate location memory from sequence memory",
+        paragraphs: [
+          "Memory Mosaic asks where a symbol appeared. Pattern Pulse asks when a direction appeared. Treating both games as generic memory tests makes the details harder to retain. In Mosaic, attach every revealed icon to a row and column. In Pulse, translate each flash into one short direction label and keep those labels in order.",
+          "The difference changes what a good pause looks like. After a Mosaic mismatch, use the visible delay to record two positions. During Pulse playback, do not review old positions at all; listen for the growing rhythm and identify the one new direction appended to the end.",
+        ],
+        tips: [
+          "For Mosaic, remember icon plus position.",
+          "For Pulse, remember direction plus order.",
+          "Use one naming system for the entire attempt.",
+        ],
+      },
+      {
+        heading: "Build a stable encoding routine",
+        paragraphs: [
+          "On the twelve-card Mosaic board, scan left to right and refer to cells by simple coordinates such as top-left or row two, column three. When the first card of a turn reveals a known icon, stop exploring and use the second card to close that pair. Every known pair removed reduces the number of positions the next turn must track.",
+          "On the four-pad Pulse board, use N, E, S, and W instead of changing between colors and directions. Sequences longer than five pads are easier to replay as chunks: N-E-S, then W-W, rather than five unrelated flashes. The chunk boundaries can move as the sequence grows, but the labels should not.",
+        ],
+        tips: [
+          "Close known Mosaic pairs before revealing another unknown card.",
+          "Chunk Pulse sequences into groups of two or three.",
+          "Keep the thumb or pointer near the center of the Pulse pad grid.",
+        ],
+      },
+      {
+        heading: "Review the mistake that actually ended the attempt",
+        paragraphs: [
+          "A high Mosaic move count usually comes from reopening a position that was already seen or choosing two unknown cards when one known match was available. After a board, identify the first repeated miss rather than judging only the final move total. That first lost piece of information often creates several later guesses.",
+          "A Pulse run ends immediately, so the final wrong pad is easy to see but not always the root cause. Ask whether the sequence was encoded with inconsistent names, split into chunks at an awkward point, or entered before playback fully ended. Fixing that process is more useful than memorizing the fixed seed by accident.",
+        ],
+        tips: [
+          "In Mosaic, review the earliest forgotten position.",
+          "In Pulse, review the encoding step before the wrong input.",
+          "Compare attempts only when using the same naming method.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string) {

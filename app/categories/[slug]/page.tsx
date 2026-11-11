@@ -10,6 +10,7 @@ import { SiteHeader } from "@/components/site-header";
 import {
   getCategoryBySlug,
   getGamesByCategory,
+  getPublicGames,
   getSiteContent,
 } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
@@ -50,8 +51,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const games = getGamesByCategory(content, slug);
-  const otherGames = content.games.filter(
-    (game) => game.category !== slug && game.status === "live",
+  const otherGames = getPublicGames(content).filter(
+    (game) => game.category !== slug,
   );
 
   return (

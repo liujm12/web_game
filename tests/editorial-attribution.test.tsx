@@ -41,7 +41,7 @@ describe("visible editorial attribution", () => {
       }),
     );
 
-    expect(screen.getByText("Last checked: October 2026")).toBeInTheDocument();
+    expect(screen.getByText("Last checked: November 11, 2026")).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: "How we test games" }),
     ).toHaveAttribute("href", "/editorial-policy");

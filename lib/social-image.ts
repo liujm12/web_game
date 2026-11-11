@@ -1,4 +1,4 @@
-import type { SiteContent } from "@/lib/site-content";
+import { isPublicGame, type SiteContent } from "@/lib/site-content";
 
 export type SocialCardPalette = {
   background: string;
@@ -56,7 +56,7 @@ export function getGameSocialCardData(
   slug: string,
 ): SocialCardData {
   const game = content.games.find(
-    (entry) => entry.slug === slug && entry.status === "live",
+    (entry) => entry.slug === slug && isPublicGame(entry),
   );
 
   if (!game) {

@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGuideBySlug } from "@/data/guides";
-import { getSiteContent } from "@/lib/site-content";
+import { getPublicGames, getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildTopicHubStructuredData } from "@/lib/structured-data";
 
@@ -26,11 +26,12 @@ const topics = [
 
 export default async function TrafficPuzzleGamesPage() {
   const content = await getSiteContent();
-  const patrol = content.games.find((game) => game.slug === "patrol-escape" && game.status === "live");
+  const publicGames = getPublicGames(content);
+  const patrol = publicGames.find((game) => game.slug === "patrol-escape");
   const guide = getGuideBySlug("how-to-play-patrol-escape");
   const strategyGuide = getGuideBySlug("patrol-escape-beginner-strategy");
   const expertGuide = getGuideBySlug("expert-traffic-puzzle-guide");
-  const related = content.games.filter((game) => game.status === "live" && ["merge-shot-2048", "2048", "color-sort"].includes(game.slug));
+  const related = publicGames.filter((game) => ["merge-shot-2048", "2048", "color-sort"].includes(game.slug));
 
   return <div className="min-h-screen text-white">
     <JsonLd data={buildTopicHubStructuredData({ title, description, path: "/traffic-puzzle-games", sections: topics, relatedPaths: ["/games/patrol-escape", ...(guide ? [`/guides/${guide.slug}`] : []), ...(strategyGuide ? [`/guides/${strategyGuide.slug}`] : []), ...(expertGuide ? [`/guides/${expertGuide.slug}`] : [])] })} />

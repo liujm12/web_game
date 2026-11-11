@@ -9,8 +9,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
   getFeaturedGames,
+  getPublicGames,
   getSiteContent,
-  getTrendingGames,
 } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildSiteStructuredData } from "@/lib/structured-data";
@@ -33,7 +33,8 @@ export const metadata: Metadata = buildSocialMetadata({
 export default async function Home() {
   const content = await getSiteContent();
   const featuredGames = getFeaturedGames(content);
-  const trendingGames = getTrendingGames(content);
+  const publicGames = getPublicGames(content);
+  const queueGames = featuredGames.slice(1, 4);
 
   return (
     <div className="min-h-screen text-white">
@@ -43,7 +44,7 @@ export default async function Home() {
         <section className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 md:py-12 lg:grid-cols-[1.12fr_0.88fr] lg:px-10 lg:py-16">
           <HomeHero
             site={content.site}
-            featuredGame={featuredGames[0] ?? trendingGames[0]}
+            featuredGame={featuredGames[0] ?? publicGames[0]}
           />
           <div className="grid gap-6">
             <div className="relative overflow-hidden rounded-[28px] border border-orange-200/15 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.42)]">
@@ -72,7 +73,7 @@ export default async function Home() {
                 ))}
               </div>
               <div className="mt-5 grid gap-3">
-                {trendingGames.slice(0, 3).map((game) => (
+                {queueGames.map((game) => (
                   <Link
                     key={game.slug}
                     href={`/games/${game.slug}`}
@@ -96,7 +97,7 @@ export default async function Home() {
 
         <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
           <PlayerDashboard
-            games={content.games.filter((game) => game.status === "live")}
+            games={publicGames}
             compact
           />
         </section>
@@ -107,8 +108,11 @@ export default async function Home() {
         >
           <div className="flex items-end justify-between gap-4">
             <div>
+              <p className="mb-3 text-xs font-black uppercase tracking-[0.3em] text-cyan-100/70">
+                Editorial core
+              </p>
               <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
-                Choose your next run
+                Choose from our strongest games
               </h2>
             </div>
             <p className="hidden max-w-lg text-sm leading-7 text-slate-400 md:block">
@@ -190,8 +194,8 @@ export default async function Home() {
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 ["Need a 20-second reset?", "Try Target Blitz or Number Rush when you want one measurable attempt."],
-                ["Want something calmer?", "Open 2048, Memory Mosaic, or Pattern Pulse for a slower focus break."],
-                ["Prefer arcade motion?", "Meteor Sprint, Snake, Breakout Blitz, and Comet Loop are better for reflex play."],
+                ["Want something calmer?", "Open Patrol Escape, 2048, Memory Mosaic, or Pattern Pulse for a more deliberate focus break."],
+                ["Prefer active controls?", "Snake and Merge Shot 2048 reward quick directional decisions without adding another near-identical lane runner."],
               ].map(([title, body]) => (
                 <div key={title} className="rounded-[22px] bg-white/[0.045] p-5">
                   <h3 className="font-black text-white">{title}</h3>

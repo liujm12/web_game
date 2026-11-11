@@ -42,4 +42,18 @@ describe("homepage Impeccable P1/P2 polish", () => {
       expect(screen.getAllByText(chip).length).toBeGreaterThan(0);
     }
   });
+
+  it("keeps editorial recommendations focused on A-tier core games", async () => {
+    const pageModule = await import("@/app/page");
+    const Page = pageModule.default;
+
+    render(await Page());
+
+    expect(screen.getAllByText("Patrol Escape").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Merge Shot 2048").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Meteor Sprint")).not.toBeInTheDocument();
+    expect(screen.queryByText("Orbit Hopper")).not.toBeInTheDocument();
+    expect(screen.queryByText("Neon Drift")).not.toBeInTheDocument();
+    expect(screen.queryByText("Signal Sweep")).not.toBeInTheDocument();
+  });
 });

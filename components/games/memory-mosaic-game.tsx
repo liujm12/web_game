@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const icons = ["🎯", "🕹", "⚡", "🛸", "🎲", "🎵"];
 
@@ -23,6 +25,38 @@ export function MemoryMosaicGame() {
 
   const isComplete = matched.length === icons.length;
   const flippedSet = useMemo(() => new Set(flipped), [flipped]);
+
+  useEffect(() => {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const stableCards = icons.flatMap((icon, index) => [
+      { id: index * 2 + 1, icon },
+      { id: index * 2 + 2, icon },
+    ]);
+    const timer = window.setTimeout(() => {
+      setCards(stableCards);
+      if (preset === "progress") {
+        setFlipped([5]);
+        setMatched(["🎯", "🕹"]);
+        setMoves(4);
+      } else if (preset === "success") {
+        setFlipped([]);
+        setMatched([...icons]);
+        setMoves(9);
+      } else if (preset === "lost") {
+        setFlipped([1, 3]);
+        setMatched(["🎲"]);
+        setMoves(5);
+      } else {
+        setFlipped([]);
+        setMatched([]);
+        setMoves(0);
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   function resetGame() {
     setCards(shuffleCards());
@@ -57,7 +91,7 @@ export function MemoryMosaicGame() {
   }
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
+    <div data-game-capture-root="memory-mosaic" className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-5 flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-fuchsia-200/70">

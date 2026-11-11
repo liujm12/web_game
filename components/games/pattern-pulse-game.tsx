@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
+
 const pads = [
   { id: 0, label: "North", color: "bg-cyan-400" },
   { id: 1, label: "East", color: "bg-orange-400" },
@@ -22,7 +24,34 @@ export function PatternPulseGame() {
   const seedIndex = useRef(0);
 
   useEffect(() => {
-    if (status !== "showing" || sequence.length === 0) return;
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const timer = window.setTimeout(() => {
+      setActivePad(null);
+      if (preset === "progress") {
+        setSequence([0, 3, 1, 2]);
+        setPlayerIndex(2);
+        setStatus("playing");
+        setBestRound(3);
+      } else if (preset === "success") {
+        setSequence([0, 3, 1, 2, 1, 0]);
+        setPlayerIndex(0);
+        setStatus("playing");
+        setBestRound(5);
+      } else if (preset === "lost") {
+        setSequence([0, 3, 1, 2, 1]);
+        setPlayerIndex(3);
+        setStatus("over");
+        setBestRound(4);
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (status !== "showing" || sequence.length === 0 || readGameScreenshotPreset()) return;
 
     let step = 0;
     const interval = window.setInterval(() => {
@@ -77,7 +106,7 @@ export function PatternPulseGame() {
   }
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
+    <div data-game-capture-root="pattern-pulse" className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-5 flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-amber-200/70">

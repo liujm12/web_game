@@ -1,4 +1,12 @@
-export type ScreenshotGameSlug = "patrol-escape" | "2048" | "snake";
+export type ScreenshotGameSlug =
+  | "patrol-escape"
+  | "merge-shot-2048"
+  | "number-rush"
+  | "target-blitz"
+  | "memory-mosaic"
+  | "pattern-pulse"
+  | "2048"
+  | "snake";
 export type ScreenshotState = "start" | "progress" | "success" | "failure" | "master";
 export type ScreenshotDevice = "Desktop" | "Mobile";
 
@@ -94,6 +102,216 @@ export const gameScreenshotSets: Record<ScreenshotGameSlug, GameplayScreenshot[]
       caption: "Captured from the playable game at mobile width. The solved state, recorded move count, and next-level action remain usable on a narrow screen.",
       width: 344,
       height: 770,
+    },
+  ],
+  "merge-shot-2048": [
+    {
+      gameSlug: "merge-shot-2048",
+      state: "start",
+      device: "Desktop",
+      src: "/images/gameplay/merge-shot-2048/desktop-ready.webp",
+      alt: "Merge Shot 2048 desktop start state with an empty five-lane stack and the Start Shot action over the aiming lane",
+      caption: "Captured from the playable game on desktop. The empty seven-row stack, selected lane, current tile, and next tile are visible before the first committed shot.",
+      width: 628,
+      height: 854,
+    },
+    {
+      gameSlug: "merge-shot-2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/merge-shot-2048/desktop-combo-progress.webp",
+      alt: "Merge Shot 2048 desktop run in progress with a combo chain, mixed lane heights, and the next number preview",
+      caption: "Captured from the playable game on desktop. A live combo has produced a 16 tile while one lane remains deliberately low for the next awkward number.",
+      width: 628,
+      height: 854,
+    },
+    {
+      gameSlug: "merge-shot-2048",
+      state: "success",
+      device: "Desktop",
+      src: "/images/gameplay/merge-shot-2048/desktop-2048-reached.webp",
+      alt: "Merge Shot 2048 desktop success state with a 2048 tile in the stack and the reached 2048 result message",
+      caption: "Captured from the playable game on desktop. The verified long-form win state records a 2048 tile after the lower lanes resolve through repeated merges.",
+      width: 628,
+      height: 854,
+    },
+    {
+      gameSlug: "merge-shot-2048",
+      state: "failure",
+      device: "Mobile",
+      src: "/images/gameplay/merge-shot-2048/mobile-danger-line.webp",
+      alt: "Merge Shot 2048 mobile failure state with a full seven-row stack, score 8420, and a touch-friendly Play again button",
+      caption: "Captured from the playable game at mobile width. Every lane has reached the danger line, so the run ends and the three aiming controls remain usable below the board.",
+      width: 358,
+      height: 638,
+    },
+  ],
+  "number-rush": [
+    {
+      gameSlug: "number-rush",
+      state: "start",
+      device: "Desktop",
+      src: "/images/gameplay/number-rush/desktop-ready-board.webp",
+      alt: "Number Rush desktop start state with nine shuffled number tiles and the Start round action centered on the board",
+      caption: "Captured from the playable game on desktop. The shuffled one-to-nine board is visible before timing begins so the player can confirm the input area without receiving a free preview.",
+      width: 628,
+      height: 742,
+    },
+    {
+      gameSlug: "number-rush",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/number-rush/desktop-next-five.webp",
+      alt: "Number Rush desktop round in progress after one mistake with five as the next required number",
+      caption: "Captured from the playable game on desktop. Numbers one through four have been cleared, one wrong tap is recorded, and five is the next legal target.",
+      width: 628,
+      height: 742,
+    },
+    {
+      gameSlug: "number-rush",
+      state: "success",
+      device: "Desktop",
+      src: "/images/gameplay/number-rush/desktop-clean-clear.webp",
+      alt: "Number Rush desktop result showing a clean board clear in eight seconds with zero mistakes",
+      caption: "Captured from the playable game on desktop. The completed round records both elapsed time and zero mistakes instead of reducing the result to a generic score.",
+      width: 628,
+      height: 742,
+    },
+    {
+      gameSlug: "number-rush",
+      state: "failure",
+      device: "Mobile",
+      src: "/images/gameplay/number-rush/mobile-three-mistake-clear.webp",
+      alt: "Number Rush mobile recovery result showing a completed board in twenty-two seconds with three mistakes",
+      caption: "Captured from the playable game at mobile width. Number Rush has no forced game-over state, so this genuine three-mistake clear demonstrates a round that should be reviewed and replayed.",
+      width: 358,
+      height: 492,
+    },
+  ],
+  "target-blitz": [
+    {
+      gameSlug: "target-blitz",
+      state: "start",
+      device: "Desktop",
+      src: "/images/gameplay/target-blitz/desktop-ready-field.webp",
+      alt: "Target Blitz desktop start state with a dark three-by-four target field and the Start challenge action centered over it",
+      caption: "Captured from the playable game on desktop. The twelve target positions are visible before the twenty-second timer and moving target begin.",
+      width: 628,
+      height: 591,
+    },
+    {
+      gameSlug: "target-blitz",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/target-blitz/desktop-progress-14-hits.webp",
+      alt: "Target Blitz desktop challenge in progress with eleven seconds remaining, fourteen hits, and one glowing GO tile",
+      caption: "Captured from the playable game on desktop. The live state shows the single active tile, remaining time, current hit count, and best result without decorative targets.",
+      width: 628,
+      height: 591,
+    },
+    {
+      gameSlug: "target-blitz",
+      state: "success",
+      device: "Desktop",
+      src: "/images/gameplay/target-blitz/desktop-result-32-hits.webp",
+      alt: "Target Blitz desktop result showing thirty-two hits and a new best score after the timed challenge",
+      caption: "Captured from the playable game on desktop. The challenge-over panel preserves the verified thirty-two-hit result and offers an immediate replay.",
+      width: 628,
+      height: 591,
+    },
+    {
+      gameSlug: "target-blitz",
+      state: "failure",
+      device: "Mobile",
+      src: "/images/gameplay/target-blitz/mobile-result-4-hits.webp",
+      alt: "Target Blitz mobile low-score result with four hits, a best score of twelve, and the Play again action",
+      caption: "Captured from the playable game at mobile width. The four-hit result makes a missed-rhythm attempt explicit while the target grid and replay control remain thumb friendly.",
+      width: 358,
+      height: 604,
+    },
+  ],
+  "memory-mosaic": [
+    {
+      gameSlug: "memory-mosaic",
+      state: "start",
+      device: "Desktop",
+      src: "/images/gameplay/memory-mosaic/desktop-hidden-board.webp",
+      alt: "Memory Mosaic desktop start board with twelve face-down cards arranged in three rows and zero moves recorded",
+      caption: "Captured from the playable game on desktop. All six pairs begin hidden in a stable three-by-four layout before the first two-card comparison.",
+      width: 628,
+      height: 615,
+    },
+    {
+      gameSlug: "memory-mosaic",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/memory-mosaic/desktop-progress-matches.webp",
+      alt: "Memory Mosaic desktop game in progress with two matched pairs, one revealed lightning card, and four moves recorded",
+      caption: "Captured from the playable game on desktop. Two completed pairs stay face up while a newly revealed card tests whether its remembered partner location is still available.",
+      width: 628,
+      height: 615,
+    },
+    {
+      gameSlug: "memory-mosaic",
+      state: "success",
+      device: "Desktop",
+      src: "/images/gameplay/memory-mosaic/desktop-board-clear.webp",
+      alt: "Memory Mosaic desktop success state with all six symbol pairs visible and the board cleared in nine moves",
+      caption: "Captured from the playable game on desktop. Every pair is matched and the result line records a nine-move clear for comparison with the next shuffled board.",
+      width: 628,
+      height: 615,
+    },
+    {
+      gameSlug: "memory-mosaic",
+      state: "failure",
+      device: "Mobile",
+      src: "/images/gameplay/memory-mosaic/mobile-mismatch-recovery.webp",
+      alt: "Memory Mosaic mobile mismatch recovery state with several solved pairs and two different unmatched symbols revealed",
+      caption: "Captured from the playable game at mobile width. Memory Mosaic has no terminal loss, so this real mismatch state shows the exact recovery moment when both revealed locations should be memorized.",
+      width: 358,
+      height: 628,
+    },
+  ],
+  "pattern-pulse": [
+    {
+      gameSlug: "pattern-pulse",
+      state: "start",
+      device: "Desktop",
+      src: "/images/gameplay/pattern-pulse/desktop-ready-pads.webp",
+      alt: "Pattern Pulse desktop start state with four directional pads and the Start sequence button ready for round one",
+      caption: "Captured from the playable game on desktop. The four fixed North, East, South, and West pads are visible before the first light sequence plays.",
+      width: 628,
+      height: 444,
+    },
+    {
+      gameSlug: "pattern-pulse",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/pattern-pulse/desktop-round-four-progress.webp",
+      alt: "Pattern Pulse desktop round four in progress with the four directional pads awaiting the player replay",
+      caption: "Captured from the playable game on desktop. The player has reached round four and must reproduce the current directional order without relying on changing pad positions.",
+      width: 628,
+      height: 444,
+    },
+    {
+      gameSlug: "pattern-pulse",
+      state: "success",
+      device: "Desktop",
+      src: "/images/gameplay/pattern-pulse/desktop-round-five-complete.webp",
+      alt: "Pattern Pulse desktop successful run after completing five rounds with the best-round counter set to five",
+      caption: "Captured from the playable game on desktop. Five sequences have been reproduced correctly, establishing a real best-round result before the next pattern begins.",
+      width: 628,
+      height: 444,
+    },
+    {
+      gameSlug: "pattern-pulse",
+      state: "failure",
+      device: "Mobile",
+      src: "/images/gameplay/pattern-pulse/mobile-wrong-pad.webp",
+      alt: "Pattern Pulse mobile failure state after a wrong pad with a best round of four and Restart available",
+      caption: "Captured from the playable game at mobile width. The wrong-pad message ends the sequence while all four large directional controls and Restart remain visible without scrolling.",
+      width: 358,
+      height: 464,
     },
   ],
   "2048": [
@@ -223,6 +441,6 @@ export const gameScreenshotSets: Record<ScreenshotGameSlug, GameplayScreenshot[]
 };
 
 export function getGameScreenshots(slug: string) {
-  if (slug !== "patrol-escape" && slug !== "2048" && slug !== "snake") return [];
-  return gameScreenshotSets[slug];
+  if (!Object.prototype.hasOwnProperty.call(gameScreenshotSets, slug)) return [];
+  return gameScreenshotSets[slug as ScreenshotGameSlug];
 }

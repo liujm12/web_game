@@ -31,6 +31,15 @@ const bannedPlayerCopy = [
   /adding language variety to the game catalog/i,
   /controls checked/i,
   /goes back into revision/i,
+  /start a short round/i,
+  /learn the pattern/i,
+  /beat your last attempt/i,
+  /warm up your focus/i,
+  /good for a quick break/i,
+  /easy to learn, hard to master/i,
+  /players who want .* of focused play/i,
+  /anyone looking for an? (easy|medium|hard) (arcade|brain) break/i,
+  /restart with one tap after a crash/i,
 ];
 
 describe("player-facing copy", () => {

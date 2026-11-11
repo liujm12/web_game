@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { saveBestScore } from "@/lib/player-profile";
+import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 function shuffleNumbers() {
   return Array.from({ length: 9 }, (_, index) => index + 1).sort(
@@ -28,7 +29,37 @@ export function NumberRushGame() {
   );
 
   useEffect(() => {
-    if (phase !== "playing") {
+    const preset = readGameScreenshotPreset();
+    if (!preset) return;
+
+    const timer = window.setTimeout(() => {
+      setNumbers([3, 1, 8, 6, 2, 9, 4, 7, 5]);
+      if (preset === "progress") {
+        setPhase("playing");
+        setNextNumber(5);
+        setMistakes(1);
+        setRoundsCleared(0);
+        setRoundTimeSeconds(12);
+      } else if (preset === "success") {
+        setPhase("over");
+        setNextNumber(10);
+        setMistakes(0);
+        setRoundsCleared(1);
+        setRoundTimeSeconds(8);
+      } else if (preset === "lost") {
+        setPhase("over");
+        setNextNumber(10);
+        setMistakes(3);
+        setRoundsCleared(1);
+        setRoundTimeSeconds(22);
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (phase !== "playing" || readGameScreenshotPreset()) {
       return;
     }
 
@@ -77,7 +108,7 @@ export function NumberRushGame() {
   }
 
   return (
-    <div className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
+    <div data-game-capture-root="number-rush" className="rounded-[30px] border border-white/10 bg-slate-950 p-4 text-white">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-violet-200/70">

@@ -28,6 +28,7 @@ export type CategoryRecord = {
 
 export type GameRecord = {
   slug: string;
+  editorialTier?: "A" | "B" | "C";
   title: string;
   category: string;
   summary: string;
@@ -58,6 +59,11 @@ export type GameRecord = {
   }[];
   testedOn?: string[];
   lastChecked?: string;
+  relatedHub?: {
+    href: string;
+    label: string;
+    description?: string;
+  };
 };
 
 export type SiteContent = {
@@ -82,9 +88,24 @@ export async function saveSiteContent(
   await writeFile(filePath, JSON.stringify(content, null, 2), "utf8");
 }
 
+export function isPublicGame(game: GameRecord) {
+  return game.status === "live" && game.editorialTier !== "C";
+}
+
+export function getPublicGames(content: SiteContent) {
+  return content.games.filter(isPublicGame);
+}
+
+export function getCoreGames(content: SiteContent) {
+  return getPublicGames(content).filter((game) => game.editorialTier === "A");
+}
+
 export function getFeaturedGames(content: SiteContent) {
   return [...content.games]
-    .filter((game) => game.featured && game.status === "live")
+    .filter(
+      (game) =>
+        game.featured && game.editorialTier === "A" && isPublicGame(game),
+    )
     .sort((left, right) => {
       const priorityDelta = (right.featuredPriority ?? 0) - (left.featuredPriority ?? 0);
 
@@ -98,7 +119,7 @@ export function getFeaturedGames(content: SiteContent) {
 
 export function getTrendingGames(content: SiteContent) {
   return [...content.games]
-    .filter((game) => game.status === "live")
+    .filter(isPublicGame)
     .sort((left, right) => right.trendingScore - left.trendingScore);
 }
 
@@ -112,7 +133,7 @@ export function getCategoryBySlug(content: SiteContent, slug: string) {
 
 export function getGamesByCategory(content: SiteContent, slug: string) {
   return content.games.filter(
-    (game) => game.category === slug && game.status === "live",
+    (game) => game.category === slug && isPublicGame(game),
   );
 }
 

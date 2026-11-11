@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { guides } from "@/data/guides";
 import { parseEditorialDate } from "@/lib/editorial";
-import { getSiteContent } from "@/lib/site-content";
+import { getPublicGames, getSiteContent } from "@/lib/site-content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await getSiteContent();
@@ -21,9 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/guides",
     "/traffic-puzzle-games",
     ...content.categories.map((category) => `/categories/${category.slug}`),
-    ...content.games
-      .filter((game) => game.status === "live")
-      .map((game) => `/games/${game.slug}`),
+    ...getPublicGames(content).map((game) => `/games/${game.slug}`),
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: siteLastModified,
