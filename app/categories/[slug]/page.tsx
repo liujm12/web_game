@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AdSlot } from "@/components/ad-slot";
@@ -7,6 +8,8 @@ import { GameCard } from "@/components/game-card";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { guides } from "@/data/guides";
+import { getGuideLinkLabel } from "@/lib/content-cluster-links";
 import {
   getCategoryBySlug,
   getGamesByCategory,
@@ -54,6 +57,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const otherGames = getPublicGames(content).filter(
     (game) => game.category !== slug,
   );
+  const relatedGuides = guides.filter(
+    (guide) => guide.relatedHub?.href === `/categories/${slug}`,
+  );
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -91,6 +97,34 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <GameCard key={game.slug} game={game} />
           ))}
         </section>
+
+        {relatedGuides.length ? (
+          <section
+            className="mt-10 rounded-[30px] border border-cyan-200/12 bg-cyan-300/[0.045] p-6 sm:p-8"
+            aria-labelledby="collection-guides-heading"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/70">
+              Field-tested guides
+            </p>
+            <h2 id="collection-guides-heading" className="mt-3 text-3xl font-semibold text-white">
+              Guides for this collection
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-400">
+              Continue with a specific board problem, control technique, or recovery plan from the games on this shelf.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {relatedGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={`/guides/${guide.slug}`}
+                  className="rounded-full border border-cyan-200/20 bg-cyan-300/10 px-5 py-3 text-sm font-black text-cyan-100 transition hover:border-cyan-200/40 hover:bg-cyan-300/20"
+                >
+                  {getGuideLinkLabel(guide)}
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <AdSlot
           label="Category page inline placement"

@@ -35,10 +35,14 @@ export default async function AboutPage() {
             <section>
               <h2 className="text-2xl font-semibold text-white">Who maintains the site</h2>
               <p className="mt-3">
-                {EDITORIAL_TEAM_NAME} maintains the catalog, gameplay notes,
-                and strategy guides. Before a game is marked live, the team
-                checks its start, restart, controls, and main completion states
-                on desktop and mobile layouts. Read the{" "}
+                {EDITORIAL_TEAM_NAME} is TurboArcade&apos;s site-level publishing
+                byline. It identifies the owner/operator and publishing workflow;
+                it does not imply a particular staff size or an independent
+                newsroom. Before a game is marked live, that workflow checks its
+                start, restart, controls, and main completion states on desktop
+                and mobile layouts. AI tools assist substantially with copy,
+                code, tests, and quality checks, while the owner/operator decides
+                what is published and remains responsible for corrections. Read the{" "}
                 <Link
                   href="/editorial-policy"
                   className="font-semibold text-cyan-200 hover:text-cyan-100"
@@ -86,10 +90,10 @@ export default async function AboutPage() {
             <section>
               <h2 className="text-2xl font-semibold text-white">How the catalog grows</h2>
               <p className="mt-3">
-                New games are added in batches instead of all at once. That gives the editorial
-                team time to improve controls, refine instructions, and remove games that do not
-                feel good on desktop and mobile. The collection grows around clear pages and
-                playable experiences.
+                New games are added in batches instead of all at once. That gives the publishing
+                workflow time to improve controls, refine instructions, and remove games that do
+                not feel good on desktop and mobile. The collection grows around clear pages and
+                playable experiences rather than an advertised release count or ranking target.
               </p>
             </section>
             <section>

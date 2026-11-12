@@ -162,6 +162,41 @@ export function TileMerge2048Game() {
         score: 3584,
         phase: "lost",
       },
+      "corner-anchor": {
+        board: [0, 2, 0, 0, 0, 4, 2, 0, 16, 8, 4, 2, 256, 128, 64, 32],
+        score: 3280,
+        phase: "playing",
+      },
+      "broken-order": {
+        board: [2, 4, 8, 0, 16, 128, 256, 64, 8, 64, 32, 16, 4, 2, 0, 4],
+        score: 2944,
+        phase: "playing",
+      },
+      "corner-recovery": {
+        board: [0, 2, 0, 0, 4, 8, 0, 0, 16, 32, 4, 0, 0, 256, 128, 64],
+        score: 3120,
+        phase: "playing",
+      },
+      "open-space": {
+        board: [0, 0, 0, 2, 0, 0, 4, 8, 16, 8, 4, 2, 512, 256, 128, 64],
+        score: 7020,
+        phase: "playing",
+      },
+      "crowded-mobility": {
+        board: [2, 4, 8, 16, 4, 8, 16, 32, 2, 4, 8, 8, 64, 32, 32, 0],
+        score: 5816,
+        phase: "playing",
+      },
+      "crowded-delay-merge": {
+        board: [2, 4, 8, 16, 8, 4, 16, 64, 16, 32, 32, 128, 256, 64, 64, 0],
+        score: 15440,
+        phase: "playing",
+      },
+      "crowded-order-repair": {
+        board: [2, 4, 16, 8, 4, 16, 8, 64, 0, 8, 16, 32, 0, 512, 256, 128],
+        score: 20480,
+        phase: "playing",
+      },
     };
     const capture = boards[preset];
     const timer = window.setTimeout(() => {

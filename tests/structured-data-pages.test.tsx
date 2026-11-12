@@ -79,7 +79,7 @@ describe("structured data page integration", () => {
       screen.getByRole("heading", { name: "What we tested in this build" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: "Read the 2048 Corner Strategy guide" }),
+      screen.getByRole("link", { name: "2048 corner strategy" }),
     ).toHaveAttribute("href", "/guides/2048-corner-strategy");
   });
 

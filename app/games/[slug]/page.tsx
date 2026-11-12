@@ -12,15 +12,15 @@ import { PlayerGameTools } from "@/components/player-game-tools";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { guides } from "@/data/guides";
+import { getGuideLinkLabel } from "@/lib/content-cluster-links";
+import { buildGamePageMetadata } from "@/lib/game-page-metadata";
 import {
   getGameBySlug,
   getPublicGames,
   getSiteContent,
   isPublicGame,
-  type GameRecord,
 } from "@/lib/site-content";
 import { EDITORIAL_POLICY_PATH } from "@/lib/editorial";
-import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildGameStructuredData } from "@/lib/structured-data";
 
 const sectionCardClass =
@@ -29,22 +29,6 @@ const sectionCardClass =
 type GamePageProps = {
   params: Promise<{ slug: string }>;
 };
-
-export function buildGamePageMetadata(game: GameRecord | null): Metadata {
-  if (!game || !isPublicGame(game)) {
-    return {
-      title: "Game not found | TurboArcade",
-    };
-  }
-
-  return buildSocialMetadata({
-    title: game.seoTitle,
-    description: game.seoDescription,
-    path: `/games/${game.slug}`,
-    image: `/games/${game.slug}/opengraph-image`,
-    imageAlt: `${game.title} free browser game social card`,
-  });
-}
 
 export async function generateMetadata({
   params,
@@ -76,7 +60,10 @@ export default async function GamePage({ params }: GamePageProps) {
       if (right.category === game.category && left.category !== game.category) return 1;
       return right.trendingScore - left.trendingScore;
     })
-    .slice(0, 6);
+    .slice(0, 3);
+  const relatedHub = game.relatedHub ?? (category
+    ? { href: `/categories/${category.slug}`, label: `${category.name} Games` }
+    : { href: "/games", label: "All Games" });
 
   const controls = game.controls ?? game.instructions;
   const bestFor = game.bestFor ?? [];
@@ -117,25 +104,33 @@ export default async function GamePage({ params }: GamePageProps) {
                     </li>
                   ))}
                 </ul>
-                {relatedGuides.length ? <div className="mt-5 flex flex-wrap gap-3">{relatedGuides.map((relatedGuide) => (
+              </section>
+            ) : null}
+            <section className={sectionCardClass} aria-labelledby="game-cluster-heading">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
+                Keep exploring
+              </p>
+              <h2 id="game-cluster-heading" className="mt-3 text-2xl font-black text-white">
+                More ways to understand {game.title}
+              </h2>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link
+                  href={relatedHub.href}
+                  className="inline-flex rounded-full border border-cyan-200/20 px-5 py-2.5 text-sm font-bold text-cyan-100 transition hover:border-cyan-200/40 hover:bg-cyan-300/10"
+                >
+                  Explore {relatedHub.label}
+                </Link>
+                {relatedGuides.map((relatedGuide) => (
                   <Link
                     key={relatedGuide.slug}
                     href={`/guides/${relatedGuide.slug}`}
                     className="inline-flex rounded-full bg-lime-300 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-cyan-300"
                   >
-                    Read the {relatedGuide.title} guide
+                    {getGuideLinkLabel(relatedGuide)}
                   </Link>
-                ))}</div> : null}
-                {game.relatedHub ? (
-                  <Link
-                    href={game.relatedHub.href}
-                    className="mt-3 inline-flex rounded-full border border-cyan-200/20 px-5 py-2.5 text-sm font-bold text-cyan-100 transition hover:border-cyan-200/40 hover:bg-cyan-300/10"
-                  >
-                    Explore {game.relatedHub.label}
-                  </Link>
-                ) : null}
-              </section>
-            ) : null}
+                ))}
+              </div>
+            </section>
           </div>
           <aside className="space-y-6">
             <AdSlot
@@ -287,7 +282,7 @@ export default async function GamePage({ params }: GamePageProps) {
           </div>
         </section>
 
-        <section className="mt-10">
+        <section className="mt-10" aria-label="Related games">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/70">

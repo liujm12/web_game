@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getGuideBySlug } from "@/data/guides";
+import { getGuideLinkLabel } from "@/lib/content-cluster-links";
 import { getPublicGames, getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildTopicHubStructuredData } from "@/lib/structured-data";
@@ -43,9 +44,9 @@ export default async function TrafficPuzzleGamesPage() {
         <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">Traffic puzzles reward planning, not speed. Learn to trace the exit lane, identify temporary parking spaces, and move each vehicle only along its own axis.</p>
         <div className="mt-7 flex flex-wrap gap-3">
           {patrol && <Link className="rounded-full bg-cyan-300 px-5 py-3 font-black text-slate-950" href="/games/patrol-escape">Play Patrol Escape</Link>}
-          {guide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${guide.slug}`}>How to Play Patrol Escape</Link>}
-          {strategyGuide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${strategyGuide.slug}`}>Beginner Strategy</Link>}
-          {expertGuide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${expertGuide.slug}`}>Expert Guide</Link>}
+          {guide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${guide.slug}`}>{getGuideLinkLabel(guide)}</Link>}
+          {strategyGuide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${strategyGuide.slug}`}>{getGuideLinkLabel(strategyGuide)}</Link>}
+          {expertGuide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${expertGuide.slug}`}>{getGuideLinkLabel(expertGuide)}</Link>}
         </div>
       </header>
       <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -58,12 +59,6 @@ export default async function TrafficPuzzleGamesPage() {
       <section className="mt-8 rounded-[28px] border border-cyan-200/15 bg-cyan-300/[0.05] p-6 sm:p-8">
         <h2 className="text-2xl font-black">Start with the original board set</h2>
         <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-300">Patrol Escape is TurboArcade&apos;s original traffic-grid game: 120 named boards, a six-by-six board, direction-locked vehicles, locally saved best moves, hints, undo, and a solver-checked route to the exit. The final twenty Master boards each have at least eight blockers and a verified shortest path of twenty or more grid steps.</p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <Link className="rounded-full bg-orange-300 px-5 py-3 font-black text-slate-950" href="/games/patrol-escape">Enter Patrol Escape</Link>
-          {guide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${guide.slug}`}>Read the how-to guide</Link>}
-          {strategyGuide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${strategyGuide.slug}`}>Study three real levels</Link>}
-          {expertGuide && <Link className="rounded-full border border-white/15 px-5 py-3 font-bold" href={`/guides/${expertGuide.slug}`}>Analyze three Master boards</Link>}
-        </div>
       </section>
       <section className="mt-10">
         <h2 className="text-3xl font-black">Related strategy games</h2>

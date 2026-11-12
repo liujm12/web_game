@@ -137,7 +137,7 @@ describe("structured data", () => {
           "@type": "Article",
           headline: guide.title,
           description: guide.summary,
-          dateModified: "2026-10-21",
+      dateModified: "2026-11-12",
           mainEntityOfPage:
             "https://playturboarcade.com/guides/2048-corner-strategy",
         }),

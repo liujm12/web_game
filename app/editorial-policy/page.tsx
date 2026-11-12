@@ -34,10 +34,10 @@ export default async function EditorialPolicyPage() {
             Editorial Policy
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">
-            {EDITORIAL_TEAM_NAME} maintains the game pages, play instructions,
-            and strategy guides published on TurboArcade. This page explains
-            what we check, how updates are dated, and how readers can report a
-            problem.
+            {EDITORIAL_TEAM_NAME} is the publishing byline used for game pages,
+            play instructions, and strategy guides on TurboArcade. This page
+            explains who that byline represents, how AI assists the work, what
+            is checked before publication, and how readers can report a problem.
           </p>
           <p className="mt-5 text-xs font-semibold text-slate-500">
             Last updated {EDITORIAL_POLICY_UPDATED_AT}
@@ -46,9 +46,41 @@ export default async function EditorialPolicyPage() {
 
         <div className="mt-8 space-y-6">
           <section className={sectionClass}>
+            <h2 className="text-2xl font-black">Who the byline represents</h2>
+            <p className="mt-4 text-base leading-8 text-slate-300">
+              {EDITORIAL_TEAM_NAME} is a site-level publishing byline for the
+              TurboArcade owner/operator and the workflow used to maintain the
+              site. It gives readers one accountable identity for corrections
+              and updates; it does not claim a particular staff size, a separate
+              newsroom, or independent third-party review.
+            </p>
+          </section>
+
+          <section className={sectionClass}>
+            <h2 className="text-2xl font-black">
+              AI assistance and accountability
+            </h2>
+            <p className="mt-4 text-base leading-8 text-slate-300">
+              TurboArcade is built and maintained with substantial AI assistance.
+              AI tools help draft and revise copy, write and refactor code,
+              prepare test coverage, and flag quality issues. The site
+              owner/operator decides what is published, checks the resulting
+              pages and playable builds, verifies screenshot evidence, and is
+              responsible for corrections.
+            </p>
+            <p className="mt-4 text-base leading-8 text-slate-300">
+              AI tools are not presented as players, users, independent reviewers,
+              or human authors. We do not invent testimonials, audience figures,
+              rankings, or gameplay results. Gameplay screenshots identified as
+              evidence are captured from a running TurboArcade build rather than
+              generated to resemble the games.
+            </p>
+          </section>
+
+          <section className={sectionClass}>
             <h2 className="text-2xl font-black">How we test games</h2>
             <p className="mt-4 text-base leading-8 text-slate-300">
-              Before a game is listed as live, the editorial team checks that
+              Before a game is listed as live, the publishing workflow checks that
               it loads, starts, restarts, and reaches its main success or
               failure state. Controls are checked with the input methods the
               page claims to support. We also review the playable area on
@@ -63,12 +95,11 @@ export default async function EditorialPolicyPage() {
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-300">
               Guides are based on the version of the game available on
-              TurboArcade. The team checks controls, rules, scoring behavior,
+              TurboArcade. The publishing workflow checks controls, rules, scoring behavior,
               and repeatable strategies against the playable page before
-              publication. Automation and AI-assisted tools may help with
-              drafting, coding, or quality checks, but the final page is
-              reviewed against the live game and this policy before it is
-              published.
+              publication. Each guide now records a gameplay-check date and a
+              specific note describing the implementation, level data, or board
+              states used for that check.
             </p>
           </section>
 

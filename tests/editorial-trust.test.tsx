@@ -23,6 +23,8 @@ describe("editorial trust", () => {
       screen.getByRole("heading", { level: 1, name: "Editorial Policy" }),
     ).toBeInTheDocument();
     expect(text).toContain("TurboArcade Editorial Team");
+    expect(text).toContain("Who the byline represents");
+    expect(text).toContain("AI assistance and accountability");
     expect(text).toContain("How we test games");
     expect(text).toContain("How guides are written and reviewed");
     expect(text).toContain("Corrections and updates");
@@ -37,6 +39,8 @@ describe("editorial trust", () => {
     const text = container.textContent ?? "";
 
     expect(text).toContain("TurboArcade Editorial Team");
+    expect(text).toContain("site-level publishing byline");
+    expect(text).toContain("owner/operator");
     expect(text).toContain("desktop and mobile");
     expect(
       screen

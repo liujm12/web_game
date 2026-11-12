@@ -7,6 +7,8 @@ export type GameGuide = {
   summary: string;
   readTime: string;
   updatedAt: string;
+  verifiedAt: string;
+  verificationNote: string;
   relatedGameSlugs: string[];
   relatedGuideSlugs?: string[];
   sections: {
@@ -28,6 +30,37 @@ export type GameGuide = {
   }[];
 };
 
+const GUIDE_REVIEW_DATE = "November 12, 2026";
+
+const guideVerificationNotes = {
+  "how-to-play-patrol-escape":
+    "Checked against the current six-by-six Patrol Escape build, its direction-locked vehicle rules, right-edge police exit, touch drag, mouse and arrow-key controls, Undo, Restart, Hint, level picker, move totals, and the published 120-level data set.",
+  "patrol-escape-beginner-strategy":
+    "Checked levels 18, 31, and 94 against the published Patrol Escape level records. Each listed vehicle move was replayed through the game movement engine, reaches the exit, and matches that level's stored par total.",
+  "expert-traffic-puzzle-guide":
+    "Checked Master levels 101, 102, and 119 against the current level data and movement engine. Each route solves its untouched starting board at par, and every selected level has a verified route of at least twenty grid steps.",
+  "2048-corner-strategy":
+    "Checked the four named 2048 board presets in the current four-by-four game. The corner anchor, broken order, one-move recovery, and open-space positions reproduce the tile values and movement choices described in this guide.",
+  "recover-a-crowded-2048-board":
+    "Checked three crowded but playable 2048 presets plus the full no-moves board in the current game. The stated merge options, empty-cell counts, order-repair move, and terminal checkerboard state match the implemented slide rules.",
+  "snake-build-space-before-length":
+    "Checked the current twelve-by-twelve Snake board, three-cell start, ten-point fruit scoring, direction controls, speed choices, fruit growth, wall collision, self collision, restart flow, and desktop and mobile control layouts.",
+  "breakout-paddle-control":
+    "Checked the current Breakout build with keyboard and on-page paddle controls. Paddle contact position changes horizontal ball velocity, missed balls reduce lives, cleared bricks increase score, and the round exposes distinct win and game-over states.",
+  "number-rush-clean-rounds":
+    "Checked the current shuffled one-to-nine board, ordered tap rule, elapsed-time counter, mistake counter, round-clear state, score calculation, replay action, and the desktop and mobile layouts used by the clean-round advice.",
+  "memory-mosaic-and-pattern-pulse-training":
+    "Checked Memory Mosaic's twelve cards and six matched pairs, including mismatch recovery and move counting, alongside Pattern Pulse's four fixed pads, growing seeded sequence, wrong-pad ending, best-round counter, and restart flow.",
+} as const;
+
+function verifiedGuide(slug: keyof typeof guideVerificationNotes) {
+  return {
+    updatedAt: GUIDE_REVIEW_DATE,
+    verifiedAt: GUIDE_REVIEW_DATE,
+    verificationNote: guideVerificationNotes[slug],
+  };
+}
+
 export const guides: GameGuide[] = [
   {
     slug: "how-to-play-patrol-escape",
@@ -35,9 +68,9 @@ export const guides: GameGuide[] = [
     eyebrow: "Traffic puzzle field guide",
     summary: "Learn the grid rules, read the blocked exit, and use undo, hints, and move targets to clear all 120 original Patrol Escape boards.",
     readTime: "8 min read",
-    updatedAt: "November 11, 2026",
+    ...verifiedGuide("how-to-play-patrol-escape"),
     relatedGameSlugs: ["patrol-escape"],
-    relatedGuideSlugs: ["patrol-escape-beginner-strategy", "expert-traffic-puzzle-guide"],
+    relatedGuideSlugs: ["patrol-escape-beginner-strategy"],
     relatedHub: { href: "/traffic-puzzle-games", label: "Traffic Puzzle Games" },
     images: getGameScreenshots("patrol-escape").map(({ src, alt, caption, width, height }) => ({
       src,
@@ -62,9 +95,9 @@ export const guides: GameGuide[] = [
     eyebrow: "Traffic puzzle decision guide",
     summary: "Learn a repeatable blocker-chain method, then apply it to real Easy, Medium, and Expert Patrol Escape boards with solver-verified routes.",
     readTime: "10 min read",
-    updatedAt: "November 11, 2026",
+    ...verifiedGuide("patrol-escape-beginner-strategy"),
     relatedGameSlugs: ["patrol-escape"],
-    relatedGuideSlugs: ["how-to-play-patrol-escape", "expert-traffic-puzzle-guide"],
+    relatedGuideSlugs: ["expert-traffic-puzzle-guide"],
     relatedHub: { href: "/traffic-puzzle-games", label: "Traffic Puzzle Games" },
     sections: [
       {
@@ -157,9 +190,9 @@ export const guides: GameGuide[] = [
     eyebrow: "Master-level traffic analysis",
     summary: "Analyze 20-plus-step Patrol Escape boards through buffer management, reverse planning, temporary retreats, and three complete Master routes.",
     readTime: "14 min read",
-    updatedAt: "November 11, 2026",
+    ...verifiedGuide("expert-traffic-puzzle-guide"),
     relatedGameSlugs: ["patrol-escape"],
-    relatedGuideSlugs: ["patrol-escape-beginner-strategy", "how-to-play-patrol-escape"],
+    relatedGuideSlugs: ["how-to-play-patrol-escape"],
     relatedHub: { href: "/traffic-puzzle-games", label: "Traffic Puzzle Games" },
     sections: [
       {
@@ -302,45 +335,137 @@ export const guides: GameGuide[] = [
     title: "2048 Corner Strategy",
     eyebrow: "Board control",
     summary:
-      "A practical plan for keeping your largest tile anchored, preserving empty cells, and recovering before the board locks up.",
-    readTime: "6 min read",
-    updatedAt: "October 21, 2026",
+      "Read four real TurboArcade boards to anchor the largest tile, diagnose a broken edge, recover the corner, and protect enough empty cells for the next spawn.",
+    readTime: "8 min read",
+    ...verifiedGuide("2048-corner-strategy"),
     relatedGameSlugs: ["2048", "merge-shot-2048"],
+    relatedGuideSlugs: ["recover-a-crowded-2048-board"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
+    images: getGameScreenshots("2048")
+      .filter(({ src }) => [
+        "/images/gameplay/2048/desktop-corner-anchor.webp",
+        "/images/gameplay/2048/desktop-broken-order.webp",
+        "/images/gameplay/2048/desktop-corner-recovery.webp",
+        "/images/gameplay/2048/desktop-open-space.webp",
+      ].includes(src))
+      .map(({ src, alt, caption, width, height }) => ({ src, alt, caption, width, height })),
     sections: [
       {
-        heading: "Choose one home corner",
+        heading: "Position 1: Lock the largest tile into one corner",
         paragraphs: [
-          "The easiest way to make a 2048 board predictable is to choose one corner for the largest tile and treat that corner as permanent. Bottom-left and bottom-right both work. The exact choice matters less than consistency. Once the large tile leaves its home, smaller tiles can slide underneath it and break the descending order that makes future merges easy.",
-          "Build a row that decreases as it moves away from the corner: for example 256, 128, 64, 32. That order gives every new tile a natural destination. It also reduces the number of emergency moves because matching values are already close to each other instead of scattered across four rows.",
+          "In Position 1, the bottom row reads 256, 128, 64, 32 from left to right. The 256 tile is fixed in the bottom-left corner and every following value is half the one before it. That descending edge is useful because a future 32 can become 64, feed the existing 64, then continue toward the corner without crossing a larger tile.",
+          "From this board, keep using Down to return loose tiles toward the bottom and Left to compress the anchor row. Right is an emergency move only when it immediately creates space that can be repaired on the next turn. Do not press Up while 256 is anchored at the bottom; Up lifts the entire chain away from its protected edge and gives the next random tile a chance to occupy the corner.",
         ],
         tips: [
-          "Avoid the direction that pulls your anchor out of its corner.",
-          "Use the two directions that push toward the anchor most often.",
-          "Check the whole anchor row before making a move that fills its last gap.",
+          "Next move rule: prefer Down or Left when either changes the board.",
+          "Decision check: make sure the bottom row still decreases away from 256 after the move.",
+          "Do not chase the isolated 2 at the top if doing so requires Up.",
         ],
       },
       {
-        heading: "Protect empty space",
+        heading: "Position 2: Recognize a broken corner chain",
         paragraphs: [
-          "A high tile is useful, but open cells are what keep a run alive. Every move should be judged by two questions: will it create a merge, and will it leave room for the next random tile? A move that gains four points but fills the final open cell is usually worse than a quiet move that keeps two escape routes available.",
-          "When the board starts to crowd, stop chasing the biggest visible merge. Look for chains instead. Combining two small pairs can open two cells and create a larger pair for the next turn. This is especially important on Normal and Hard, where an awkward spawn can punish a board with only one empty cell.",
+          "Position 2 has a 256 tile in the middle of the second row, 128 to its left, and another 64 below it. The numbers look valuable, but they no longer form one route toward a corner. The 256 cannot stay still while the smaller chain feeds it, and the bottom edge contains low tiles on both sides of an empty cell. This is the typical result of alternating Left and Right or using Up without a repair plan.",
+          "Do not try to fix this board by making the first visible 4 merge. The priority is to rebuild one edge: use Down to collect the lower values, then choose a corner based on where the 256 settles. After that move, stop switching between opposite horizontal directions. The board is recoverable because two cells remain empty, but every move now needs to improve the ordering rather than only add points.",
         ],
         tips: [
-          "Try to keep at least two cells open.",
-          "Prefer moves that create more than one merge.",
-          "Do not trap a 2 or 4 between two large tiles that cannot combine.",
+          "Warning sign: the largest tile has smaller values on both horizontal sides.",
+          "Recovery goal: move all large values toward one edge before building another 128.",
+          "Do not alternate Left and Right just because both moves are legal.",
         ],
       },
       {
-        heading: "Recover without abandoning the plan",
+        heading: "Position 3: Return the largest tile before the corner fills",
         paragraphs: [
-          "Eventually a new tile will force a move away from your preferred rhythm. Recovery is not about restoring a perfect board in one turn. First reopen a lane, then rebuild the descending row. If the corner tile must move, use the next move to push it back before another tile spawns into the exposed corner.",
-          "Slow down when three rows are nearly full. Read each direction before pressing it and picture where the new gaps will appear. The strongest runs are not the ones with perfect luck; they are the ones that survive one bad spawn without turning the next five moves into random swipes.",
+          "Position 3 shows a specific recovery window: 256 has moved one cell right, but the bottom-left corner is still empty and 128 and 64 remain beside it. Move Left now. That single move returns 256 to the corner and restores the 256–128–64 order before the game adds another tile. This is safer than making a small merge in the upper rows first.",
+          "The order matters because every successful slide adds a random 2 or 4. If you choose Down or Right first, the exposed corner may be filled by that spawn, forcing several extra moves to remove a low tile from the anchor position. When the largest tile is only one move from home and the corner is open, repair it immediately; score can wait one turn.",
         ],
         tips: [
-          "Repair the anchor row before chasing a new large merge.",
-          "Use small merges to reopen a lane from the crowded side.",
-          "Restart only when no legal merge or useful shift remains.",
+          "Concrete move: press Left before making any upper-row merge.",
+          "Recovery succeeds because the corner cell is empty and the edge values are already ordered.",
+          "Do not make a different valid move and assume the corner will remain open after the spawn.",
+        ],
+      },
+      {
+        heading: "Position 4: Protect empty cells before chasing points",
+        paragraphs: [
+          "Position 4 has a strong 512–256–128–64 bottom row and five empty cells in the upper half. Those empty cells are not unfinished work; they are the board's safety margin. They let new 2 and 4 tiles enter without separating the high-value chain and give the upper rows room to form pairs before feeding them downward.",
+          "From this position, judge a move by the number and location of empty cells it leaves, not only by the score it gains. A small merge that reduces five open cells to one can make the next spawn decisive in the wrong way. Prefer Down when it keeps the high row fixed, then use Left after matching tiles are aligned. Do not fill the upper-left pocket merely to merge the visible 4 and 8 on the right; they are not equal, and compressing them early removes useful staging space.",
+        ],
+        tips: [
+          "Keep at least two empty cells; four or five gives enough room to build a feeder chain.",
+          "Prefer a move that creates two merges and two empty cells over one flashy merge that closes the board.",
+          "Do not count a high score as a safe board if the next spawn has only one available cell.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "recover-a-crowded-2048-board",
+    title: "Recover a Crowded 2048 Board",
+    eyebrow: "2048 board recovery",
+    summary:
+      "Use four real TurboArcade boards to measure remaining mobility, delay the wrong merge, rebuild number order, and recognize a position that cannot be saved.",
+    readTime: "9 min read",
+    ...verifiedGuide("recover-a-crowded-2048-board"),
+    relatedGameSlugs: ["2048"],
+    relatedGuideSlugs: ["2048-corner-strategy"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
+    images: getGameScreenshots("2048")
+      .filter(({ src }) => [
+        "/images/gameplay/2048/desktop-crowded-mobility.webp",
+        "/images/gameplay/2048/desktop-crowded-delay-merge.webp",
+        "/images/gameplay/2048/desktop-crowded-order-repair.webp",
+        "/images/gameplay/2048/desktop-no-moves-left.webp",
+      ].includes(src))
+      .map(({ src, alt, caption, width, height }) => ({ src, alt, caption, width, height })),
+    sections: [
+      {
+        heading: "Position 1: Measure whether the board still has breathing room",
+        paragraphs: [
+          "A board is crowded when every move is controlled by one or two empty cells, not merely when many tiles are visible. Start by counting empty cells, then count the merges one move can complete. One empty cell is critical, but it is still recoverable when a direction creates at least two merges; those merges remove two tiles before the game adds the next 2 or 4.",
+          "Position 1 begins with one empty cell. Press Right. The two 8 tiles in row three become 16, and the two 32 tiles in row four become 64. The slide briefly creates three empty cells; the automatic spawn consumes one, leaving two. That result matters more than the 80 points gained because the next turn now has two places to move through instead of one.",
+        ],
+        tips: [
+          "Before moving, calculate: current empty cells + merges created − one new spawn.",
+          "Concrete move: Right creates two merges and leaves two empty cells after the spawn.",
+          "A one-cell board is not lost if one direction produces multiple merges immediately.",
+        ],
+      },
+      {
+        heading: "Position 2: Delay the smaller merge and create two exits",
+        paragraphs: [
+          "Position 2 also has one empty cell, but it offers competing merge directions. Up combines the two vertical 4 tiles. That move creates one new space, then the spawned tile fills one of the two available cells, so the board returns to a single empty cell. The score changes, but the mobility problem does not.",
+          "Move Left instead. Row three combines 32 and 32, while row four combines 64 and 64. Two merges create two additional cells; after the spawn, two cells remain empty. Delaying the smaller 4 merge is not refusing points—it is choosing the move with the larger space return. Use the vertical 4 pair later, after the board has enough room to absorb another spawn.",
+        ],
+        tips: [
+          "Compare directions by empty cells after the spawn, not by the first pair your eye notices.",
+          "Concrete move: Left earns two merges; Up earns only one on this board.",
+          "Delay a merge when completing it now leaves the board just as cramped as before.",
+        ],
+      },
+      {
+        heading: "Position 3: Spend a zero-score move to restore number order",
+        paragraphs: [
+          "Position 3 has two empty cells but no adjacent equal values, so no direction can score immediately. The high tiles are displaced one column to the right: 512, 256, and 128 occupy the lower row, while 32, 16, and 8 sit above them with gaps at the left. Waiting for a lucky spawn will not repair that path; the current move must organize the board first.",
+          "Press Left even though it scores zero. The lower row becomes 512–256–128, and the row above becomes 8–16–32, which can be read back from right to left as 32–16–8. One new tile will occupy one of the two cells opened on the right, but the large values now form a continuous descending route. On the following turns, feed matching small tiles into the upper row instead of scattering them across all four columns.",
+        ],
+        tips: [
+          "A zero-score move is useful when it turns scattered values into one predictable sequence.",
+          "Concrete move: Left restores the 512–256–128 and 32–16–8 paths without merging.",
+          "Do not demand points from every move when the board has no immediate pair available.",
+        ],
+      },
+      {
+        heading: "Position 4: Know when the board cannot be recovered",
+        paragraphs: [
+          "The final screenshot is not merely crowded; it is finished. All sixteen cells are occupied, and no equal values touch horizontally or vertically. With no empty cell, tiles cannot slide. With no adjacent pair, no slide can merge. Left, Right, Up, and Down all leave the board unchanged, so the game correctly reports No moves left.",
+          "Use that exact test before giving up: first confirm that the board has zero empty cells, then scan every row and every column for equal neighbors. If either an empty cell or an adjacent pair exists, at least one legal move remains and recovery may still be possible. If both checks fail, restart instead of repeatedly pressing directions; the position has no route to create space.",
+        ],
+        tips: [
+          "Unrecoverable means zero empty cells and zero equal horizontal or vertical neighbors.",
+          "A full board with one adjacent pair is still alive because that pair can create space.",
+          "When every direction is unchanged, restart; no sequence can repair the position.",
         ],
       },
     ],
@@ -352,8 +477,10 @@ export const guides: GameGuide[] = [
     summary:
       "Learn how to turn early, keep a safe return lane, and grow without trapping the snake against its own body.",
     readTime: "5 min read",
-    updatedAt: "October 21, 2026",
+    ...verifiedGuide("snake-build-space-before-length"),
     relatedGameSlugs: ["snake", "meteor-sprint"],
+    relatedGuideSlugs: ["breakout-paddle-control"],
+    relatedHub: { href: "/categories/arcade", label: "Arcade Games" },
     sections: [
       {
         heading: "Use the outside edge as a map",
@@ -400,8 +527,10 @@ export const guides: GameGuide[] = [
     summary:
       "Turn the paddle from a last-second shield into an aiming tool and clear bricks with more deliberate rebounds.",
     readTime: "6 min read",
-    updatedAt: "October 21, 2026",
+    ...verifiedGuide("breakout-paddle-control"),
     relatedGameSlugs: ["breakout-blitz", "target-blitz"],
+    relatedGuideSlugs: ["snake-build-space-before-length"],
+    relatedHub: { href: "/categories/arcade", label: "Arcade Games" },
     sections: [
       {
         heading: "Meet the ball instead of chasing it",
@@ -448,8 +577,10 @@ export const guides: GameGuide[] = [
     summary:
       "Use a repeatable scan pattern, reduce wrong taps, and improve speed without turning each board into a guessing game.",
     readTime: "5 min read",
-    updatedAt: "October 21, 2026",
+    ...verifiedGuide("number-rush-clean-rounds"),
     relatedGameSlugs: ["number-rush", "target-blitz", "sudoku-sprint"],
+    relatedGuideSlugs: ["memory-mosaic-and-pattern-pulse-training"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
     sections: [
       {
         heading: "Map the first three numbers before tapping",
@@ -496,8 +627,9 @@ export const guides: GameGuide[] = [
     summary:
       "Practice location memory in Memory Mosaic, ordered recall in Pattern Pulse, and use the right encoding method for each game.",
     readTime: "6 min read",
-    updatedAt: "November 11, 2026",
+    ...verifiedGuide("memory-mosaic-and-pattern-pulse-training"),
     relatedGameSlugs: ["memory-mosaic", "pattern-pulse"],
+    relatedGuideSlugs: ["number-rush-clean-rounds"],
     relatedHub: { href: "/categories/brain", label: "Brain Games" },
     sections: [
       {

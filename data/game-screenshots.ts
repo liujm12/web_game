@@ -21,6 +21,12 @@ export type GameplayScreenshot = {
   height: number;
 };
 
+export const GAMEPLAY_SCREENSHOT_PROVENANCE = {
+  source: "TurboArcade playable build",
+  disclosure:
+    "These images were captured from reproducible states in the running TurboArcade site; they are not AI-generated gameplay art or stock images.",
+} as const;
+
 export const gameScreenshotSets: Record<ScreenshotGameSlug, GameplayScreenshot[]> = {
   "patrol-escape": [
     {
@@ -337,6 +343,76 @@ export const gameScreenshotSets: Record<ScreenshotGameSlug, GameplayScreenshot[]
     },
     {
       gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-corner-anchor.webp",
+      alt: "TurboArcade 2048 strategy position with the 256 tile anchored in the bottom-left corner and a descending bottom row",
+      caption: "Captured from the playable game on desktop. Position 1 keeps 256 in the bottom-left corner, followed by 128, 64, and 32, so every smaller tile has a predictable route into the anchor chain.",
+      width: 628,
+      height: 900,
+    },
+    {
+      gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-broken-order.webp",
+      alt: "TurboArcade 2048 strategy position with the 256 tile stranded near the center and high tiles scattered across several rows",
+      caption: "Captured from the playable game on desktop. Position 2 shows the danger state: 256 is stranded near the center, 128 and 64 cannot feed it cleanly, and opposite-direction moves have broken the ordered edge.",
+      width: 628,
+      height: 900,
+    },
+    {
+      gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-corner-recovery.webp",
+      alt: "TurboArcade 2048 strategy position with an empty bottom-left corner and the 256 tile one cell away from returning home",
+      caption: "Captured from the playable game on desktop. Position 3 is recoverable: the bottom-left cell is still empty, so one Left move returns 256 to its anchor before a random tile can occupy that corner.",
+      width: 628,
+      height: 900,
+    },
+    {
+      gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-open-space.webp",
+      alt: "TurboArcade 2048 strategy position with a 512 corner chain and five open cells preserved above the high-value rows",
+      caption: "Captured from the playable game on desktop. Position 4 keeps five empty cells while the 512, 256, 128, and 64 edge remains ordered; the open upper-left area is more valuable than forcing a small merge immediately.",
+      width: 628,
+      height: 900,
+    },
+    {
+      gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-crowded-mobility.webp",
+      alt: "Crowded TurboArcade 2048 board with one empty cell and two separate pairs ready to merge on the right",
+      caption: "Captured from the playable game on desktop. Position 1 has only one empty cell, but Right merges both the 8 pair and the 32 pair, so the board still has two empty cells after the next tile spawns.",
+      width: 809,
+      height: 1078,
+    },
+    {
+      gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-crowded-delay-merge.webp",
+      alt: "Crowded TurboArcade 2048 board comparing a small vertical 4 merge with two larger horizontal merges",
+      caption: "Captured from the playable game on desktop. Position 2 should move Left: the 32 pair and 64 pair create two spaces after the spawn, while merging the vertical 4 pair first leaves only one.",
+      width: 809,
+      height: 1078,
+    },
+    {
+      gameSlug: "2048",
+      state: "progress",
+      device: "Desktop",
+      src: "/images/gameplay/2048/desktop-crowded-order-repair.webp",
+      alt: "Crowded TurboArcade 2048 board with two empty cells and high tiles displaced one column from an ordered path",
+      caption: "Captured from the playable game on desktop. Position 3 has no immediate merge; Left scores zero but rebuilds a 512–256–128 row with 32–16–8 above it, making the next feeder route readable.",
+      width: 809,
+      height: 1078,
+    },
+    {
+      gameSlug: "2048",
       state: "success",
       device: "Desktop",
       src: "/images/gameplay/2048/desktop-2048-reached.webp",
@@ -350,7 +426,7 @@ export const gameScreenshotSets: Record<ScreenshotGameSlug, GameplayScreenshot[]
       state: "failure",
       device: "Desktop",
       src: "/images/gameplay/2048/desktop-no-moves-left.webp",
-      alt: "TurboArcade 2048 desktop failure state with a full checkerboard and the No moves left panel displayed",
+      alt: "TurboArcade 2048 unrecoverable crowded board with a full checkerboard, no legal slide, and the No moves left panel displayed",
       caption: "Captured from the playable game on desktop. The full board has no adjacent equal tiles, so the game correctly reports that no legal slide remains.",
       width: 809,
       height: 1077,

@@ -5,12 +5,14 @@ import "@testing-library/jest-dom/vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
 import { guides } from "@/data/guides";
 import { patrolEscapeLevels } from "@/data/patrol-escape-levels";
 import GamePage from "@/app/games/[slug]/page";
 import { applyVehicleMove, createPatrolEscapeState, isPatrolEscapeSolved } from "@/lib/patrol-escape";
+
+afterEach(() => cleanup());
 
 describe("guides", () => {
   it("ships a first batch of substantial, game-specific guides", () => {
@@ -48,9 +50,9 @@ describe("guides", () => {
     const hub = render(await hubModule.default());
     expect(screen.getByRole("heading", { name: "Traffic Puzzle Games: Clear the Grid One Move at a Time" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Play Patrol Escape" })).toHaveAttribute("href", "/games/patrol-escape");
-    expect(screen.getByRole("link", { name: /How to Play Patrol Escape/ })).toHaveAttribute("href", "/guides/how-to-play-patrol-escape");
-    expect(screen.getByRole("link", { name: "Beginner Strategy" })).toHaveAttribute("href", "/guides/patrol-escape-beginner-strategy");
-    expect(screen.getByRole("link", { name: "Expert Guide" })).toHaveAttribute("href", "/guides/expert-traffic-puzzle-guide");
+    expect(screen.getByRole("link", { name: "Learn the traffic puzzle rules" })).toHaveAttribute("href", "/guides/how-to-play-patrol-escape");
+    expect(screen.getByRole("link", { name: "Patrol Escape beginner strategy" })).toHaveAttribute("href", "/guides/patrol-escape-beginner-strategy");
+    expect(screen.getByRole("link", { name: "Expert traffic puzzle guide" })).toHaveAttribute("href", "/guides/expert-traffic-puzzle-guide");
     const hubJsonLd = hub.container.querySelector('script[type="application/ld+json"]');
     expect(hubJsonLd).toBeInTheDocument();
     expect(hubJsonLd?.textContent).toContain("CollectionPage");
@@ -63,9 +65,10 @@ describe("guides", () => {
     expect(screen.getByRole("heading", { name: "How to Play Patrol Escape" })).toBeInTheDocument();
     expect(screen.getAllByRole("img").length).toBeGreaterThanOrEqual(5);
     expect(screen.getByRole("link", { name: "Play Patrol Escape" })).toHaveAttribute("href", "/games/patrol-escape");
-    expect(screen.getByRole("link", { name: "Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
-    expect(screen.getByRole("link", { name: "Read Patrol Escape Beginner Strategy" })).toHaveAttribute("href", "/guides/patrol-escape-beginner-strategy");
-    expect(screen.getByText(/Written and reviewed by TurboArcade Editorial Team/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Explore Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
+    expect(screen.getByRole("link", { name: "Patrol Escape beginner strategy" })).toHaveAttribute("href", "/guides/patrol-escape-beginner-strategy");
+    expect(screen.getByText(/Published by TurboArcade Editorial Team/)).toBeInTheDocument();
+    expect(screen.getByText(/Gameplay checked November 12, 2026/)).toBeInTheDocument();
     cleanup();
 
     render(await GamePage({ params: Promise.resolve({ slug: "patrol-escape" }) }));
@@ -97,8 +100,8 @@ describe("guides", () => {
     expect(screen.getByText("Medium case study · Level 31")).toBeInTheDocument();
     expect(screen.getByText("Expert case study · Level 94")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Play Patrol Escape" })).toHaveAttribute("href", "/games/patrol-escape");
-    expect(screen.getByRole("link", { name: "Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
-    expect(screen.getByRole("link", { name: "Read How to Play Patrol Escape" })).toHaveAttribute("href", "/guides/how-to-play-patrol-escape");
+    expect(screen.getByRole("link", { name: "Explore Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
+    expect(screen.getByRole("link", { name: "Expert traffic puzzle guide" })).toHaveAttribute("href", "/guides/expert-traffic-puzzle-guide");
     cleanup();
   });
 
@@ -131,8 +134,92 @@ describe("guides", () => {
     expect(screen.getByText("Master case study · Level 119")).toBeInTheDocument();
     expect(rendered.container.textContent).not.toContain("Hint: move");
     expect(screen.getByRole("link", { name: "Play Patrol Escape" })).toHaveAttribute("href", "/games/patrol-escape");
-    expect(screen.getByRole("link", { name: "Read Patrol Escape Beginner Strategy" })).toHaveAttribute("href", "/guides/patrol-escape-beginner-strategy");
-    expect(screen.getByRole("link", { name: "Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
+    expect(screen.getByRole("link", { name: "Learn the traffic puzzle rules" })).toHaveAttribute("href", "/guides/how-to-play-patrol-escape");
+    expect(screen.getByRole("link", { name: "Explore Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
+    cleanup();
+  });
+
+  it("teaches the 2048 corner strategy with real, actionable board positions", async () => {
+    const strategy = guides.find((guide) => guide.slug === "2048-corner-strategy");
+    const guideText = strategy?.sections
+      .flatMap((section) => [section.heading, ...section.paragraphs, ...(section.tips ?? [])])
+      .join(" ") ?? "";
+
+    expect(strategy?.updatedAt).toBe("November 12, 2026");
+    expect(strategy?.images).toHaveLength(4);
+    expect(strategy?.sections.map((section) => section.heading)).toEqual([
+      "Position 1: Lock the largest tile into one corner",
+      "Position 2: Recognize a broken corner chain",
+      "Position 3: Return the largest tile before the corner fills",
+      "Position 4: Protect empty cells before chasing points",
+    ]);
+    expect(guideText).toMatch(/bottom-left/i);
+    expect(guideText).toMatch(/move left/i);
+    expect(guideText).toMatch(/empty cells/i);
+    expect(guideText).toMatch(/do not/i);
+
+    for (const image of strategy?.images ?? []) {
+      expect(image.src).toMatch(/^\/images\/gameplay\/2048\/desktop-(corner-anchor|broken-order|corner-recovery|open-space)\.webp$/);
+      expect(image.alt.length).toBeGreaterThan(45);
+      expect(image.caption.length).toBeGreaterThan(90);
+      expect(existsSync(path.join(process.cwd(), "public", image.src))).toBe(true);
+    }
+
+    const guideModule = await import("@/app/guides/[slug]/page");
+    render(await guideModule.default({ params: Promise.resolve({ slug: "2048-corner-strategy" }) }));
+    expect(screen.getByRole("region", { name: "2048 Corner Strategy examples" })).toBeInTheDocument();
+    expect(screen.getAllByRole("img", { name: /TurboArcade 2048 strategy position/i })).toHaveLength(4);
+    expect(screen.getByRole("link", { name: "Play 2048" })).toHaveAttribute("href", "/games/2048");
+    expect(screen.getByText(/Published by TurboArcade Editorial Team/)).toBeInTheDocument();
+    cleanup();
+  });
+
+  it("teaches how to recover a crowded 2048 board without repeating corner strategy", async () => {
+    const guide = guides.find((candidate) => candidate.slug === "recover-a-crowded-2048-board");
+    const guideText = guide?.sections
+      .flatMap((section) => [section.heading, ...section.paragraphs, ...(section.tips ?? [])])
+      .join(" ") ?? "";
+
+    expect(guide?.title).toBe("Recover a Crowded 2048 Board");
+    expect(guide?.updatedAt).toBe("November 12, 2026");
+    expect(guide?.images).toHaveLength(4);
+    expect(guide?.sections.map((section) => section.heading)).toEqual([
+      "Position 1: Measure whether the board still has breathing room",
+      "Position 2: Delay the smaller merge and create two exits",
+      "Position 3: Spend a zero-score move to restore number order",
+      "Position 4: Know when the board cannot be recovered",
+    ]);
+    expect(guideText).toMatch(/empty cells/i);
+    expect(guideText).toMatch(/delay/i);
+    expect(guideText).toMatch(/zero-score/i);
+    expect(guideText).toMatch(/horizontal or vertical/i);
+    expect(guideText).not.toMatch(/bottom-left|anchor tile/i);
+
+    const expectedImages = [
+      "/images/gameplay/2048/desktop-crowded-mobility.webp",
+      "/images/gameplay/2048/desktop-crowded-delay-merge.webp",
+      "/images/gameplay/2048/desktop-crowded-order-repair.webp",
+      "/images/gameplay/2048/desktop-no-moves-left.webp",
+    ];
+    expect(guide?.images?.map((image) => image.src)).toEqual(expectedImages);
+    for (const image of guide?.images ?? []) {
+      expect(image.alt.length).toBeGreaterThan(45);
+      expect(image.caption.length).toBeGreaterThan(90);
+      expect(existsSync(path.join(process.cwd(), "public", image.src))).toBe(true);
+    }
+
+    expect(
+      guides.find((candidate) => candidate.slug === "2048-corner-strategy")?.relatedGuideSlugs,
+    ).toContain("recover-a-crowded-2048-board");
+
+    const guideModule = await import("@/app/guides/[slug]/page");
+    render(await guideModule.default({
+      params: Promise.resolve({ slug: "recover-a-crowded-2048-board" }),
+    }));
+    expect(screen.getByRole("region", { name: "Recover a Crowded 2048 Board examples" })).toBeInTheDocument();
+    expect(screen.getAllByRole("img", { name: /crowded|no legal slide/i })).toHaveLength(4);
+    expect(screen.getByRole("link", { name: "Play 2048" })).toHaveAttribute("href", "/games/2048");
+    expect(screen.getByRole("link", { name: "2048 corner strategy" })).toHaveAttribute("href", "/guides/2048-corner-strategy");
     cleanup();
   });
 });

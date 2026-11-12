@@ -3,7 +3,7 @@ const BASE_URL = "https://playturboarcade.com";
 export async function GET() {
   const body = `# TurboArcade
 
-> TurboArcade publishes free browser games for short play sessions, plus practical rules, controls, strategy notes, and original guides reviewed by the TurboArcade Editorial Team.
+> TurboArcade publishes free browser games for short play sessions, plus practical rules, controls, strategy notes, and original guides. TurboArcade Editorial Team is the site's publishing byline. The site uses substantial AI assistance for copy, code, tests, and quality checks; the owner/operator decides publication, checks the playable build, and is responsible for corrections.
 
 ## Main sections
 - [All Games](${BASE_URL}/games): Browse the complete public game catalog.

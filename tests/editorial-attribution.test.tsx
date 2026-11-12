@@ -21,9 +21,13 @@ describe("visible editorial attribution", () => {
     );
 
     expect(
-      screen.getByText("Written and reviewed by TurboArcade Editorial Team"),
+      screen.getByText("Published by TurboArcade Editorial Team"),
     ).toBeInTheDocument();
-    expect(screen.getByText("Updated October 21, 2026")).toBeInTheDocument();
+    expect(screen.getByText("Updated November 12, 2026")).toBeInTheDocument();
+    expect(screen.getByText("Gameplay checked November 12, 2026")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "How this guide was checked" }),
+    ).toBeInTheDocument();
     expect(
       screen
         .getAllByRole("link", { name: "Editorial Policy" })

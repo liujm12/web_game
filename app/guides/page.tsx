@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { guides } from "@/data/guides";
+import { getGuideLinkLabel } from "@/lib/content-cluster-links";
 import { getSiteContent } from "@/lib/site-content";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { buildGuideCollectionStructuredData } from "@/lib/structured-data";
@@ -49,7 +50,7 @@ export default async function GuidesPage() {
                   <h2 className="text-3xl font-black text-white">{guide.title}</h2>
                   <p className="mt-4 text-sm leading-7 text-slate-300">{guide.summary}</p>
                   <Link href={`/guides/${guide.slug}`} className="mt-6 inline-flex rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-black text-cyan-950 transition group-hover:bg-orange-300 group-hover:text-orange-950">
-                    Read the guide
+                    {getGuideLinkLabel(guide)}
                   </Link>
                 </div>
               </div>

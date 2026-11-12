@@ -4,10 +4,7 @@ import { metadata as aboutMetadata } from "@/app/about/page";
 import { metadata as contactMetadata } from "@/app/contact/page";
 import { metadata as dmcaMetadata } from "@/app/dmca/page";
 import { generateMetadata as generateCategoryMetadata } from "@/app/categories/[slug]/page";
-import {
-  buildGamePageMetadata,
-  generateMetadata as generateGameMetadata,
-} from "@/app/games/[slug]/page";
+import { generateMetadata as generateGameMetadata } from "@/app/games/[slug]/page";
 import { metadata as gamesMetadata } from "@/app/games/page";
 import { metadata as guidesMetadata } from "@/app/guides/page";
 import { generateMetadata as generateGuideMetadata } from "@/app/guides/[slug]/page";
@@ -18,6 +15,7 @@ import { metadata as privacyMetadata } from "@/app/privacy/page";
 import sitemap from "@/app/sitemap";
 import { metadata as termsMetadata } from "@/app/terms/page";
 import { metadata as trafficPuzzleMetadata } from "@/app/traffic-puzzle-games/page";
+import { buildGamePageMetadata } from "@/lib/game-page-metadata";
 import { guides } from "@/data/guides";
 import { buildSocialMetadata } from "@/lib/social-metadata";
 import { getSiteContent } from "@/lib/site-content";
@@ -267,9 +265,9 @@ describe("SEO metadata", () => {
 });
 
 describe("sitemap", () => {
-  it("uses the site update for catalog pages and editorial dates for guides", async () => {
+  it("uses the current site and guide review date in the sitemap", async () => {
     const entries = await sitemap();
-    const expectedLastModified = new Date("2026-11-10").toISOString();
+    const expectedLastModified = "2026-11-12";
     const guideUrls = new Set(
       guides.map(
         (guide) => `https://playturboarcade.com/guides/${guide.slug}`,
@@ -285,16 +283,17 @@ describe("sitemap", () => {
       catalogEntries.every(
         (entry) =>
           entry.lastModified &&
-          new Date(entry.lastModified).toISOString() === expectedLastModified,
+          new Date(entry.lastModified).toISOString().slice(0, 10) === expectedLastModified,
       ),
     ).toBe(true);
     expect(
-      entries.some(
-        (entry) =>
-          guideUrls.has(entry.url) &&
-          entry.lastModified &&
-          new Date(entry.lastModified).toISOString() !== expectedLastModified,
-      ),
+      entries
+        .filter((entry) => guideUrls.has(entry.url))
+        .every(
+          (entry) =>
+            entry.lastModified &&
+            new Date(entry.lastModified).toISOString().slice(0, 10) === expectedLastModified,
+        ),
     ).toBe(true);
     expect(
       entries.some(
