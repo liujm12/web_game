@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getGameDifficultyDisplay } from "@/lib/game-display";
 import type { GameRecord } from "@/lib/site-content";
 
 type GameCardProps = {
@@ -592,7 +593,7 @@ export function GameCard({ game }: GameCardProps) {
         <div className="flex items-center justify-between gap-4 text-sm text-slate-400">
           <p>{game.playersLabel}</p>
           <p className="text-right font-semibold text-cyan-100/75">
-            {game.difficulty} · {game.estimatedSession}
+            {getGameDifficultyDisplay(game)} · {game.estimatedSession}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

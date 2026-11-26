@@ -37,6 +37,7 @@ const patrolEscape = {
   summary: "Slide traffic out of the way and clear the police cruiser to the exit.",
   tags: ["Traffic", "Logic", "Sliding Puzzle"],
   difficulty: "Medium",
+  difficultyRange: "Easy–Master",
   estimatedSession: "5 minutes",
   componentKey: "patrol-escape",
   heroGradient: "from-sky-500 via-blue-600 to-indigo-700",
@@ -68,5 +69,7 @@ describe("GameCard visual specificity", () => {
     expect(container.querySelector("[data-patrol-preview-board]")).toBeTruthy();
     expect(screen.getByRole("link", { name: "Clear the exit" })).toBeInTheDocument();
     expect(screen.getByText("Traffic logic")).toBeInTheDocument();
+    expect(screen.getByText("Easy–Master · 5 minutes")).toBeInTheDocument();
+    expect(screen.queryByText("Medium · 5 minutes")).not.toBeInTheDocument();
   });
 });

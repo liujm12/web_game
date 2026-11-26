@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AdSlot } from "@/components/ad-slot";
+import { getGameDifficultyDisplay } from "@/lib/game-display";
 import { GameCard } from "@/components/game-card";
 import { GamePageIntro } from "@/components/game-page-intro";
 import { GameScreenshotGallery } from "@/components/game-screenshot-gallery";
@@ -156,8 +157,8 @@ export default async function GamePage({ params }: GamePageProps) {
               <div className="mt-5 grid gap-3 text-sm text-slate-300">
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
                   {game.difficultyRange
-                    ? `Difficulty range: ${game.difficultyRange}`
-                    : `Difficulty: ${game.difficulty}`}
+                    ? `Difficulty range: ${getGameDifficultyDisplay(game)}`
+                    : `Difficulty: ${getGameDifficultyDisplay(game)}`}
                 </div>
                 <div className="rounded-2xl bg-white/5 px-4 py-3">
                   Players: {game.playersLabel}

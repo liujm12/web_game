@@ -45,6 +45,24 @@ describe("homepage Impeccable P1/P2 polish", () => {
     expect(screen.getByRole("list", { name: "Quick choice notes" })).toBeInTheDocument();
   });
 
+  it("turns each Pick your break recommendation into a clear destination", async () => {
+    const pageModule = await import("@/app/page");
+    render(await pageModule.default());
+
+    expect(screen.getByRole("link", { name: "Start a short run with Target Blitz" })).toHaveAttribute(
+      "href",
+      "/games/target-blitz",
+    );
+    expect(screen.getByRole("link", { name: "Browse calmer brain games" })).toHaveAttribute(
+      "href",
+      "/categories/brain",
+    );
+    expect(screen.getByRole("link", { name: "Play the arcade classic Snake" })).toHaveAttribute(
+      "href",
+      "/games/snake",
+    );
+  });
+
   it("shows Patrol Escape's full difficulty range instead of conflicting with the active level", async () => {
     const pageModule = await import("@/app/games/[slug]/page");
 

@@ -23,6 +23,30 @@ const quickChoiceChips = [
   "Thumb friendly",
 ];
 
+const breakChoices = [
+  {
+    label: "Short run",
+    description: "Jump into a 20-second score chase before your coffee cools.",
+    cta: "Play Target Blitz",
+    href: "/games/target-blitz",
+    ariaLabel: "Start a short run with Target Blitz",
+  },
+  {
+    label: "Brain tap",
+    description: "Clear a board when you want something calmer.",
+    cta: "Browse Brain",
+    href: "/categories/brain",
+    ariaLabel: "Browse calmer brain games",
+  },
+  {
+    label: "Classic hit",
+    description: "Take a familiar arcade loop for one more run.",
+    cta: "Play Snake",
+    href: "/games/snake",
+    ariaLabel: "Play the arcade classic Snake",
+  },
+];
+
 export const metadata: Metadata = buildSocialMetadata({
   title: "TurboArcade | Free Browser Games",
   description:
@@ -52,10 +76,26 @@ export default async function Home() {
               <h2 className="text-2xl font-black text-white">
                 Pick your break
               </h2>
-              <ul className="mt-5 space-y-4 text-sm leading-7 text-slate-300">
-                <li><span className="font-semibold text-cyan-100">Short run:</span> jump into a score chase before your coffee cools.</li>
-                <li><span className="font-semibold text-cyan-100">Brain tap:</span> clear a board when you want something calmer.</li>
-                <li><span className="font-semibold text-cyan-100">Classic hit:</span> grab a familiar arcade loop and try again fast.</li>
+              <ul className="mt-5 grid gap-3">
+                {breakChoices.map((choice) => (
+                  <li key={choice.href}>
+                    <Link
+                      href={choice.href}
+                      aria-label={choice.ariaLabel}
+                      className="group flex min-h-20 flex-col items-start justify-between gap-2 rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3 transition hover:-translate-y-0.5 hover:border-orange-200/30 hover:bg-orange-300/[0.08] sm:flex-row sm:items-center sm:gap-4"
+                    >
+                      <span>
+                        <span className="block font-black text-cyan-100">{choice.label}</span>
+                        <span className="mt-1 block text-sm leading-6 text-slate-400">
+                          {choice.description}
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-xs font-black uppercase tracking-[0.12em] text-orange-200 transition group-hover:text-orange-100">
+                        {choice.cta} →
+                      </span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="rounded-[28px] border border-cyan-100/15 bg-[#0a0d18]/88 p-6 shadow-[0_24px_70px_rgba(2,6,23,0.42)]">
