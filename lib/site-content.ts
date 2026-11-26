@@ -39,6 +39,7 @@ export type GameRecord = {
   featuredPriority?: number;
   trendingScore: number;
   difficulty: string;
+  difficultyRange?: string;
   playersLabel: string;
   status: "draft" | "live";
   estimatedSession: string;

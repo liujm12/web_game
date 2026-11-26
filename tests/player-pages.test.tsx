@@ -56,5 +56,7 @@ describe("player-facing page sections", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("3 quick games ready")).toBeInTheDocument();
     expect(screen.getByText("Best for two-minute breaks")).toBeInTheDocument();
+    expect(screen.getByRole("list", { name: "Category details" })).toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });

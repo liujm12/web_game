@@ -15,6 +15,7 @@ describe("Patrol Escape game", () => {
 
     expect(screen.getByRole("heading", { name: "Patrol Escape" })).toBeInTheDocument();
     expect(screen.getByText(/Level 1 of 120/)).toBeInTheDocument();
+    expect(screen.getByText("Level difficulty: Easy")).toBeInTheDocument();
     expect(screen.getByLabelText("Police escape car")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Undo move" })).toBeDisabled();
   });

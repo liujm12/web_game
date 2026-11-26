@@ -62,16 +62,17 @@ export default async function Home() {
               <h2 className="text-2xl font-black text-white">
                 Turbo queue
               </h2>
-              <div className="mt-5 flex flex-wrap gap-2">
+              <ul aria-label="Quick choice notes" className="mt-5 grid gap-x-5 gap-y-2 sm:grid-cols-2">
                 {quickChoiceChips.map((chip) => (
-                  <span
+                  <li
                     key={chip}
-                    className="rounded-full border border-cyan-200/20 bg-cyan-300/10 px-3 py-1 text-xs font-bold text-cyan-100"
+                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-cyan-100"
                   >
-                    {chip}
-                  </span>
+                    <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-sm bg-orange-300" />
+                    <span>{chip}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
               <div className="mt-5 grid gap-3">
                 {queueGames.map((game) => (
                   <Link

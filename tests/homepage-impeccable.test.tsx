@@ -41,6 +41,17 @@ describe("homepage Impeccable P1/P2 polish", () => {
     ]) {
       expect(screen.getAllByText(chip).length).toBeGreaterThan(0);
     }
+
+    expect(screen.getByRole("list", { name: "Quick choice notes" })).toBeInTheDocument();
+  });
+
+  it("shows Patrol Escape's full difficulty range instead of conflicting with the active level", async () => {
+    const pageModule = await import("@/app/games/[slug]/page");
+
+    render(await pageModule.default({ params: Promise.resolve({ slug: "patrol-escape" }) }));
+
+    expect(screen.getByText("Difficulty range: Easy–Master")).toBeInTheDocument();
+    expect(screen.queryByText("Difficulty: Medium")).not.toBeInTheDocument();
   });
 
   it("keeps editorial recommendations focused on A-tier core games", async () => {

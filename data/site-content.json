@@ -1621,6 +1621,7 @@
       "featuredPriority": 145,
       "trendingScore": 97,
       "difficulty": "Medium",
+      "difficultyRange": "Easy–Master",
       "playersLabel": "Single player",
       "status": "live",
       "estimatedSession": "4 minutes",

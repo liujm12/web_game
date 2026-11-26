@@ -264,7 +264,10 @@ export function PatrolEscapeGame() {
         <div>
           <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-200/65">Original traffic puzzle</p>
           <h2 className="mt-2 text-3xl font-black">Patrol Escape</h2>
-          <p className="mt-1 text-sm text-slate-400">Level {level.id} of {patrolEscapeLevels.length} · {level.title} · {level.difficulty}</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Level {level.id} of {patrolEscapeLevels.length} · {level.title} ·{" "}
+            <span>Level difficulty: {level.difficulty}</span>
+          </p>
         </div>
         <div className="flex gap-2 text-center">
           <div className="min-w-20 rounded-2xl border border-white/10 bg-white/5 px-3 py-2"><span className="block text-[10px] uppercase tracking-widest text-slate-500">Moves</span><strong>{state.moves}</strong></div>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-
+import { GuideBrowser, type GuideBrowserItem, type GuideTopic } from "@/components/guide-browser";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -19,6 +18,36 @@ export const metadata: Metadata = buildSocialMetadata({
 
 export default async function GuidesPage() {
   const content = await getSiteContent();
+  const guideItems: GuideBrowserItem[] = guides.map((guide) => {
+    const relatedGames = guide.relatedGameSlugs
+      .map((slug) => content.games.find((game) => game.slug === slug))
+      .filter((game) => Boolean(game));
+    const topics = new Set<GuideTopic>();
+
+    if (guide.relatedHub?.href === "/traffic-puzzle-games") topics.add("Traffic puzzles");
+    if (guide.relatedGameSlugs.some((slug) => slug.includes("2048"))) topics.add("2048");
+    for (const game of relatedGames) {
+      if (game?.category === "arcade") topics.add("Arcade");
+      if (game?.category === "brain") topics.add("Brain");
+    }
+
+    return {
+      slug: guide.slug,
+      title: guide.title,
+      eyebrow: guide.eyebrow,
+      summary: guide.summary,
+      readTime: guide.readTime,
+      linkLabel: getGuideLinkLabel(guide),
+      topics: Array.from(topics),
+      searchText: [
+        guide.title,
+        guide.eyebrow,
+        guide.summary,
+        ...relatedGames.map((game) => game?.title ?? ""),
+        ...topics,
+      ].join(" ").toLocaleLowerCase(),
+    };
+  });
 
   return (
     <div className="min-h-screen text-white">
@@ -37,26 +66,7 @@ export default async function GuidesPage() {
           </p>
         </section>
 
-        <section className="mt-8 grid gap-6 lg:grid-cols-2">
-          {guides.map((guide, index) => (
-            <article key={guide.slug} className="group rounded-[30px] border border-white/10 bg-[#0a0d18]/88 p-7 shadow-[0_24px_70px_rgba(2,6,23,0.38)] transition hover:-translate-y-1 hover:border-cyan-200/25">
-              <div className="flex items-center justify-between gap-3 text-xs font-black uppercase tracking-[0.24em] text-cyan-200/70">
-                <span>{guide.eyebrow}</span>
-                <span>{guide.readTime}</span>
-              </div>
-              <div className="mt-7 flex items-start gap-5">
-                <span className="text-5xl font-black text-white/10">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h2 className="text-3xl font-black text-white">{guide.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-slate-300">{guide.summary}</p>
-                  <Link href={`/guides/${guide.slug}`} className="mt-6 inline-flex rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-black text-cyan-950 transition group-hover:bg-orange-300 group-hover:text-orange-950">
-                    {getGuideLinkLabel(guide)}
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </section>
+        <GuideBrowser guides={guideItems} />
       </main>
       <SiteFooter brandName={content.site.brandName} supportEmail={content.site.supportEmail} />
     </div>

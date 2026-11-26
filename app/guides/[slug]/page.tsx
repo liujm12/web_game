@@ -77,6 +77,17 @@ export default async function GuidePage({ params }: GuidePageProps) {
             </p>
             <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-6xl">{guide.title}</h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">{guide.summary}</p>
+            <div className="mt-6 flex flex-wrap gap-3" aria-label="Play the games covered by this guide">
+              {relatedGames.map((game) => game ? (
+                <Link
+                  key={game.slug}
+                  href={`/games/${game.slug}`}
+                  className="inline-flex min-h-11 items-center rounded-full bg-orange-300 px-5 py-2.5 text-sm font-black text-orange-950 transition hover:bg-cyan-300 hover:text-cyan-950"
+                >
+                  Play {game.title}
+                </Link>
+              ) : null)}
+            </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-400">
               <span>Published by {EDITORIAL_TEAM_NAME}</span>
               <span>Updated {guide.updatedAt}</span>
