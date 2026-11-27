@@ -10,20 +10,20 @@ import { GamePlayer } from "@/components/game-player";
 describe("Patrol Escape game", () => {
   afterEach(() => cleanup());
 
-  it("renders the original sliding-car puzzle through the game registry", () => {
+  it("renders the original sliding-car puzzle through the game registry", async () => {
     render(<GamePlayer componentKey="patrol-escape" />);
 
-    expect(screen.getByRole("heading", { name: "Patrol Escape" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Patrol Escape" })).toBeInTheDocument();
     expect(screen.getByText(/Level 1 of 120/)).toBeInTheDocument();
     expect(screen.getByText("Level difficulty: Easy")).toBeInTheDocument();
     expect(screen.getByLabelText("Police escape car")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Undo move" })).toBeDisabled();
   });
 
-  it("supports keyboard movement and completes the first level", () => {
+  it("supports keyboard movement and completes the first level", async () => {
     render(<GamePlayer componentKey="patrol-escape" />);
 
-    const gateVan = screen.getByLabelText("Blue gate van");
+    const gateVan = await screen.findByLabelText("Blue gate van");
     fireEvent.click(gateVan);
     fireEvent.keyDown(window, { key: "ArrowUp" });
 
@@ -38,10 +38,10 @@ describe("Patrol Escape game", () => {
     expect(screen.getByRole("button", { name: "Next level" })).toBeInTheDocument();
   });
 
-  it("opens a mobile-friendly level picker and jumps to any level", () => {
+  it("opens a mobile-friendly level picker and jumps to any level", async () => {
     render(<GamePlayer componentKey="patrol-escape" />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Choose level" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Choose level" }));
 
     expect(screen.getByRole("dialog", { name: "Choose a Patrol Escape level" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Show levels 61 to 80" })).toBeInTheDocument();
@@ -53,10 +53,10 @@ describe("Patrol Escape game", () => {
     expect(screen.queryByRole("dialog", { name: "Choose a Patrol Escape level" })).not.toBeInTheDocument();
   });
 
-  it("offers the Master range and opens a level above 100", () => {
+  it("offers the Master range and opens a level above 100", async () => {
     render(<GamePlayer componentKey="patrol-escape" />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Choose level" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Choose level" }));
     fireEvent.click(screen.getByRole("button", { name: "Show levels 101 to 120" }));
     fireEvent.click(screen.getByRole("button", { name: /Play level 113:/ }));
 

@@ -12,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
   const publicRoutes = [
     "",
+    "/games",
     "/about",
     "/privacy",
     "/terms",

@@ -12,19 +12,19 @@ afterEach(() => {
 });
 
 describe("merge shot 2048 game", () => {
-  it("registers a playable merge shooter with start controls and previews", () => {
+  it("registers a playable merge shooter with start controls and previews", async () => {
     render(<GamePlayer componentKey="merge-shot-2048" />);
 
-    expect(screen.getByRole("heading", { name: "Merge Shot 2048" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Merge Shot 2048" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Start Shot" })).toBeInTheDocument();
     expect(screen.getByText(/Current 2 · Next 2/i)).toBeInTheDocument();
     expect(screen.getByText(/Arrow keys or A\/D to aim/i)).toBeInTheDocument();
   });
 
-  it("moves the cannon with desktop keyboard controls", () => {
+  it("moves the cannon with desktop keyboard controls", async () => {
     render(<GamePlayer componentKey="merge-shot-2048" />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Start Shot" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Start Shot" }));
     expect(screen.getByText(/Lane 3/)).toBeInTheDocument();
 
     fireEvent.keyDown(window, { key: "ArrowRight" });
@@ -34,10 +34,10 @@ describe("merge shot 2048 game", () => {
     expect(screen.getByText(/Lane 3/)).toBeInTheDocument();
   });
 
-  it("shoots a tile with Space and gives board feedback", () => {
+  it("shoots a tile with Space and gives board feedback", async () => {
     render(<GamePlayer componentKey="merge-shot-2048" />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Start Shot" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Start Shot" }));
     fireEvent.keyDown(window, { key: " " });
 
     const board = screen.getByLabelText("Merge Shot 2048 board");
@@ -45,10 +45,10 @@ describe("merge shot 2048 game", () => {
     expect(screen.getByText(/Nice shot/i)).toBeInTheDocument();
   });
 
-  it("places touch controls directly after the board for mobile play", () => {
+  it("places touch controls directly after the board for mobile play", async () => {
     render(<GamePlayer componentKey="merge-shot-2048" />);
 
-    const fireButton = screen.getByRole("button", { name: "Fire" });
+    const fireButton = await screen.findByRole("button", { name: "Fire" });
     const board = screen.getByLabelText("Merge Shot 2048 board");
     const statusText = screen.getByText("Score 0 · Lane 3 · Best 2 · Combo ready");
 

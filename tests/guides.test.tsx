@@ -88,7 +88,7 @@ describe("guides", () => {
     expect(screen.getAllByRole("link", { name: "Play Patrol Escape" })[0]).toHaveAttribute("href", "/games/patrol-escape");
     expect(screen.getByRole("link", { name: "Explore Traffic Puzzle Games" })).toHaveAttribute("href", "/traffic-puzzle-games");
     expect(screen.getByRole("link", { name: "Patrol Escape beginner strategy" })).toHaveAttribute("href", "/guides/patrol-escape-beginner-strategy");
-    const guideHeader = renderedGuide.container.querySelector("article > header");
+    const guideHeader = renderedGuide.container.querySelector<HTMLElement>("article > header");
     expect(guideHeader).not.toBeNull();
     expect(within(guideHeader!).getByRole("link", { name: "Play Patrol Escape" })).toHaveAttribute("href", "/games/patrol-escape");
     expect(screen.getByText(/Published by TurboArcade Editorial Team/)).toBeInTheDocument();

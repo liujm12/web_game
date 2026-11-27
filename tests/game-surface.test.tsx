@@ -30,10 +30,10 @@ const baseGame = {
 } satisfies GameRecord;
 
 describe("game surface", () => {
-  it("renders internal games through the local component registry", () => {
+  it("renders internal games through the local component registry", async () => {
     render(<GameSurface game={baseGame} />);
 
-    expect(screen.getByRole("button", { name: "Start run" })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Start run" })).toBeInTheDocument();
     expect(screen.getByText("Ready for launch?")).toBeInTheDocument();
   });
 

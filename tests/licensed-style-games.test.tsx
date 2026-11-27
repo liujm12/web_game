@@ -8,11 +8,11 @@ import { describe, expect, it } from "vitest";
 import { GamePlayer } from "@/components/game-player";
 
 describe("expanded game entries", () => {
-  it("renders a playable 2048 game", () => {
+  it("renders a playable 2048 game", async () => {
     const view = render(<GamePlayer componentKey="tile-merge-2048" />);
     const scoped = within(view.container);
 
-    fireEvent.click(scoped.getByRole("button", { name: "Hard" }));
+    fireEvent.click(await scoped.findByRole("button", { name: "Hard" }));
     fireEvent.click(scoped.getByRole("button", { name: "Start 2048" }));
 
     expect(scoped.getByText(/Score 0 · Best/)).toBeInTheDocument();
@@ -21,11 +21,11 @@ describe("expanded game entries", () => {
     cleanup();
   });
 
-  it("renders a playable snake game", () => {
+  it("renders a playable snake game", async () => {
     const view = render(<GamePlayer componentKey="neon-snake" />);
     const scoped = within(view.container);
 
-    fireEvent.click(scoped.getByRole("button", { name: "Hard" }));
+    fireEvent.click(await scoped.findByRole("button", { name: "Hard" }));
     fireEvent.click(scoped.getByRole("button", { name: "Start snake" }));
 
     expect(scoped.getByText("Choose a direction to start.")).toBeInTheDocument();
@@ -34,11 +34,11 @@ describe("expanded game entries", () => {
     cleanup();
   });
 
-  it("renders a playable gomoku board on a standard grid", () => {
+  it("renders a playable gomoku board on a standard grid", async () => {
     const { container } = render(<GamePlayer componentKey="gomoku-board" />);
     const scoped = within(container);
 
-    fireEvent.click(scoped.getByRole("button", { name: "New board" }));
+    fireEvent.click(await scoped.findByRole("button", { name: "New board" }));
 
     expect(scoped.getByText(/Turn:/)).toBeInTheDocument();
     expect(scoped.getByText("Turn: Black")).toBeInTheDocument();
@@ -47,11 +47,11 @@ describe("expanded game entries", () => {
     cleanup();
   });
 
-  it("renders a playable breakout game", () => {
+  it("renders a playable breakout game", async () => {
     const view = render(<GamePlayer componentKey="breakout-blitz" />);
     const scoped = within(view.container);
 
-    fireEvent.click(scoped.getByRole("button", { name: "Hard" }));
+    fireEvent.click(await scoped.findByRole("button", { name: "Hard" }));
     fireEvent.click(scoped.getByRole("button", { name: "Launch ball" }));
 
     expect(scoped.queryByRole("button", { name: "Launch ball" })).not.toBeInTheDocument();

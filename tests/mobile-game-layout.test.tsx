@@ -14,7 +14,7 @@ describe("mobile game detail layout", () => {
 
     render(await Page({ params: Promise.resolve({ slug: "meteor-sprint" }) }));
 
-    const playButton = screen.getByRole("button", { name: "Start run" });
+    const playButton = await screen.findByRole("button", { name: "Start run" });
     const introHeading = screen.getByRole("heading", { name: "Meteor Sprint" });
 
     expect(

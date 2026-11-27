@@ -42,22 +42,21 @@ describe("mobile game UX polish", () => {
     const game: GameRecord = {
       slug: "comet-loop",
       title: "Comet Loop",
-      category: "Arcade",
-      categorySlug: "arcade",
+      category: "arcade",
       summary: "Tap at the right time.",
       description: "Tap at the right time.",
+      instructions: ["Tap"],
       heroGradient: "from-cyan-300 to-emerald-300",
       tags: ["Timing"],
       difficulty: "Easy",
       estimatedSession: "45 seconds",
       playersLabel: "Single player",
-      trendingScore: "78",
+      status: "live",
+      trendingScore: 78,
       componentKey: "comet-loop",
       featured: false,
       seoTitle: "Comet Loop",
       seoDescription: "Play Comet Loop.",
-      howToPlay: ["Tap"],
-      contentSections: [],
     };
 
     render(<GameCard game={game} />);
@@ -69,7 +68,7 @@ describe("mobile game UX polish", () => {
 
   it("puts meteor lane controls after the field and restart actions inside the field", () => {
     const { container } = render(<MeteorSprintGame />);
-    const field = container.querySelector('[data-meteor-field="true"]')!;
+    const field = container.querySelector<HTMLElement>('[data-meteor-field="true"]')!;
 
     expect(within(field).getByRole("button", { name: "Start run" })).toBeInTheDocument();
     expect(appearsBefore(field, screen.getByRole("button", { name: "Move left" }))).toBe(true);
@@ -80,7 +79,7 @@ describe("mobile game UX polish", () => {
 
   it("puts breakout paddle controls after the field and launch actions inside the field", () => {
     const { container } = render(<BreakoutBlitzGame />);
-    const field = container.querySelector('[data-breakout-field="true"]')!;
+    const field = container.querySelector<HTMLElement>('[data-breakout-field="true"]')!;
 
     expect(within(field).getByRole("button", { name: "Launch ball" })).toBeInTheDocument();
     expect(appearsBefore(field, screen.getByRole("button", { name: "Paddle left" }))).toBe(true);
@@ -89,7 +88,7 @@ describe("mobile game UX polish", () => {
   it("lets snake wait for the first direction before it moves", () => {
     vi.useFakeTimers();
     const { container } = render(<NeonSnakeGame />);
-    const board = container.querySelector('[data-snake-board="true"]')!;
+    const board = container.querySelector<HTMLElement>('[data-snake-board="true"]')!;
 
     fireEvent.click(within(board).getByRole("button", { name: "Start snake" }));
     expect(within(board).getByText("Choose a direction to start.")).toBeInTheDocument();
@@ -103,7 +102,7 @@ describe("mobile game UX polish", () => {
 
   it("keeps 2048 start controls inside the board", () => {
     const { container } = render(<TileMerge2048Game />);
-    const board = container.querySelector('[data-tile-2048-board="true"]')!;
+    const board = container.querySelector<HTMLElement>('[data-tile-2048-board="true"]')!;
 
     expect(within(board).getByRole("button", { name: "Start 2048" })).toBeInTheDocument();
     expect(appearsBefore(board, screen.getByRole("button", { name: "Left" }))).toBe(true);
@@ -119,7 +118,7 @@ describe("mobile game UX polish", () => {
 
   it("shows compact number rush status without large stat cards", () => {
     const { container } = render(<NumberRushGame />);
-    const board = container.querySelector('[data-number-rush-board="true"]')!;
+    const board = container.querySelector<HTMLElement>('[data-number-rush-board="true"]')!;
 
     expect(screen.getByText("Next 1 · Mistakes 0 · Cleared 0")).toBeInTheDocument();
     expect(within(board).getByRole("button", { name: "Start round" })).toBeInTheDocument();
@@ -159,7 +158,7 @@ describe("mobile game UX polish", () => {
 
   it("shows compact target blitz score and best status", () => {
     const { container } = render(<TargetBlitzGame />);
-    const field = container.querySelector('[data-target-blitz-field="true"]')!;
+    const field = container.querySelector<HTMLElement>('[data-target-blitz-field="true"]')!;
 
     expect(screen.getByText("Time 20s · Score 0 · Best 0")).toBeInTheDocument();
     expect(within(field).getByRole("button", { name: "Start challenge" })).toBeInTheDocument();

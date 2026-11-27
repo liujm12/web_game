@@ -3,8 +3,14 @@ import { describe, expect, it } from "vitest";
 import { metadata as aboutMetadata } from "@/app/about/page";
 import { metadata as contactMetadata } from "@/app/contact/page";
 import { metadata as dmcaMetadata } from "@/app/dmca/page";
-import { generateMetadata as generateCategoryMetadata } from "@/app/categories/[slug]/page";
-import { generateMetadata as generateGameMetadata } from "@/app/games/[slug]/page";
+import {
+  generateMetadata as generateCategoryMetadata,
+  generateStaticParams as generateCategoryStaticParams,
+} from "@/app/categories/[slug]/page";
+import {
+  generateMetadata as generateGameMetadata,
+  generateStaticParams as generateGameStaticParams,
+} from "@/app/games/[slug]/page";
 import { metadata as gamesMetadata } from "@/app/games/page";
 import { metadata as guidesMetadata } from "@/app/guides/page";
 import { generateMetadata as generateGuideMetadata } from "@/app/guides/[slug]/page";
@@ -309,10 +315,30 @@ describe("sitemap", () => {
     const entries = await sitemap();
     const urls = new Set(entries.map((entry) => entry.url));
 
+    expect(urls).toContain("https://playturboarcade.com/games");
     expect(urls).toContain("https://playturboarcade.com/games/meteor-sprint");
     expect(urls).toContain("https://playturboarcade.com/games/pattern-pulse");
     expect(urls).not.toContain("https://playturboarcade.com/games/orbit-hopper");
     expect(urls).not.toContain("https://playturboarcade.com/games/neon-drift");
     expect(urls).not.toContain("https://playturboarcade.com/games/signal-sweep");
+  });
+
+  it("generates static params for all public games and categories while excluding drafts", async () => {
+    const [content, gameParams, categoryParams] = await Promise.all([
+      getSiteContent(),
+      generateGameStaticParams(),
+      generateCategoryStaticParams(),
+    ]);
+    const gameSlugs = new Set(gameParams.map((entry) => entry.slug));
+    const categorySlugs = new Set(categoryParams.map((entry) => entry.slug));
+
+    expect(gameSlugs).toContain("patrol-escape");
+    expect(gameSlugs).toContain("meteor-sprint");
+    expect(gameSlugs).not.toContain("orbit-hopper");
+    expect(gameSlugs).not.toContain("neon-drift");
+    expect(gameSlugs).not.toContain("signal-sweep");
+    expect(categorySlugs).toEqual(
+      new Set(content.categories.map((category) => category.slug)),
+    );
   });
 });

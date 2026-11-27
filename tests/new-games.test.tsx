@@ -8,19 +8,19 @@ import { describe, expect, it } from "vitest";
 import { GamePlayer } from "@/components/game-player";
 
 describe("new game entries", () => {
-  it("renders a playable Target Blitz game", () => {
+  it("renders a playable Target Blitz game", async () => {
     render(<GamePlayer componentKey="target-blitz" />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Start challenge" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Start challenge" }));
 
     expect(screen.getByText(/Time 20s · Score 0 · Best 0/)).toBeInTheDocument();
     expect(screen.queryByText("Tap the glowing target as fast as you can.")).not.toBeInTheDocument();
   });
 
-  it("renders a playable Number Rush game", () => {
+  it("renders a playable Number Rush game", async () => {
     render(<GamePlayer componentKey="number-rush" />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Start round" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Start round" }));
 
     expect(screen.getByText(/Next 1 · Mistakes 0 · Cleared 0/)).toBeInTheDocument();
     expect(screen.queryByText("Tap numbers from low to high as quickly as you can.")).not.toBeInTheDocument();

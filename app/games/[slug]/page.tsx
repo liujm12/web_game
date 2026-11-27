@@ -31,6 +31,14 @@ type GamePageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const content = await getSiteContent();
+
+  return getPublicGames(content).map((game) => ({
+    slug: game.slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: GamePageProps): Promise<Metadata> {

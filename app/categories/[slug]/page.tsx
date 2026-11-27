@@ -23,6 +23,14 @@ type CategoryPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const content = await getSiteContent();
+
+  return content.categories.map((category) => ({
+    slug: category.slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
