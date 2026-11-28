@@ -261,6 +261,8 @@ describe("guides", () => {
       const guide = guides.find((candidate) => candidate.slug === slug);
       expect(guide, `${slug} should exist`).toBeDefined();
       expect(guide?.sections).toHaveLength(4);
+      expect(guide?.updatedAt).toBe("November 28, 2026");
+      expect(guide?.verifiedAt).toBe("November 28, 2026");
 
       render(await guideModule.default({ params: Promise.resolve({ slug }) }));
       expect(screen.getByRole("heading", { name: title })).toBeInTheDocument();
@@ -268,5 +270,11 @@ describe("guides", () => {
       expect(screen.getByText(guide!.verificationNote)).toBeInTheDocument();
       cleanup();
     }
+
+    expect(
+      guides.find(
+        (guide) => guide.slug === "checkers-center-control-and-king-endgames",
+      )?.relatedGuideSlugs,
+    ).toEqual(["minesweeper-opening-and-pattern-guide"]);
   });
 });

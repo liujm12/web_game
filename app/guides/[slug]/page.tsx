@@ -77,7 +77,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
             </p>
             <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-6xl">{guide.title}</h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">{guide.summary}</p>
-            <div className="mt-6 flex flex-wrap gap-3" aria-label="Play the games covered by this guide">
+            <div className="mt-6 flex flex-wrap gap-3" aria-label="Play games related to this guide">
               {relatedGames.map((game) => game ? (
                 <Link
                   key={game.slug}

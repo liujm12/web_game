@@ -31,6 +31,7 @@ export type GameGuide = {
 };
 
 const GUIDE_REVIEW_DATE = "November 12, 2026";
+const NEW_GUIDE_REVIEW_DATE = "November 28, 2026";
 
 const guideVerificationNotes = {
   "how-to-play-patrol-escape":
@@ -61,10 +62,13 @@ const guideVerificationNotes = {
     "Checked the current 8x8 American-rules Checkers Lite build against both Computer (Easy, Normal, Hard) and Local 2-player modes, including Orange moving first, mandatory captures and multi-jump chains, turn-ending king promotion, and threefold or forty-move draw rules.",
 } as const;
 
-function verifiedGuide(slug: keyof typeof guideVerificationNotes) {
+function verifiedGuide(
+  slug: keyof typeof guideVerificationNotes,
+  reviewedAt = GUIDE_REVIEW_DATE,
+) {
   return {
-    updatedAt: GUIDE_REVIEW_DATE,
-    verifiedAt: GUIDE_REVIEW_DATE,
+    updatedAt: reviewedAt,
+    verifiedAt: reviewedAt,
     verificationNote: guideVerificationNotes[slug],
   };
 }
@@ -685,7 +689,7 @@ export const guides: GameGuide[] = [
     summary:
       "Turn safe openings, border counting, and simple 1-1 and 1-2 deductions into clean Minesweeper clears on 8x8, 9x9, and 10x10 boards.",
     readTime: "6 min read",
-    ...verifiedGuide("minesweeper-opening-and-pattern-guide"),
+    ...verifiedGuide("minesweeper-opening-and-pattern-guide", NEW_GUIDE_REVIEW_DATE),
     relatedGameSlugs: ["minesweeper"],
     relatedGuideSlugs: ["sudoku-scanning-and-notes-guide"],
     relatedHub: { href: "/categories/brain", label: "Brain Games" },
@@ -747,7 +751,7 @@ export const guides: GameGuide[] = [
     summary:
       "Build a repeatable cross-hatching routine, keep pencil notes clean, and avoid guesswork on Easy, Normal, and Hard 9x9 Sudoku boards.",
     readTime: "6 min read",
-    ...verifiedGuide("sudoku-scanning-and-notes-guide"),
+    ...verifiedGuide("sudoku-scanning-and-notes-guide", NEW_GUIDE_REVIEW_DATE),
     relatedGameSlugs: ["sudoku-sprint"],
     relatedGuideSlugs: ["minesweeper-opening-and-pattern-guide"],
     relatedHub: { href: "/categories/brain", label: "Brain Games" },
@@ -809,7 +813,7 @@ export const guides: GameGuide[] = [
     summary:
       "Keep a flat stack, leave a clean well for four-line clears, and use the ghost outline and seven-bag preview to survive faster Block Drop levels.",
     readTime: "6 min read",
-    ...verifiedGuide("block-drop-stacking-and-line-clear-guide"),
+    ...verifiedGuide("block-drop-stacking-and-line-clear-guide", NEW_GUIDE_REVIEW_DATE),
     relatedGameSlugs: ["block-drop", "flappy-dash"],
     relatedGuideSlugs: ["breakout-paddle-control"],
     relatedHub: { href: "/categories/arcade", label: "Arcade Games" },
@@ -871,9 +875,9 @@ export const guides: GameGuide[] = [
     summary:
       "Use center squares, back-row defense, mandatory-capture traps, and king coordination to win more American-rules Checkers games.",
     readTime: "6 min read",
-    ...verifiedGuide("checkers-center-control-and-king-endgames"),
+    ...verifiedGuide("checkers-center-control-and-king-endgames", NEW_GUIDE_REVIEW_DATE),
     relatedGameSlugs: ["checkers-lite", "four-in-a-row"],
-    relatedGuideSlugs: ["how-to-play-patrol-escape"],
+    relatedGuideSlugs: ["minesweeper-opening-and-pattern-guide"],
     relatedHub: { href: "/categories/brain", label: "Brain Games" },
     sections: [
       {

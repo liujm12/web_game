@@ -59,17 +59,16 @@ describe("content authenticity", () => {
   });
 
   it("publishes a current, game-specific verification record for every guide", async () => {
-    const today = new Date("2026-11-12T23:59:59Z");
+    const today = new Date("2026-11-28T23:59:59Z");
+    const oldestAcceptedReview = new Date("2026-10-01T00:00:00Z");
 
     for (const guide of guides) {
-      expect(guide.updatedAt).toBe("November 12, 2026");
-      expect(guide.verifiedAt).toBe("November 12, 2026");
+      expect(guide.updatedAt).toBe(guide.verifiedAt);
       expect(guide.verificationNote.length).toBeGreaterThan(110);
-      expect(new Date(`${guide.updatedAt} 12:00:00 UTC`).getTime()).toBeLessThanOrEqual(
-        today.getTime(),
-      );
-      expect(new Date(`${guide.verifiedAt} 12:00:00 UTC`).getTime()).toBeLessThanOrEqual(
-        today.getTime(),
+      const reviewedAt = new Date(`${guide.verifiedAt} 12:00:00 UTC`);
+      expect(reviewedAt.getTime()).toBeLessThanOrEqual(today.getTime());
+      expect(reviewedAt.getTime()).toBeGreaterThanOrEqual(
+        oldestAcceptedReview.getTime(),
       );
 
       render(

@@ -296,9 +296,22 @@ describe("sitemap", () => {
       entries
         .filter((entry) => guideUrls.has(entry.url))
         .every(
-          (entry) =>
-            entry.lastModified &&
-            new Date(entry.lastModified).toISOString().slice(0, 10) === expectedLastModified,
+          (entry) => {
+            const guide = guides.find(
+              (candidate) =>
+                entry.url ===
+                `https://playturboarcade.com/guides/${candidate.slug}`,
+            );
+
+            return Boolean(
+              guide &&
+                entry.lastModified &&
+                new Date(entry.lastModified).toISOString().slice(0, 10) ===
+                  new Date(`${guide.updatedAt} 12:00:00 UTC`)
+                    .toISOString()
+                    .slice(0, 10),
+            );
+          },
         ),
     ).toBe(true);
     expect(
