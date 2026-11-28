@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TurboArcade (`web_game`)
+
+TurboArcade (`playturboarcade.com`) is a fast, mobile-friendly browser game portal built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, and **TypeScript**. It focuses on instant-play sessions, clean keyboard and touch controls, original playtested guides, structured technical SEO, and zero runtime third-party UI or database dependencies.
+
+## Features
+
+- **Curated Game Catalog**: 20 public browser games across `Arcade` and `Brain` categories (19 lazy-loaded React games via `next/dynamic` + 1 hosted HTML5 iframe game), organized by editorial tier (`A` core, `B` tested catalog, `C` / `draft` hidden).
+- **Deterministic Game Engines**: Core logic lives in standalone modules (`lib/patrol-escape.ts`, `lib/games/*`), including a 120-level solver-verified traffic puzzle (`Patrol Escape`).
+- **Local Player Profile**: Favorites, recent games, best scores, and daily challenge state stored in `localStorage` via `lib/player-profile.ts` and surfaced on `/my-games`.
+- **Editorial Guides & Verification**: 9 original strategy guides in `data/guides.ts` with gameplay check dates, verification notes, real build WebP screenshots (`public/images/gameplay/`), and a dedicated `/traffic-puzzle-games` hub.
+- **Technical SEO & Trust Surfaces**:
+  - Static prerendering (`generateStaticParams`) for all public game, category, and guide routes.
+  - JSON-LD structured data (`Organization`, `WebSite`, `VideoGame`, `FAQPage`, `CollectionPage`, `ItemList`, `Article`, `BreadcrumbList`).
+  - Dynamic Open Graph / Twitter cards, `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/ads.txt`, and policy pages (`/about`, `/editorial-policy`, `/contact`, `/privacy`, `/terms`, `/dmca`).
+- **Dev-Only Content Workspace**: `/admin` and `/api/site-content` allow local editing of `data/site-content.json` and automatically return `404` in production.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Start the Next.js development server |
+| `npm run build` | Build the production bundle and prerender static routes |
+| `npm run start` | Run the production server after building |
+| `npm run lint` | Run ESLint across the repository |
+| `npm test` | Run the full Vitest unit & component test suite |
+| `npx tsc --noEmit` | Run strict TypeScript typechecking |
+| `npm run screenshots:optimize` | Convert captured PNGs in `.tmp-game-screenshots/` to optimized WebP assets under `public/images/gameplay/` |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+app/                    App Router pages, metadata routes, dynamic OG images, and dev-only API
+components/             Shared UI shell, player tools, ad slot wrapper, and lazy-loaded games
+  games/                Playable React game components
+data/                   Site catalog (site-content.json), guides, screenshot manifest, and level data
+lib/                    Game engines, player profile store, editorial helpers, and JSON-LD builders
+public/
+  embed-games/          Standalone HTML5 games served inside EmbedGameFrame
+  images/gameplay/      Optimized WebP gameplay evidence screenshots
+scripts/                Asset optimization scripts
+tests/                  Vitest suites covering engines, UI, mobile UX, SEO, and content authenticity
+docs/                   Design specs, implementation plans, content audits, and UX regression reports
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Editorial Tiers & Publishing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Game visibility is governed by `isPublicGame()` in `lib/site-content.ts`:
 
-## Deploy on Vercel
+- **Tier `A` (`status: "live"`)**: Featured editorial core with dedicated guides, verified gameplay notes, and screenshot galleries.
+- **Tier `B` (`status: "live"`)**: Tested public catalog games listed on `/games` and category pages.
+- **Tier `C` or `status: "draft"`**: Excluded from public pages, `generateStaticParams`, and `/sitemap.xml`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment & AdSense Configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Set the optional AdSense client environment variable when ready for monetization:
+   ```bash
+   NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX
+   ```
+   - When unset, `AdSlot` renders nothing (no empty ad placeholders) and `/ads.txt` returns a configuration comment.
+   - When set, the AdSense script is injected in `app/layout.tsx` and `/ads.txt` serves the matching publisher record.
+2. After approval, configure individual slot IDs under `site.adSlots` in `data/site-content.json`.
+3. Verify `/sitemap.xml`, `/robots.txt`, `/llms.txt`, and `/ads.txt` after deployment.
