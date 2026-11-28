@@ -51,6 +51,14 @@ const guideVerificationNotes = {
     "Checked the current shuffled one-to-nine board, ordered tap rule, elapsed-time counter, mistake counter, round-clear state, score calculation, replay action, and the desktop and mobile layouts used by the clean-round advice.",
   "memory-mosaic-and-pattern-pulse-training":
     "Checked Memory Mosaic's twelve cards and six matched pairs, including mismatch recovery and move counting, alongside Pattern Pulse's four fixed pads, growing seeded sequence, wrong-pad ending, best-round counter, and restart flow.",
+  "minesweeper-opening-and-pattern-guide":
+    "Checked the current Minesweeper build across Easy (8x8, 10 mines), Normal (9x9, 12 mines), and Hard (10x10, 18 mines), including safe first reveal and neighbors, flood-fill zeros, flag-cap protection, right-click or flag-mode toggling, and timer tracking.",
+  "sudoku-scanning-and-notes-guide":
+    "Checked the current 9x9 Sudoku Sprint build across Easy, Normal, and Hard difficulties, including unique-solution generation, real-time orange conflict highlights, pencil notes toggle (N), keyboard navigation, Undo (Ctrl/Cmd+Z), and persistent hint counting.",
+  "block-drop-stacking-and-line-clear-guide":
+    "Checked the current 10x20 Block Drop build, its seven-bag piece randomizer, ghost landing outline, Next piece preview, clockwise rotation, soft and hard drops, line-clear scoring multipliers (100/300/500/800 times level), ten-line level progression, and pause flow.",
+  "checkers-center-control-and-king-endgames":
+    "Checked the current 8x8 American-rules Checkers Lite build against both Computer (Easy, Normal, Hard) and Local 2-player modes, including Orange moving first, mandatory captures and multi-jump chains, turn-ending king promotion, and threefold or forty-move draw rules.",
 } as const;
 
 function verifiedGuide(slug: keyof typeof guideVerificationNotes) {
@@ -666,6 +674,254 @@ export const guides: GameGuide[] = [
           "In Mosaic, review the earliest forgotten position.",
           "In Pulse, review the encoding step before the wrong input.",
           "Compare attempts only when using the same naming method.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "minesweeper-opening-and-pattern-guide",
+    title: "Minesweeper Opening and Pattern Guide",
+    eyebrow: "Logic grid fundamentals",
+    summary:
+      "Turn safe openings, border counting, and simple 1-1 and 1-2 deductions into clean Minesweeper clears on 8x8, 9x9, and 10x10 boards.",
+    readTime: "6 min read",
+    ...verifiedGuide("minesweeper-opening-and-pattern-guide"),
+    relatedGameSlugs: ["minesweeper"],
+    relatedGuideSlugs: ["sudoku-scanning-and-notes-guide"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
+    sections: [
+      {
+        heading: "1. Open away from the corners to maximize the safe zone",
+        paragraphs: [
+          "In TurboArcade's Minesweeper, mines are placed only after your first reveal, and both the tapped tile and every adjacent neighbor are guaranteed safe. Opening on an interior tile protects up to nine squares at once and usually triggers a zero-tile cascade that exposes a wide ring of numbered clues.",
+          "Opening directly in a corner protects only four squares, which often produces a cramped pocket of isolated numbers with no guaranteed second move. On Easy (8x8 with 10 mines), Normal (9x9 with 12 mines), and Hard (10x10 with 18 mines), starting one or two cells inward from the center gives the cleanest opening read.",
+        ],
+        tips: [
+          "Click or tap near the middle third of the grid on move one.",
+          "Scan the entire exposed perimeter before placing your first flag.",
+          "Use the flag counter at the top to keep track of remaining mines.",
+        ],
+      },
+      {
+        heading: "2. Lock in guaranteed mines before revealing safe neighbors",
+        paragraphs: [
+          "Start every pass by looking for corners of the frontier where a revealed number equals the exact count of unopened tiles touching it. A 1 touching a single hidden square or a 2 touching two hidden squares leaves zero ambiguity: flag those squares immediately using right-click on desktop or Flag mode on touch screens.",
+          "Once a number already touches as many flags as its value, every other hidden neighbor around that number is provably safe. Switching cleanly between Reveal mode and Flag mode prevents accidental taps, and flagged tiles stay protected when you return to Reveal mode.",
+        ],
+        tips: [
+          "Clear obvious corner 1s first; they often unlock an entire edge.",
+          "Never tap a tile just because it looks quiet; tie every reveal to a satisfied clue.",
+          "Remember the flag count cannot exceed the board's total mine count.",
+        ],
+      },
+      {
+        heading: "3. Read 1-1 and 1-2 wall patterns instead of guessing",
+        paragraphs: [
+          "When single-square deductions pause, compare two neighboring numbers along a straight edge. In a 1-1 pattern starting against a wall or already cleared boundary, the first 1 shares all of its hidden neighbors with the second 1. That means the single mine for the first 1 must lie inside those shared squares, making the third square next to the second 1 completely safe.",
+          "In a 1-2 pattern along a flat border with three hidden squares in a row, the 1 touches two of them and can hold at most one mine there. Because the adjacent 2 touches all three squares and needs two mines, the third square outside the 1's reach must be a mine. Reducing clues by subtracting already placed flags exposes hidden 1-1 and 1-2 patterns across the entire grid.",
+        ],
+        tips: [
+          "Mentally subtract neighboring flags from each clue to spot reduced 1-1 and 1-2 pairs.",
+          "Check both horizontal and vertical frontiers when progress slows.",
+          "Follow each newly revealed number immediately before moving to another side of the board.",
+        ],
+      },
+      {
+        heading: "4. Use remaining mine count to close the endgame",
+        paragraphs: [
+          "Near the end of a 10x10 Hard board, two small pockets can appear stuck even when the remaining mine count solves them. Count how many unflagged mines are left by comparing the flag header against the board total, then check whether a frontier already accounts for all remaining mines.",
+          "If every leftover mine must sit inside one cluster of clues, every isolated hidden square elsewhere on the board is automatically safe. Keeping flags accurate throughout the round turns that final count into a reliable deduction tool rather than a guess.",
+        ],
+        tips: [
+          "Verify your flags whenever the remaining mine count feels off.",
+          "Solve small enclosed islands last, when total-mine arithmetic is sharpest.",
+          "Use Best time as a secondary goal only after your clear rate is consistent.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "sudoku-scanning-and-notes-guide",
+    title: "Sudoku Scanning and Pencil Notes Guide",
+    eyebrow: "Structured 9x9 solving",
+    summary:
+      "Build a repeatable cross-hatching routine, keep pencil notes clean, and avoid guesswork on Easy, Normal, and Hard 9x9 Sudoku boards.",
+    readTime: "6 min read",
+    ...verifiedGuide("sudoku-scanning-and-notes-guide"),
+    relatedGameSlugs: ["sudoku-sprint"],
+    relatedGuideSlugs: ["minesweeper-opening-and-pattern-guide"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
+    sections: [
+      {
+        heading: "1. Cross-hatch one digit at a time before writing notes",
+        paragraphs: [
+          "Every Sudoku Sprint puzzle is generated with a single unique 9x9 solution, which means early progress should come from systematic scanning rather than staring at one empty square. Start with the digits that already appear most often on the board and sweep through each three-by-three box.",
+          "Trace the rows and columns occupied by that digit to cross out impossible cells inside neighboring boxes. When only one empty square in a box remains open for that digit, place it right away. Completing two or three quick sweeps from 1 through 9 fills most easy singles without cluttering the grid with pencil marks.",
+        ],
+        tips: [
+          "Sweep bands of three boxes horizontally, then stacks of three vertically.",
+          "Use arrow keys and 1–9 on desktop to keep your eyes on the grid.",
+          "Watch for orange conflict highlights immediately after placing a digit.",
+        ],
+      },
+      {
+        heading: "2. Check rows, columns, and boxes for hidden singles",
+        paragraphs: [
+          "After obvious cross-hatching slows down, look for the unit—row, column, or 3x3 box—with the fewest empty cells left. List which digits are still missing from that unit, then check each missing digit against the intersecting rows and columns.",
+          "A cell may look open to three or four candidates at first glance, yet be the only legal home in its row for a specific digit like 7. Finding these hidden singles keeps Easy and Normal boards moving smoothly without needing to fill all eighty-one cells with full candidate lists.",
+        ],
+        tips: [
+          "Prioritize any row, column, or box that already has six or more numbers filled.",
+          "Use the selected-cell row and column highlight to trace intersections quickly.",
+          "Never guess between two cells; move to another unit and come back with more clues.",
+        ],
+      },
+      {
+        heading: "3. Keep pencil notes selective with Snyder-style pairs",
+        paragraphs: [
+          "Toggle Notes mode (or press N on keyboard) only when a digit is narrowed down to two possible squares inside a 3x3 box. Marking two-cell pairs keeps the board readable and immediately reveals pointing pairs: if both candidates for a digit inside a box sit on the same row or column, that digit cannot appear anywhere else along that line outside the box.",
+          "When two squares inside the same box, row, or column contain the exact same pair of candidates—such as 4 and 8—those two digits are locked into those two squares. You can safely eliminate 4 and 8 from every other cell in that unit, which frequently exposes a single answer nearby.",
+        ],
+        tips: [
+          "Toggle Notes off before entering a confirmed answer so you do not overwrite intentionally.",
+          "Erase stale candidates in the same row, column, and box right after placing a digit.",
+          "Reserve full-cell candidate notes for the dense final third of Hard puzzles.",
+        ],
+      },
+      {
+        heading: "4. Recover cleanly with Undo instead of stacking conflicts",
+        paragraphs: [
+          "Sudoku Sprint highlights conflicting numbers in orange whenever a row, column, or 3x3 box contains a duplicate. Treat an orange highlight as an immediate stop sign rather than trying to patch around it two moves later.",
+          "Press Undo (or Ctrl/Cmd+Z) to step back to the last verified state, and save Hint for positions where you genuinely want to see which cell breaks a stall. Because hints remain counted even after Undo, using them deliberately makes it easier to spot which scanning step you missed for the next puzzle.",
+        ],
+        tips: [
+          "Fix orange conflicts immediately before placing another number.",
+          "Use Undo to check whether an earlier placement caused a dead end.",
+          "When you take a Hint, trace why that cell was forced before continuing.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "block-drop-stacking-and-line-clear-guide",
+    title: "Block Drop Stacking and Line Clear Guide",
+    eyebrow: "Stack control & scoring",
+    summary:
+      "Keep a flat stack, leave a clean well for four-line clears, and use the ghost outline and seven-bag preview to survive faster Block Drop levels.",
+    readTime: "6 min read",
+    ...verifiedGuide("block-drop-stacking-and-line-clear-guide"),
+    relatedGameSlugs: ["block-drop", "flappy-dash"],
+    relatedGuideSlugs: ["breakout-paddle-control"],
+    relatedHub: { href: "/categories/arcade", label: "Arcade Games" },
+    sections: [
+      {
+        heading: "1. Keep the surface flat and avoid buried holes",
+        paragraphs: [
+          "Block Drop runs on a 10x20 grid where a single buried gap under an overhang can block three or four rows from clearing until you chip down to it. A low, mostly flat contour gives every falling shape—O, T, J, L, S, Z, and I—multiple safe homes without forcing awkward vertical towers.",
+          "Before dropping a piece, glance at the ghost landing outline at the bottom of the board. That preview confirms exact column alignment before you commit to a hard drop with Space, preventing the one-column misses that create accidental holes at higher speeds.",
+        ],
+        tips: [
+          "Avoid creating two-column cliffs that only an I, J, or L piece can fill.",
+          "Check the ghost outline before pressing Space for a hard drop.",
+          "Smooth out S and Z bumps early instead of letting them climb toward the center.",
+        ],
+      },
+      {
+        heading: "2. Leave one edge column open for four-line clears",
+        paragraphs: [
+          "Line-clear scoring in Block Drop rewards multi-line clears heavily: a single line awards 100 times your level, two lines award 300 times level, three lines award 500 times level, and a four-line clear pays 800 times level. Because each level increases every ten cleared lines, building for clean four-line clears scores twice as efficiently per row as single-line clears.",
+          "Keep nine columns stacked neatly while leaving either the leftmost or rightmost column open as a vertical well. Because Block Drop deals pieces from a shuffled seven-bag—meaning every group of seven pieces contains one of each shape—you are guaranteed an I piece regularly rather than facing an endless drought.",
+        ],
+        tips: [
+          "Reserve column 1 or column 10 for the vertical I piece.",
+          "Count how recently the I piece appeared in the current seven-piece bag.",
+          "Take a clean double or triple if the stack rises past mid-board rather than getting greedy.",
+        ],
+      },
+      {
+        heading: "3. Read the Next piece before locking the current one",
+        paragraphs: [
+          "The Next preview above the 10x20 board tells you which shape enters immediately after the current piece locks. Planning two pieces at a time turns tricky S and Z arrivals into smooth pairs: place a J, L, or T to create the step the upcoming S or Z needs.",
+          "Do not wait until the piece reaches the bottom to decide its rotation. Rotate near the top of the board where there is open width, slide over to the target column, verify the ghost outline, and then commit with soft drop or hard drop.",
+        ],
+        tips: [
+          "Glance at the Next box as soon as a new piece spawns.",
+          "Rotate pieces high in the playfield while walls and tall stacks cannot block the turn.",
+          "Use P to pause if you need a break; switching browser tabs also pauses automatically.",
+        ],
+      },
+      {
+        heading: "4. Switch to survival mode when gravity speeds up",
+        paragraphs: [
+          "Gravity accelerates each time you cross a ten-line level threshold, shrinking the drop interval from 900 ms on Easy, 700 ms on Normal, or 470 ms on Hard all the way down toward 85 ms. When the stack climbs into the upper half of the grid, stop chasing four-line wells and prioritize skimming single and double clears to lower the roof.",
+          "Focus first on uncovering the highest buried hole rather than building on top of it. Clearing one row above a hole immediately restores access, brings the stack back below the center line, and buys time to rebuild a clean side well.",
+        ],
+        tips: [
+          "Once the stack passes halfway up the board, switch from scoring to height reduction.",
+          "Keep the center columns lower than the outer columns so newly spawned pieces never collide at the top.",
+          "Practice Hard mode in short sessions to train faster early rotations.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "checkers-center-control-and-king-endgames",
+    title: "Checkers Center Control and King Endgames",
+    eyebrow: "8x8 board tactics",
+    summary:
+      "Use center squares, back-row defense, mandatory-capture traps, and king coordination to win more American-rules Checkers games.",
+    readTime: "6 min read",
+    ...verifiedGuide("checkers-center-control-and-king-endgames"),
+    relatedGameSlugs: ["checkers-lite", "four-in-a-row"],
+    relatedGuideSlugs: ["how-to-play-patrol-escape"],
+    relatedHub: { href: "/categories/brain", label: "Brain Games" },
+    sections: [
+      {
+        heading: "1. Advance in connected pairs toward the four center squares",
+        paragraphs: [
+          "In Checkers Lite, Orange moves first on an 8x8 American-rules board where pieces move diagonally on dark squares. Pushing a single piece too far ahead leaves an empty square behind it and invites an easy jump. Advancing pieces in diagonal pairs keeps every front piece backed up so a capture always allows an immediate recapture.",
+          "Controlling the central dark squares gives your pieces two forward directions and restricts where Cyan can safely advance. Side-edge squares are safe from being jumped, yet pieces parked on the rim have half as many routes and often arrive late to the decisive flank.",
+        ],
+        tips: [
+          "Develop your front rank in two-piece or three-piece triangular formations.",
+          "Use edge squares temporarily for defense, then bring pieces back toward the center.",
+          "Check every legal destination dot before moving so you do not open a double-jump lane.",
+        ],
+      },
+      {
+        heading: "2. Protect your back row to delay enemy kings",
+        paragraphs: [
+          "A crowned king moves and captures both forward and backward, which dramatically shifts control on an open board. Keeping at least two pieces anchored on your home back row—especially the central back-row defenders—blocks Cyan from slipping through for an early promotion.",
+          "Move back-row pieces only when they are needed to complete a favorable trade, stop a forced break-in, or enter the endgame after most enemy men are cleared. Keeping a solid home rank also creates a reliable base for counterattacks down the open diagonals.",
+        ],
+        tips: [
+          "Delay moving your central back-row pieces until the middlegame settles.",
+          "If your opponent empties their back row early, look for a direct sprint to crown first.",
+          "Remember that reaching the far row to crown a king immediately ends your turn.",
+        ],
+      },
+      {
+        heading: "3. Turn mandatory captures into two-for-one traps",
+        paragraphs: [
+          "Under American rules in Checkers Lite, captures are mandatory: whenever any jump exists, you must take a capture and continue jumping with that same piece until no further jump remains. That rule is your strongest tactical weapon because it forces your opponent onto squares you choose.",
+          "Look for simple shot setups where offering one front piece pulls an enemy defender out of position, allowing your trailing piece to jump two opponents in a single chain. Because the computer on Normal and Hard also checks forced captures, verify that your own sacrifice does not trigger a longer counter-jump first.",
+        ],
+        tips: [
+          "Before moving, ask whether your move lets the opponent force a capture next turn.",
+          "Use one-for-one trades when you are already ahead in pieces to simplify into a winning endgame.",
+          "Remember promotion ends a capture chain, so do not count on jumping backward on the crowning turn.",
+        ],
+      },
+      {
+        heading: "4. Coordinate kings and respect the draw rules in endgames",
+        paragraphs: [
+          "When both sides have only kings left, chasing a lone enemy king across the long center diagonal rarely traps it. Instead, use two kings together to cut off the center and herd the opponent toward the double corners or side walls where legal squares run out.",
+          "Checkers Lite enforces threefold repetition and a 40-move-each draw limit without a capture or promotion. If you are ahead in material, advance steadily with forcing moves that restrict enemy squares rather than repeating the same diagonal shuttle.",
+        ],
+        tips: [
+          "Keep two kings on adjacent diagonals so they protect each other while squeezing space.",
+          "Track opposition: winning happens when the other side runs out of legal moves.",
+          "Use Local 2 players mode or Easy computer games to practice clean two-king checkmates.",
         ],
       },
     ],

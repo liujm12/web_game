@@ -246,4 +246,27 @@ describe("guides", () => {
     expect(screen.getByRole("link", { name: "2048 corner strategy" })).toHaveAttribute("href", "/guides/2048-corner-strategy");
     cleanup();
   });
+
+  it("publishes verified strategy guides for Minesweeper, Sudoku, Block Drop, and Checkers", async () => {
+    const newGuideSlugs = [
+      ["minesweeper-opening-and-pattern-guide", "Minesweeper Opening and Pattern Guide", "Play Minesweeper", "/games/minesweeper"],
+      ["sudoku-scanning-and-notes-guide", "Sudoku Scanning and Pencil Notes Guide", "Play Sudoku Sprint", "/games/sudoku-sprint"],
+      ["block-drop-stacking-and-line-clear-guide", "Block Drop Stacking and Line Clear Guide", "Play Block Drop", "/games/block-drop"],
+      ["checkers-center-control-and-king-endgames", "Checkers Center Control and King Endgames", "Play Checkers Lite", "/games/checkers-lite"],
+    ] as const;
+
+    const guideModule = await import("@/app/guides/[slug]/page");
+
+    for (const [slug, title, playLabel, gameHref] of newGuideSlugs) {
+      const guide = guides.find((candidate) => candidate.slug === slug);
+      expect(guide, `${slug} should exist`).toBeDefined();
+      expect(guide?.sections).toHaveLength(4);
+
+      render(await guideModule.default({ params: Promise.resolve({ slug }) }));
+      expect(screen.getByRole("heading", { name: title })).toBeInTheDocument();
+      expect(screen.getAllByRole("link", { name: playLabel })[0]).toHaveAttribute("href", gameHref);
+      expect(screen.getByText(guide!.verificationNote)).toBeInTheDocument();
+      cleanup();
+    }
+  });
 });

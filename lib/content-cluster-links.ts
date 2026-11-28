@@ -13,6 +13,10 @@ const guideLinkLabels: Record<string, string> = {
   "breakout-paddle-control": "Control the Breakout paddle",
   "number-rush-clean-rounds": "Play Number Rush without mistakes",
   "memory-mosaic-and-pattern-pulse-training": "Train memory and pattern recall",
+  "minesweeper-opening-and-pattern-guide": "Read Minesweeper opening patterns",
+  "sudoku-scanning-and-notes-guide": "Solve Sudoku with scanning and notes",
+  "block-drop-stacking-and-line-clear-guide": "Stack cleaner boards in Block Drop",
+  "checkers-center-control-and-king-endgames": "Control the board in Checkers",
 };
 
 export function getGuideLinkLabel(guide: GuideLinkTarget) {
