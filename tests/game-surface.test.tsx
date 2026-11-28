@@ -2,10 +2,11 @@
 
 import "@testing-library/jest-dom/vitest";
 
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { GameSurface } from "@/components/game-surface";
+import { SOUND_PREFERENCE_KEY } from "@/lib/game-sound";
 import type { GameRecord } from "@/lib/site-content";
 
 const baseGame = {
@@ -30,14 +31,101 @@ const baseGame = {
 } satisfies GameRecord;
 
 describe("game surface", () => {
-  it("renders internal games through the local component registry", async () => {
+  const storage = new Map<string, string>();
+
+  beforeEach(() => {
+    storage.clear();
+    Object.defineProperty(window, "localStorage", {
+      configurable: true,
+      value: {
+        getItem: (key: string) => storage.get(key) ?? null,
+        setItem: (key: string, value: string) => storage.set(key, value),
+      },
+    });
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("renders internal games through the local component registry with display and sound controls", async () => {
     render(<GameSurface game={baseGame} />);
 
     expect(await screen.findByRole("button", { name: "Start run" })).toBeInTheDocument();
     expect(screen.getByText("Ready for launch?")).toBeInTheDocument();
+
+    const soundButton = screen.getByRole("button", { name: "Sound: On" });
+    expect(soundButton).toHaveAttribute("aria-pressed", "true");
+
+    fireEvent.click(soundButton);
+    expect(screen.getByRole("button", { name: "Sound: Off" })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+    expect(storage.get(SOUND_PREFERENCE_KEY)).toBe("off");
   });
 
-  it("renders embed games in an iframe shell", () => {
+  it("toggles fallback fullscreen mode and closes on Escape when Fullscreen API is unavailable", async () => {
+    const { container } = render(<GameSurface game={baseGame} />);
+    await screen.findByRole("button", { name: "Start run" });
+
+    const root = container.querySelector<HTMLElement>('[data-game-surface-root="true"]')!;
+    expect(root).toHaveAttribute("data-fullscreen", "false");
+
+    fireEvent.click(screen.getByRole("button", { name: "Fullscreen" }));
+    expect(root).toHaveAttribute("data-fullscreen", "true");
+    expect(screen.getByRole("button", { name: "Exit fullscreen" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(root).toHaveAttribute("data-fullscreen", "false");
+    expect(screen.getByRole("button", { name: "Fullscreen" })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+  });
+
+  it("uses native Fullscreen API when supported", async () => {
+    const { container } = render(<GameSurface game={baseGame} />);
+    await screen.findByRole("button", { name: "Start run" });
+
+    const root = container.querySelector<HTMLElement>('[data-game-surface-root="true"]')!;
+    const requestFullscreen = vi.fn().mockImplementation(async () => {
+      Object.defineProperty(document, "fullscreenElement", {
+        configurable: true,
+        value: root,
+      });
+      document.dispatchEvent(new Event("fullscreenchange"));
+    });
+    const exitFullscreen = vi.fn().mockImplementation(async () => {
+      Object.defineProperty(document, "fullscreenElement", {
+        configurable: true,
+        value: null,
+      });
+      document.dispatchEvent(new Event("fullscreenchange"));
+    });
+
+    Object.defineProperty(root, "requestFullscreen", {
+      configurable: true,
+      value: requestFullscreen,
+    });
+    Object.defineProperty(document, "exitFullscreen", {
+      configurable: true,
+      value: exitFullscreen,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Fullscreen" }));
+    expect(requestFullscreen).toHaveBeenCalledTimes(1);
+    expect(await screen.findByRole("button", { name: "Exit fullscreen" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Exit fullscreen" }));
+    expect(exitFullscreen).toHaveBeenCalledTimes(1);
+    expect(await screen.findByRole("button", { name: "Fullscreen" })).toBeInTheDocument();
+  });
+
+  it("renders embed games in an iframe shell with fullscreen control and without misleading sound toggle", () => {
     render(
       <GameSurface
         game={{
@@ -62,5 +150,7 @@ describe("game surface", () => {
     expect(
       screen.getByText("Game opens in the frame below without leaving TurboArcade."),
     ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Fullscreen" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Sound:/ })).not.toBeInTheDocument();
   });
 });

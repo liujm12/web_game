@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { playGameSound } from "@/lib/game-sound";
 import {
   colorsSorted, createMineBoard, generateColorLevel, generateSudoku, mineCountAround,
   pourColor, revealMine, sudokuConflicts, toggleMineFlag, validSudoku,
@@ -96,13 +97,25 @@ export function MinesweeperGame() {
   }
 
   function choose(index: number, flag = flagMode) {
-    if (flag) { setBoard(toggleMineFlag(board, index)); return; }
+    if (flag) {
+      const nextFlagged = toggleMineFlag(board, index);
+      if (nextFlagged !== board) playGameSound("move");
+      setBoard(nextFlagged);
+      return;
+    }
     const next = revealMine(board, index);
     if (next === board) return;
     if (!board.planted) timer.start();
     if (next.phase !== "playing") {
       const seconds = timer.stop();
-      if (next.phase === "won") saveBest(seconds);
+      if (next.phase === "won") {
+        saveBest(seconds);
+        playGameSound("win");
+      } else {
+        playGameSound("over");
+      }
+    } else {
+      playGameSound("score");
     }
     setBoard(next);
   }
@@ -150,25 +163,43 @@ export function SudokuSprintGame() {
     setEntry({ cells: [...next.puzzle], notes: Array.from({ length: 81 }, () => []) });
     setHistory([]); setHints(0); setNotesMode(false); setSelected(next.puzzle.indexOf(0));
     setMessage("Select a cell, then enter 1–9. Orange cells have a row, column or box conflict."); timer.start();
+    playGameSound("start");
   }
 
   function commit(next: SudokuEntry) {
     setHistory([...history, entry]); setEntry(next);
-    if (validSudoku(next.cells)) timer.stop();
+    if (validSudoku(next.cells)) {
+      timer.stop();
+      playGameSound("win");
+      return true;
+    }
+    return false;
   }
 
   function place(value: number) {
     if (!puzzle || won) return;
-    if (puzzle.puzzle[selected]) { setMessage("That number is a fixed clue. Select an empty or editable cell."); return; }
+    if (puzzle.puzzle[selected]) {
+      playGameSound("error");
+      setMessage("That number is a fixed clue. Select an empty or editable cell.");
+      return;
+    }
     const next = { cells: [...entry.cells], notes: entry.notes.map((notes) => [...notes]) };
     if (notesMode && value !== 0) {
-      if (next.cells[selected]) { setMessage("Erase this number before adding notes."); return; }
+      if (next.cells[selected]) {
+        playGameSound("error");
+        setMessage("Erase this number before adding notes.");
+        return;
+      }
       next.notes[selected] = next.notes[selected].includes(value) ? next.notes[selected].filter((note) => note !== value) : [...next.notes[selected], value].sort();
     } else {
       if (value === entry.cells[selected] && !entry.notes[selected].length) return;
       next.cells[selected] = value; next.notes[selected] = [];
     }
-    commit(next); setMessage(notesMode && value ? "Notes updated. Toggle Notes off to enter an answer." : "Use Undo to recover the previous number or notes.");
+    const solved = commit(next);
+    if (!solved) {
+      playGameSound(!notesMode && value !== 0 && sudokuConflicts(next.cells).has(selected) ? "error" : "move");
+    }
+    setMessage(notesMode && value ? "Notes updated. Toggle Notes off to enter an answer." : "Use Undo to recover the previous number or notes.");
   }
 
   function hint() {
@@ -177,12 +208,16 @@ export function SudokuSprintGame() {
     if (target < 0) return;
     const next = { cells: [...entry.cells], notes: entry.notes.map((notes) => [...notes]) };
     next.cells[target] = puzzle.solution[target]; next.notes[target] = [];
-    setSelected(target); setHints(hints + 1); commit(next); setMessage("One correct number revealed. Hints stay counted even after Undo.");
+    setSelected(target); setHints(hints + 1);
+    const solved = commit(next);
+    if (!solved) playGameSound("score");
+    setMessage("One correct number revealed. Hints stay counted even after Undo.");
   }
 
   function undo() {
     if (!history.length || won) return;
     setEntry(history[history.length - 1]); setHistory(history.slice(0, -1)); setMessage("Previous entry restored.");
+    playGameSound("move");
   }
 
   return <Shell title="Sudoku Sprint" stats={<><span>{timeLabel(timer.seconds)}</span><span>{entry.cells.filter(Boolean).length}/81 filled</span><span>Hints {hints}</span></>}>
@@ -244,18 +279,32 @@ export function ColorSortGame() {
     const next = generateColorLevel(nextLevel).tubes;
     setLevel(nextLevel); setInitial(next); setTubes(next); setHistory([]); setSelected(null);
     setMessage("Select a source tube, then a destination. Matching top layers pour together.");
+    playGameSound("start");
   }
 
   function choose(index: number) {
     if (!initial || won) return;
     if (selected === null) {
-      if (!tubes[index].length) { setMessage("This tube is empty. Choose a tube with color first."); return; }
-      setSelected(index); setMessage(`Tube ${index + 1} selected. Choose an empty tube or the same top number.`); return;
+      if (!tubes[index].length) {
+        playGameSound("error");
+        setMessage("This tube is empty. Choose a tube with color first.");
+        return;
+      }
+      setSelected(index);
+      playGameSound("move");
+      setMessage(`Tube ${index + 1} selected. Choose an empty tube or the same top number.`);
+      return;
     }
     if (selected === index) { setSelected(null); setMessage("Selection cleared."); return; }
     const next = pourColor(tubes, selected, index);
-    if (!next) { setMessage(tubes[index].length === 4 ? "That tube is full. Choose another destination." : "Top numbers must match, unless the destination is empty."); return; }
-    setHistory([...history, tubes]); setTubes(next); setSelected(null); setMessage("Pour complete. Select your next source tube.");
+    if (!next) {
+      playGameSound("error");
+      setMessage(tubes[index].length === 4 ? "That tube is full. Choose another destination." : "Top numbers must match, unless the destination is empty.");
+      return;
+    }
+    setHistory([...history, tubes]); setTubes(next); setSelected(null);
+    playGameSound(colorsSorted(next) ? "win" : "merge");
+    setMessage("Pour complete. Select your next source tube.");
   }
 
   return <Shell title="Color Sort" stats={<><span>Level {level}</span><span>Moves {history.length}</span><span>{tubes.length - 2} colors</span></>}>

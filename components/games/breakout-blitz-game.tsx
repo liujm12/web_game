@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 
 const fieldWidth = 100;
@@ -140,6 +141,9 @@ export function BreakoutBlitzGame() {
 
           if (nextBricks.every((brick) => !brick.alive)) {
             nextPhase = "won";
+            playGameSound("win");
+          } else {
+            playGameSound("score");
           }
         }
 
@@ -156,12 +160,16 @@ export function BreakoutBlitzGame() {
           nextVelocityX = Number((offset * 2.2).toFixed(2));
           nextVelocityY = -Math.abs(nextVelocityY);
           nextY = paddleY - 3;
+          playGameSound("move");
         }
 
         if (nextY >= fieldHeight - ballRadius) {
           nextLives -= 1;
           if (nextLives <= 0) {
             nextPhase = "over";
+            playGameSound("over");
+          } else {
+            playGameSound("error");
           }
 
           return {
@@ -196,6 +204,7 @@ export function BreakoutBlitzGame() {
 
   function startGame() {
     setGame({ ...createInitialState(difficulty), phase: "playing" });
+    playGameSound("start");
   }
 
   function movePaddle(direction: -1 | 1) {

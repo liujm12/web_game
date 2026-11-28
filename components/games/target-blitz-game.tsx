@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
@@ -70,6 +71,7 @@ export function TargetBlitzGame() {
           window.clearInterval(interval);
           setPhase("over");
           setActiveCell(null);
+          playGameSound("over");
           return 0;
         }
 
@@ -85,6 +87,7 @@ export function TargetBlitzGame() {
     setScore(0);
     setTimeLeft(roundSeconds);
     setActiveCell(getNextTarget(null));
+    playGameSound("start");
   }
 
   function handleCellClick(index: number) {
@@ -96,6 +99,7 @@ export function TargetBlitzGame() {
       return;
     }
 
+    playGameSound("score");
     setScore((currentScore) => {
       const nextScore = currentScore + 1;
       setBestScore((currentBest) => Math.max(currentBest, nextScore));

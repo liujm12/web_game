@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { playGameSound } from "@/lib/game-sound";
 import { applyMove, chooseComputerMove, createCheckers, legalMoves, type Difficulty } from "@/lib/games/classic-checkers";
 
 const controlClass = "min-h-11 rounded-xl border border-white/20 bg-slate-800 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300";
@@ -26,7 +27,16 @@ export function CheckersLiteGame() {
     if (!started || state.result || !computerTurn) return;
     const timer = window.setTimeout(() => {
       const move = chooseComputerMove(state, difficulty);
-      if (move) setState(current => current === state ? applyMove(current, move) : current);
+      if (move) {
+        setState(current => {
+          if (current !== state) return current;
+          const next = applyMove(current, move);
+          if (next.result) playGameSound("over");
+          else if (move.captured !== undefined) playGameSound("error");
+          else playGameSound("move");
+          return next;
+        });
+      }
     }, 280);
     return () => window.clearTimeout(timer);
   }, [state, started, computerTurn, difficulty]);
@@ -36,6 +46,7 @@ export function CheckersLiteGame() {
     setSelected(null);
     setStarted(play);
     setHint("Choose a highlighted piece, then a dotted square.");
+    if (play) playGameSound("start");
   }
 
   function chooseSquare(square: number) {
@@ -43,6 +54,15 @@ export function CheckersLiteGame() {
     const move = moves.find(candidate => candidate.from === activePiece && candidate.to === square);
     if (move) {
       const next = applyMove(state, move);
+      if (next.result === "orange" || (mode === "local" && next.result && next.result !== "draw")) {
+        playGameSound("win");
+      } else if (next.result) {
+        playGameSound("over");
+      } else if (move.captured !== undefined) {
+        playGameSound("score");
+      } else {
+        playGameSound("move");
+      }
       setState(next);
       setSelected(next.forced);
       setHint(next.forced !== null ? "Keep jumping with the same piece." : "Choose a highlighted piece, then a dotted square.");
@@ -50,6 +70,7 @@ export function CheckersLiteGame() {
       setSelected(square);
       setHint("Choose a dotted destination.");
     } else {
+      playGameSound("error");
       setHint(state.forced !== null ? "Finish the capture chain with the selected piece." : moves[0]?.captured !== undefined ? "A capture is available and must be taken." : "Choose a highlighted piece or a dotted destination.");
     }
   }

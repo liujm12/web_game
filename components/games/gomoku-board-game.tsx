@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
+
 const boardSize = 15;
 
 type Stone = null | "black" | "white";
@@ -55,6 +57,7 @@ export function GomokuBoardGame() {
     setPhase("playing");
     setTurn("black");
     setWinner(null);
+    playGameSound("start");
   }
 
   function placeStone(row: number, column: number) {
@@ -69,9 +72,11 @@ export function GomokuBoardGame() {
     if (hasFiveInRow(nextBoard, row, column, turn)) {
       setWinner(turn);
       setPhase("over");
+      playGameSound("win");
       return;
     }
 
+    playGameSound("move");
     setTurn((currentTurn) => (currentTurn === "black" ? "white" : "black"));
   }
 

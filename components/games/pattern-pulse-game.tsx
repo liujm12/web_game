@@ -2,7 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { playGameSound, type GameSoundEffect } from "@/lib/game-sound";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
+
+function getPadSound(padId: number): GameSoundEffect {
+  return `pad-${padId}` as GameSoundEffect;
+}
 
 const pads = [
   { id: 0, label: "North", color: "bg-cyan-400" },
@@ -57,6 +62,7 @@ export function PatternPulseGame() {
     const interval = window.setInterval(() => {
       const pad = sequence[step];
       setActivePad(pad);
+      playGameSound(getPadSound(pad));
       window.setTimeout(() => setActivePad(null), 320);
       step += 1;
 
@@ -90,6 +96,7 @@ export function PatternPulseGame() {
     if (status !== "playing") return;
 
     if (sequence[playerIndex] !== padId) {
+      playGameSound("error");
       setStatus("over");
       setBestRound((current) => Math.max(current, Math.max(sequence.length - 1, 0)));
       return;
@@ -97,11 +104,13 @@ export function PatternPulseGame() {
 
     const nextIndex = playerIndex + 1;
     if (nextIndex === sequence.length) {
+      playGameSound("win");
       setBestRound((current) => Math.max(current, sequence.length));
       window.setTimeout(() => addRound(sequence), 450);
       return;
     }
 
+    playGameSound(getPadSound(padId));
     setPlayerIndex(nextIndex);
   }
 

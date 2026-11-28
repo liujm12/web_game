@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { playGameSound } from "@/lib/game-sound";
 import { createWordSearch, findWordPath, wordThemes, chooseHangmanWord, hangmanRound, type WordSearch } from "@/lib/games/classic-words";
 import { ActionButton, GameMessage, GameShell, formatGameTime, useBestScore, useGameKeys } from "./classic-shared";
 
@@ -40,22 +41,31 @@ export function WordHuntGame() {
     setHints(0);
     setHintCell(null);
     setMessage("Words run horizontally, vertically or diagonally, in either direction.");
+    playGameSound("start");
   }
 
   function finishSelection(startIndex: number, lastIndex: number) {
     if (!puzzle || won) return;
     const match = findWordPath(puzzle, startIndex, lastIndex);
-    if (!match) setMessage("No target word on that line. Try another pair of letters.");
-    else if (found[match.word]) setMessage(match.word + " is already found.");
-    else {
+    if (!match) {
+      playGameSound("error");
+      setMessage("No target word on that line. Try another pair of letters.");
+    } else if (found[match.word]) {
+      playGameSound("error");
+      setMessage(match.word + " is already found.");
+    } else {
       const next = { ...found, [match.word]: match.path };
       setFound(next);
       setHintCell(null);
       if (Object.keys(next).length === puzzle.words.length) {
         const score = Math.max(100, 1800 - seconds * 3 - hints * 100);
         recordBest(score);
+        playGameSound("win");
         setMessage("All six found in " + formatGameTime(seconds) + ". Score " + score + " · Hints " + hints + ".");
-      } else setMessage(match.word + " found. " + (puzzle.words.length - Object.keys(next).length) + " to go.");
+      } else {
+        playGameSound("score");
+        setMessage(match.word + " found. " + (puzzle.words.length - Object.keys(next).length) + " to go.");
+      }
     }
     setFirst(null);
   }
@@ -142,6 +152,7 @@ export function HangmanGame() {
     setEntry(chooseHangmanWord(theme, entry?.word));
     setGuesses([]);
     setSeconds(0);
+    playGameSound("start");
   }
 
   function guess(letter: string) {
@@ -152,7 +163,15 @@ export function HangmanGame() {
     if (result.won) {
       const nextStreak = streak + 1;
       setStreak(nextStreak); recordBest(nextStreak);
-    } else if (result.lost) setStreak(0);
+      playGameSound("win");
+    } else if (result.lost) {
+      setStreak(0);
+      playGameSound("over");
+    } else if (entry.word.includes(letter)) {
+      playGameSound("score");
+    } else {
+      playGameSound("error");
+    }
   }
 
   useGameKeys((key) => {

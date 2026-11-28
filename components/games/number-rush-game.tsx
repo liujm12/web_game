@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
@@ -76,6 +77,7 @@ export function NumberRushGame() {
     setMistakes(0);
     setRoundTimeSeconds(0);
     setPhase("playing");
+    playGameSound("start");
   }
 
   function handleNumberClick(value: number) {
@@ -84,11 +86,13 @@ export function NumberRushGame() {
     }
 
     if (value !== nextNumber) {
+      playGameSound("error");
       setMistakes((currentMistakes) => currentMistakes + 1);
       return;
     }
 
     if (value === 9) {
+      playGameSound("win");
       const performanceScore = Math.max(
         1,
         200 - roundTimeSeconds * 3 - mistakes * 15,
@@ -104,6 +108,7 @@ export function NumberRushGame() {
       return;
     }
 
+    playGameSound("score");
     setNextNumber((currentNumber) => currentNumber + 1);
   }
 

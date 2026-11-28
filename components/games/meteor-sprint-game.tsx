@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 
 const lanes = [18, 50, 82];
@@ -45,12 +46,14 @@ export function MeteorSprintGame() {
         if (caught.some((item) => item.type === "meteor")) {
           setGameOver(true);
           setIsRunning(false);
+          playGameSound("over");
           return [];
         }
 
         const starsCaught = caught.filter((item) => item.type === "star").length;
         if (starsCaught > 0) {
           setScore((currentScore) => currentScore + starsCaught * 10);
+          playGameSound("score");
         }
 
         return moved.filter(
@@ -81,10 +84,17 @@ export function MeteorSprintGame() {
     spawnCount.current = 0;
     setGameOver(false);
     setIsRunning(true);
+    playGameSound("start");
   }
 
   function moveLane(direction: -1 | 1) {
-    setLaneIndex((current) => Math.min(lanes.length - 1, Math.max(0, current + direction)));
+    setLaneIndex((current) => {
+      const next = Math.min(lanes.length - 1, Math.max(0, current + direction));
+      if (isRunning && next !== current) {
+        playGameSound("move");
+      }
+      return next;
+    });
   }
 
   useEffect(() => {

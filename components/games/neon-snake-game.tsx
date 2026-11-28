@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
@@ -98,12 +99,14 @@ export function NeonSnakeGame() {
           nextColumn >= boardSize
         ) {
           setPhase("over");
+          playGameSound("over");
           return currentSnake;
         }
 
         const nextHead = nextRow * boardSize + nextColumn;
         if (currentSnake.includes(nextHead)) {
           setPhase("over");
+          playGameSound("over");
           return currentSnake;
         }
 
@@ -113,6 +116,7 @@ export function NeonSnakeGame() {
           : [...currentSnake.slice(1), nextHead];
 
         if (grew) {
+          playGameSound("score");
           setScore((currentScore) => currentScore + 10);
           setFruit(randomFreeCell(nextSnake));
         }
@@ -131,6 +135,7 @@ export function NeonSnakeGame() {
     setScore(0);
     setPhase("ready");
     setCapturePreset(null);
+    playGameSound("start");
   }
 
   function chooseDirection(nextDirection: "up" | "down" | "left" | "right") {

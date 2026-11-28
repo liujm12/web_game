@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useEffectEvent, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { GameShell, GameMessage, useBestScore } from "./classic-shared";
+import { playGameSound } from "@/lib/game-sound";
 import {
   BLOCK_COLORS, FLAPPY, TETROMINOES, blockAction, blockGhost, blockInterval,
   createBlocks, createFlappy, flapBird, stepFlappy,
@@ -102,11 +103,20 @@ export function BlockDropGame() {
     elapsed.current = 0;
     update(createBlocks(difficulty));
     changePhase("playing");
+    playGameSound("start");
   }
   function act(action: BlockAction) {
     if (phaseRef.current !== "playing") return;
-    const next = blockAction(gameRef.current, action);
-    if (next.queue !== gameRef.current.queue) elapsed.current = 0;
+    const previous = gameRef.current;
+    const next = blockAction(previous, action);
+    if (next.queue !== previous.queue) elapsed.current = 0;
+    if (next.over && !previous.over) {
+      playGameSound("over");
+    } else if (next.lines > previous.lines) {
+      playGameSound(next.lines - previous.lines >= 2 ? "combo" : "score");
+    } else if (action === "hard" || action === "rotate") {
+      playGameSound("move");
+    }
     update(next);
   }
   function togglePause() {
@@ -181,16 +191,28 @@ export function FlappyDashGame() {
   function start() {
     update(flapBird(createFlappy(difficulty)));
     changePhase("playing");
+    playGameSound("start");
   }
   function flap() {
-    if (phaseRef.current === "playing") update(flapBird(gameRef.current));
+    if (phaseRef.current === "playing") {
+      playGameSound("move");
+      update(flapBird(gameRef.current));
+    }
   }
   function togglePause() {
     if (phaseRef.current === "paused") changePhase("playing");
     else pause();
   }
   useArcadeFrames(phase === "playing", seconds => {
-    if (phaseRef.current === "playing") update(stepFlappy(gameRef.current, seconds));
+    if (phaseRef.current !== "playing") return;
+    const previous = gameRef.current;
+    const next = stepFlappy(previous, seconds);
+    if (next.over && !previous.over) {
+      playGameSound("over");
+    } else if (next.score > previous.score) {
+      playGameSound("score");
+    }
+    update(next);
   });
   useArcadeKeys((key, repeated) => {
     if (key.toLowerCase() === "p" && (phaseRef.current === "playing" || phaseRef.current === "paused")) {

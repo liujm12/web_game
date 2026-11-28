@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const columnCount = 5;
@@ -203,6 +204,7 @@ export function MergeShot2048Game() {
     setCombo(0);
     setBestTile(0);
     setMessage("Cannon armed. Pick a lane and fire.");
+    playGameSound("start");
   }
 
   function moveLane(direction: -1 | 1) {
@@ -223,6 +225,7 @@ export function MergeShot2048Game() {
     if (landingRow < 0) {
       setPhase("over");
       setMessage("Lane jammed. Restart and keep the stack lower.");
+      playGameSound("over");
       return;
     }
 
@@ -246,6 +249,13 @@ export function MergeShot2048Game() {
     if (settledBoard[0].some((value) => value > 0)) {
       setPhase("over");
       setMessage("Stack reached the danger line. Try another run.");
+      playGameSound("over");
+    } else if (merged.value >= 2048 && bestTile < 2048) {
+      playGameSound("win");
+    } else if (merged.combo > 0) {
+      playGameSound("combo");
+    } else {
+      playGameSound("move");
     }
   }
 

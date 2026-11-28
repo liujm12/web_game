@@ -14,6 +14,7 @@ import {
   type PatrolEscapeState,
   type PatrolEscapeVehicle,
 } from "@/lib/patrol-escape";
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
@@ -154,6 +155,7 @@ export function PatrolEscapeGame() {
     const next = applyVehicleMove(state, vehicleId, delta);
     if (next === state) return;
     if (isPatrolEscapeSolved(next)) {
+      playGameSound("win");
       setLevelBests((current) => {
         const key = String(level.id);
         if (current[key] && current[key] <= next.moves) return current;
@@ -167,6 +169,8 @@ export function PatrolEscapeGame() {
         performanceScore,
         `Level ${level.id} · ${next.moves} moves`,
       );
+    } else {
+      playGameSound("move");
     }
     setHistory((current) => [...current, state]);
     setState(next);
@@ -235,6 +239,7 @@ export function PatrolEscapeGame() {
   function undoMove() {
     const previous = history.at(-1);
     if (!previous) return;
+    playGameSound("move");
     setState(previous);
     setHistory((current) => current.slice(0, -1));
     setHint(null);
@@ -243,7 +248,10 @@ export function PatrolEscapeGame() {
   function showHint() {
     const nextHint = getPatrolEscapeHint(state);
     setHint(nextHint);
-    if (nextHint) setSelectedId(nextHint.vehicleId);
+    if (nextHint) {
+      playGameSound("start");
+      setSelectedId(nextHint.vehicleId);
+    }
   }
 
   function openLevelPicker() {

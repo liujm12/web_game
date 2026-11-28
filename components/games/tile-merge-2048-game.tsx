@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { saveBestScore } from "@/lib/player-profile";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
@@ -225,6 +226,7 @@ export function TileMerge2048Game() {
     setBestTile(Math.max(...seeded));
     setPhase("playing");
     setCapturePreset(null);
+    playGameSound("start");
   }
 
   function handleMove(direction: "up" | "down" | "left" | "right") {
@@ -234,7 +236,10 @@ export function TileMerge2048Game() {
 
     const result = moveBoard(board, direction, difficulty);
     if (!result.didChange) {
-      if (!canMoveTileBoard(board)) setPhase("lost");
+      if (!canMoveTileBoard(board)) {
+        setPhase("lost");
+        playGameSound("over");
+      }
       return;
     }
 
@@ -243,8 +248,14 @@ export function TileMerge2048Game() {
     setBestTile(Math.max(...result.board));
     if (result.board.some((value) => value >= 2048)) {
       setPhase("won");
+      playGameSound("win");
     } else if (!canMoveTileBoard(result.board)) {
       setPhase("lost");
+      playGameSound("over");
+    } else if (result.gainedScore > 0) {
+      playGameSound("merge");
+    } else {
+      playGameSound("move");
     }
   }
 

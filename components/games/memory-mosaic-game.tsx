@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { playGameSound } from "@/lib/game-sound";
 import { readGameScreenshotPreset } from "@/lib/game-screenshot-presets";
 
 const icons = ["🎯", "🕹", "⚡", "🛸", "🎲", "🎵"];
@@ -63,6 +64,7 @@ export function MemoryMosaicGame() {
     setFlipped([]);
     setMatched([]);
     setMoves(0);
+    playGameSound("start");
   }
 
   function handleFlip(card: CardRecord) {
@@ -73,6 +75,11 @@ export function MemoryMosaicGame() {
     const nextFlipped = [...flipped, card.id];
     setFlipped(nextFlipped);
 
+    if (nextFlipped.length === 1) {
+      playGameSound("move");
+      return;
+    }
+
     if (nextFlipped.length === 2) {
       setMoves((current) => current + 1);
       const [firstId, secondId] = nextFlipped;
@@ -80,11 +87,13 @@ export function MemoryMosaicGame() {
       const second = cards.find((entry) => entry.id === secondId);
 
       if (first?.icon === second?.icon) {
+        playGameSound(matched.length + 1 === icons.length ? "win" : "score");
         window.setTimeout(() => {
           setMatched((current) => [...current, card.icon]);
           setFlipped([]);
         }, 250);
       } else {
+        playGameSound("error");
         window.setTimeout(() => setFlipped([]), 600);
       }
     }
